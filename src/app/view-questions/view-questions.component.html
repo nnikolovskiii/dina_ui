@@ -1,0 +1,35 @@
+<div *ngIf="response && response.length > 0; else loading" class="container">
+  <div class="panels-container">
+    <ng-container *ngFor="let key of getKeys(response[currentPage])">
+      <div class="panel">
+        <strong>{{ key | titlecase }}:</strong>
+        <pre>{{ response[currentPage][key] }}</pre>
+
+<!--        <div [innerHTML]="response[currentPage][key]"></div>-->
+      </div>
+    </ng-container>
+  </div>
+
+  <!-- Pagination Controls -->
+  <div class="pagination">
+    <button (click)="prevPage()" [disabled]="currentPage === 0">Previous</button>
+
+    <!-- Centered Pagination -->
+    <span *ngFor="let page of getCenteredPages(); let i = index">
+    <button
+      (click)="goToPage(page - 1)"
+      [class.active]="currentPage === (page - 1)">
+      {{ page }}
+    </button>
+  </span>
+
+    <button (click)="nextPage()" [disabled]="currentPage === response.length - 1">Next</button>
+  </div>
+
+</div>
+
+<ng-template #loading>
+  <p>Loading...</p>
+</ng-template>
+
+

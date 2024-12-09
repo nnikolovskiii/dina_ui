@@ -1,0 +1,40 @@
+<div *ngIf="folders$ | async as folders; else loading" class="card-list">
+  <!-- Checklist -->
+  <div class="card"
+       [class.selected]="selectedFolders.includes(folder)"
+       *ngFor="let folder of folders">
+    <label class="card-label" *ngIf="!folder.is_folder; else folderLink">
+      <input
+        type="checkbox"
+        [value]="folder"
+        [checked]="selectedFolders.includes(folder)"
+        (change)="toggleFolderSelection($event, folder)"
+      />
+      <span class="checkmark"></span>
+      {{ folder.next }}
+    </label>
+    <!-- Link to navigate for folders -->
+    <ng-template #folderLink>
+      <a
+        class="card-link"
+        [routerLink]="['/code-process']"
+        [queryParams]="{ prevFolder: folder.next }">
+        📂 {{ folder.next }}
+      </a>
+    </ng-template>
+  </div>
+
+  <!-- Button group -->
+  <div class="button-group">
+    <button (click)="selectAllFolders(folders)">Select All</button>
+    <button (click)="navigateToQuestions()">Go to Questions</button>
+    <button (click)="deselectAllFolders()">Deselect All</button>
+  </div>
+</div>
+
+<ng-template #loading>
+  <div class="loading">
+    <img src="path/to/loading-spinner.gif" alt="Loading..." />
+    <p>Loading your folders...</p>
+  </div>
+</ng-template>

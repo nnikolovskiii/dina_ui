@@ -1,0 +1,114 @@
+.card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px;
+}
+
+.card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s, background-color 0.3s;
+  cursor: pointer;
+}
+
+.card.selected {
+  background-color: #e6f7ff;
+  box-shadow: 0 4px 15px rgba(0, 0, 255, 0.1);
+}
+
+.card:hover {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.card-label {
+  position: relative;
+  padding-left: 35px;
+  cursor: pointer;
+  font-size: 18px;
+  color: #333;
+}
+
+.card-label input[type=checkbox] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  height: 24px;
+  width: 24px;
+  background-color: #eee;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-label input[type=checkbox]:checked ~ .checkmark {
+  background-color: #007bff;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+  width: 10px;
+  height: 5px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.card-label input[type=checkbox]:checked ~ .checkmark:after {
+  display: block;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #0056b3;
+  transform: translateY(-1px);
+}
+
+button:active {
+  background-color: #003d80;
+  transform: translateY(0);
+}
+
+.loading {
+  text-align: center;
+  padding: 30px;
+  font-size: 20px;
+  color: #333;
+}
+
+.loading img {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 15px;
+}

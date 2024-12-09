@@ -1,0 +1,19 @@
+.chat-container {
+  border: 1px solid #ccc;
+  padding: 10px;
+  max-height: 300px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+  white-space: nowrap; /* Ensures that text does not wrap to new lines */
+  overflow-x: auto; /* Allows horizontal scrolling if needed */
+}
+
+.message {
+  margin-right: 5px; /* Add some space between messages */
+}
+
+.message::after {
+  content: '';
+  display: table;
+  clear: both;
+}
