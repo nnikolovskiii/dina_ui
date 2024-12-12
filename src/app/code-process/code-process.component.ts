@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { CodeProcessService } from '../code-process.service';
-import { catchError, forkJoin, Observable } from 'rxjs';
+import {catchError, forkJoin, Observable, Subscription} from 'rxjs';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { Folder } from '../models/folder';
 import {ActivatedRoute, Router, RouterModule} from '@angular/router';
@@ -15,35 +15,69 @@ import {ActivatedRoute, Router, RouterModule} from '@angular/router';
 export class CodeProcessComponent implements OnInit, OnDestroy {
   @Input() prevFolder: string = '/fastapi'; // Accept prevFolder as an Input
   folders$: Observable<Folder[]> | null = null;
-  selectedFolders: Folder[] = [];
+  selectedFolders = new Map<string, boolean>();
+  private subscription: Subscription | null = null;
 
-  constructor(private codeProcessService: CodeProcessService, private router: Router,  private route: ActivatedRoute) {}
+  constructor(private codeProcessService: CodeProcessService, private router: Router,  private route: ActivatedRoute,) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.prevFolder = params['prevFolder'] || '/fastapi';
+
       if (!this.prevFolder) {
         console.warn('prevFolder is not defined. Please pass a valid value.');
         return;
       }
+
+      // Initialize folders$ observable
       this.folders$ = this.codeProcessService.getFiles(this.prevFolder);
+
+      // Subscribe to folders$
+      this.subscription = this.folders$.subscribe({
+        next: folders => {
+          // Initialize selectedFolders with folders that have color === 'green'
+          for (const folder of folders) {
+            if(folder.color == "green" || folder.color == "blue") {
+              this.selectedFolders.set(folder.next, true);
+            }
+          }
+          console.log(this.selectedFolders);
+        },
+        error: err => {
+          console.error('Error fetching folders:', err);
+        }
+      });
     });
   }
+
   onFolderSelect(event: Event, folder: Folder): void {
     const checkbox = event.target as HTMLInputElement;
     if (checkbox.checked) {
-      this.selectedFolders.push(folder);
-    } else {
-      this.selectedFolders = this.selectedFolders.filter(
-        (selectedFolder) => selectedFolder !== folder
-      );
+      this.selectedFolders.set(folder.next, true);
     }
+    // else {
+    //   this.selectedFolders = this.selectedFolders.filter(
+    //     (selectedFolder) => selectedFolder !== folder
+    //   );
+    // }
+    console.log(this.selectedFolders);
   }
 
   onFolderUnselect(folder: Folder): void {
-    this.selectedFolders = this.selectedFolders.filter(
-      (selectedFolder) => selectedFolder !== folder
-    );
+    this.selectedFolders.set(folder.next, false);
+  }
+
+  checkForFolder(folder: Folder): boolean {
+    if (folder.is_folder) {
+      return false
+    }
+
+    const isSelected = this.selectedFolders.get(folder.next);
+    if (typeof isSelected === 'boolean') {
+      return isSelected;
+    } else {
+      return false;
+    }
   }
 
   toggleFolderSelection(event: Event, folder: Folder): void {
@@ -57,30 +91,123 @@ export class CodeProcessComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {}
 
-  navigateToQuestions(): void {
-    if (this.selectedFolders.length > 0) {
-      const saveObservables = this.selectedFolders.map(folder =>
-        this.codeProcessService.addFile(folder)
+  // navigateToQuestions(): void {
+  //   if (this.selectedFolders.length > 0) {
+  //     const saveObservables = this.selectedFolders.map(folder =>
+  //       this.codeProcessService.addFile(folder)
+  //     );
+  //
+  //     forkJoin(saveObservables).pipe(
+  //       catchError(error => {
+  //         console.error('Error saving folders:', error);
+  //         return [];
+  //       })
+  //     ).subscribe(() => {
+  //       this.router.navigate(['/questions']);
+  //     });
+  //   } else {
+  //     this.router.navigate(['/questions']);
+  //   }
+  // }
+
+  getLabel(folder: Folder): string {
+    return folder.next.split(this.prevFolder+"/")[1];
+  }
+
+  saveCurrFolders(): void {
+    if (this.selectedFolders.size > 0) {
+      const saveObservables = Array.from(this.selectedFolders.entries()).map(
+        ([key, value]) => this.codeProcessService.update_file( key, value )
       );
 
-      forkJoin(saveObservables).pipe(
-        catchError(error => {
-          console.error('Error saving folders:', error);
-          return [];
-        })
-      ).subscribe(() => {
-        this.router.navigate(['/questions']);
-      });
-    } else {
-      this.router.navigate(['/questions']);
+      forkJoin(saveObservables)
+        .pipe(
+          catchError((error) => {
+            console.error('Error saving folders:', error);
+            return [];
+          })
+        )
+        .subscribe({
+          complete: () => console.log('Folders saved successfully'),
+        });
     }
   }
 
   selectAllFolders(folders: Folder[]): void {
-    this.selectedFolders = [...folders];
+    this.selectedFolders = new Map(folders.filter(folder=>!folder.is_folder).map(folder => [folder.next, true]));
   }
 
-  deselectAllFolders(): void {
-    this.selectedFolders = [];
+  getBreadcrumbs(): [string, string][] {
+    const breadcrumbs: [string, string][] = [];
+
+    if (!this.prevFolder) {
+      console.warn('prevFolder is not defined.');
+      return breadcrumbs;
+    }
+
+    let acc = "";
+    // Split the prevFolder into parts using "/" as the delimiter
+    for (const path of this.prevFolder.split('/')) {
+      if (path!== '') {
+        acc +=  "/" + path
+        breadcrumbs.push([path, acc]);
+      }
+    }
+
+    return breadcrumbs;
   }
+
+  deselectAllFolders(folders: Folder[]): void {
+    this.selectedFolders = new Map(folders.filter(folder=>!folder.is_folder).map(folder => [folder.next, false]));
+  }
+
+  get_color(folder: Folder):string{
+    if(this.selectedFolders.has(folder.next)) {
+      if (folder.color == "green") {
+        if (!this.selectedFolders.get(folder.next)){
+          return "white"
+        }else{
+          return folder.color;
+        }
+      }if(folder.color == "blue") {
+        if (!this.selectedFolders.get(folder.next)){
+          return "red"
+        }else{
+          return folder.color;
+        }
+      }if (folder.color == "red") {
+        if (this.selectedFolders.get(folder.next)){
+          return "blue"
+        }else{
+          return folder.color;
+        }
+      }else{
+        if (this.selectedFolders.get(folder.next)){
+          return "green"
+        }else{
+          return folder.color;
+        }
+      }
+    }
+    else{
+      return folder.color;
+    }
+  }
+
+  get_files_by_type(is_folder: boolean): Folder[] {
+    let folders: Folder[] = [];
+    if (this.folders$) {
+      // Subscribe to the observable to fetch the current folders
+      this.folders$.subscribe({
+        next: folderList => {
+          folders = folderList.filter(folder => folder.is_folder === is_folder);
+        },
+        error: err => {
+          console.error('Error fetching folders:', err);
+        }
+      });
+    }
+    return folders;
+  }
+
 }

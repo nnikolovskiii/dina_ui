@@ -64,7 +64,7 @@ export class CodeProcessService {
     );
   }
 
-  addFile(file_folder: Folder): Observable<any> {
-    return this.http.post(`${this.baseUrl}/add_file/`, file_folder, {});
+  update_file(file_path: string, active: boolean): Observable<any> {
+    return this.http.post(`${this.baseUrl}/update_file/`, { "file_path":file_path, "active":active }, {});
   }
 }
