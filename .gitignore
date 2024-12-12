@@ -1,0 +1,68 @@
+# Node.js dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Angular build files
+dist/
+tmp/
+out-tsc/
+
+# IDE and editor specific files
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+.DS_Store
+
+# Logs
+*.log
+
+# OS generated files
+Thumbs.db
+ehthumbs.db
+
+# Angular CLI specific files
+.angular/
+.angular/cache
+
+# Environment files
+src/environments/environment*.ts
+
+# Temporary files and backups
+*.bak
+*.tmp
+
+# Coverage directory used by testing tools
+coverage/
+
+# Compiled and packaged files
+*.tgz
+*.gz
+*.zip
+
+# Dependency directories
+bower_components/
+jspm_packages/
+
+# Other configuration files
+/karma.conf.js
+/protractor.conf.js
+*.swp
+*.iml
+*.lock
+*.pf
+package-lock.json
+yarn.lock
+
+# Generated files
+*.metadata.json
+*.map
+*.d.ts
+
+# Lint and testing artifacts
+reports/
+test-results/

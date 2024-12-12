@@ -91,24 +91,10 @@ export class CodeProcessComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {}
 
-  // navigateToQuestions(): void {
-  //   if (this.selectedFolders.length > 0) {
-  //     const saveObservables = this.selectedFolders.map(folder =>
-  //       this.codeProcessService.addFile(folder)
-  //     );
-  //
-  //     forkJoin(saveObservables).pipe(
-  //       catchError(error => {
-  //         console.error('Error saving folders:', error);
-  //         return [];
-  //       })
-  //     ).subscribe(() => {
-  //       this.router.navigate(['/questions']);
-  //     });
-  //   } else {
-  //     this.router.navigate(['/questions']);
-  //   }
-  // }
+  navigateToFinish(): void {
+    this.saveCurrFolders()
+    this.router.navigate(['/finish']);
+  }
 
   getLabel(folder: Folder): string {
     return folder.next.split(this.prevFolder+"/")[1];
@@ -162,36 +148,47 @@ export class CodeProcessComponent implements OnInit, OnDestroy {
   }
 
   get_color(folder: Folder):string{
+    let color = "white";
     if(this.selectedFolders.has(folder.next)) {
       if (folder.color == "green") {
         if (!this.selectedFolders.get(folder.next)){
-          return "white"
+          color = "white"
         }else{
-          return folder.color;
+          color = folder.color;
         }
       }if(folder.color == "blue") {
         if (!this.selectedFolders.get(folder.next)){
-          return "red"
+          color = "red"
         }else{
-          return folder.color;
+          color = folder.color;
         }
       }if (folder.color == "red") {
         if (this.selectedFolders.get(folder.next)){
-          return "blue"
+          color = "blue"
         }else{
-          return folder.color;
+          color = folder.color;
         }
-      }else{
+      }if(folder.color == "white"){
         if (this.selectedFolders.get(folder.next)){
-          return "green"
+          color = "green"
         }else{
-          return folder.color;
+          color = folder.color;
         }
       }
     }
     else{
-      return folder.color;
+      color = folder.color;
     }
+
+    if (color == "green"){
+      color = "#98FB98"
+    }if (color == "blue"){
+      color = "#6495ED"
+    } if (color == "red"){
+      color ="#FF0800"
+    }
+
+    return color
   }
 
   get_files_by_type(is_folder: boolean): Folder[] {

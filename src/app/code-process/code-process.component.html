@@ -1,5 +1,5 @@
 <div *ngIf="folders$ | async as folders; else loading" class="card-list">
-  <div class="breadcrumb">
+  <div class="breadcrumb sticky-top">
     <a
       class="breadcrumb-link"
       [routerLink]="['/code-process']"
@@ -42,9 +42,10 @@
   </div>
 
   <!-- Button group -->
-  <div class="button-group">
-    <button (click)="selectAllFolders(folders)">Select All</button>
-    <button (click)="deselectAllFolders(folders)">Deselect All</button>
+  <div class="button-group sticky-bottom">
+    <button class="small-button" (click)="selectAllFolders(folders)">Select All</button>
+    <button class="small-button" (click)="deselectAllFolders(folders)">Clear All</button>
+    <button class="small-button-finish" (click)="navigateToFinish()">Finish</button>
   </div>
 </div>
 
