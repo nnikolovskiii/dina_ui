@@ -1,6 +1,21 @@
-<h1>WebSocket Chat</h1>
-<form (submit)="sendMessage($event)">
-  <input type="text" [(ngModel)]="messageText" name="message" autocomplete="off" />
-  <button type="submit">Send</button>
-</form>
-<p>{{ messages }}</p> <!-- Display the concatenated messages here -->
+<body>
+<div class="chat-container">
+  <div class="messages">
+    <div *ngFor="let userMessage of userMessages; let i = index">
+      <div class="user-card"  [innerHtml]="getMarkedMessage(userMessage)"></div>
+      <div id="gap"></div>
+      <div class="assistant-card" *ngIf="i < assistantMessages.length; else nothing" [innerHtml]="getMarkedMessage(assistantMessages[i])">
+      </div>
+
+      <ng-template #nothing>
+      </ng-template>
+    </div>
+
+    <div class="assistant-card" [innerHtml]="sanitizedMessages" *ngIf="!isFirst"></div>
+  </div>
+  <form (submit)="sendMessage($event)">
+    <textarea [(ngModel)]="inputMessage" name="message" autocomplete="off" rows="1" placeholder="Type your message..."></textarea>
+    <button type="submit">Send</button>
+  </form>
+</div>
+</body>

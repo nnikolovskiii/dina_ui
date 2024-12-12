@@ -1,19 +1,92 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f9;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
 .chat-container {
-  border: 1px solid #ccc;
-  padding: 10px;
-  max-height: 300px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding-bottom: 15px;
+  padding-left: 100px;
+  padding-right: 100px;
+}
+
+.messages {
+  flex: 1;
+  padding: 15px;
   overflow-y: auto;
-  margin-bottom: 10px;
-  white-space: nowrap; /* Ensures that text does not wrap to new lines */
-  overflow-x: auto; /* Allows horizontal scrolling if needed */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.message {
-  margin-right: 5px; /* Add some space between messages */
+.assistant-card {
+  align-self: flex-start;
+  background-color: rgba(245, 254, 253, 0.2);
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 10px 15px;
+  max-width: 70%;
+  width: fit-content; /* Ensure the card fits its content */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  margin-left: 0;
+  margin-right: auto;
 }
 
-.message::after {
-  content: '';
-  display: table;
-  clear: both;
+.user-card {
+  align-self: flex-end;
+  background-color:  rgba(100, 149, 237, 0.3);
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 10px 15px;
+  max-width: 70%;
+  width: fit-content; /* Ensure the card fits its content */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  margin-left: auto;
+  margin-right: 0;
+}
+
+form {
+  display: flex;
+  padding: 10px;
+  border-top: 1px;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+
+}
+
+textarea {
+  flex: 0.5;
+  resize: none;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 16px;
+  outline: none;
+}
+
+button {
+  background-color:rgba(100, 149, 237, 1);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  margin-left: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: rgba( 46, 88, 148, 0.8);
+}
+
+#gap {
+  padding-bottom: 10px;
 }
