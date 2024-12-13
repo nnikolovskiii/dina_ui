@@ -1,0 +1,13 @@
+<div *ngIf="chats$ | async as chats; else loading" class="card-list">
+  <h2 class="title">Chat Histories</h2>
+  <div class="card" *ngFor="let chat of chats">
+    <h3>{{ chat.title }}</h3>
+  </div>
+</div>
+
+<ng-template #loading>
+  <div class="loading">
+    <img src="path/to/loading-spinner.gif" alt="Loading..." />
+    <p>Loading your folders...</p>
+  </div>
+</ng-template>

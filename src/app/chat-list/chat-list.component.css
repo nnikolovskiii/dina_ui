@@ -1,0 +1,66 @@
+/* Style for the card list container */
+.card-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  margin: 20px;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Individual card styles */
+.card {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  width: 300px;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Title inside the card */
+.card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+/* Description text inside the card */
+.card p {
+  font-size: 1rem;
+  color: #666;
+  margin: 0;
+}
+
+/* Loading state styles */
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.loading img {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 16px;
+}
+
+.loading p {
+  font-size: 1.2rem;
+  color: #666;
+}
