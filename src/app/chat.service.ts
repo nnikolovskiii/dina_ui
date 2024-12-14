@@ -27,4 +27,12 @@ export class ChatService {
   add_chat(user_messages: string[], assistant_messages: string[]): Observable<any> {
     return this.http.post(`${this.baseUrl}add_chat/`, { "user_messages":user_messages, "assistant_messages":assistant_messages }, {});
   }
+
+  update_chat(chat_id: string, user_messages: string[], assistant_messages: string[]): Observable<any> {
+    return this.http.post(`${this.baseUrl}update_chat/${chat_id}`, { "user_messages":user_messages, "assistant_messages":assistant_messages }, {});
+  }
+
+  get_chat_messages(chat_id: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}get_chat_messages/${chat_id}`);
+  }
 }

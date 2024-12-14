@@ -1,7 +1,14 @@
 <div *ngIf="chats$ | async as chats; else loading" class="card-list">
   <h2 class="title">Chat Histories</h2>
   <div class="card" *ngFor="let chat of chats">
-    <h3>{{ chat.title }}</h3>
+    <a
+      class="card-link"
+      [routerLink]="['/chat']"
+      [queryParams]="{ chat_id: chat.id }"
+    >
+       <h3>{{ chat.title }}</h3>
+
+    </a>
   </div>
 </div>
 
