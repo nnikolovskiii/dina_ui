@@ -1,7 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { CodeProcessService } from '../code-process.service';
 import {catchError, forkJoin, Observable, Subscription} from 'rxjs';
-import { AsyncPipe, CommonModule } from '@angular/common';
+import { AsyncPipe, CommonModule, Location } from '@angular/common';
 import { Folder } from '../models/folder';
 import {ActivatedRoute, Router, RouterModule} from '@angular/router';
 
@@ -18,21 +18,35 @@ export class CodeProcessComponent implements OnInit, OnDestroy {
   selectedFolders = new Map<string, boolean>();
   private subscription: Subscription | null = null;
 
-  constructor(private codeProcessService: CodeProcessService, private router: Router,  private route: ActivatedRoute,) { }
+  constructor(
+    private codeProcessService: CodeProcessService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private location: Location,
+    ) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.prevFolder = params['prevFolder'] || '/fastapi';
+
+
+      const storedData = localStorage.getItem('selectedFolders');
+      if (storedData) {
+        let selectedFolders: Map<string, boolean> = new Map(JSON.parse(storedData));
+        this.saveCurrFolders(selectedFolders);
+
+      }
+
+      this.clearLocal()
+
 
       if (!this.prevFolder) {
         console.warn('prevFolder is not defined. Please pass a valid value.');
         return;
       }
 
-      // Initialize folders$ observable
       this.folders$ = this.codeProcessService.getFiles(this.prevFolder);
 
-      // Subscribe to folders$
       this.subscription = this.folders$.subscribe({
         next: folders => {
           // Initialize selectedFolders with folders that have color === 'green'
@@ -41,13 +55,16 @@ export class CodeProcessComponent implements OnInit, OnDestroy {
               this.selectedFolders.set(folder.next, true);
             }
           }
-          console.log(this.selectedFolders);
         },
         error: err => {
           console.error('Error fetching folders:', err);
         }
       });
     });
+  }
+
+  clearLocal(): void {
+    localStorage.removeItem('selectedFolders');
   }
 
   onFolderSelect(event: Event, folder: Folder): void {
@@ -60,7 +77,6 @@ export class CodeProcessComponent implements OnInit, OnDestroy {
     //     (selectedFolder) => selectedFolder !== folder
     //   );
     // }
-    console.log(this.selectedFolders);
   }
 
   onFolderUnselect(folder: Folder): void {
@@ -87,6 +103,9 @@ export class CodeProcessComponent implements OnInit, OnDestroy {
     } else {
       this.onFolderUnselect(folder);
     }
+    localStorage.setItem('selectedFolders', JSON.stringify(Array.from(this.selectedFolders.entries())));
+    console.log(localStorage.getItem('selectedFolders'))
+    console.log(this.selectedFolders);
   }
 
   ngOnDestroy(): void {}
@@ -100,9 +119,9 @@ export class CodeProcessComponent implements OnInit, OnDestroy {
     return folder.next.split(this.prevFolder+"/")[1];
   }
 
-  saveCurrFolders(): void {
-    if (this.selectedFolders.size > 0) {
-      const saveObservables = Array.from(this.selectedFolders.entries()).map(
+  saveCurrFolders(selectedFolders:Map<string, boolean> = this.selectedFolders): void {
+    if (selectedFolders.size > 0) {
+      const saveObservables = Array.from(selectedFolders.entries()).map(
         ([key, value]) => this.codeProcessService.update_file( key, value )
       );
 
@@ -206,5 +225,10 @@ export class CodeProcessComponent implements OnInit, OnDestroy {
     }
     return folders;
   }
+
+  navigateBack() {
+    this.location.back(); // Go back to the previous route
+  }
+
 
 }

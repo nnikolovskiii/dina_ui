@@ -1,5 +1,6 @@
 <div *ngIf="folders$ | async as folders; else loading" class="card-list">
   <div class="breadcrumb sticky-top">
+    <button class="back-button" (click)="navigateBack()">🔙 Back</button>
     <a
       class="breadcrumb-link"
       [routerLink]="['/code-process']"

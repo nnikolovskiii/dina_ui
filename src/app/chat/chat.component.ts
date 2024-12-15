@@ -37,7 +37,7 @@ export class ChatComponent implements OnInit, OnDestroy {
       let savedAssistantMessages = localStorage.getItem('assistantMessages');
       let chat_id = localStorage.getItem('chat_id');
 
-      console.log(savedUserMessages, savedAssistantMessages)
+      console.log(savedUserMessages, savedAssistantMessages, chat_id)
 
 
       if (chat_id && chat_id !== "" && savedUserMessages && savedAssistantMessages) {
@@ -45,8 +45,10 @@ export class ChatComponent implements OnInit, OnDestroy {
         let assistantMessages = JSON.parse(savedAssistantMessages);
         await firstValueFrom(this.chatService.update_chat(chat_id, userMessages, assistantMessages));
       } else if (savedUserMessages && savedAssistantMessages) {
+        console.log("yes")
         let userMessages = JSON.parse(savedUserMessages);
         let assistantMessages = JSON.parse(savedAssistantMessages);
+        console.log(userMessages, assistantMessages)
         await firstValueFrom(this.chatService.add_chat(userMessages, assistantMessages));
       }
 
@@ -107,9 +109,8 @@ export class ChatComponent implements OnInit, OnDestroy {
     }
   }
 
-  sendMessage(event: Event): void {
+  sendMessage(): void {
     this.sanitizedMessages = this.sanitizer.bypassSecurityTrustHtml('');
-    event.preventDefault();
 
 
     // Send the message
@@ -119,6 +120,7 @@ export class ChatComponent implements OnInit, OnDestroy {
       this.newUserMessages.push([this.inputMessage, this.userMessages.length - 1]);
       this.isFirst = false;
       this.messages = '';
+      this.inputMessage = ""
     }
 
     // Save chat data after sending a message
@@ -141,4 +143,31 @@ export class ChatComponent implements OnInit, OnDestroy {
   getMarkedMessage(message: string): string | Promise<string> {
     return marked.parse(message);
   }
+
+  handleKeyDown(event: KeyboardEvent, textarea: HTMLTextAreaElement): void {
+    if (event.key === 'Enter') {
+      if (event.shiftKey) {
+        event.preventDefault();
+        if (textarea.rows < 7) {
+          textarea.rows += 1;
+          this.inputMessage += '\n'; // Add a newline to the inputMessage
+        }
+      } else {
+        // Prevent default Enter behavior and send the message
+        event.preventDefault();
+        this.sendMessage();
+        textarea.rows = 1; // Reset rows after sending the message
+      }
+    }
+
+    if (event.key === 'Backspace') {
+      // Check if the last character in inputMessage is a newline
+      if (this.inputMessage.endsWith('\n')) {
+        event.preventDefault();
+        textarea.rows = Math.max(1, textarea.rows - 1); // Decrease rows but ensure it doesn't go below 1
+        this.inputMessage = this.inputMessage.slice(0, -1); // Remove the last character (newline)
+      }
+    }
+  }
+
 }

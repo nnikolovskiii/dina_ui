@@ -67,4 +67,9 @@ export class CodeProcessService {
   update_file(file_path: string, active: boolean): Observable<any> {
     return this.http.post(`${this.baseUrl}/update_file/`, { "file_path":file_path, "active":active }, {});
   }
+
+  activate_tmp_files(git_url: string): Observable<any> {
+    const params = { git_url: git_url };
+    return this.http.get(`${this.baseUrl}/activate_tmp_files/`,  { params });
+  }
 }
