@@ -180,3 +180,17 @@
   background-color: #43995f; /* Darker shade on hover */
 }
 
+.back-button {
+  background-color: rgba(100, 149, 237, 1);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.back-button:hover {
+  background-color: rgba(46, 88, 148, 0.8);
+}

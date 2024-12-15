@@ -13,8 +13,18 @@
 
     <div class="assistant-card" [innerHtml]="sanitizedMessages" *ngIf="!isFirst"></div>
   </div>
-  <form (submit)="sendMessage($event)">
-    <textarea [(ngModel)]="inputMessage" name="message" autocomplete="off" rows="1" placeholder="Type your message..."></textarea>
+  <form (submit)="sendMessage()">
+    <textarea
+      #messageArea
+      [(ngModel)]="inputMessage"
+      name="message"
+      autocomplete="off"
+      rows="1"
+      placeholder="chat with code_explore"
+      (keydown)="handleKeyDown($event, messageArea)"
+    >
+
+    </textarea>
     <button type="submit">Send</button>
   </form>
 </div>
