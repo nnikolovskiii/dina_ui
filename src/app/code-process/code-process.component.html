@@ -21,7 +21,7 @@
       <a
         class="card-link"
         [routerLink]="['/code-process']"
-        [queryParams]="{ prevFolder: folder.next }"
+        [queryParams]="{ prevFolder: folder.next, git_url: git_url }"
         (click)="saveCurrFolders()"
       >
         📂 {{ getLabel(folder) }}

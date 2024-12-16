@@ -1,4 +1,4 @@
-<div *ngIf="git_repos$ | async as git_repos; else loading" class="card-list">
+<div *ngIf="git_repos; else loading" class="card-list">
   <h2 class="title">Git Urls</h2>
   <div class="card" *ngFor="let git_repo of git_repos">
     <a
@@ -7,9 +7,21 @@
       [queryParams]="{ git_url: git_repo.url }"
     >
       <h3>{{ getName(git_repo.url) }}</h3>
-      <p>{{ getGitUser(git_repo.url) }}</p>
+      <p>{{ getName(git_repo.url) }}</p>
 
     </a>
+
+      <label class="switch">
+        <input
+          type="checkbox"
+          id="override"
+          name="override"
+          [(ngModel)]="git_repo.active"
+          (click)="toggleButtonAction(git_repo)"
+        />
+        <span class="slider round"></span>
+      </label>
+
   </div>
 </div>
 

@@ -29,6 +29,7 @@ export class CodeProcessComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.prevFolder = params['prevFolder'] || '/fastapi';
+      this.git_url = params['git_url'] || '/fastapi';
 
 
       const storedData = localStorage.getItem('selectedFolders');
