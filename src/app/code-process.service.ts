@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {map, Observable} from 'rxjs';
 import {Folder} from './models/folder';
-import {GitUrl} from './models/git-url';
 
 interface GitUrlDto {
   git_urls: string[];
@@ -94,4 +93,5 @@ export class CodeProcessService {
   change_active_repos(git_urls: string[], active: boolean[]): Observable<any> {
     return this.http.post(`http://localhost:5000/code/change_active_repos/`, { "git_urls":git_urls, "active":active }, {});
   }
+
 }
