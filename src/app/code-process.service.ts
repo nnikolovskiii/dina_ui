@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {map, Observable} from 'rxjs';
 import {Folder} from './models/folder';
+import {GitUrl} from './models/git-url';
 
 interface GitUrlDto {
   git_urls: string[];
