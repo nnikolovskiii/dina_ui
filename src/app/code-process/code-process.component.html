@@ -15,20 +15,24 @@
   <!-- Checklist -->
   <div class="card"
        [class.selected]="checkForFolder(folder)"
-       *ngFor="let folder of folders">
+       *ngFor="let folder of getFolders(true, folders)">
 
-    <ng-template #folderLink>
-      <a
-        class="card-link"
-        [routerLink]="['/code-process']"
-        [queryParams]="{ prevFolder: folder.next, git_url: git_url }"
-        (click)="saveCurrFolders()"
-      >
-        📂 {{ getLabel(folder) }}
-      </a>
-    </ng-template>
+    <a
+      class="card-link"
+      [routerLink]="['/code-process']"
+      [queryParams]="{ prevFolder: folder.next, git_url: git_url }"
+      (click)="saveCurrFolders()"
+    >
+      📂 {{ getLabel(folder) }}
+    </a>
 
-    <label class="card-label" *ngIf="!folder.is_folder; else folderLink">
+  </div>
+
+  <div class="card"
+       [class.selected]="checkForFolder(folder)"
+       *ngFor="let folder of getFolders(false, folders)">
+
+    <label class="card-label" *ngIf="!folder.is_folder">
       <input
         type="checkbox"
         [value]="folder"
@@ -52,7 +56,7 @@
 
 <ng-template #loading>
   <div class="loading">
-    <img src="path/to/loading-spinner.gif" alt="Loading..." />
+    <img src="path/to/loading-spinner.gif" alt="Loading..."/>
     <p>Loading your folders...</p>
   </div>
 </ng-template>

@@ -198,6 +198,10 @@ export class CodeProcessComponent implements OnInit, OnDestroy {
     return color
   }
 
+  getFolders(is_parent: boolean, links: Folder[]): Folder[] {
+    return links.filter(link => link.is_folder == is_parent);
+  }
+
 
   navigateBack() {
     this.location.back(); // Go back to the previous route

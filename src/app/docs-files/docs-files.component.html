@@ -1,34 +1,47 @@
 <div *ngIf="links$ | async as links; else loading" class="card-list">
   <div class="breadcrumb sticky-top">
-    <button class="back-button" (click)="navigateBack()">🔙 Back</button>
-    <a
-      class="breadcrumb-link"
-      [routerLink]="['/docs-files']"
-      [queryParams]="{ prevLink: breadcrumb[1] }"
-      (click)="saveCurrLinks()"
-      *ngFor="let breadcrumb of getBreadcrumbs()"
-    >
-      📂 {{ breadcrumb[0] }}
-    </a>
+    <button class="back-button" (click)="navigateBack()"> Back</button>
+    <div class="breadcrumb-links">
+    <span *ngFor="let breadcrumb of getBreadcrumbs(); let i = index; let isLast = last">
+      <a
+        class="breadcrumb-link"
+        [routerLink]="['/docs-files']"
+        [queryParams]="{ prevLink: breadcrumb[1] }"
+        (click)="saveCurrLinks()"
+      >
+        {{ breadcrumb[0] }}
+      </a>
+      <span class="breadcrumb-separator" *ngIf="!isLast"> &gt; </span>
+    </span>
+    </div>
   </div>
 
   <!-- Checklist -->
   <div class="card"
        [class.selected]="checkForParent(link)"
-       *ngFor="let link of links">
+       *ngFor="let link of getLinks(true, links)">
 
-    <ng-template #parentLink>
-      <a
-        class="card-link"
-        [routerLink]="['/docs-files']"
-        [queryParams]="{ prevLink: link.link, docs_url: docs_url }"
-        (click)="saveCurrLinks()"
-      >
-        📂{{link.link}}
-      </a>
-    </ng-template>
+    <a
+      class="card-link"
+      [routerLink]="['/docs-files']"
+      [queryParams]="{ prevLink: link.link, docs_url: docs_url }"
+      (click)="saveCurrLinks()"
+    >
+      <div class="folder-flex">
+        <img ngSrc="assets/folder.png" height="20" width="20" />
+        <span class="card-label">
+      {{ getLabel(link) }}
+    </span>
+      </div>
+    </a>
 
-    <label class="card-label" *ngIf="!link.is_parent; else parentLink">
+
+  </div>
+
+  <div class="card"
+       [class.selected]="checkForParent(link)"
+       *ngFor="let link of getLinks(false, links)">
+    <label class="card-label" *ngIf="!link.is_parent;">
       <input
         type="checkbox"
         [value]="link"
@@ -36,23 +49,23 @@
         (change)="toggleLinkSelection($event, link)"
       />
       <span class="checkmark"></span>
-      {{link.link}}
+      {{ getLabel(link) }}
       <span class="folder-color" [style.backgroundColor]="get_color(link)"></span>
     </label>
-
   </div>
+
 
   <!-- Button group -->
   <div class="button-group sticky-bottom">
     <button class="small-button" (click)="selectAllLinks(links)">Select All</button>
     <button class="small-button" (click)="deselectAllLinks(links)">Clear All</button>
-<!--    <button class="small-button-finish" (click)="navigateToFinish()">Finish</button>-->
+    <!--    <button class="small-button-finish" (click)="navigateToFinish()">Finish</button>-->
   </div>
 </div>
 
 <ng-template #loading>
   <div class="loading">
-    <img src="path/to/loading-spinner.gif" alt="Loading..." />
+    <img src="path/to/loading-spinner.gif" alt="Loading..."/>
     <p>Loading your folders...</p>
   </div>
 </ng-template>

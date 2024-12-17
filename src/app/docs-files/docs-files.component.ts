@@ -1,14 +1,14 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {CommonModule, Location} from '@angular/common';
+import {CommonModule, Location, NgOptimizedImage} from '@angular/common';
 import {ActivatedRoute, Router, RouterModule} from '@angular/router';
-import {catchError, forkJoin, Observable, Subscription} from 'rxjs';
+import {catchError, filter, forkJoin, Observable, of, Subscription} from 'rxjs';
 import {Link} from '../models/link';
 import {DocsFilesService} from '../docs-files.service';
 
 @Component({
   selector: 'app-docs-files',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, NgOptimizedImage],
   templateUrl: './docs-files.component.html',
   styleUrl: './docs-files.component.css'
 })
@@ -96,7 +96,7 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
   }
 
   getLabel(link: Link): string {
-    return link.link.split(this.prevLink + "/")[1];
+    return link.link.split("//")[1];
   }
 
   selectAllLinks(links: Link[]): void {
@@ -210,4 +210,11 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
   }
 
+  getLinks(is_parent: boolean, links: Link[]): Link[] {
+    return links.filter(link => link.is_parent == is_parent);
+  }
+
+  protected Link = Link;
+  protected readonly of = of;
+  protected readonly filter = filter;
 }
