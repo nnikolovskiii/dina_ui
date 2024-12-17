@@ -1,0 +1,58 @@
+<div *ngIf="links$ | async as links; else loading" class="card-list">
+  <div class="breadcrumb sticky-top">
+    <button class="back-button" (click)="navigateBack()">🔙 Back</button>
+    <a
+      class="breadcrumb-link"
+      [routerLink]="['/docs-files']"
+      [queryParams]="{ prevLink: breadcrumb[1] }"
+      (click)="saveCurrLinks()"
+      *ngFor="let breadcrumb of getBreadcrumbs()"
+    >
+      📂 {{ breadcrumb[0] }}
+    </a>
+  </div>
+
+  <!-- Checklist -->
+  <div class="card"
+       [class.selected]="checkForParent(link)"
+       *ngFor="let link of links">
+
+    <ng-template #parentLink>
+      <a
+        class="card-link"
+        [routerLink]="['/docs-files']"
+        [queryParams]="{ prevLink: link.link, docs_url: docs_url }"
+        (click)="saveCurrLinks()"
+      >
+        📂{{link.link}}
+      </a>
+    </ng-template>
+
+    <label class="card-label" *ngIf="!link.is_parent; else parentLink">
+      <input
+        type="checkbox"
+        [value]="link"
+        [checked]="checkForParent(link)"
+        (change)="toggleLinkSelection($event, link)"
+      />
+      <span class="checkmark"></span>
+      {{link.link}}
+      <span class="folder-color" [style.backgroundColor]="get_color(link)"></span>
+    </label>
+
+  </div>
+
+  <!-- Button group -->
+  <div class="button-group sticky-bottom">
+    <button class="small-button" (click)="selectAllLinks(links)">Select All</button>
+    <button class="small-button" (click)="deselectAllLinks(links)">Clear All</button>
+<!--    <button class="small-button-finish" (click)="navigateToFinish()">Finish</button>-->
+  </div>
+</div>
+
+<ng-template #loading>
+  <div class="loading">
+    <img src="path/to/loading-spinner.gif" alt="Loading..." />
+    <p>Loading your folders...</p>
+  </div>
+</ng-template>

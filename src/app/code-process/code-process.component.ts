@@ -38,14 +38,7 @@ export class CodeProcessComponent implements OnInit, OnDestroy {
         this.saveCurrFolders(selectedFolders);
 
       }
-
       this.clearLocal()
-
-
-      if (!this.prevFolder) {
-        console.warn('prevFolder is not defined. Please pass a valid value.');
-        return;
-      }
 
       this.folders$ = this.codeProcessService.getFiles(this.prevFolder);
 
@@ -74,11 +67,6 @@ export class CodeProcessComponent implements OnInit, OnDestroy {
     if (checkbox.checked) {
       this.selectedFolders.set(folder.next, true);
     }
-    // else {
-    //   this.selectedFolders = this.selectedFolders.filter(
-    //     (selectedFolder) => selectedFolder !== folder
-    //   );
-    // }
   }
 
   onFolderUnselect(folder: Folder): void {
@@ -106,8 +94,6 @@ export class CodeProcessComponent implements OnInit, OnDestroy {
       this.onFolderUnselect(folder);
     }
     localStorage.setItem('selectedFolders', JSON.stringify(Array.from(this.selectedFolders.entries())));
-    console.log(localStorage.getItem('selectedFolders'))
-    console.log(this.selectedFolders);
   }
 
   ngOnDestroy(): void {}
@@ -212,21 +198,6 @@ export class CodeProcessComponent implements OnInit, OnDestroy {
     return color
   }
 
-  get_files_by_type(is_folder: boolean): Folder[] {
-    let folders: Folder[] = [];
-    if (this.folders$) {
-      // Subscribe to the observable to fetch the current folders
-      this.folders$.subscribe({
-        next: folderList => {
-          folders = folderList.filter(folder => folder.is_folder === is_folder);
-        },
-        error: err => {
-          console.error('Error fetching folders:', err);
-        }
-      });
-    }
-    return folders;
-  }
 
   navigateBack() {
     this.location.back(); // Go back to the previous route
