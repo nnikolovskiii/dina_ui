@@ -7,6 +7,7 @@ import {ChatListComponent} from './chat-list/chat-list.component';
 import {SelectGiturlComponent} from './select-giturl/select-giturl.component';
 import {ListGiturlComponent} from './list-giturl/list-giturl.component';
 import {DocsFilesComponent} from './docs-files/docs-files.component';
+import {ProcessListComponent} from './process-list/process-list.component';
 
 
 export const routes: Routes = [
@@ -19,4 +20,6 @@ export const routes: Routes = [
   {path: 'finish', component: FinishComponent},
   {path:'giturl-select', component: SelectGiturlComponent},
   {path:'giturl-list', component: ListGiturlComponent},
+  {path:'process-list', component: ProcessListComponent},
+
 ];

@@ -1,0 +1,21 @@
+.tabs, .sub-tabs {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.tabs button, .sub-tabs button {
+  padding: 10px;
+  border: none;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  outline: none;
+}
+
+.tabs button.active, .sub-tabs button.active {
+  background-color: #007bff;
+  color: white;
+}
+
+.tabs button + button, .sub-tabs button + button {
+  margin-left: 5px;
+}
