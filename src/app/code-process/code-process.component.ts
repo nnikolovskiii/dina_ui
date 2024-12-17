@@ -1,14 +1,14 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { CodeProcessService } from '../code-process.service';
 import {catchError, forkJoin, Observable, Subscription} from 'rxjs';
-import { AsyncPipe, CommonModule, Location } from '@angular/common';
+import {AsyncPipe, CommonModule, Location, NgOptimizedImage} from '@angular/common';
 import { Folder } from '../models/folder';
 import {ActivatedRoute, Router, RouterModule} from '@angular/router';
 
 @Component({
   selector: 'app-code-process',
   standalone: true,
-  imports: [CommonModule,RouterModule],
+  imports: [CommonModule, RouterModule, NgOptimizedImage],
   templateUrl: './code-process.component.html',
   styleUrls: ['./code-process.component.css'],
 })
