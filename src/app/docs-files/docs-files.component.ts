@@ -214,6 +214,12 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
     return links.filter(link => link.is_parent == is_parent);
   }
 
+  navigateToFinish(): void {
+    this.saveCurrLinks()
+    this.router.navigate(['/finish'], { queryParams: { url: this.docs_url, type: "docs" } });
+  }
+
+
   protected Link = Link;
   protected readonly of = of;
   protected readonly filter = filter;

@@ -68,7 +68,7 @@
 
 .card-label input[type="checkbox"]:checked ~ .checkmark {
   background: rgba(100, 149, 237);
-  border-color:  rgba(100, 149, 237);
+  border-color: rgba(100, 149, 237);
 }
 
 .checkmark:after {
@@ -180,17 +180,19 @@
 .small-button-finish {
   padding: 11px 17px; /* Smaller padding for compact buttons */
   font-size: 14px; /* Adjust font size */
-  background-color: #50C878; /* Button background color */
-  color: #fff; /* Button text color */
+  background-color: rgba( 255, 195, 11); /* Button background color */
+  color: rgba(76, 70, 70); /* Button text color */
   border: none;
   border-radius: 5px; /* Rounded corners */
   cursor: pointer;
   transition: background-color 0.3s ease;
+  font-weight: bold;
 }
 
 .small-button-finish:hover {
-  background-color: #43995f; /* Darker shade on hover */
+  background-color:rgba(235, 175, 11); /* Darker shade on hover */
 }
+
 
 .back-button {
   background-color: rgba(100, 149, 237, 1);

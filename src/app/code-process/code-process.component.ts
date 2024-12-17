@@ -100,7 +100,7 @@ export class CodeProcessComponent implements OnInit, OnDestroy {
 
   navigateToFinish(): void {
     this.saveCurrFolders()
-    this.router.navigate(['/finish'], { queryParams: { git_url: this.git_url } });
+    this.router.navigate(['/finish'], { queryParams: { url: this.git_url, type: "code" } });
   }
 
   getLabel(folder: Folder): string {
