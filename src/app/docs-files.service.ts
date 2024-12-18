@@ -53,4 +53,9 @@ export class DocsFilesService {
     return this.http.get(`${this.baseUrl}/select_all_links/`,  { params });
   }
 
+  selectDocs(docs_url: string, select: boolean): Observable<any> {
+    const params = { docs_url: docs_url , select: select};
+    return this.http.get(`${this.baseUrl}/select_docs/`,  { params });
+  }
+
 }

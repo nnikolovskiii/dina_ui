@@ -242,6 +242,7 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
     this.saveCurrLinks()
     this.router.navigate(['/finish'], { queryParams: { url: this.docs_url, type: "docs" } });
   }
+
   selectAll(prev_link: string, select: boolean){
     this.docsFilesService.selectAllLinks(prev_link, select).subscribe(
       (response) => {
@@ -253,10 +254,15 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
         // Handle any errors that occur during the request
       }
     );
-
-    console.log(this.selectedLinks)
   }
 
+  isSelectDocs: boolean = false;
+
+  selectDocs(docsUrl: string, select: boolean){
+    this.isSelectDocs = true
+    this.docsFilesService.selectDocs(docsUrl, select).subscribe();
+    window.location.reload();
+  }
 
   protected Link = Link;
   protected readonly of = of;
