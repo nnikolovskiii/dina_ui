@@ -1,18 +1,18 @@
 <div class="container">
   <div class="tabs">
-    <div class="tab" [class.active]="selectedStatus === 'ongoing'" (click)="selectStatus('ongoing')">Ongoing</div>
-    <div class="tab" [class.active]="selectedStatus === 'finished'" (click)="selectStatus('finished')">Finished</div>
+    <div class="tab" [class.active]="selectedStatus === 'ongoing'" (click)="changeDisplayProcesses('ongoing')">Ongoing</div>
+    <div class="tab" [class.active]="selectedStatus === 'finished'" (click)="changeDisplayProcesses('finished')">Finished</div>
   </div>
 
   <div *ngIf="selectedStatus">
-    <div *ngFor="let process of getEntries(selectedStatus)">
+    <div *ngFor="let process of displayedProcesses; let i = index">
       <div class="card">
         <div class="card-header">
           {{ process.url }}
           <span
             class="refresh-emoji"
             *ngIf="selectedStatus === 'ongoing'"
-            (click)="refresh()">🔄</span>
+            (click)="refresh(process.id, i)">🔄</span>
         </div>
         <div class="card-body">
           <p>Type: {{ process.type }}</p>
@@ -31,8 +31,8 @@
       </div>
     </div>
 
-    <div class="empty-message" *ngIf="!getEntries(selectedStatus).length">
-      No processes found for the selected status.
-    </div>
+<!--    <div class="empty-message" *ngIf="!getEntries(selectedStatus).length">-->
+<!--      No processes found for the selected status.-->
+<!--    </div>-->
   </div>
 </div>

@@ -1,8 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Process} from '../models/process';
 import {ProcessService} from '../process.service';
-import {JsonPipe, NgForOf, NgIf} from '@angular/common';
-import { MatTabsModule } from '@angular/material/tabs';
+import {JsonPipe, Location, NgForOf, NgIf} from '@angular/common';
+import {MatTabsModule} from '@angular/material/tabs';
+import {ActivatedRoute, Router} from '@angular/router';
+import {firstValueFrom} from 'rxjs';
 
 @Component({
   selector: 'app-process-list',
@@ -17,23 +19,29 @@ import { MatTabsModule } from '@angular/material/tabs';
   styleUrl: './process-list.component.css'
 })
 export class ProcessListComponent implements OnInit {
-  processMap: Map<string, Process[]> | undefined;
+  displayedProcesses: Process[] | undefined;
+  @Input() finished: boolean = false;
 
-  constructor(private processService: ProcessService) {}
+  constructor(
+    private processService: ProcessService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private location: Location,
+    ) {
+  }
 
   ngOnInit() {
-    this.processService.getProcesses().subscribe(
-      (map: Map<string, Process[]>) => {
-        this.processMap = map;
-        console.log(this.processMap); // For debugging purposes
-      },
-      (error) => {
-        console.error('Error fetching processes:', error);
-        // Handle error appropriately, e.g., show error message to user
+    this.route.queryParams.subscribe(async params => {
+      this.finished = params['finished'] || false;
+      if (this.finished) {
+        this.setToFinished()
+      }else{
+        this.setToOngoing()
       }
-    );
 
-    console.log()
+
+      console.log()
+    });
   }
 
   selectedStatus = 'ongoing';
@@ -47,12 +55,44 @@ export class ProcessListComponent implements OnInit {
     this.selectedType = type;
   }
 
-
-  getEntries(status: string):Process[] {
-    return [...(this.processMap?.get("docs_" + status ) ?? []), ...(this.processMap?.get("code_" + status) ?? [])];
+  changeDisplayProcesses(status: string) {
+    this.selectedStatus = status;
+    if (status === 'ongoing') {
+      this.setToOngoing();
+    } else if (status === 'finished') {
+      this.setToFinished();
+    }
   }
 
-  refresh(){
+  async refresh(progressId:string, ind: number) {
+    console.log("refreshed")
+    let process = await firstValueFrom(this.processService.refreshProgress(progressId))
+    if (this.displayedProcesses) {
+      this.displayedProcesses[ind] = process;
+    }
+  }
 
+  setToFinished() {
+    this.processService.getFinishedProcesses().subscribe(
+      (processes: Process[]) => {
+        this.displayedProcesses = processes;
+      },
+      (error) => {
+        console.error('Error fetching processes:', error);
+        // Handle error appropriately, e.g., show error message to user
+      }
+    );
+  }
+
+  setToOngoing() {
+    this.processService.getOngoingProcesses().subscribe(
+      (processes: Process[]) => {
+        this.displayedProcesses = processes;
+      },
+      (error) => {
+        console.error('Error fetching processes:', error);
+        // Handle error appropriately, e.g., show error message to user
+      }
+    );
   }
 }
