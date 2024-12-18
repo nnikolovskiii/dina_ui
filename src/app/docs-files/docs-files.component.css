@@ -27,7 +27,7 @@
 }
 
 .card {
-  background: linear-gradient(145deg, #f9f9f9, #e6e6e6);
+  background: linear-gradient(145deg, #f9f9f9, #F5F5F5);
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -41,8 +41,7 @@
 }
 
 .card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .card-label {
@@ -216,17 +215,14 @@
 }
 
 .tow-button-group {
-  margin-top: 10px; /* Adds some space between the buttons and the rest of the card */
   display: flex;
   justify-content: flex-start;
   gap: 10px;
 }
 
 .emoji-button {
-  background-color: #f1f1f1;
   border: 1px solid #ddd;
   border-radius: 5px;
-  padding: 5px 10px;
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.2s;
@@ -234,12 +230,17 @@
 
 .emoji-button.plus {
   color: #28a745;
+  font-weight: bold;
 }
 
 .emoji-button.minus {
   color: #dc3545;
+  font-weight: bold;
+
 }
 
 .emoji-button:hover {
-  background-color: #eaeaea;
+  background-color: #ddd;
+  color: #fff;
 }
+

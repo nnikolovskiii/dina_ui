@@ -18,6 +18,7 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
   links$: Observable<Link[]> | null = null;
   selectedLinks = new Map<string, boolean>();
   private subscription: Subscription | null = null;
+  hoveredCard: any = null;
 
   constructor(
     private docsFilesService: DocsFilesService,
@@ -57,6 +58,26 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
     });
   }
 
+  navigateToLink(link: string): void {
+    if (link) {
+      // Open the link in a new tab
+      window.open(link, '_blank');
+    } else {
+      console.error('Invalid link:', link);
+    }
+  }
+
+  selectCard(card: any): void {
+    this.hoveredCard = card; // Set the hovered card
+  }
+
+  deselectCard(): void {
+    this.hoveredCard = null; // Clear the hovered card
+  }
+
+  isCardHovered(card: any): boolean {
+    return this.hoveredCard === card; // Check if the card is being hovered
+  }
   toggleLinkSelection(event: Event, link: Link): void {
     const checkbox = event.target as HTMLInputElement;
     if (checkbox.checked) {
