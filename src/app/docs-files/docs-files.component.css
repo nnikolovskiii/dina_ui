@@ -214,3 +214,32 @@
   align-items: center; /* Vertically centers content */
   gap: 13px; /* Adds space between the image and label */
 }
+
+.tow-button-group {
+  margin-top: 10px; /* Adds some space between the buttons and the rest of the card */
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+.emoji-button {
+  background-color: #f1f1f1;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.emoji-button.plus {
+  color: #28a745;
+}
+
+.emoji-button.minus {
+  color: #dc3545;
+}
+
+.emoji-button:hover {
+  background-color: #eaeaea;
+}

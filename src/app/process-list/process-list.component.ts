@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Process} from '../models/process';
 import {ProcessService} from '../process.service';
-import {JsonPipe, Location, NgForOf, NgIf} from '@angular/common';
+import {JsonPipe, Location, NgForOf, NgIf, NgOptimizedImage} from '@angular/common';
 import {MatTabsModule} from '@angular/material/tabs';
 import {ActivatedRoute, Router} from '@angular/router';
 import {firstValueFrom} from 'rxjs';
@@ -13,7 +13,8 @@ import {firstValueFrom} from 'rxjs';
     NgForOf,
     JsonPipe,
     MatTabsModule,
-    NgIf
+    NgIf,
+    NgOptimizedImage
   ],
   templateUrl: './process-list.component.html',
   styleUrl: './process-list.component.css'
@@ -56,6 +57,7 @@ export class ProcessListComponent implements OnInit {
   }
 
   changeDisplayProcesses(status: string) {
+    this.displayedProcesses = []
     this.selectedStatus = status;
     if (status === 'ongoing') {
       this.setToOngoing();

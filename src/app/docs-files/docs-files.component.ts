@@ -40,6 +40,7 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
       this.clearLocal()
 
       this.links$ = this.docsFilesService.getLinks(this.prevLink);
+      this.selectedLinks = new Map();
 
       this.subscription = this.links$.subscribe({
         next: links => {
@@ -101,10 +102,13 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
 
   selectAllLinks(links: Link[]): void {
     this.selectedLinks = new Map(links.filter(link => !link.is_parent).map(link => [link.link, true]));
+    localStorage.setItem('selectedLinks', JSON.stringify(Array.from(this.selectedLinks.entries())));
   }
 
   deselectAllLinks(links: Link[]): void {
     this.selectedLinks = new Map(links.filter(link => !link.is_parent).map(link => [link.link, false]));
+    localStorage.setItem('selectedLinks', JSON.stringify(Array.from(this.selectedLinks.entries())));
+
   }
 
   getBreadcrumbs(): [string, string][] {
@@ -201,9 +205,8 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
     return color
   }
 
-
   navigateBack() {
-    this.location.back(); // Go back to the previous route
+    this.location.back();
   }
 
 
@@ -217,6 +220,20 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
   navigateToFinish(): void {
     this.saveCurrLinks()
     this.router.navigate(['/finish'], { queryParams: { url: this.docs_url, type: "docs" } });
+  }
+  selectAll(prev_link: string, select: boolean){
+    this.docsFilesService.selectAllLinks(prev_link, select).subscribe(
+      (response) => {
+        console.log('Response:', response);
+        // Handle the response data here, e.g., update the UI, log a message, etc.
+      },
+      (error) => {
+        console.error('Error:', error);
+        // Handle any errors that occur during the request
+      }
+    );
+
+    console.log(this.selectedLinks)
   }
 
 

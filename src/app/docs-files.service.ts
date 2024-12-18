@@ -48,4 +48,9 @@ export class DocsFilesService {
     );
   }
 
+  selectAllLinks(prev_link: string, select: boolean): Observable<any> {
+    const params = { prev_link: prev_link , select: select};
+    return this.http.get(`${this.baseUrl}/select_all_links/`,  { params });
+  }
+
 }
