@@ -1,21 +1,105 @@
-.tabs, .sub-tabs {
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f9fa;
+}
+
+.container {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.tabs {
   display: flex;
-  margin-bottom: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
 }
 
-.tabs button, .sub-tabs button {
-  padding: 10px;
-  border: none;
-  background-color: #f0f0f0;
+.tab {
+  padding: 10px 20px;
+  margin: 0 5px;
   cursor: pointer;
-  outline: none;
+  background-color: #e9ecef;
+  color: #495057;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
 }
 
-.tabs button.active, .sub-tabs button.active {
+.tab.active {
   background-color: #007bff;
-  color: white;
+  color: #ffffff;
 }
 
-.tabs button + button, .sub-tabs button + button {
-  margin-left: 5px;
+.card {
+  border: 1px solid #dee2e6;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  overflow: hidden;
+  position: relative;
+}
+
+.card-header {
+  background-color: #007bff;
+  color: #ffffff;
+  padding: 10px;
+  font-weight: bold;
+}
+
+.card-body {
+  padding: 15px;
+}
+
+.progress {
+  background-color: #e9ecef;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.progress-bar {
+  background-color: #007bff;
+  color: #ffffff;
+  text-align: center;
+  line-height: 20px;
+  transition: background-color 0.3s;
+}
+
+.progress-bar.finished {
+  background-color: #28a745;
+}
+
+.progress-end {
+  position: absolute;
+  right: 10px;
+  color: #495057;
+  font-size: 0.9em;
+}
+
+.empty-message {
+  text-align: center;
+  font-style: italic;
+  color: #6c757d;
+  margin-top: 20px;
+}
+
+.refresh-emoji {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.2em;
+  cursor: pointer;
+  color: #007bff;
+  transition: color 0.3s;
+}
+
+.refresh-emoji:hover {
+  color: #0056b3;
 }

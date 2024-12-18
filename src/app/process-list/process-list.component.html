@@ -1,45 +1,38 @@
-<div class="container mt-5">
-  <div class="row">
-    <div class="col">
-      <ul class="nav nav-tabs" id="statusTabs" role="tablist">
-        <li class="nav-item">
-          <a class="nav-link" [class.active]="selectedStatus === 'ongoing'" (click)="selectStatus('ongoing')">Ongoing</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" [class.active]="selectedStatus === 'finished'" (click)="selectStatus('finished')">Finished</a>
-        </li>
-      </ul>
-    </div>
+<div class="container">
+  <div class="tabs">
+    <div class="tab" [class.active]="selectedStatus === 'ongoing'" (click)="selectStatus('ongoing')">Ongoing</div>
+    <div class="tab" [class.active]="selectedStatus === 'finished'" (click)="selectStatus('finished')">Finished</div>
   </div>
-  <div class="row mt-3">
-    <div class="col">
-      <ul class="nav nav-tabs" id="typeTabs" role="tablist">
-        <li class="nav-item">
-          <a class="nav-link" [class.active]="selectedType === 'docs'" (click)="selectType('docs')">Docs</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" [class.active]="selectedType === 'code'" (click)="selectType('code')">Code</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-  <div class="row mt-3">
-    <div class="col">
-      <div *ngIf="selectedStatus && selectedType">
-        <div *ngFor="let process of getEntries(selectedType, selectedStatus)">
-          <div class="card mb-3">
-            <div class="card-header">{{ process.process_type }}</div>
-            <div class="card-body">
-              <p>Status: {{ process.url }}</p>
-              <p>Type: {{ process.type }}</p>
-              <!-- Add more fields as needed -->
+
+  <div *ngIf="selectedStatus">
+    <div *ngFor="let process of getEntries(selectedStatus)">
+      <div class="card">
+        <div class="card-header">
+          {{ process.url }}
+          <span
+            class="refresh-emoji"
+            *ngIf="selectedStatus === 'ongoing'"
+            (click)="refresh()">🔄</span>
+        </div>
+        <div class="card-body">
+          <p>Type: {{ process.type }}</p>
+          <p>Process Type: {{ process.process_type }}</p>
+          <div class="progress">
+            <div
+              class="progress-bar"
+              role="progressbar"
+              [class.finished]="process.curr === process.end"
+              [style.width]="(process.curr / process.end) * 100 + '%'">
+              {{ (process.curr / process.end * 100).toFixed(2) }}%
             </div>
+            <span class="progress-end">Total: {{ process.end }}</span>
           </div>
         </div>
-        <div *ngIf="!getEntries(selectedType, selectedStatus).length">
-          No processes found for the selected status and type.
-        </div>
       </div>
+    </div>
+
+    <div class="empty-message" *ngIf="!getEntries(selectedStatus).length">
+      No processes found for the selected status.
     </div>
   </div>
 </div>

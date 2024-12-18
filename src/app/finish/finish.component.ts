@@ -31,10 +31,11 @@ export class FinishComponent implements OnInit, OnDestroy{
 
   async completeFinish(){
     if (this.type=="code") {
-      await firstValueFrom(this.codeProcessService.activate_tmp_files(this.url));
+      firstValueFrom(this.codeProcessService.activate_tmp_files(this.url));
     } else if (this.type == "docs"){
-      await firstValueFrom(this.docsFilesService.activateTmpFiles(this.url));
+      firstValueFrom(this.docsFilesService.activateTmpFiles(this.url));
     }
+    this.router.navigate(['/process-list'],);
   }
 
 

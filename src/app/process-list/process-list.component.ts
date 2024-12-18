@@ -48,7 +48,11 @@ export class ProcessListComponent implements OnInit {
   }
 
 
-  getEntries(type: string, status: string):Process[] {
-    return this.processMap?.get(type+"_"+status) || [];
+  getEntries(status: string):Process[] {
+    return [...(this.processMap?.get("docs_" + status ) ?? []), ...(this.processMap?.get("code_" + status) ?? [])];
+  }
+
+  refresh(){
+
   }
 }
