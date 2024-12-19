@@ -247,11 +247,9 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
     this.docsFilesService.selectAllLinks(prev_link, select).subscribe(
       (response) => {
         console.log('Response:', response);
-        // Handle the response data here, e.g., update the UI, log a message, etc.
       },
       (error) => {
         console.error('Error:', error);
-        // Handle any errors that occur during the request
       }
     );
   }
@@ -260,8 +258,14 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
 
   selectDocs(docsUrl: string, select: boolean){
     this.isSelectDocs = true
-    this.docsFilesService.selectDocs(docsUrl, select).subscribe();
-    window.location.reload();
+    this.docsFilesService.selectDocs(docsUrl, select).subscribe(
+      (response) => {
+        window.location.reload();
+        },
+      (error) => {
+        console.error('Error:', error);
+      }
+    );
   }
 
   protected Link = Link;

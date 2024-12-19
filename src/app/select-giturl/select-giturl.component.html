@@ -11,10 +11,11 @@
         class="form-input"
         required
         placeholder="Enter Git repository URL"
+        (input)="checkLink()"
       />
     </div>
 
-    <div class="form-group">
+    <div *ngIf="codeForm;else docsForm" class="form-group">
       <label for="override">Override Existing Data:</label>
       <label class="switch">
         <input
@@ -26,6 +27,19 @@
         <span class="slider round"></span>
       </label>
     </div>
+
+    <ng-template #docsForm>
+      <label for="override1">Override Existing Data:</label>
+      <label class="switch">
+        <input
+          type="checkbox"
+          id="override1"
+          name="override"
+          [(ngModel)]="override"
+        />
+        <span class="slider round"></span>
+      </label>
+    </ng-template>
 
 
     <div class="form-actions">

@@ -58,4 +58,9 @@ export class DocsFilesService {
     return this.http.get(`${this.baseUrl}/select_docs/`,  { params });
   }
 
+
+  extractDocs(docs_url: string, override: boolean): Observable<any> {
+    const params = { docs_url: docs_url, override: override };
+    return this.http.get(`http://localhost:5000/docs/extract_docs/`,  { params });
+  }
 }
