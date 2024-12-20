@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import {map, Observable} from 'rxjs';
 import {Link} from './models/link';
 import {DocsUrl} from './models/docs-url';
+import {GitUrl} from './models/git-url';
+import {Url} from './models/url';
 
 @Injectable({
   providedIn: 'root',
@@ -36,7 +38,7 @@ export class DocsFilesService {
     return this.http.get(`${this.baseUrl}/activate_tmp_files/`,  { params });
   }
 
-  getDocsUrls(): Observable<DocsUrl[]> {
+  getDocsUrls(): Observable<Url[]> {
     return this.http.get<any>(`${this.baseUrl}/get_docs_urls/`).pipe(
       map((response) =>
         response.docs_urls.map((docs_url: any) => ({
@@ -59,8 +61,12 @@ export class DocsFilesService {
   }
 
 
-  extractDocs(docs_url: string, override: boolean): Observable<any> {
-    const params = { docs_url: docs_url, override: override };
+  extractDocs(docs_url: string, override: boolean, selector: string, selectorAttrs: string): Observable<any> {
+    const params = { docs_url: docs_url, override: override, selector: selector, selector_attrs: selectorAttrs };
     return this.http.get(`http://localhost:5000/docs/extract_docs/`,  { params });
+  }
+
+  changeActiveRepos(docsUrls: string[], active: boolean[]): Observable<any> {
+    return this.http.post(`${this.baseUrl}/change_active_repos/`, {"docs_urls": docsUrls, "active": active}, {});
   }
 }

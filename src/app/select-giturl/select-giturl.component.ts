@@ -18,6 +18,8 @@ import {DocsFilesService} from '../docs-files.service';
 export class SelectGiturlComponent {
   gitUrl: string = '';
   override: boolean = false;
+  selectorBs: string = "";
+  selectorAttr: string = "";
   loading: boolean = false;
   codeForm: boolean = false;
 
@@ -35,7 +37,7 @@ export class SelectGiturlComponent {
       await firstValueFrom(this.codeProcessService.extract_library(url, override));
       this.router.navigate(['/code-process'], { queryParams: { git_url: url } });
     }else{
-      await firstValueFrom(this.docsFilesService.extractDocs(url, override));
+      await firstValueFrom(this.docsFilesService.extractDocs(url, override, this.selectorBs, this.selectorAttr));
       this.router.navigate(['/docs-files'], { queryParams: { docs_url: url } });
     }
   }

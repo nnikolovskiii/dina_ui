@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import {map, Observable} from 'rxjs';
 import {Folder} from './models/folder';
 import {GitUrl} from './models/git-url';
+import {Url} from './models/url';
 
 @Injectable({
   providedIn: 'root',
@@ -41,7 +42,7 @@ export class CodeProcessService {
     return this.http.get(`http://localhost:5000/code/extract_library/`,  { params });
   }
 
-  get_git_urls(): Observable<GitUrl[]> {
+  get_git_urls(): Observable<Url[]> {
     return this.http.get<any>(`${this.baseUrl}/get_git_urls/`).pipe(
       map((response) =>
         response.git_urls.map((git_url: any) => ({

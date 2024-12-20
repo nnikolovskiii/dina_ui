@@ -13,8 +13,8 @@ import {ActivatedRoute, Router, RouterModule} from '@angular/router';
   styleUrls: ['./code-process.component.css'],
 })
 export class CodeProcessComponent implements OnInit, OnDestroy {
-  @Input() prevFolder: string = '/fastapi';
-  @Input() git_url: string = 'loool';
+  @Input() prevFolder: string = '';
+  @Input() git_url: string = '';
   folders$: Observable<Folder[]> | null = null;
   selectedFolders = new Map<string, boolean>();
   private subscription: Subscription | null = null;
@@ -28,8 +28,8 @@ export class CodeProcessComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      this.prevFolder = params['prevFolder'] || '/fastapi';
-      this.git_url = params['git_url'] || '/fastapi';
+      this.prevFolder = params['prevFolder'] || '';
+      this.git_url = params['git_url'] || '';
 
 
       const storedData = localStorage.getItem('selectedFolders');

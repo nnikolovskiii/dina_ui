@@ -13,8 +13,8 @@ import {DocsFilesService} from '../docs-files.service';
   styleUrl: './docs-files.component.css'
 })
 export class DocsFilesComponent implements OnInit, OnDestroy {
-  @Input() prevLink: string = 'https://fastapi.tiangolo.com/';
-  @Input() docs_url: string = 'https://fastapi.tiangolo.com/';
+  @Input() prevLink: string = '';
+  @Input() docs_url: string = '';
   links$: Observable<Link[]> | null = null;
   selectedLinks = new Map<string, boolean>();
   private subscription: Subscription | null = null;
@@ -30,8 +30,8 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      this.prevLink = params['prevLink'] || 'https://fastapi.tiangolo.com';
-      this.docs_url = params['docs_url'] || 'https://fastapi.tiangolo.com/';
+      this.prevLink = params['prevLink'] || '';
+      this.docs_url = params['docs_url'] || '';
 
       const storedData = localStorage.getItem('selectedLinks');
       if (storedData) {

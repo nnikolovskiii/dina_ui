@@ -17,7 +17,7 @@ export class ViewQuestionsComponent {
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.http.get<any[]>('http://0.0.0.0:5000/collection_data/?collection_name=CodeContext').subscribe((data) => {
+    this.http.get<any[]>('http://0.0.0.0:5000/collection-data/?collection_name=DocsContent').subscribe((data) => {
       this.response = data;
       console.log(this.response);
     });

@@ -1,5 +1,5 @@
 <div *ngIf="!isSelectDocs; else loading">
-  <div *ngIf="links$| async as links ; else loading" class="card-list">
+  <div *ngIf="links$| async as links ; else loading" class="card-list container">
     <div class="breadcrumb sticky-top">
       <button class="back-button" (click)="navigateBack()"> Back</button>
       <div class="breadcrumb-links">
@@ -87,8 +87,10 @@
   </div>
 </div>
 <ng-template #loading>
-  <div class="loading">
-    <img src="path/to/loading-spinner.gif" alt="Loading..."/>
-    <p>Loading your folders...</p>
+  <div class="card-list container">
+    <div class="loading">
+      <img src="path/to/loading-spinner.gif" alt="Loading..."/>
+      <p>Loading your docs...</p>
+    </div>
   </div>
 </ng-template>

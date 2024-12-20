@@ -165,6 +165,7 @@
   padding: 11px 17px; /* Smaller padding for compact buttons */
   font-size: 14px; /* Adjust font size */
   background-color: rgba(100, 149, 237); /* Button background color */
+  background-color: rgba(100, 149, 237); /* Button background color */
   color: #fff; /* Button text color */
   border: none;
   border-radius: 5px; /* Rounded corners */
@@ -248,3 +249,11 @@
   color: #fff;
 }
 
+.container {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}

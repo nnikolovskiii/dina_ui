@@ -29,16 +29,42 @@
     </div>
 
     <ng-template #docsForm>
-      <label for="override1">Override Existing Data:</label>
-      <label class="switch">
+      <div class="form-group">
+        <label for="override1">Override Existing Data:</label>
+        <label class="switch">
+          <input
+            type="checkbox"
+            id="override1"
+            name="override"
+            [(ngModel)]="override"
+          />
+          <span class="slider round"></span>
+        </label>
+      </div>
+
+      <div class="form-group">
+        <label for="selectorBs">Selector:</label>
         <input
-          type="checkbox"
-          id="override1"
-          name="override"
-          [(ngModel)]="override"
+          type="text"
+          id="selectorBs"
+          name="selectorBs"
+          [(ngModel)]="selectorBs"
+          class="form-input"
+          placeholder="Enter Selector"
         />
-        <span class="slider round"></span>
-      </label>
+      </div>
+
+      <div class="form-group">
+        <label for="selectorAttr">Selector Attribute:</label>
+        <input
+          type="text"
+          id="selectorAttr"
+          name="selectorAttr"
+          [(ngModel)]="selectorAttr"
+          class="form-input"
+          placeholder="Enter Selector Attributes"
+        />
+      </div>
     </ng-template>
 
 

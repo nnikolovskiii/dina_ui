@@ -8,18 +8,20 @@ import {SelectGiturlComponent} from './select-giturl/select-giturl.component';
 import {ListGiturlComponent} from './list-giturl/list-giturl.component';
 import {DocsFilesComponent} from './docs-files/docs-files.component';
 import {ProcessListComponent} from './process-list/process-list.component';
+import {HomeComponent} from './home/home.component';
 
 
 export const routes: Routes = [
-  {path: 'questions', component: ViewQuestionsComponent },
+  {path: 'collection-data', component: ViewQuestionsComponent },
   {path: 'chat', component: ChatComponent },
   {path: 'code-process', component: CodeProcessComponent},
   {path: 'docs-files', component: DocsFilesComponent},
   {path: 'finish', component: FinishComponent},
   {path: 'chat-list', component: ChatListComponent},
   {path: 'finish', component: FinishComponent},
-  {path:'giturl-select', component: SelectGiturlComponent},
-  {path:'giturl-list', component: ListGiturlComponent},
-  {path:'process-list', component: ProcessListComponent},
-
+  {path:'extract-url', component: SelectGiturlComponent},
+  {path:'collections', component: ListGiturlComponent},
+  {path:'process', component: ProcessListComponent},
+  {path:'home', component: HomeComponent},
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];
