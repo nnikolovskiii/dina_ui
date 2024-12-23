@@ -14,6 +14,7 @@
     <div class="assistant-card" [innerHtml]="sanitizedMessages" *ngIf="!isFirst"></div>
   </div>
   <form (submit)="sendMessage()">
+    <div id="form-div">
     <textarea
       #messageArea
       [(ngModel)]="inputMessage"
@@ -25,7 +26,8 @@
     >
 
     </textarea>
-    <button type="submit">Send</button>
+    <button type="submit">
+      <img src="../../assets/send(1).png" height="20" width="20"/></button></div>
   </form>
 </div>
 </body>

@@ -1,4 +1,4 @@
-import {Component, OnInit, OnDestroy, Input} from '@angular/core';
+import {Component, OnInit, OnDestroy, Input, ViewEncapsulation} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
@@ -12,7 +12,8 @@ import {ActivatedRoute, Router, RouterModule} from '@angular/router';
   standalone: true,
   imports: [FormsModule, CommonModule, RouterModule],
   templateUrl: './chat.component.html',
-  styleUrls: ['./chat.component.css']
+  styleUrls: ['./chat.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ChatComponent implements OnInit, OnDestroy {
   @Input() chat_id: string = "";

@@ -22,15 +22,16 @@ body {
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 20px;
 }
 
 .assistant-card {
   align-self: flex-start;
   background-color: rgba(245, 254, 253, 0.2);
   border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 10px 15px;
+  box-shadow: 0 -2px 1px rgba(0, 0, 0, 0.07), /* Top shadow */
+  0 4px 6px rgba(0, 0, 0, 0.1); /* Bottom shadow */
+  padding: 10px 20px;
   max-width: 70%;
   width: fit-content; /* Ensure the card fits its content */
   word-wrap: break-word;
@@ -53,41 +54,157 @@ body {
   margin-right: 0;
 }
 
+
 form {
   display: flex;
-  padding: 10px;
-  border-top: 1px;
+  padding-top: 8px;
+  border-top: 1px solid transparent; /* You might want to specify a color here if needed */
   justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
+  align-items: center;
+  gap: 0px; /* Center vertically */
+  background-color: rgba(255, 255, 255, 0); /* Fully transparent background */
+  /* or use opacity if you want the entire form to be transparent
+  opacity: 0.5; */
 
 }
 
-textarea {
+#form-div{
   flex: 0.5;
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center;
+  gap: 0px;/* Center vertically */
+  background-color:  rgb(232,233,234);
+  border-radius: 13px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+textarea {
+  flex: 1;
   resize: none;
   border: 0px solid #ccc;
   border-radius: 13px;
   padding: 10px;
   font-size: 16px;
   outline: none;
-  background-color:  rgba(218, 218, 218, 0.3);
+  background-color:    rgb(232,233,234);
+  color: rgba( 102, 99, 98);
 }
 
 button {
-  background-color:rgba(100, 149, 237, 1);
-  color: white;
+  background-color:  rgb(232,233,234);
+  color: black;
   border: none;
   border-radius: 5px;
-  padding: 10px 15px;
-  margin-left: 10px;
+  padding: 2px 5px;
   font-size: 16px;
   cursor: pointer;
 }
 
-button:hover {
-  background-color: rgba( 46, 88, 148, 0.8);
+button img:hover {
+  transform: scale(1.2); /* Makes the image 10% bigger */
+  transition: transform 0.2s ease; /* Smooth transition for the scale effect */
+}
+
+code{
+  color:rgb(108, 160, 220);
+  font-weight: 600;
 }
 
 #gap {
-  padding-bottom: 10px;
+  padding-bottom: 20px;
+}
+
+a{
+  color:gray;
+  text-decoration: underline;
+}
+
+a:hover{
+  color:gray;
+
+}
+
+.chat-container .assistant-card h3 {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+pre:has(code) {
+  display: inline-block; /* Shrinks the <pre> to fit the content */
+  background-color: rgba(220, 220, 220);
+  white-space: pre-wrap; /* Enables text wrapping */
+  word-wrap: break-word; /* Breaks long words if needed */
+  overflow-wrap: break-word; /* Additional support for word breaking */
+  padding: 10px; /* Optional: Adds some space inside the <pre> */
+  max-width: 100%; /* Ensures it doesn’t overflow the container */
+  overflow: auto; /* Adds scrollbars if necessary */
+  box-sizing: border-box; /* Includes padding in size */
+  border-radius: 10px;
+  text-align: left;
+  margin-left: 20px;
+  padding-left: 18px;
+  color:rgb(85,85,85);
+}
+
+
+
+li > pre:has(code) {
+  display: inline; /* Shrinks the <pre> to fit the content */
+  background-color: rgba(220, 220, 220);
+  white-space: pre-wrap; /* Enables text wrapping */
+  word-wrap: break-word; /* Breaks long words if needed */
+  overflow-wrap: break-word; /* Additional support for word breaking */
+  padding: 9px; /* Optional: Adds some space inside the <pre> */
+  max-width: 100%; /* Ensures it doesn’t overflow the container */
+  overflow: auto; /* Adds scrollbars if necessary */
+  box-sizing: border-box; /* Includes padding in size */
+  border-radius: 8px;
+  text-align: left;
+  margin-left: 10px;
+
+}
+
+
+/*pre code{*/
+/*  margin-left: 20px;*/
+/*}*/
+
+p:has(strong){
+margin-left: 20px}
+
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 20px; /* Adjust the value to increase or decrease the space */
+  color: rgba( 102, 99, 98);
+}
+
+h1::before,
+h2::before,
+h3::before,
+h4::before,
+h5::before,
+h6::before {
+  content: "";
+  display: block;
+  height: 1px; /* Adjust the height to make the line thicker or thinner */
+  background-color: rgba(220, 220, 220); /* Change the color of the line */
+  margin-bottom: 10px; /* Adjust the margin to increase or decrease the space between the line and the heading */
+}
+
+/*strong{*/
+/*  color: rgba(190, 190, 190)*/
+/*}*/
+.assistant-card p{
+  color: rgba( 102, 99, 98)
+}
+
+li{
+  padding-top:5px;
+  padding-bottom:5px;
+}
+
+.assistant-card li{
+  color: rgba( 102, 99, 98)
 }
