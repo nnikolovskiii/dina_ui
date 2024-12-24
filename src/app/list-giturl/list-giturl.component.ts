@@ -30,6 +30,16 @@ export class ListGiturlComponent {
         this.setToCode()
     });
   }
+  toggleUrlActive(url: Url): void {
+    url.active = !url.active;
+    // Perform additional logic if needed
+    if (this.selectedStatus === 'code') {
+      this.codeProcessService.change_active_repos([url.url], [url.active]).subscribe()
+    }else{
+      this.docsFilesService.changeActiveRepos([url.url], [url.active]).subscribe()
+    }
+  }
+
 
   selectedStatus = 'code';
 

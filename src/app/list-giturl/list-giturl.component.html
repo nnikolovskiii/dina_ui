@@ -15,6 +15,13 @@
          (click)="refresh()">
         {{ url.url }}
       </a>
+      <label class="switch">
+        <input type="checkbox"
+               [checked]="url.active"
+               (change)="toggleUrlActive(url)"
+        >
+        <span class="slider round"></span>
+      </label>
     </div>
   </div>
 
@@ -29,6 +36,14 @@
          (click)="refresh()">
         {{ url.url }}
       </a>
+
+      <label class="switch">
+        <input type="checkbox"
+               [checked]="url.active"
+               (change)="toggleUrlActive(url)"
+        >
+        <span class="slider round"></span>
+      </label>
     </div>
   </ng-template>
 </div>

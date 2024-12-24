@@ -26,16 +26,30 @@ export class FinishComponent implements OnInit, OnDestroy{
     this.route.queryParams.subscribe(async params => {
       this.url = params['url'] || 'https://github.com/fastapi/fastapi.git';
       this.type = params['type'] || '';
+      console.log(this.url, this.type)
     });
   }
 
   async completeFinish(){
-    if (this.type=="code") {
-      this.codeProcessService.activate_tmp_files(this.url);
-    } else if (this.type == "docs"){
-      this.docsFilesService.activateTmpFiles(this.url);
+    if (this.type==="code") {
+      this.codeProcessService.activate_tmp_files(this.url).subscribe(
+        (response) => {
+          this.router.navigate(['/process'],);
+        },
+        (error) => {
+          console.error('Error:', error);
+        }
+      )
+    } else if (this.type === "docs"){
+      this.docsFilesService.activateTmpFiles(this.url).subscribe(
+        (response) => {
+          this.router.navigate(['/process'],);
+        },
+        (error) => {
+          console.error('Error:', error);
+        }
+      )
     }
-    this.router.navigate(['/process-list'],);
   }
 
 
