@@ -4,6 +4,7 @@ import {ActivatedRoute, Router, RouterModule} from '@angular/router';
 import {catchError, filter, forkJoin, Observable, of, Subscription} from 'rxjs';
 import {Link} from '../models/link';
 import {DocsFilesService} from '../docs-files.service';
+import {ProcessService} from '../process.service';
 
 @Component({
   selector: 'app-docs-files',
@@ -19,9 +20,12 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
   selectedLinks = new Map<string, boolean>();
   private subscription: Subscription | null = null;
   hoveredCard: any = null;
+  isFinished: boolean = false;
+  processMap: Map<string, [boolean, number]> = new Map();
 
   constructor(
     private docsFilesService: DocsFilesService,
+    private processService: ProcessService,
     private router: Router,
     private route: ActivatedRoute,
     private location: Location,
@@ -42,6 +46,16 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
 
       this.links$ = this.docsFilesService.getLinks(this.prevLink);
       this.selectedLinks = new Map();
+
+      this.processService.getPreProcesses(this.docs_url).subscribe(
+        (response) => {
+          this.isFinished = response.get("main")?.[0] ?? false;
+          this.processMap = response;
+        },
+        (error) => {
+          console.error('Error:', error);
+        }
+      )
 
       this.subscription = this.links$.subscribe({
         next: links => {
@@ -266,6 +280,13 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
         console.error('Error:', error);
       }
     );
+  }
+
+
+  getSortedProcesses(): [string, [boolean, number]][] {
+    return Array.from(this.processMap.entries())
+      .filter(([key, value]) => value[1] !== 0)
+      .sort((a, b) => a[1][1] - b[1][1]);
   }
 
   protected Link = Link;

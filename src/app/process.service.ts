@@ -51,4 +51,11 @@ export class ProcessService {
     return this.http.get(`${this.baseUrl}/refresh_progress/`,  { params });
   }
 
+  getPreProcesses(url: string): Observable<Map<string, [boolean, number]>> {
+    const params = { url: url };
+    return this.http.get<Record<string, [boolean, number]>>(`${this.baseUrl}/get_pre_processes/`, { params }).pipe(
+      map(response => new Map(Object.entries(response)))
+    );
+  }
+
 }

@@ -1,5 +1,5 @@
 <div class="form-container">
-  <h1>Select Git Repository</h1>
+  <h1>Select Git/Docs Url</h1>
   <form (ngSubmit)="extractLibraries(gitUrl, override)">
     <div class="form-group">
       <label for="gitUrl">Git URL:</label>
@@ -74,9 +74,4 @@
     </div>
   </form>
 
-  <!-- Loading animation -->
-  <div *ngIf="loading" class="loading-container">
-    <img ngSrc="assets/loading.gif" alt="Loading..." class="loading-gif" height="38" width="150"/>
-    <p>Processing your request...</p>
-  </div>
 </div>

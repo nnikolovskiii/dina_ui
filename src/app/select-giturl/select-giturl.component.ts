@@ -33,12 +33,21 @@ export class SelectGiturlComponent {
 
   async extractLibraries(url: string, override: boolean){
     this.loading = true;
+    if (url[url.length - 1] === '/') {
+      url = url.substring(0, url.length - 1);
+    }
+    this.route.queryParams.subscribe(async params => {
+      this.selectorBs = params['selectorBs'] || '';
+      this.selectorAttr = params['selectorAttr'] || '';
+    })
     if (this.codeForm) {
-      await firstValueFrom(this.codeProcessService.extract_library(url, override));
+      this.codeProcessService.extract_library(url, override).subscribe()
+      console.log("Next")
       this.router.navigate(['/code-process'], { queryParams: { git_url: url } });
     }else{
-      await firstValueFrom(this.docsFilesService.extractDocs(url, override, this.selectorBs, this.selectorAttr));
-      this.router.navigate(['/docs-files'], { queryParams: { docs_url: url } });
+      this.docsFilesService.extractDocs(url, override, this.selectorBs, this.selectorAttr).subscribe()
+      console.log("Next")
+      this.router.navigate(['/docs-files'], { queryParams: { docs_url: url, prevLink: url } });
     }
   }
 

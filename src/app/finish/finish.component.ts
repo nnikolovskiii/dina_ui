@@ -32,24 +32,12 @@ export class FinishComponent implements OnInit, OnDestroy{
 
   async completeFinish(){
     if (this.type==="code") {
-      this.codeProcessService.activate_tmp_files(this.url).subscribe(
-        (response) => {
-          this.router.navigate(['/process'],);
-        },
-        (error) => {
-          console.error('Error:', error);
-        }
-      )
+      this.codeProcessService.activate_tmp_files(this.url).subscribe()
     } else if (this.type === "docs"){
-      this.docsFilesService.activateTmpFiles(this.url).subscribe(
-        (response) => {
-          this.router.navigate(['/process'],);
-        },
-        (error) => {
-          console.error('Error:', error);
-        }
-      )
+      this.docsFilesService.activateTmpFiles(this.url).subscribe()
     }
+
+    this.router.navigate(['/process'],);
   }
 
 

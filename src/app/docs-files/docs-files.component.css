@@ -257,3 +257,39 @@
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+.progress-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0 auto;
+  gap: 40px;
+}
+
+.dot-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dot {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+
+.green {
+  background-color: #4caf50; /* Green color */
+}
+
+.gray {
+  background-color: #ccc; /* Gray color */
+}
+
+.label {
+  margin-top: 5px;
+  font-size: 14px;
+  color: #333;
+}
+
