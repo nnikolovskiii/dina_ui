@@ -2,9 +2,10 @@
 <div class="chat-container">
   <div class="messages">
     <div *ngFor="let userMessage of userMessages; let i = index">
-      <div class="user-card"  [innerHtml]="getMarkedMessage(userMessage)"></div>
+      <div class="user-card" [innerHtml]="getMarkedMessage(userMessage)"></div>
       <div id="gap"></div>
-      <div class="assistant-card" *ngIf="i < assistantMessages.length; else nothing" [innerHtml]="getMarkedMessage(assistantMessages[i])">
+      <div class="assistant-card" *ngIf="i < assistantMessages.length; else nothing"
+           [innerHtml]="getMarkedMessage(assistantMessages[i])">
       </div>
 
       <ng-template #nothing>
@@ -13,7 +14,7 @@
 
     <div class="assistant-card" [innerHtml]="sanitizedMessages" *ngIf="!isFirst"></div>
   </div>
-  <form (submit)="sendMessage()">
+  <form>
     <div id="form-div">
     <textarea
       #messageArea
@@ -24,10 +25,72 @@
       placeholder="chat with code_explore"
       (keydown)="handleKeyDown($event, messageArea)"
     >
-
     </textarea>
-    <button type="submit">
-      <img src="../../assets/send(1).png" height="20" width="20"/></button></div>
+      <div class="chat-button-div">
+        <div class="left-chat-buttons">
+          <div  *ngIf="!vanillaFlag; else selected_vanilla" class="chat_button" (click)="setVanillaFlag()">
+            <img src="../../assets/ice-cream-cone.png" height="23" width="23"/>
+          </div>
+          <ng-template #selected_vanilla>
+            <div class="chat-button-extra">
+              <div class="chat_button" (click)="setVanillaFlag()">
+                <img src="../../assets/ice-cream-cone_white.png" height="23" width="23"/>
+              </div>
+              <div class="chat-button-extra-text vanilla">Vanilla</div>
+            </div>
+          </ng-template>
+          <div  *ngIf="!historyFlag; else selected_history" class="chat_button" (click)="setHistoryFlag()">
+            <img src="../../assets/history.png" height="23" width="23"/>
+          </div>
+          <ng-template #selected_history>
+            <div class="chat-button-extra">
+              <div class="chat_button" (click)="setHistoryFlag()">
+                <img src="../../assets/history_white.png" height="23" width="23"/>
+              </div>
+              <div class="chat-button-extra-text">History</div>
+            </div>
+          </ng-template>
+          <div  *ngIf="!docsFlag; else selected_docs" class="chat_button" (click)="setDocsFlag()">
+            <img src="../../assets/docs.png" height="22" width="22"/>
+          </div>
+          <ng-template #selected_docs>
+            <div class="chat-button-extra">
+              <div class="chat_button" (click)="setDocsFlag()">
+                <img src="../../assets/docs_white.png" height="22" width="22"/>
+              </div>
+              <div class="chat-button-extra-text">Docs</div>
+            </div>
+          </ng-template>
+          <div *ngIf="!codeFlag; else selected_code" class="chat_button" (click)="setCodeFlag()">
+            <img src="../../assets/code_chat_button.png" height="23" width="23"/>
+          </div>
+          <ng-template #selected_code>
+            <div class="chat-button-extra">
+              <div class="chat_button" (click)="setCodeFlag()">
+                <img src="../../assets/code_white.png" height="23" width="23"/>
+              </div>
+              <div class="chat-button-extra-text">Code</div>
+            </div>
+          </ng-template>
+          <div *ngIf="!expandFlag; else selected_expand" class="chat_button" (click)="expandChat(messageArea)">
+            <img src="../../assets/expand.png" height="18" width="18"/>
+          </div>
+          <ng-template #selected_expand>
+            <div class="chat-button-extra">
+              <div class="chat_button" (click)="expandChat(messageArea)">
+                <img src="../../assets/expand_white.png" height="18" width="18"/>
+              </div>
+              <div class="chat-button-extra-text">Expanded</div>
+            </div>
+          </ng-template>
+        </div>
+        <div class="right-chat-buttons">
+          <div class="chat_button" (click)="sendMessage()">
+            <img src="../../assets/send(1).png" height="22" width="22"/>
+          </div>
+        </div>
+      </div>
+    </div>
   </form>
 </div>
 </body>

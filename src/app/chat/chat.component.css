@@ -71,38 +71,63 @@ form {
 #form-div{
   flex: 0.5;
   display: flex;
-  justify-content: center; /* Center horizontally */
+  justify-content: space-between; /* Center horizontally */
   align-items: center;
-  gap: 0px;/* Center vertically */
+  gap: 3px;/* Center vertically */
   background-color:  rgb(232,233,234);
   border-radius: 13px;
   padding-left: 10px;
   padding-right: 10px;
+  flex-flow:column;
+}
+
+.chat-button-div{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  padding: 5px 5px 7px;
+}
+
+.left-chat-buttons{
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.right-chat-buttons{
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 textarea {
   flex: 1;
+  width: 100%;
   resize: none;
   border: 0px solid #ccc;
   border-radius: 13px;
-  padding: 10px;
+  padding: 10px 10px 3px;
   font-size: 16px;
   outline: none;
   background-color:    rgb(232,233,234);
   color: rgba( 102, 99, 98);
 }
 
-button {
+.chat_button {
   background-color:  rgb(232,233,234);
   color: black;
   border: none;
-  border-radius: 5px;
-  padding: 2px 5px;
-  font-size: 16px;
+  border-radius: 0px;
   cursor: pointer;
 }
 
-button img:hover {
+.chat_button img:hover {
   transform: scale(1.2); /* Makes the image 10% bigger */
   transition: transform 0.2s ease; /* Smooth transition for the scale effect */
 }
@@ -207,4 +232,28 @@ li{
 
 .assistant-card li{
   color: rgba( 102, 99, 98)
+}
+
+.chat-button-extra{
+  display: flex;
+  flex-flow: row;
+  color: #f4f4f9;
+  align-items: center;
+  background-color: rgb(108, 160, 220);
+  padding-left: 4px;
+  padding-right: 4px;
+  border-radius: 5px;
+}
+
+.chat-button-extra .chat_button{
+  background-color: rgb(108, 160, 220);
+  padding:4px;
+}
+
+.chat-button-extra-text{
+  padding:4px;
+}
+
+.vanilla{
+  padding-right: 8px;
 }

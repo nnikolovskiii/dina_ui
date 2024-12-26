@@ -1,11 +1,13 @@
 import {Component, OnInit, OnDestroy, Input, ViewEncapsulation} from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import {FormGroup, FormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 import * as marked from 'marked';
 import {ChatService} from '../chat.service';
 import {firstValueFrom} from 'rxjs';
 import {ActivatedRoute, Router, RouterModule} from '@angular/router';
+import {FlagService} from '../flag.service';
+import {Flag} from '../models/flag';
 
 @Component({
   selector: 'app-chat',
@@ -27,7 +29,13 @@ export class ChatComponent implements OnInit, OnDestroy {
   public newAssistantMessages: any[] = [];
   public isFirst: boolean = true;
 
-  constructor(private sanitizer: DomSanitizer, private chatService: ChatService,private router: Router,  private route: ActivatedRoute,) {
+  constructor(
+    private sanitizer: DomSanitizer,
+    private chatService: ChatService,
+    private flagService: FlagService,
+    private router: Router,
+    private route: ActivatedRoute,
+  ) {
     this.sanitizedMessages = this.sanitizer.bypassSecurityTrustHtml('');
   }
 
@@ -49,14 +57,18 @@ export class ChatComponent implements OnInit, OnDestroy {
         console.log("yes")
         let userMessages = JSON.parse(savedUserMessages);
         let assistantMessages = JSON.parse(savedAssistantMessages);
-        console.log(userMessages, assistantMessages)
-        await firstValueFrom(this.chatService.add_chat(userMessages, assistantMessages));
+        if (userMessages.length > 0 && assistantMessages.length > 0) {
+          console.log(userMessages, assistantMessages)
+          await firstValueFrom(this.chatService.add_chat(userMessages, assistantMessages));
+        } else {
+          this.clearChat();
+        }
       }
 
       this.clearChat()
 
 
-      if (this.chat_id !== ""){
+      if (this.chat_id !== "") {
         let response = await firstValueFrom(this.chatService.get_chat_messages(this.chat_id));
         let user_message_objs = response["user_messages"]
         let assistant_message_objs = response["assistant_messages"]
@@ -70,6 +82,19 @@ export class ChatComponent implements OnInit, OnDestroy {
       }
 
       this.updateSanitizedMessages();
+
+      this.flagService.getFlag("vanilla").subscribe((flag: Flag) => {
+        this.vanillaFlag = flag.active;
+      });
+      this.flagService.getFlag("history").subscribe((flag: Flag) => {
+        this.historyFlag = flag.active;
+      });
+      this.flagService.getFlag("docs").subscribe((flag: Flag) => {
+        this.docsFlag = flag.active;
+      });
+      this.flagService.getFlag("code").subscribe((flag: Flag) => {
+        this.codeFlag = flag.active;
+      });
 
       this.ws = new WebSocket("ws://localhost:5000/websocket/");
 
@@ -145,28 +170,79 @@ export class ChatComponent implements OnInit, OnDestroy {
     return marked.parse(message);
   }
 
+  expandFlag: boolean = false;
+
+  expandChat(textarea: HTMLTextAreaElement) {
+    console.log("expand")
+    if (textarea.rows == 1) {
+      textarea.rows = 10;
+      this.expandFlag = true;
+    } else {
+      textarea.rows = 1;
+      this.expandFlag = false;
+    }
+  }
+
+
+  docsFlag: boolean = false;
+
+  setDocsFlag() {
+    this.flagService.setFlag("docs", !this.docsFlag).subscribe(
+      (response) => {
+        this.docsFlag = !this.docsFlag;
+      },
+      (error) => {
+        console.error('Error:', error);
+      }
+    )
+  }
+
+
+  codeFlag: boolean = false;
+
+  setCodeFlag() {
+    this.flagService.setFlag("code", !this.codeFlag).subscribe(
+      (response) => {
+        this.codeFlag = !this.codeFlag;
+      },
+      (error) => {
+        console.error('Error:', error);
+      }
+    )
+  }
+
+  vanillaFlag: boolean = false;
+
+  setVanillaFlag() {
+    this.flagService.setFlag("vanilla", !this.vanillaFlag).subscribe(
+      (response) => {
+        this.vanillaFlag = !this.vanillaFlag;
+      },
+      (error) => {
+        console.error('Error:', error);
+      }
+    )
+  }
+
+  historyFlag: boolean = false;
+
+  setHistoryFlag() {
+    this.flagService.setFlag("history", !this.historyFlag).subscribe(
+      (response) => {
+        this.historyFlag = !this.historyFlag;
+      },
+      (error) => {
+        console.error('Error:', error);
+      }
+    )
+  }
+
   handleKeyDown(event: KeyboardEvent, textarea: HTMLTextAreaElement): void {
     if (event.key === 'Enter') {
       if (event.shiftKey) {
-        event.preventDefault();
-        if (textarea.rows < 7) {
-          textarea.rows += 1;
-          this.inputMessage += '\n'; // Add a newline to the inputMessage
-        }
       } else {
-        // Prevent default Enter behavior and send the message
         event.preventDefault();
         this.sendMessage();
-        textarea.rows = 1; // Reset rows after sending the message
-      }
-    }
-
-    if (event.key === 'Backspace') {
-      // Check if the last character in inputMessage is a newline
-      if (this.inputMessage.endsWith('\n')) {
-        event.preventDefault();
-        textarea.rows = Math.max(1, textarea.rows - 1); // Decrease rows but ensure it doesn't go below 1
-        this.inputMessage = this.inputMessage.slice(0, -1); // Remove the last character (newline)
       }
     }
   }
