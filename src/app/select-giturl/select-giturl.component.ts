@@ -22,6 +22,7 @@ export class SelectGiturlComponent {
   selectorAttr: string = "";
   loading: boolean = false;
   codeForm: boolean = false;
+  patternList: string[] = [""]
 
   constructor(
     private codeProcessService: CodeProcessService,
@@ -45,7 +46,15 @@ export class SelectGiturlComponent {
       console.log("Next")
       this.router.navigate(['/code-process'], { queryParams: { git_url: url } });
     }else{
-      this.docsFilesService.extractDocs(url, override, this.selectorBs, this.selectorAttr).subscribe()
+      let patterns = [];
+      for (let pattern of this.patternList) {
+        if (pattern != "") {
+          patterns.push(pattern.trim());
+        }
+      }
+      console.log(patterns)
+
+      this.docsFilesService.extractDocs(url, override, this.selectorBs, this.selectorAttr, patterns).subscribe()
       console.log("Next")
       this.router.navigate(['/docs-files'], { queryParams: { docs_url: url, prevLink: url } });
     }
@@ -61,5 +70,12 @@ export class SelectGiturlComponent {
 
   goBack() {
     this.location.back();
+  }
+
+  addPattern() {
+    this.patternList.push('');
+  }
+  trackByIndex(index: number, item: string): number {
+    return index;
   }
 }

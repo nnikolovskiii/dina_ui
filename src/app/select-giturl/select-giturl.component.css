@@ -142,3 +142,38 @@ input:checked + .slider {
 input:checked + .slider:before {
   transform: translateX(18px);
 }
+
+.string-list-container {
+  max-height: 200px; /* Display 5 items, assuming ~40px per item */
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 5px;
+}
+
+.list-item {
+  margin-bottom: 5px;
+}
+
+.list-input {
+  width: calc(100% - 10px);
+  margin: 0 5px;
+}
+
+.add-button {
+  display: inline-block;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 18px;
+  text-align: center;
+  line-height: 30px;
+  cursor: pointer;
+}
+
+.add-button:hover {
+  background-color: #0056b3;
+}

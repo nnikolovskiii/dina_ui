@@ -61,10 +61,13 @@ export class DocsFilesService {
   }
 
 
-  extractDocs(docs_url: string, override: boolean, selector: string, selectorAttrs: string): Observable<any> {
+  extractDocs(docs_url: string, override: boolean, selector: string, selectorAttrs: string, patternList: string[]): Observable<any> {
     const params = { docs_url: docs_url, override: override, selector: selector, selector_attrs: selectorAttrs };
-    return this.http.get(`http://localhost:5000/docs/extract_docs/`,  { params });
-  }
+    return this.http.post(
+      `http://localhost:5000/docs/extract_docs/`,
+      { patterns: patternList },
+      { params: params }
+    );  }
 
   changeActiveRepos(docsUrls: string[], active: boolean[]): Observable<any> {
     return this.http.post(`${this.baseUrl}/change_active_repos/`, {"docs_urls": docsUrls, "active": active}, {});
