@@ -5,6 +5,7 @@ import {Link} from './models/link';
 import {DocsUrl} from './models/docs-url';
 import {Process} from './models/process';
 import {Folder} from './models/folder';
+import {SimpleProcess} from './models/simple-process';
 
 @Injectable({
   providedIn: 'root'
@@ -56,6 +57,11 @@ export class ProcessService {
     return this.http.get<Record<string, [boolean, number]>>(`${this.baseUrl}/get_pre_processes/`, { params }).pipe(
       map(response => new Map(Object.entries(response)))
     );
+  }
+
+  getPreProcess(url: string, processType: string): Observable<SimpleProcess> {
+    const params = { url: url , process_type: processType};
+    return this.http.get<SimpleProcess>(`${this.baseUrl}/get_pre_process/`, { params })
   }
 
 }

@@ -5,11 +5,12 @@ import {catchError, filter, forkJoin, Observable, of, Subscription} from 'rxjs';
 import {Link} from '../models/link';
 import {DocsFilesService} from '../docs-files.service';
 import {ProcessService} from '../process.service';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-docs-files',
   standalone: true,
-  imports: [CommonModule, RouterModule, NgOptimizedImage],
+  imports: [CommonModule, RouterModule, NgOptimizedImage, FormsModule],
   templateUrl: './docs-files.component.html',
   styleUrl: './docs-files.component.css'
 })
@@ -51,6 +52,15 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
         (response) => {
           this.isFinished = response.get("main")?.[0] ?? false;
           this.processMap = response;
+          let li = this.getSortedProcesses()
+          this.processService.getPreProcess(this.docs_url, li[li.length-1][0]).subscribe(
+            (response) => {
+              this.processStatus = response["status"] ?? 'Unknown';
+            },
+            (error) => {
+              console.error('Error:', error);
+            }
+          )
         },
         (error) => {
           console.error('Error:', error);
@@ -287,6 +297,28 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
     return Array.from(this.processMap.entries())
       .filter(([key, value]) => value[1] !== 0)
       .sort((a, b) => a[1][1] - b[1][1]);
+  }
+
+  processStatus: string = 'Initial Status';
+  refresh(){
+    this.processService.getPreProcesses(this.docs_url).subscribe(
+      (response) => {
+        this.isFinished = response.get("main")?.[0] ?? false;
+        this.processMap = response;
+        let li = this.getSortedProcesses()
+        this.processService.getPreProcess(this.docs_url, li[li.length-1][0]).subscribe(
+          (response) => {
+            this.processStatus = response["status"] ?? 'Unknown';
+          },
+          (error) => {
+            console.error('Error:', error);
+          }
+        )
+      },
+      (error) => {
+        console.error('Error:', error);
+      }
+    )
   }
 
   protected Link = Link;

@@ -99,11 +99,17 @@
 
 <ng-template #process>
   <div class="card-list container">
-    <div class="progress-container" >
-        <div class="dot-container" *ngFor="let values of getSortedProcesses()">
-          <div class="dot" [ngClass]="{'green': true, 'gray': !true}"></div>
-          <div class="label">{{values[0]}}</div>
-        </div>
+    <div class="progress-container">
+      <div class="dot-container" *ngFor="let values of getSortedProcesses()">
+        <div class="dot" [ngClass]="{'green': true, 'gray': !true}"></div>
+        <div class="label">{{values[0]}}</div>
+      </div>
+    </div>
+
+    <div class="progress-box">
+      <h3 class="progress-title">Progress Status</h3>
+      <p class="progress-text">{{this.processStatus}}</p>
+      <button class="refresh-button" (click)="refresh()">Refresh</button>
     </div>
   </div>
 </ng-template>

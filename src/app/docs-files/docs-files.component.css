@@ -292,4 +292,92 @@
   font-size: 14px;
   color: #333;
 }
+/* Box styling */
+.progress-box {
+  background-color: #f9f9f9;
+  padding: 20px;
+  max-width: 300px;
+  margin: 0 auto;
+  text-align: center;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
+/* Title styling */
+.progress-title {
+  font-size: 1.5em;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* Progress text styling */
+.progress-text {
+  font-size: 1.2em;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+/* Button styling */
+.refresh-button {
+  background-color: rgba(41, 171, 135);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.refresh-button:hover {
+  background-color: rgba(0, 117, 94);
+}
+
+.refresh-button:active {
+  background-color: #004080;
+}
+
+/* Progress container styling */
+.progress-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Dot container styling */
+.dot-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Dot styling */
+.dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #ccc; /* Default gray color */
+  transition: background-color 0.3s ease;
+}
+
+.dot.green {
+  background-color: rgba(41, 171, 135); /* Green color for active/completed state */
+}
+
+.dot.gray {
+  background-color: #ccc; /* Gray color for inactive state */
+}
+
+/* Label styling */
+.label {
+  font-size: 0.9em;
+  color: #333;
+  text-align: center;
+  font-weight: 500;
+}
