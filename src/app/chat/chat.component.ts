@@ -4,10 +4,11 @@ import {CommonModule} from '@angular/common';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 import * as marked from 'marked';
 import {ChatService} from '../chat.service';
-import {firstValueFrom} from 'rxjs';
+import {firstValueFrom, Observable} from 'rxjs';
 import {ActivatedRoute, Router, RouterModule} from '@angular/router';
 import {FlagService} from '../flag.service';
 import {Flag} from '../models/flag';
+import {Chat} from '../models/chat';
 
 @Component({
   selector: 'app-chat',
@@ -245,6 +246,34 @@ export class ChatComponent implements OnInit, OnDestroy {
         this.sendMessage();
       }
     }
+  }
+
+  isBarOpen = false;
+  initChats = false;
+  chats: Chat[] | null = null
+
+
+  toggleBar() {
+    this.isBarOpen = !this.isBarOpen;
+    if (!this.initChats) {
+      this.chatService.getChats().subscribe(
+        (chats: Chat[]) => {
+          this.chats = chats;
+          console.log(this.chats)
+        },
+        (error) => {
+          console.error('Error fetching chats:', error);
+        })
+    }
+    this.initChats = true;
+  }
+
+  selectChat(chatId: string) {
+    this.router.navigate(['/chat'], { queryParams: { chat_id: chatId } })
+      .then(() => {
+        // Refresh the site after navigation
+        window.location.reload();
+      });
   }
 
 }

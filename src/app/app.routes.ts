@@ -9,6 +9,7 @@ import {ListGiturlComponent} from './list-giturl/list-giturl.component';
 import {DocsFilesComponent} from './docs-files/docs-files.component';
 import {ProcessListComponent} from './process-list/process-list.component';
 import {HomeComponent} from './home/home.component';
+import {SideBarComponent} from './side-bar/side-bar.component';
 
 
 export const routes: Routes = [
@@ -23,5 +24,6 @@ export const routes: Routes = [
   {path:'collections', component: ListGiturlComponent},
   {path:'process', component: ProcessListComponent},
   {path:'home', component: HomeComponent},
+  {path:'side-bar', component: SideBarComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];

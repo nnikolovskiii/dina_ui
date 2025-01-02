@@ -1,0 +1,13 @@
+<button (click)="toggleBar()" class="toggle-button">
+  {{ isBarOpen ? 'Close' : 'Open' }} Bar
+</button>
+
+<div [class.open]="isBarOpen" class="sliding-bar">
+  <!-- Sliding bar content goes here -->
+  <p>This is the sliding bar content.</p>
+</div>
+
+<div class="content">
+  <!-- Main content goes here -->
+  <p>Main content of the page.</p>
+</div>
