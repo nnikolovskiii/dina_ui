@@ -434,48 +434,10 @@ a:hover{
   font-weight: 600;
 }
 
-pre:has(code) {
-  display: inline-block; /* Shrinks the <pre> to fit the content */
-  background-color: rgba(220, 220, 220);
-  white-space: pre-wrap; /* Enables text wrapping */
-  word-wrap: break-word; /* Breaks long words if needed */
-  overflow-wrap: break-word; /* Additional support for word breaking */
-  padding: 10px; /* Optional: Adds some space inside the <pre> */
-  max-width: 100%; /* Ensures it doesn’t overflow the container */
-  overflow: auto; /* Adds scrollbars if necessary */
-  box-sizing: border-box; /* Includes padding in size */
-  border-radius: 10px;
-  text-align: left;
-  margin-left: 20px;
-  padding-left: 18px;
-  color:rgb(85,85,85);
-}
-
-
-
-li > pre:has(code) {
-  display: inline; /* Shrinks the <pre> to fit the content */
-  background-color: rgba(220, 220, 220);
-  white-space: pre-wrap; /* Enables text wrapping */
-  word-wrap: break-word; /* Breaks long words if needed */
-  overflow-wrap: break-word; /* Additional support for word breaking */
-  padding: 9px; /* Optional: Adds some space inside the <pre> */
-  max-width: 100%; /* Ensures it doesn’t overflow the container */
-  overflow: auto; /* Adds scrollbars if necessary */
-  box-sizing: border-box; /* Includes padding in size */
-  border-radius: 8px;
-  text-align: left;
-  margin-left: 10px;
-
-}
-
-
 /*pre code{*/
 /*  margin-left: 20px;*/
 /*}*/
 
-p:has(strong){
-margin-left: 20px}
 
 
 h1, h2, h3, h4, h5, h6 {
