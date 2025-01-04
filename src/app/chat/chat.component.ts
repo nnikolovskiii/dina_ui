@@ -29,7 +29,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   public newUserMessages: any[] = [];
   public newAssistantMessages: any[] = [];
   public isFirst: boolean = true;
-  public chatApi: ChatApi | null = null;
+  public chatApi: any | null = null;
   public chatModels: ChatModel[] | null = null;
 
   constructor(

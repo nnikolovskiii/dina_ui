@@ -87,12 +87,12 @@
 
           <!-- Display existing chat models -->
           <div *ngFor="let chatModel of chatModels" class="chat-model-name">
-            {{ chatModel.name }}
+            <div>{{ chatModel.name }}</div>
             <div class="breaker1"></div>
           </div>
 
           <div *ngIf="isAddingModel" class="add-model-input">
-            <input type="text" [(ngModel)]="newModelName" placeholder="Enter model name" />
+            <input type="text" [(ngModel)]="newModelName" placeholder="Enter model name"/>
             <button (click)="confirmAddModel()"><img src="../../assets/check.png" height="15" width="15"/></button>
             <button (click)="cancelAddModel()"><img src="../../assets/close(1).png" height="12" width="12"/></button>
           </div>
@@ -100,13 +100,15 @@
 
           <!-- Add button -->
           <div class="chat-model-name" *ngIf="!isAddingModel" (click)="addChatModel()">
-            <img src="../../assets/add(4).png" height="12" width="12" />
+            <img src="../../assets/add(4).png" height="12" width="12"/>
           </div>
         </div>
 
 
         <ng-template #api>
-          <p>{{ chatApi | json }}</p>
+          <div class="all-models api">
+            <div class="fixed-scrollable">{{ chatApi["api_key"] }}</div>
+          </div>
         </ng-template>
       </div>
     </div>

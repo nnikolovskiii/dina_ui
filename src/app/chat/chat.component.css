@@ -12,7 +12,7 @@
   border: none;
   width: 50px;
   height: 100%;
-  background-color: rgba(211, 211, 211, 0.7);
+  background-color: rgba(238, 238, 238, 1);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,7 +29,7 @@
   left: -250px; /* Hidden position */
   width: 250px;
   height: 100%;
-  background-color: rgba(211, 211, 211, 0.7);
+  background-color:  rgba(238, 238, 238, 1);
   overflow-y: auto;
   transition: left 0.3s ease;
 }
@@ -100,6 +100,8 @@
   width: 4px;
   background-color: rgba(211, 211, 211, 1);
 }
+
+
 
 .breaker1{
   width: 100%;
@@ -185,6 +187,19 @@
   font-size: 0.8em;
 }
 
+.fixed-scrollable {
+  width: 160px; /* Set a fixed width */
+  overflow-x: auto; /* Enable horizontal scrolling if content overflows */
+  white-space: nowrap; /* Prevent text from wrapping to a new line */
+  border: 1px solid #ccc; /* Optional: Add a border for better visibility */
+  padding: 5px; /* Optional: Add padding for spacing */
+}
+
+.api{
+  padding-top: 11px;
+}
+
+
 .chat-model-name:hover{
   background-color: rgba(211, 211, 211, 1);
   cursor: pointer;
@@ -194,6 +209,7 @@
   padding: 4px 8px; /* Smaller padding for compactness */
   font-size: 12px; /* Reduced font size */
   border: 1px solid #ccc;
+  background-color: rgba(211, 211, 211, 1);
   border-radius: 4px;
   outline: none;
   transition: border-color 0.3s;
@@ -222,12 +238,12 @@
 }
 
 .add-model-input button:last-of-type {
-  background-color: #f4f4f9; /* Red */
+  background-color: rgba(211,211,211); /* Red */
   color: white;
 }
 
 .add-model-input button:last-of-type:hover {
-  background-color: lightgray;
+  background-color: rgba(181,181,181);
 }
 
 .main-div {
@@ -254,6 +270,9 @@
   width: 22px;
   height: 4px;
 }
+.blank-space1{
+  height: 4px;
+}
 
 .line{
   width: 100%;
@@ -272,7 +291,7 @@
 
 .messages {
   flex: 1;
-  padding: 15px;
+  padding: 15px 396px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -286,7 +305,7 @@
   box-shadow: 0 -2px 1px rgba(0, 0, 0, 0.07), /* Top shadow */
   0 4px 6px rgba(0, 0, 0, 0.1); /* Bottom shadow */
   padding: 10px 20px;
-  max-width: 70%;
+  max-width: 100%;
   width: fit-content; /* Ensure the card fits its content */
   word-wrap: break-word;
   overflow-wrap: break-word;
@@ -311,7 +330,6 @@
 
 form {
   display: flex;
-  padding-top: 8px;
   border-top: 1px solid transparent; /* You might want to specify a color here if needed */
   justify-content: center; /* Center horizontally */
   align-items: center;
