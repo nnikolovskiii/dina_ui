@@ -295,11 +295,14 @@
   padding-bottom: 15px;
   padding-left: 100px;
   padding-right: 100px;
+  flex-flow: column;
+  align-items: center;
 }
 
 .messages {
   flex: 1;
-  padding: 15px 396px;
+  padding: 15px;
+  width: 900px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -308,10 +311,7 @@
 
 .assistant-card {
   align-self: flex-start;
-  background-color: rgba(245, 254, 253, 0.2);
   border-radius: 10px;
-  box-shadow: 0 -2px 1px rgba(0, 0, 0, 0.07), /* Top shadow */
-  0 4px 6px rgba(0, 0, 0, 0.1); /* Bottom shadow */
   padding: 10px 20px;
   max-width: 100%;
   width: fit-content; /* Ensure the card fits its content */
@@ -325,7 +325,6 @@
   align-self: flex-end;
   background-color:  rgba(100, 149, 237, 0.3);
   border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 10px 15px;
   max-width: 70%;
   width: fit-content; /* Ensure the card fits its content */
@@ -338,18 +337,17 @@
 
 form {
   display: flex;
-  border-top: 1px solid transparent; /* You might want to specify a color here if needed */
   justify-content: center; /* Center horizontally */
   align-items: center;
   gap: 0px; /* Center vertically */
   background-color: rgba(255, 255, 255, 0); /* Fully transparent background */
   /* or use opacity if you want the entire form to be transparent
   opacity: 0.5; */
-
+  width: 900px;
 }
 
 #form-div{
-  flex: 0.5;
+  flex: 1;
   display: flex;
   justify-content: space-between; /* Center horizontally */
   align-items: center;
@@ -407,10 +405,10 @@ textarea {
   cursor: pointer;
 }
 
-.chat_button img:hover {
-  transform: scale(1.2); /* Makes the image 10% bigger */
-  transition: transform 0.2s ease; /* Smooth transition for the scale effect */
-}
+/*.chat_button img:hover {*/
+/*  transform: scale(1.1); !* Makes the image 10% bigger *!*/
+/*  transition: transform 0.2s ease; !* Smooth transition for the scale effect *!*/
+/*}*/
 
 code{
   color:rgb(108, 160, 220);
@@ -523,17 +521,29 @@ li{
   padding-left: 4px;
   padding-right: 4px;
   border-radius: 5px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.chat-button-extra:hover{
+  background-color: rgb(118, 170, 230);
+  transition: background-color 0.3s ease;
+}
+
+.chat-button-extra:hover .chat_button{
+  background-color: rgb(118, 170, 230);
+  transition: background-color 0.3s ease;
 }
 
 .chat-button-extra .chat_button{
   background-color: rgb(108, 160, 220);
-  padding:4px;
+  padding:2px;
 }
 
 .chat-button-extra-text{
-  padding:4px;
+  padding:2px;
 }
 
-.vanilla{
-  padding-right: 8px;
-}
+/*.vanilla{*/
+/*  padding-right: 8px;*/
+/*}*/
