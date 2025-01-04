@@ -49,6 +49,14 @@ export class ChatService {
     return this.http.post(`${this.baseUrl}add_chat_model/`, { "name":name, "chat_api_type":chatApiType }, {});
   }
 
+  setActiveChatModel(model: string, type: string): Observable<any>{
+    return this.http.post(`${this.baseUrl}set_active_model/`, { "model":model, "type":type }, {});
+  }
+
+  getActiveChatModel(): Observable<ChatModel>{
+    return this.http.get<ChatModel>(`${this.baseUrl}get_active_model/`);
+  }
+
   private handleError(error: HttpErrorResponse): Observable<never> {
     console.error('An error occurred:', error.message);
     return throwError(() => new Error('Failed to fetch chat API and models. Please try again later.'));

@@ -84,11 +84,13 @@
           </div>
         </div>
         <div *ngIf="selectedInfo === 'models'; else api" class="all-models">
-
-          <!-- Display existing chat models -->
-          <div *ngFor="let chatModel of chatModels" class="chat-model-name">
-            <div>{{ chatModel.name }}</div>
-            <div class="breaker1"></div>
+          <div
+            [class.selected]="activeModel?.name === chatModel.name"
+            *ngFor="let chatModel of chatModels;  let i = index" class="chat-model-name">
+            <div
+              (click)="setActiveChatModel(chatModel.name)">
+              {{ chatModel.name }}
+            </div>
           </div>
 
           <div *ngIf="isAddingModel" class="add-model-input">

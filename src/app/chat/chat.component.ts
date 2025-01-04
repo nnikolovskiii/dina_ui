@@ -31,6 +31,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   public isFirst: boolean = true;
   public chatApi: any | null = null;
   public chatModels: ChatModel[] | null = null;
+  public activeModel: ChatModel | null = null;
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -133,6 +134,13 @@ export class ChatComponent implements OnInit, OnDestroy {
         (error) => {
           console.error('Error fetching chats:', error);
         })
+
+      this.chatService.getActiveChatModel().subscribe(
+        (response) => {
+          this.activeModel = response;
+          console.log("activeModel",this.activeModel)
+        },
+      )
     });
 
   }
@@ -347,7 +355,16 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   cancelAddModel() {
-    this.newModelName = ''; // Reset input field
-    this.isAddingModel = false; // Hide the input field
+    this.newModelName = '';
+    this.isAddingModel = false;
+  }
+
+  setActiveChatModel(model:string) {
+    console.log(model, this.selectedApi)
+    this.chatService.setActiveChatModel(model, this.selectedApi).subscribe(
+      (response) => {
+        this.activeModel = new ChatModel(model, this.selectedApi)
+      }
+    )
   }
 }
