@@ -12,11 +12,11 @@ export class Chat {
 
 export class ChatModel {
   name: string;
-  chatApiType: string;
+  chat_api_type: string;
 
-  constructor(name: string, chatApiType: string) {
+  constructor(name: string, chat_api_type: string) {
     this.name = name;
-    this.chatApiType = chatApiType;
+    this.chat_api_type = chat_api_type;
   }
 }
 

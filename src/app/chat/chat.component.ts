@@ -125,22 +125,22 @@ export class ChatComponent implements OnInit, OnDestroy {
         console.log("WebSocket connection closed.");
       };
 
-      this.chatService.getChatApiAndModels("openai").subscribe(
-        (response) => {
-          this.chatApi = response["api"]
-          this.chatModels = response["models"]
-          console.log(this.chatApi, this.chatModels)
-        },
-        (error) => {
-          console.error('Error fetching chats:', error);
-        })
-
       this.chatService.getActiveChatModel().subscribe(
         (response) => {
           this.activeModel = response;
-          console.log("activeModel",this.activeModel)
+          this.selectedApi = this.activeModel!.chat_api_type;
+          this.chatService.getChatApiAndModels(this.activeModel!.chat_api_type).subscribe(
+            (response) => {
+              this.chatApi = response["api"]
+              this.chatModels = response["models"]
+              console.log(this.chatApi, this.chatModels)
+            },
+            (error) => {
+              console.error('Error fetching chats:', error);
+            })
         },
       )
+
     });
 
   }
