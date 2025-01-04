@@ -8,7 +8,7 @@ import {firstValueFrom, Observable} from 'rxjs';
 import {ActivatedRoute, Router, RouterModule} from '@angular/router';
 import {FlagService} from '../flag.service';
 import {Flag} from '../models/flag';
-import {Chat} from '../models/chat';
+import {Chat, ChatApi, ChatModel} from '../models/chat';
 
 @Component({
   selector: 'app-chat',
@@ -29,6 +29,8 @@ export class ChatComponent implements OnInit, OnDestroy {
   public newUserMessages: any[] = [];
   public newAssistantMessages: any[] = [];
   public isFirst: boolean = true;
+  public chatApi: ChatApi | null = null;
+  public chatModels: ChatModel[] | null = null;
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -121,6 +123,16 @@ export class ChatComponent implements OnInit, OnDestroy {
       this.ws.onclose = () => {
         console.log("WebSocket connection closed.");
       };
+
+      this.chatService.getChatApiAndModels("openai").subscribe(
+        (response) => {
+          this.chatApi = response["api"]
+          this.chatModels = response["models"]
+          console.log(this.chatApi, this.chatModels)
+        },
+        (error) => {
+          console.error('Error fetching chats:', error);
+        })
     });
 
   }
@@ -248,13 +260,18 @@ export class ChatComponent implements OnInit, OnDestroy {
     }
   }
 
-  isBarOpen = false;
+  barStatus = "close"
   initChats = false;
   chats: Chat[] | null = null
 
 
-  toggleBar() {
-    this.isBarOpen = !this.isBarOpen;
+  toggleHistoryBar() {
+    if (this.barStatus == "history") {
+      this.barStatus = "close"
+    }else{
+      this.barStatus = "history"
+    }
+
     if (!this.initChats) {
       this.chatService.getChats().subscribe(
         (chats: Chat[]) => {
@@ -268,6 +285,36 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.initChats = true;
   }
 
+  // chats: Chat[] | null = null
+
+
+  toggleChatModels() {
+    if (this.barStatus == "chat_models") {
+      this.barStatus = "close"
+    }else{
+      this.barStatus = "chat_models"
+    }
+  }
+
+  selectedApi: string = "openai"
+  getModelInfo(model:string){
+    this.selectedApi = model;
+    this.chatService.getChatApiAndModels(model).subscribe(
+      (response) => {
+        this.chatApi = response["api"]
+        this.chatModels = response["models"]
+        console.log(this.chatApi, this.chatModels)
+      },
+      (error) => {
+        console.error('Error fetching chats:', error);
+      })
+  }
+
+  selectedInfo: string = "models"
+  changeSelectedInfo(newSelected:string){
+    this.selectedInfo = newSelected;
+  }
+
   selectChat(chatId: string) {
     this.router.navigate(['/chat'], { queryParams: { chat_id: chatId } })
       .then(() => {
@@ -276,4 +323,31 @@ export class ChatComponent implements OnInit, OnDestroy {
       });
   }
 
+  isAddingModel = false; // State to track if we are adding a model
+  newModelName = '';
+
+  addChatModel() {
+    this.isAddingModel = true; // Display the input field and button
+  }
+
+  confirmAddModel() {
+    if (this.newModelName.trim()) {
+      let chatModel = new ChatModel(this.newModelName, this.selectedApi)
+      this.chatService.addChatModel(this.newModelName, this.selectedApi).subscribe(
+        (response) => {
+          this.chatModels?.push(chatModel);
+          this.newModelName = '';
+          this.isAddingModel = false;
+        },
+        (error) => {
+          console.error('Error:', error);
+        }
+      )
+    }
+  }
+
+  cancelAddModel() {
+    this.newModelName = ''; // Reset input field
+    this.isAddingModel = false; // Hide the input field
+  }
 }

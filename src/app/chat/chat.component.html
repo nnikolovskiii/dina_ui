@@ -1,21 +1,113 @@
-<div *ngIf="!isBarOpen" class="banter">
-  <div (click)="toggleBar()" class="toggle-button">
-    <img src="../../assets/settings.png" height="25" width="25"/>
+<div *ngIf="this.barStatus == 'close'" class="banter">
+  <div (click)="toggleHistoryBar()" class="toggle-button">
+    <img src="../../assets/history_icon.png" height="30" width="30"/>
+  </div>
+  <div (click)="toggleChatModels()" class="toggle-button">
+    <img src="../../assets/generative.png" height="38" width="38"/>
   </div>
 </div>
-<div [class.open]="isBarOpen" class="sliding-bar">
+<div [class.open]="this.barStatus == 'history'" class="sliding-bar">
   <div class="sliding-bar-column">
     <div class="chat-history-heading">
-      <div *ngIf="isBarOpen" (click)="toggleBar()">
-        <img src="../../assets/settings.png" height="25" width="25"/>
+      <div *ngIf="this.barStatus == 'history'" (click)="toggleHistoryBar()">
+        <img src="../../assets/arrow.png" height="22" width="22"/>
       </div>
       <p class="subheading">Chat History</p>
     </div>
+    <div class="line-div">
+      <div class="blank-space">
+      </div>
+
+      <div class="line"></div>
+    </div>
     <div class="chat-history">
-      <div  *ngFor="let chat of chats">
+      <div *ngFor="let chat of chats">
         <div (click)="selectChat(chat.id)">
           <p class="chat-entry">{{ chat.title }}</p>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div [class.open]="this.barStatus == 'chat_models'" class="sliding-bar">
+  <div class="sliding-bar-column">
+    <div class="chat-history-heading">
+      <div *ngIf="this.barStatus == 'chat_models'" (click)="toggleChatModels()">
+        <img src="../../assets/arrow.png" height="22" width="22"/>
+      </div>
+
+      <p class="subheading">Chat Models</p>
+    </div>
+    <div class="line-div">
+      <div class="blank-space">
+      </div>
+
+      <div class="line"></div>
+    </div>
+    <div class="chat-models-segment-2">
+      <div class="chat-apis">
+        <div
+          class="image-div"
+          [class.selected]="selectedApi === 'openai'"
+          (click)="getModelInfo('openai')">
+          <img src="../../assets/chatgpt.png" height="22" width="22"/>
+        </div>
+        <div
+          class="image-div"
+          [class.selected]="selectedApi === 'hugging_face'"
+          (click)="getModelInfo('hugging_face')">
+          <img src="../../assets/hf-logo-removebg-preview.png" height="35"/>
+        </div>
+        <div
+          class="image-div"
+          [class.selected]="selectedApi === 'deepseek'"
+          (click)="getModelInfo('deepseek')">
+          <img src="../../assets/deepseek-removebg-preview.png" height="22"/>
+        </div>
+      </div>
+
+      <div class="chat-models">
+        <div class="model-list">
+          <div
+            class="model-name"
+            [class.selected]="selectedInfo === 'models'"
+            (click)="changeSelectedInfo('models')">
+            MODELS
+          </div>
+          <div
+            class="model-name"
+            [class.selected]="selectedInfo === 'api'"
+            (click)="changeSelectedInfo('api')">
+            API
+          </div>
+        </div>
+        <div *ngIf="selectedInfo === 'models'; else api" class="all-models">
+
+          <!-- Display existing chat models -->
+          <div *ngFor="let chatModel of chatModels" class="chat-model-name">
+            {{ chatModel.name }}
+            <div class="breaker1"></div>
+          </div>
+
+          <div *ngIf="isAddingModel" class="add-model-input">
+            <input type="text" [(ngModel)]="newModelName" placeholder="Enter model name" />
+            <button (click)="confirmAddModel()"><img src="../../assets/check.png" height="15" width="15"/></button>
+            <button (click)="cancelAddModel()"><img src="../../assets/close(1).png" height="12" width="12"/></button>
+          </div>
+
+
+          <!-- Add button -->
+          <div class="chat-model-name" *ngIf="!isAddingModel" (click)="addChatModel()">
+            <img src="../../assets/add(4).png" height="12" width="12" />
+          </div>
+        </div>
+
+
+        <ng-template #api>
+          <p>{{ chatApi | json }}</p>
+        </ng-template>
       </div>
     </div>
   </div>
