@@ -1,4 +1,4 @@
-import {Component, OnInit, OnDestroy, Input, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, OnDestroy, Input, ViewEncapsulation, ElementRef, AfterViewInit} from '@angular/core';
 import {FormGroup, FormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
@@ -9,6 +9,7 @@ import {ActivatedRoute, Router, RouterModule} from '@angular/router';
 import {FlagService} from '../flag.service';
 import {Flag} from '../models/flag';
 import {Chat, ChatApi, ChatModel} from '../models/chat';
+import hljs from 'highlight.js';
 
 @Component({
   selector: 'app-chat',
@@ -18,7 +19,7 @@ import {Chat, ChatApi, ChatModel} from '../models/chat';
   styleUrls: ['./chat.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class ChatComponent implements OnInit, OnDestroy {
+export class ChatComponent implements OnInit, OnDestroy, AfterViewInit{
   @Input() chat_id: string = "";
   private ws: WebSocket | undefined;
   public inputMessage: string = '';
@@ -39,6 +40,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     private flagService: FlagService,
     private router: Router,
     private route: ActivatedRoute,
+    private el: ElementRef
   ) {
     this.sanitizedMessages = this.sanitizer.bypassSecurityTrustHtml('');
   }
@@ -86,6 +88,9 @@ export class ChatComponent implements OnInit, OnDestroy {
       }
 
       this.updateSanitizedMessages();
+      setTimeout(() => {
+        this.highlightCode();
+      });
 
       this.flagService.getFlag("vanilla").subscribe((flag: Flag) => {
         this.vanillaFlag = flag.active;
@@ -111,6 +116,10 @@ export class ChatComponent implements OnInit, OnDestroy {
           this.isFirst = true;
           this.assistantMessages.push(this.messages);
           this.newAssistantMessages.push([this.messages, this.assistantMessages.length - 1]);
+          setTimeout(() => {
+            this.highlightCode();
+          }, 1000); // Waits for 1 second before calling highlightCode
+
         }
         this.messages += event.data + "";
         this.updateSanitizedMessages();
@@ -158,28 +167,38 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   sendMessage(): void {
     this.sanitizedMessages = this.sanitizer.bypassSecurityTrustHtml('');
+    setTimeout(() => {
+      this.highlightCode();
+    });
 
-
-    // Send the message
     if (this.ws && this.inputMessage.trim() !== '') {
       this.ws.send(JSON.stringify([this.inputMessage, this.userMessages, this.assistantMessages]));
       this.userMessages.push(this.inputMessage);
       this.newUserMessages.push([this.inputMessage, this.userMessages.length - 1]);
       this.isFirst = false;
       this.messages = '';
-      this.inputMessage = ""
+      this.inputMessage = '';
     }
 
     // Save chat data after sending a message
     this.saveChatData();
+
+    // Update and apply syntax highlighting after the message is processed
   }
+
 
   updateSanitizedMessages(): void {
     const html = marked.parse(this.messages);
     if (typeof html === 'string') {
+      if (html.includes("</code>")) {
+        // setTimeout(() => {
+        //   this.highlightCode();
+        // });
+      }
       this.sanitizedMessages = this.sanitizer.bypassSecurityTrustHtml(html);
     }
   }
+
 
   saveChatData(): void {
     localStorage.setItem('userMessages', JSON.stringify(this.newUserMessages));
@@ -367,4 +386,20 @@ export class ChatComponent implements OnInit, OnDestroy {
       }
     )
   }
+
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.highlightCode();
+    });
+  }
+
+  private highlightCode(): void {
+    const codeBlocks = this.el.nativeElement.querySelectorAll('pre code');
+    // console.log('Found Code Blocks:', codeBlocks);
+
+    codeBlocks.forEach((block: HTMLElement) => {
+      hljs.highlightElement(block);
+    });
+  }
+
 }

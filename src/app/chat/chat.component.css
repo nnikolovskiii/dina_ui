@@ -410,10 +410,10 @@ textarea {
 /*  transition: transform 0.2s ease; !* Smooth transition for the scale effect *!*/
 /*}*/
 
-code{
-  color:rgb(108, 160, 220);
-  font-weight: 600;
-}
+/*code{*/
+/*  color:rgb(108, 160, 220);*/
+/*  font-weight: 600;*/
+/*}*/
 
 #gap {
   padding-bottom: 20px;

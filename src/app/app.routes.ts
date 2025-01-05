@@ -10,6 +10,7 @@ import {DocsFilesComponent} from './docs-files/docs-files.component';
 import {ProcessListComponent} from './process-list/process-list.component';
 import {HomeComponent} from './home/home.component';
 import {SideBarComponent} from './side-bar/side-bar.component';
+import {HighlightComponent} from './highlight/highlight.component';
 
 
 export const routes: Routes = [
@@ -25,5 +26,6 @@ export const routes: Routes = [
   {path:'process', component: ProcessListComponent},
   {path:'home', component: HomeComponent},
   {path:'side-bar', component: SideBarComponent},
+  {path:'h1', component: HighlightComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];
