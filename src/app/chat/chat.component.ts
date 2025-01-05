@@ -289,7 +289,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit{
 
   barStatus = "close"
   initChats = false;
-  chats: Chat[] | null = null
+  chats: any | null = null
 
 
   toggleHistoryBar() {
@@ -301,9 +301,9 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit{
 
     if (!this.initChats) {
       this.chatService.getChats().subscribe(
-        (chats: Chat[]) => {
+        (chats: any) => {
           this.chats = chats;
-          console.log(this.chats)
+          console.log(this.chats["today"])
         },
         (error) => {
           console.error('Error fetching chats:', error);
@@ -402,4 +402,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit{
     });
   }
 
+  getChats(timePeriod: string) {
+    return this.chats[timePeriod];
+  }
 }

@@ -21,7 +21,26 @@
       <div class="line"></div>
     </div>
     <div class="chat-history">
-      <div *ngFor="let chat of chats">
+      <div *ngFor="let chat of getChats('today')">
+        <div (click)="selectChat(chat.id)">
+          <p class="chat-entry">{{ chat.title }}</p>
+        </div>
+      </div>
+
+      <div *ngFor="let chat of getChats('yesterday')">
+        <div (click)="selectChat(chat.id)">
+          <p class="chat-entry">{{ chat.title }}</p>
+        </div>
+      </div>
+
+      <div *ngFor="let chat of getChats('previous_7_days')">
+        <div (click)="selectChat(chat.id)">
+          <p class="chat-entry">{{ chat.title }}</p>
+        </div>
+      </div>
+      <div class="blank-space2"></div>
+      <p>Previous 30 days</p>
+      <div *ngFor="let chat of getChats('previous_30_days')">
         <div (click)="selectChat(chat.id)">
           <p class="chat-entry">{{ chat.title }}</p>
         </div>

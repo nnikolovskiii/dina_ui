@@ -12,16 +12,8 @@ export class ChatService {
 
   constructor(private http: HttpClient) {}
 
-  getChats(): Observable<Chat[]> {
-    return this.http.get<any>(`${this.baseUrl}get_chats/`).pipe(
-      map((response) =>
-        response.map((chat: any) => ({
-          id: chat.id,
-          title: chat.title,
-          timestamp: chat.timestamp,
-        }))
-      )
-    );
+  getChats(): Observable<Map<string,Chat[]>> {
+    return this.http.get<any>(`${this.baseUrl}get_chats/`)
   }
 
   add_chat(user_messages: string[], assistant_messages: string[]): Observable<any> {
