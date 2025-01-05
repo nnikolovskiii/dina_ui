@@ -403,6 +403,8 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit{
   }
 
   getChats(timePeriod: string) {
-    return this.chats[timePeriod];
+    if (this.chats != null) {
+      return this.chats[timePeriod];
+    }
   }
 }

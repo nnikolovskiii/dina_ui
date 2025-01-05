@@ -72,6 +72,20 @@
 
 .chat-entry:hover {
   cursor: pointer;
+  background-color: rgba(211, 211, 211, 1);
+  margin-right: 20px;
+  border-radius: 5px;
+}
+
+.chat-entry{
+  font-size:14px;
+  padding: 4px 0px;
+  padding-left: 10px;
+}
+
+.history-header{
+  font-size: 10.5px;
+  font-weight: bold;
 }
 
 .sliding-bar.open {
@@ -462,6 +476,9 @@ h6::before {
   margin-bottom: 10px; /* Adjust the margin to increase or decrease the space between the line and the heading */
 }
 
+p{
+  margin-bottom: 0px;
+}
 /*strong{*/
 /*  color: rgba(190, 190, 190)*/
 /*}*/
