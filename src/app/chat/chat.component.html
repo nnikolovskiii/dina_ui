@@ -5,6 +5,16 @@
   <div (click)="toggleChatModels()" class="toggle-button">
     <img src="../../assets/generative.png" height="38" width="38"/>
   </div>
+  <div class="add-chat">
+    <div
+      id = "new-chat-button"
+      (click)="navigateToChat()"
+      class="toggle-button">
+
+<!--      <img src="../../assets/chat.png" height="30" width="30"/>-->
+
+    </div>
+  </div>
 </div>
 <div [class.open]="this.barStatus == 'history'" class="sliding-bar">
   <div class="sliding-bar-column">
@@ -177,7 +187,7 @@
               </div>
               <ng-template #selected_vanilla>
                 <div class="chat-button-extra" (click)="setVanillaFlag()">
-                  <div class="chat_button" >
+                  <div class="chat_button">
                     <img src="../../assets/ice-cream-cone_white.png" height="18" width="18"/>
                   </div>
                   <div class="chat-button-extra-text vanilla">Vanilla</div>
@@ -188,7 +198,7 @@
               </div>
               <ng-template #selected_history>
                 <div class="chat-button-extra" (click)="setHistoryFlag()">
-                  <div class="chat_button" >
+                  <div class="chat_button">
                     <img src="../../assets/history_white.png" height="18" width="18"/>
                   </div>
                   <div class="chat-button-extra-text">History</div>
@@ -209,7 +219,7 @@
                 <img src="../../assets/code_chat_button.png" height="18" width="18"/>
               </div>
               <ng-template #selected_code>
-                <div class="chat-button-extra"(click)="setCodeFlag()">
+                <div class="chat-button-extra" (click)="setCodeFlag()">
                   <div class="chat_button">
                     <img src="../../assets/code_white.png" height="18" width="18"/>
                   </div>
@@ -221,7 +231,7 @@
               </div>
               <ng-template #selected_expand>
                 <div class="chat-button-extra" (click)="expandChat(messageArea)">
-                  <div class="chat_button" >
+                  <div class="chat_button">
                     <img src="../../assets/expand_white.png" height="13" width="13"/>
                   </div>
                   <div class="chat-button-extra-text">Expanded</div>

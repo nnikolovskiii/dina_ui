@@ -77,6 +77,15 @@
   border-radius: 5px;
 }
 
+.add-chat{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: 15px;
+}
+
 .chat-entry{
   font-size:14px;
   padding: 4px 0px;
@@ -115,8 +124,22 @@
   background-color: rgba(211, 211, 211, 1);
 }
 
+#new-chat-button {
+  width: 30px;
+  height: 30px;
+  background-image: url('../../assets/chat.png');
+  background-size: cover; /* Ensures the image covers the entire div */
+  background-position: center; /* Centers the image */
+  cursor: pointer;
+  transition: background-image 0.2s ease; /* Adds a transition for the background image */
+}
 
-
+/*#new-chat-button:hover {*/
+/*  background-image: url('../../assets/chat(1).png');*/
+/*  background-size: cover; !* Ensures the image covers the entire div *!*/
+/*  background-position: center; !* Centers the image *!*/
+/*  cursor: pointer;*/
+/*}*/
 .breaker1{
   width: 100%;
   height: 2px;

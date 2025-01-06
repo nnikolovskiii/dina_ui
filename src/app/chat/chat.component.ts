@@ -157,6 +157,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit{
   clearChat(): void {
     localStorage.removeItem('userMessages');
     localStorage.removeItem('assistantMessages');
+    localStorage.removeItem('chat_id')
   }
 
   ngOnDestroy(): void {
@@ -236,8 +237,12 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit{
       }
     )
   }
-
-
+  navigateToChat() {
+    this.clearChat();
+    this.router.navigate(['/chat']).then(() => {
+      window.location.reload();
+    });
+  }
   codeFlag: boolean = false;
 
   setCodeFlag() {
