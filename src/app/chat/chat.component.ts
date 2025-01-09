@@ -10,6 +10,7 @@ import {FlagService} from '../flag.service';
 import {Flag} from '../models/flag';
 import {Chat, ChatApi, ChatModel} from '../models/chat';
 import hljs from 'highlight.js';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-chat',
@@ -105,7 +106,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit{
         this.codeFlag = flag.active;
       });
 
-      this.ws = new WebSocket("ws://localhost:5000/websocket/");
+      this.ws = new WebSocket('ws://'+environment.apiUrl+':' +environment.port+ '/websocket/');
 
       this.ws.onopen = () => {
         console.log("WebSocket connection opened.");

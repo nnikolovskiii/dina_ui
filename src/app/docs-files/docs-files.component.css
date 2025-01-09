@@ -224,6 +224,7 @@
   width: 100%;
   justify-content: center;
   align-items: center;
+  margin-left: 10px;
 }
 
 .finish-button{
@@ -231,6 +232,7 @@
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
+  padding-right:10px;
 }
 
 

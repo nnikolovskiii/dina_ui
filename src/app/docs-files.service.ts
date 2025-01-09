@@ -5,12 +5,13 @@ import {Link} from './models/link';
 import {DocsUrl} from './models/docs-url';
 import {GitUrl} from './models/git-url';
 import {Url} from './models/url';
+import {environment} from '../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DocsFilesService {
-  private baseUrl = 'http://localhost:5000/docs_files';
+  private baseUrl = 'http://'+environment.apiUrl+':' +environment.port+ '/docs_files';
 
   constructor(private http: HttpClient) {}
 

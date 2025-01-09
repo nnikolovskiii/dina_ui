@@ -4,12 +4,13 @@ import {map, Observable} from 'rxjs';
 import {Folder} from './models/folder';
 import {GitUrl} from './models/git-url';
 import {Url} from './models/url';
+import {environment} from '../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CodeProcessService {
-  private baseUrl = 'http://localhost:5000/code_files';
+  private baseUrl = 'http://'+environment.apiUrl+':' +environment.port+ '/code_files';
 
   constructor(private http: HttpClient) {}
 

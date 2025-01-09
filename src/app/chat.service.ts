@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {catchError, map, Observable, throwError} from 'rxjs';
 import {Chat, ChatApi, ChatModel} from './models/chat';
+import {environment} from '../environments/environment';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChatService {
-  private baseUrl = 'http://localhost:5000/chat/';
+  private baseUrl = 'http://'+environment.apiUrl+':' +environment.port+ '/chat/';
 
   constructor(private http: HttpClient) {}
 

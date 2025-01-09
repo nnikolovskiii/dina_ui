@@ -6,12 +6,13 @@ import {DocsUrl} from './models/docs-url';
 import {Process} from './models/process';
 import {Folder} from './models/folder';
 import {SimpleProcess} from './models/simple-process';
+import {environment} from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProcessService {
-  private baseUrl = 'http://localhost:5000/process';
+  private baseUrl = 'http://'+environment.apiUrl+':' +environment.port+ '/process';
 
   constructor(private http: HttpClient) {}
 

@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {map, Observable} from 'rxjs';
 import {Flag} from './models/flag';
+import {environment} from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FlagService {
 
-  private baseUrl = 'http://localhost:5000/flag';
+  private baseUrl = 'http://'+environment.apiUrl+':' +environment.port+ '/flag';
 
   constructor(private http: HttpClient) {}
 
