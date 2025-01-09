@@ -78,19 +78,30 @@
 
 
       <!-- Button group -->
-      <div class="button-group sticky-bottom">
-        <button class="small-button" (click)="selectAllLinks(links)">Select Page</button>
-        <button class="small-button" (click)="deselectAllLinks(links)">Clear Page</button>
+
+    </div>
+    <div class="button-group sticky-bottom">
+      <div class="last-button-group">
+
+        <button class="small-button" (click)="selectAllLinks()">Select Page</button>
+        <button class="small-button" (click)="deselectAllLinks()">Clear Page</button>
         <button class="small-button" (click)="selectDocs(docs_url,true)">Select All</button>
         <button class="small-button" (click)="selectDocs(docs_url, false)">Clear All</button>
-        <button class="small-button-finish" (click)="navigateToFinish()">Finish</button>
+
+
+
+      </div>
+      <div class="finish-button">
+        <button class="small-button-finish" (click)="navigateToFinish()">
+
+        </button>
       </div>
     </div>
   </div>
   <ng-template #loading>
-    <div class="card-list container">
+    <div class="card-list container loading-screen">
       <div class="loading">
-        <img src="path/to/loading-spinner.gif" alt="Loading..."/>
+        <img src="/assets/loading-gif-black.gif" alt="Loading..."/>
         <p>Loading your docs...</p>
       </div>
     </div>
@@ -100,10 +111,10 @@
 <ng-template #process>
   <div class="card-list container">
     <div class="progress-container">
-        <div class="dot-container" *ngFor="let values of getSortedProcesses()">
-          <div class="dot" [ngClass]="{'green': true, 'gray': !true}"></div>
-          <div class="label">{{ values[0] }}</div>
-        </div>
+      <div class="dot-container" *ngFor="let values of getSortedProcesses()">
+        <div class="dot" [ngClass]="{'green': true, 'gray': !true}"></div>
+        <div class="label">{{ values[0] }}</div>
+      </div>
     </div>
 
     <div class="progress-box">

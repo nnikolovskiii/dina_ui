@@ -106,6 +106,10 @@
   color: #333;
 }
 
+.loading-screen{
+  height: 100%;
+}
+
 .loading img {
   width: 60px;
   height: 60px;
@@ -156,42 +160,77 @@
   padding: 10px;
   display: flex;
   justify-content: center; /* Center align buttons */
-  gap: 10px; /* Add space between buttons */
-  border-top: 1px solid #ddd; /* Optional: Adds a top border for separation */
+  gap: 0px; /* Add space between buttons */
+  border-top: 1px solid #ddd;
+  max-width: 800px;
+  margin: 0 auto; /* Center horizontally */
+  width: 100%; /* Ensure it takes up the full width of the parent */
 }
-
 /* Smaller button style */
 .small-button {
-  padding: 11px 17px; /* Smaller padding for compact buttons */
-  font-size: 14px; /* Adjust font size */
-  background-color: rgba(100, 149, 237); /* Button background color */
-  background-color: rgba(100, 149, 237); /* Button background color */
-  color: #fff; /* Button text color */
+  padding: 4px 9px; /* Smaller padding for compact buttons */
+  font-size: 16px; /* Adjust font size */
+  color: #666362;
   border: none;
-  border-radius: 5px; /* Rounded corners */
+  border-radius: 3px; /* Rounded corners */
   cursor: pointer;
   transition: background-color 0.3s ease;
+  text-transform: lowercase; /* Convert text to uppercase */
+  font-weight: bold;
+  background-color: #F5F5F5; /* Background color for the button */
 }
 
 .small-button:hover {
-  background-color: rgba(80, 119, 189); /* Darker shade on hover */
+  background-color:lightgrey;
+  color: black;
 }
 
 
 .small-button-finish {
-  padding: 11px 17px; /* Smaller padding for compact buttons */
-  font-size: 14px; /* Adjust font size */
-  background-color: rgba( 255, 195, 11); /* Button background color */
-  color: rgba(76, 70, 70); /* Button text color */
+  padding: 4px 9px; /* Smaller padding for compact buttons */
   border: none;
-  border-radius: 5px; /* Rounded corners */
+  border-radius: 3px; /* Rounded corners */
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  font-weight: bold;
+  transition: background-color 0.3s ease, color 0.3s ease, background-image 0.3s ease;
+  letter-spacing: 1.1px; /* Adjust spacing between letters */
+  text-transform: lowercase; /* Convert text to uppercase */
+  font-family: "Arial", sans-serif; /* Use a clear and legible font */
+  font-weight: bold; /* Make the font clearer by making it bold */
+  font-size: 14px;
+  color: #666362;
+  background-color: #F5F5F5; /* Background color for the button */
+  background-image: url('../../assets/right-arrow(1).png');
+  background-repeat: no-repeat;
+  background-position: center; /* Position the image */
+  background-size: 20px 20px; /* Adjust the size of the background image */
+  width: 35px;
+  height: 100%;
 }
 
 .small-button-finish:hover {
-  background-color:rgba(235, 175, 11); /* Darker shade on hover */
+  background-color: lightgrey; /* Background color for the button */
+  background-image: url('../../assets/right-arrow(4).png');
+  background-repeat: no-repeat;
+  background-position: center; /* Position the image */
+  background-size: 20px 20px; /* Adjust the size of the background image */
+  width: 35px;
+}
+
+.last-button-group{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.finish-button{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 

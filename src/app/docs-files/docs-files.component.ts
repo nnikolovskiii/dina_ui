@@ -6,6 +6,7 @@ import {Link} from '../models/link';
 import {DocsFilesService} from '../docs-files.service';
 import {ProcessService} from '../process.service';
 import {FormsModule} from '@angular/forms';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-docs-files',
@@ -150,15 +151,27 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
     return link.link.split("//")[1];
   }
 
-  selectAllLinks(links: Link[]): void {
-    this.selectedLinks = new Map(links.filter(link => !link.is_parent).map(link => [link.link, true]));
-    localStorage.setItem('selectedLinks', JSON.stringify(Array.from(this.selectedLinks.entries())));
+  selectAllLinks(): void {
+    this.links$?.pipe(
+      take(1) // Take only the first emitted value (unsubscribe automatically)
+    ).subscribe(links => {
+      this.selectedLinks = new Map(
+        links.filter(link => !link.is_parent).map(link => [link.link, true])
+      );
+      localStorage.setItem('selectedLinks', JSON.stringify(Array.from(this.selectedLinks.entries())));
+    });
   }
 
-  deselectAllLinks(links: Link[]): void {
-    this.selectedLinks = new Map(links.filter(link => !link.is_parent).map(link => [link.link, false]));
-    localStorage.setItem('selectedLinks', JSON.stringify(Array.from(this.selectedLinks.entries())));
 
+  deselectAllLinks(): void {
+    this.links$?.pipe(
+      take(1) // Take only the first emitted value (unsubscribe automatically)
+    ).subscribe(links => {
+      this.selectedLinks = new Map(
+        links.filter(link => !link.is_parent).map(link => [link.link, false])
+      );
+      localStorage.setItem('selectedLinks', JSON.stringify(Array.from(this.selectedLinks.entries())));
+    });
   }
 
   getBreadcrumbs(): [string, string][] {
