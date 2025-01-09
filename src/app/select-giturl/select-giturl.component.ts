@@ -5,6 +5,7 @@ import {ActivatedRoute, Router, RouterModule} from '@angular/router';
 import {CommonModule, Location, NgOptimizedImage} from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {DocsFilesService} from '../docs-files.service';
+import {ProcessService} from '../process.service';
 
 
 @Component({
@@ -27,6 +28,7 @@ export class SelectGiturlComponent {
   constructor(
     private codeProcessService: CodeProcessService,
     private docsFilesService: DocsFilesService,
+    private processService: ProcessService,
     private router: Router,
     private route: ActivatedRoute,
     private location: Location,
@@ -54,9 +56,16 @@ export class SelectGiturlComponent {
       }
       console.log(patterns)
 
-      this.docsFilesService.extractDocs(url, override, this.selectorBs, this.selectorAttr, patterns).subscribe()
-      console.log("Next")
-      this.router.navigate(['/docs-files'], { queryParams: { docs_url: url, prevLink: url } });
+      this.processService.deletePreProcesses(url).subscribe(
+        (response) => {
+          this.docsFilesService.extractDocs(url, override, this.selectorBs, this.selectorAttr, patterns).subscribe()
+          this.router.navigate(['/docs-files'], { queryParams: { docs_url: url, prevLink: url } });
+        },
+        (error) => {
+          console.error('Error:', error);
+        }
+      )
+
     }
   }
 

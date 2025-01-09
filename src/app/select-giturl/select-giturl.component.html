@@ -1,8 +1,8 @@
 <div class="form-container">
-  <h1>Select Git/Docs Url</h1>
-  <div>
+  <h1 class="extract-heading">Select Git/Docs Url</h1>
+  <div class="form-content">
     <div class="form-group">
-      <label for="gitUrl">Git URL:</label>
+      <label for="gitUrl" class="extract-heading1">Git URL</label>
       <input
         type="url"
         id="gitUrl"
@@ -10,13 +10,13 @@
         [(ngModel)]="gitUrl"
         class="form-input"
         required
-        placeholder="Enter Git repository URL"
+        placeholder="Enter Git/Docs repository URL"
         (input)="checkLink()"
       />
     </div>
 
     <div *ngIf="codeForm;else docsForm" class="form-group">
-      <label for="override">Override Existing Data:</label>
+      <label for="override" class="extract-heading1">Override</label>
       <label class="switch">
         <input
           type="checkbox"
@@ -30,7 +30,7 @@
 
     <ng-template #docsForm>
       <div class="form-group">
-        <label for="override1">Override Existing Data:</label>
+        <label for="override1" class="extract-heading1">Override</label>
         <label class="switch">
           <input
             type="checkbox"
@@ -43,7 +43,7 @@
       </div>
 
       <div class="form-group">
-        <label for="selectorBs">Selector:</label>
+        <label for="selectorBs" class="extract-heading1">Selector</label>
         <input
           type="text"
           id="selectorBs"
@@ -55,7 +55,7 @@
       </div>
 
       <div class="form-group">
-        <label for="selectorAttr">Selector Attribute:</label>
+        <label for="selectorAttr" class="extract-heading1">Selector Attribute</label>
         <input
           type="text"
           id="selectorAttr"
@@ -67,7 +67,7 @@
       </div>
 
       <div class="form-group">
-        <label for="stringList">List of Patterns (Optional):</label>
+        <label for="stringList" class="extract-heading1">List of Patterns (Optional)</label>
         <div id="stringList" class="string-list-container">
           <div *ngFor="let item of patternList; let i = index; trackBy: trackByIndex" class="list-item">
             <input
@@ -86,7 +86,7 @@
 
 
     <div class="form-actions">
-      <button class="btn btn-primary" [disabled]="loading" (click)="extractLibraries(gitUrl, override)">Extract Libraries</button>
+      <button class="btn btn-primary" [disabled]="loading" (click)="extractLibraries(gitUrl, override)">Extract</button>
       <button type="button" class="btn btn-secondary" (click)="goBack()">Cancel</button>
     </div>
   </div>

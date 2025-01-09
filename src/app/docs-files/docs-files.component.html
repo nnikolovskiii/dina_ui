@@ -100,15 +100,18 @@
 <ng-template #process>
   <div class="card-list container">
     <div class="progress-container">
-      <div class="dot-container" *ngFor="let values of getSortedProcesses()">
-        <div class="dot" [ngClass]="{'green': true, 'gray': !true}"></div>
-        <div class="label">{{values[0]}}</div>
-      </div>
+        <div class="dot-container" *ngFor="let values of getSortedProcesses()">
+          <div class="dot" [ngClass]="{'green': true, 'gray': !true}"></div>
+          <div class="label">{{ values[0] }}</div>
+        </div>
     </div>
 
     <div class="progress-box">
       <h3 class="progress-title">Progress Status</h3>
-      <p class="progress-text">{{this.processStatus}}</p>
+      <p *ngIf="loadingSortedProcess; else loadingContainer" class="progress-text">{{ this.processStatus }}</p>
+      <ng-template #loadingContainer>
+        <img src="../../assets/loading-gif-black.gif" height="50" width="50"/>
+      </ng-template>
       <button class="refresh-button" (click)="refresh()">Refresh</button>
     </div>
   </div>

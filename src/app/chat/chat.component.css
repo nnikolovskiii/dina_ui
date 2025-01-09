@@ -146,6 +146,10 @@
   background-color: rgba(211, 211, 211, 1);
 }
 
+.references{
+
+}
+
 .chat-apis{
   height: 100%;
   flex:1;
@@ -486,12 +490,35 @@ h1, h2, h3, h4, h5, h6 {
   color: rgba( 102, 99, 98);
 }
 
+.references{
+  margin-top: 20px; /* Adjust the value to increase or decrease the space */
+  color: rgba( 102, 99, 98);
+  font-size: 14px;
+}
+.reference_header{
+  font-weight: bold;
+}
+
+.references_list{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  flex-wrap: wrap;
+}
+
+.reference a:hover{
+  color:rgb(118, 170, 230);
+}
+
 h1::before,
 h2::before,
 h3::before,
 h4::before,
 h5::before,
-h6::before {
+h6::before{
   content: "";
   display: block;
   height: 1px; /* Adjust the height to make the line thicker or thinner */

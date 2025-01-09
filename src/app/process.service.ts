@@ -64,4 +64,8 @@ export class ProcessService {
     return this.http.get<SimpleProcess>(`${this.baseUrl}/get_pre_process/`, { params })
   }
 
+  deletePreProcesses(url: string): Observable<boolean> {
+    const params = { url };
+    return this.http.delete<boolean>(`${this.baseUrl}/delete_pre_process/`, { params });
+  }
 }

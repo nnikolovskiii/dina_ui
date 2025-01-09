@@ -50,12 +50,17 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
 
       this.processService.getPreProcesses(this.docs_url).subscribe(
         (response) => {
+          this.loadingSortedProcess = false;
           this.isFinished = response.get("main")?.[0] ?? false;
+          console.log(response)
+          console.log(this.isFinished)
           this.processMap = response;
-          let li = this.getSortedProcesses()
-          this.processService.getPreProcess(this.docs_url, li[li.length-1][0]).subscribe(
+          let lastProcessType = this.getLastProcessType()
+          this.processService.getPreProcess(this.docs_url, lastProcessType).subscribe(
             (response) => {
               this.processStatus = response["status"] ?? 'Unknown';
+              console.log(response)
+              this.loadingSortedProcess = true;
             },
             (error) => {
               console.error('Error:', error);
@@ -292,21 +297,28 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
     );
   }
 
-
   getSortedProcesses(): [string, [boolean, number]][] {
     return Array.from(this.processMap.entries())
       .filter(([key, value]) => value[1] !== 0)
       .sort((a, b) => a[1][1] - b[1][1]);
   }
 
+  getLastProcessType(): string {
+    let li = Array.from(this.processMap.entries())
+      .sort((a, b) => a[1][1] - b[1][1]);
+    return li[li.length-1][0]
+  }
+
+  loadingSortedProcess: boolean = false;
   processStatus: string = 'Initial Status';
   refresh(){
+    this.loadingSortedProcess = false;
     this.processService.getPreProcesses(this.docs_url).subscribe(
       (response) => {
         this.isFinished = response.get("main")?.[0] ?? false;
         this.processMap = response;
-        let li = this.getSortedProcesses()
-        this.processService.getPreProcess(this.docs_url, li[li.length-1][0]).subscribe(
+        let lastProcessType = this.getLastProcessType()
+        this.processService.getPreProcess(this.docs_url, lastProcessType).subscribe(
           (response) => {
             this.processStatus = response["status"] ?? 'Unknown';
           },
@@ -314,6 +326,7 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
             console.error('Error:', error);
           }
         )
+        this.loadingSortedProcess = true;
       },
       (error) => {
         console.error('Error:', error);

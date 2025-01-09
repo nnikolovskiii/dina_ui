@@ -36,7 +36,7 @@ label {
 }
 
 .form-input:focus {
-  border-color: #007bff;
+  border-color: #6ca0dc;
   outline: none;
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
@@ -62,12 +62,12 @@ label {
 }
 
 .btn-primary {
-  background-color: #007bff;
+  background-color: #6ca0dc;
   color: #fff;
 }
 
 .btn-primary:hover {
-  background-color: #0056b3;
+  background-color: rgb(88, 140, 200);
 }
 
 .btn-secondary {
@@ -136,7 +136,7 @@ label {
 }
 
 input:checked + .slider {
-  background-color: #007bff;
+  background-color: #6ca0dc;
 }
 
 input:checked + .slider:before {
@@ -146,9 +146,8 @@ input:checked + .slider:before {
 .string-list-container {
   max-height: 200px; /* Display 5 items, assuming ~40px per item */
   overflow-y: auto;
-  border: 1px solid #ccc;
+  border: 0px solid #ccc;
   border-radius: 4px;
-  padding: 5px;
 }
 
 .list-item {
@@ -162,7 +161,7 @@ input:checked + .slider:before {
 
 .add-button {
   display: inline-block;
-  background-color: #007bff;
+  background-color: #6ca0dc;
   color: white;
   border: none;
   border-radius: 50%;
@@ -172,8 +171,32 @@ input:checked + .slider:before {
   text-align: center;
   line-height: 30px;
   cursor: pointer;
+  margin-top:4px;
 }
 
 .add-button:hover {
-  background-color: #0056b3;
+  background-color:rgb(88, 140, 200);
 }
+
+.extract-heading {
+  letter-spacing: 2px; /* Adjust spacing between letters */
+  text-transform: uppercase; /* Convert text to uppercase */
+  font-family: "Arial", sans-serif; /* Use a clear and legible font */
+  font-weight: bold; /* Make the font clearer by making it bold */
+  font-size: 1.8em; /* Optional: Adjust font size */
+  color: #666362;
+}
+
+.extract-heading1 {
+  letter-spacing: 1.3px; /* Adjust spacing between letters */
+  text-transform: uppercase; /* Convert text to uppercase */
+  font-family: "Arial", sans-serif; /* Use a clear and legible font */
+  font-weight: bold; /* Make the font clearer by making it bold */
+  font-size: 1.0em; /* Optional: Adjust font size */
+  color: #666362;
+}
+
+.form-content{
+  padding-top: 20px;
+}
+
