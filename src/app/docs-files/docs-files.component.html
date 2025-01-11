@@ -72,6 +72,9 @@
             <button class="emoji-button minus" *ngIf="isCardHovered(link)" (click)="navigateToLink(link.link)">
 
               <img src="../../assets/link.png" height="15" width="15"/></button>
+            <button *ngIf="isCardHovered(link)" class="emoji-button minus" (click)="navigateToDisplayContent(link.base_url,link.link)">
+
+              <img src="../../assets/find.png" height="15" width="15"/></button>
           </div>
         </label>
       </div>

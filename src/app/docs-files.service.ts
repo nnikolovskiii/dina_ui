@@ -62,8 +62,15 @@ export class DocsFilesService {
   }
 
 
-  extractDocs(docs_url: string, override: boolean, selector: string, selectorAttrs: string, patternList: string[]): Observable<any> {
-    const params = { docs_url: docs_url, override: override, selector: selector, selector_attrs: selectorAttrs };
+  extractDocs(
+    docs_url: string,
+    override: boolean,
+    selector: string,
+    selectorType: string,
+    selectorAttrs: string,
+    patternList: string[]
+  ): Observable<any> {
+    const params = { docs_url: docs_url, override: override, selector: selector, selector_type: selectorType, selector_attrs: selectorAttrs };
     return this.http.post(
       `http://localhost:5000/docs/extract_docs/`,
       { patterns: patternList },

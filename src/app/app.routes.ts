@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import {ViewQuestionsComponent} from './view-questions/view-questions.component';
+import {DisplayContentComponent} from './display-content/display-content.component';
 import {ChatComponent} from './chat/chat.component';
 import {CodeProcessComponent} from './code-process/code-process.component';
 import {FinishComponent} from './finish/finish.component';
@@ -13,7 +13,7 @@ import {HighlightComponent} from './highlight/highlight.component';
 
 
 export const routes: Routes = [
-  {path: 'collection-data', component: ViewQuestionsComponent },
+  {path: 'collection-data', component: DisplayContentComponent },
   {path: 'chat', component: ChatComponent },
   {path: 'code-process', component: CodeProcessComponent},
   {path: 'docs-files', component: DocsFilesComponent},

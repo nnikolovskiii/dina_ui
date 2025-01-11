@@ -11,7 +11,7 @@ import {ProcessService} from '../process.service';
 @Component({
   selector: 'app-select-giturl',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule, NgOptimizedImage],
+  imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './select-giturl.component.html',
   styleUrl: './select-giturl.component.css'
 })
@@ -21,6 +21,7 @@ export class SelectGiturlComponent {
   override: boolean = false;
   selectorBs: string = "";
   selectorAttr: string = "";
+  selectorType: string = "class";
   loading: boolean = false;
   codeForm: boolean = false;
   patternList: string[] = [""]
@@ -55,10 +56,11 @@ export class SelectGiturlComponent {
         }
       }
       console.log(patterns)
+      console.log(this.selectorType)
 
       this.processService.deletePreProcesses(url).subscribe(
         (response) => {
-          this.docsFilesService.extractDocs(url, override, this.selectorBs, this.selectorAttr, patterns).subscribe()
+          this.docsFilesService.extractDocs(url, override, this.selectorBs, this.selectorType, this.selectorAttr, patterns).subscribe();
           this.router.navigate(['/docs-files'], { queryParams: { docs_url: url, prevLink: url } });
         },
         (error) => {

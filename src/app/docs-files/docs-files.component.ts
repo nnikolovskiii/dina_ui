@@ -347,7 +347,10 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
     )
   }
 
-  protected Link = Link;
   protected readonly of = of;
-  protected readonly filter = filter;
+
+  navigateToDisplayContent(base_url: string, link: string) {
+    this.saveCurrLinks()
+    this.router.navigate(['/collection-data'], { queryParams: { baseUrl: base_url, link: link } });
+  }
 }

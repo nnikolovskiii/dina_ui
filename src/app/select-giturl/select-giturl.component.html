@@ -55,6 +55,30 @@
       </div>
 
       <div class="form-group">
+        <label class="extract-heading1">Selector Type</label>
+        <div class="radio-group">
+          <label>
+            <input
+              type="radio"
+              name="selectorType"
+              [(ngModel)]="selectorType"
+              value="id"
+            />
+            <span class="radio-label">ID</span>
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="selectorType"
+              [(ngModel)]="selectorType"
+              value="class"
+            />
+            <span class="radio-label">Class</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
         <label for="selectorAttr" class="extract-heading1">Selector Attribute</label>
         <input
           type="text"

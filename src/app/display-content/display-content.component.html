@@ -1,0 +1,25 @@
+<div *ngIf="response && response.length > 0; else loading" class="container">
+  <button class="back-button" (click)="navigateBack()"> Back</button>
+  <div class="panels-container">
+    <ng-container *ngFor="let key of getKeys(response[currentPage])">
+      <div class="panel">
+        <strong>{{ key | titlecase }}:</strong>
+        <pre>{{ response[currentPage][key] }}</pre>
+
+<!--        <div [innerHTML]="response[currentPage][key]"></div>-->
+      </div>
+    </ng-container>
+  </div>
+
+</div>
+
+<ng-template #loading>
+  <button class="back-button" (click)="navigateBack()"> Back</button>
+  <div class="container">
+    <div class="panels-container">
+      <img src="../../assets/loading-gif-black.gif" height="50" width="50"/>
+    </div>
+  </div>
+</ng-template>
+
+
