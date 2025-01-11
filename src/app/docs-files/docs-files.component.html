@@ -20,7 +20,6 @@
 
       <!-- Checklist -->
       <div class="card"
-           [class.selected]="checkForParent(link)"
            *ngFor="let link of getLinks(true, links)"
            (mouseenter)="selectCard(link)"
            (mouseleave)="deselectCard()">
@@ -35,9 +34,6 @@
               {{ getLabel(link) }}
             </a>
 
-            <button *ngIf="isCardHovered(link)" (click)="navigateToLink(link.link)" class="emoji-button minus">
-
-              <img src="../../assets/link.png" height="15" width="15"/></button>
             <button *ngIf="isCardHovered(link)" class="emoji-button plus" (click)="selectAll(link.link,true)">
               <img src="../../assets/plus-symbol-button(1).png" height="12.8" width="12.8"/></button>
 
@@ -53,11 +49,11 @@
 
       <div class="card"
            [class.selected]="checkForParent(link)"
-           *ngFor="let link of getLinks(false, links)"
+           *ngFor="let link of links"
            (mouseenter)="selectCard(link)"
            (mouseleave)="deselectCard()">
 
-        <label class="card-label" *ngIf="!link.is_parent;">
+        <label class="card-label">
           <input
             type="checkbox"
             [value]="link"

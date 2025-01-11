@@ -131,10 +131,6 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
 
   // i dont understand this
   checkForParent(link: Link): boolean {
-    if (link.is_parent) {
-      return false
-    }
-
     const isSelected = this.selectedLinks.get(link.link);
     if (typeof isSelected === 'boolean') {
       return isSelected;
