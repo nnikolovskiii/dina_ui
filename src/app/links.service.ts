@@ -8,7 +8,9 @@ import {Link} from './models/link';
   providedIn: 'root',
 })
 export class LinksService {
-  private baseUrl = 'http://' + environment.apiUrl + ':' + environment.port + '/links';
+  private baseUrl = environment.port
+    ? `${environment.protocol}://${environment.apiUrl}:${environment.port}/links`
+    : `${environment.protocol}://${environment.apiUrl}/links`;
 
   constructor(private http: HttpClient) {}
 

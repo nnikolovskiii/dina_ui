@@ -12,8 +12,9 @@ import {environment} from '../environments/environment';
   providedIn: 'root'
 })
 export class ProcessService {
-  private baseUrl = 'http://'+environment.apiUrl+':' +environment.port+ '/process';
-
+  private baseUrl = environment.port
+    ? `${environment.protocol}://${environment.apiUrl}:${environment.port}/process`
+    : `${environment.protocol}://${environment.apiUrl}/process`;
   constructor(private http: HttpClient) {}
 
   getFinishedProcesses(): Observable<Process[]> {

@@ -9,7 +9,9 @@ import {environment} from '../environments/environment';
   providedIn: 'root'
 })
 export class ChatService {
-  private baseUrl = 'http://'+environment.apiUrl+':' +environment.port+ '/chat/';
+  private baseUrl = environment.port
+    ? `${environment.protocol}://${environment.apiUrl}:${environment.port}/chat/`
+    : `${environment.protocol}://${environment.apiUrl}/chat/`;
 
   constructor(private http: HttpClient) {}
 

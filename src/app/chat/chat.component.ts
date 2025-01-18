@@ -106,7 +106,10 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit{
         this.codeFlag = flag.active;
       });
 
-      this.ws = new WebSocket('ws://'+environment.apiUrl+':' +environment.port+ '/websocket/');
+      let url = environment.port
+        ? `ws://${environment.apiUrl}:${environment.port}/websocket/`
+        : `ws://${environment.apiUrl}/websocket/`;
+      this.ws = new WebSocket(url);
 
       this.ws.onopen = () => {
         console.log("WebSocket connection opened.");
