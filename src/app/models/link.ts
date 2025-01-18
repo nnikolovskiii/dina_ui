@@ -6,6 +6,7 @@ export class Link {
   color: string;
   is_parent: boolean;
   active: boolean;
+  processed: boolean;
 
 
   constructor(
@@ -16,6 +17,7 @@ export class Link {
     color: string,
     is_parent: boolean,
     active: boolean,
+    processed: boolean
 ) {
     this.id = id;
     this.prev_link = prev_link;
@@ -24,5 +26,6 @@ export class Link {
     this.color = color;
     this.is_parent = is_parent;
     this.active = active;
+    this.processed = processed;
   }
 }
