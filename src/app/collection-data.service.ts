@@ -9,8 +9,9 @@ import {Url} from './models/url';
   providedIn: 'root'
 })
 export class CollectionDataService {
-  private baseUrl = 'http://'+environment.apiUrl+':' +environment.port+ '/collection-data';
-
+  private baseUrl = environment.port
+    ? `${environment.protocol}://${environment.apiUrl}:${environment.port}/collection-data`
+    : `${environment.protocol}://${environment.apiUrl}/collection-data`;
   constructor(private http: HttpClient) {}
 
   getAllContentData(base_url: string,): Observable<any> {

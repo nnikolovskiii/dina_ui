@@ -9,7 +9,9 @@ import {environment} from '../environments/environment';
 })
 export class FlagService {
 
-  private baseUrl = 'http://'+environment.apiUrl+':' +environment.port+ '/flag';
+  private baseUrl = environment.port
+    ? `${environment.protocol}://${environment.apiUrl}:${environment.port}/flag`
+    : `${environment.protocol}://${environment.apiUrl}/flag`;
 
   constructor(private http: HttpClient) {}
 

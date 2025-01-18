@@ -9,7 +9,9 @@ import {Url} from './models/url';
   providedIn: 'root',
 })
 export class DocsService {
-  private baseUrl = 'http://' + environment.apiUrl + ':' + environment.port + '/docs';
+  private baseUrl = environment.port
+    ? `${environment.protocol}://${environment.apiUrl}:${environment.port}/docs`
+    : `${environment.protocol}://${environment.apiUrl}/docs`;
 
   constructor(private http: HttpClient) {}
 
