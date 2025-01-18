@@ -17,13 +17,15 @@ body {
 }
 
 header {
-  background-color: #0078d7;
+  background: transparent;  /* Make the header transparent */
   color: #fff;
-  padding: 1rem 2rem;
+  padding: 1rem 2rem;  /* Adjust padding as needed */
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: absolute;  /* Position the header over the hero image */
+  width: 100%;
+  z-index: 2;
 }
 
 header .logo {
@@ -53,15 +55,29 @@ nav ul li a:hover {
   text-align: center;
   background: url('/assets/gradient.jpg') no-repeat center/cover;
   color: #fff;
-  padding: 4rem 2rem;
+  padding: 6rem 2rem;  /* Increase the padding to cover the header area */
   flex: 1;
+  position: relative;  /* Allow the header to overlap */
+  z-index: 1;  /* Set the hero section's image behind the header */
+}
+#welcomeText{
+  margin-top: 50px;
 }
 
 .hero h1 {
   font-size: 3rem;
   margin-bottom: 1rem;
 }
+.logo {
+  display: flex;
+  align-items: center;
+}
 
+.logo-img {
+  width: 60px; /* Adjust size as needed */
+  height: auto;
+  margin-right: 10px; /* Space between the logo and the text */
+}
 .hero p {
   font-size: 1.25rem;
   margin-bottom: 2rem;
