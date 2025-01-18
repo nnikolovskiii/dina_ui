@@ -3,10 +3,8 @@ import {CommonModule, Location, NgOptimizedImage} from '@angular/common';
 import {ActivatedRoute, Router, RouterModule} from '@angular/router';
 import {catchError, filter, forkJoin, Observable, of, Subscription} from 'rxjs';
 import {Link} from '../models/link';
-import {DocsService} from '../docs.service';
 import {ProcessService} from '../process.service';
 import {FormsModule} from '@angular/forms';
-import { take } from 'rxjs/operators';
 import {LinksService} from '../links.service';
 
 @Component({
@@ -24,6 +22,8 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
   hoveredCard: any = null;
   isFinished: boolean = false;
   processMap: Map<string, [boolean, number]> = new Map();
+  isSelectDocs: boolean = false;
+
 
   constructor(
     private linksService: LinksService,
@@ -89,7 +89,11 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
 
   toggleLinkSelection(event: Event, link: Link): void {
     const checkbox = event.target as HTMLInputElement;
-    this.linksService.activateLink(link.link, checkbox.checked);
+    this.linksService.activateLink(link.link, checkbox.checked).subscribe(
+      (response) => {
+        link.active = checkbox.checked;
+      }
+    );
   }
 
   getLabel(link: Link): string {
@@ -97,11 +101,30 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
   }
 
   selectPage(activeStatus: boolean): void {
-    this.linksService.activateAllLinksFromParent(this.prevLink, activeStatus).subscribe()
+    this.isSelectDocs=true
+    this.linksService.activateAllLinksFromParent(this.prevLink, activeStatus).subscribe(
+      (response) => {
+        this.isSelectDocs=false
+      }
+    )
+  }
+
+  selectByParentRecursively(activeStatus: boolean, prevLink: string): void {
+    this.isSelectDocs=true
+    this.linksService.activateAllLinksFromParentRecursively(prevLink, activeStatus).subscribe(
+      (response) => {
+        this.isSelectDocs=false
+      }
+    )
   }
 
   selectAllLinks(activeStatus: boolean): void {
-    this.linksService.activateAllLinksFromDocsUrl(this.docs_url, activeStatus).subscribe()
+    this.isSelectDocs=true
+    this.linksService.activateAllLinksFromDocsUrl(this.docs_url, activeStatus).subscribe(
+      (response) => {
+        this.isSelectDocs=false
+      }
+    )
   }
 
   getBreadcrumbs(): [string, string][] {
@@ -131,6 +154,18 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
     return breadcrumbs;
   }
 
+  getColor(link: Link) {
+    let color = null
+    if(link.processed){
+      color = "#6495ED"
+    }
+
+    if(link.active && !link.processed){
+      color = "#98FB98"
+    }
+
+    return color
+  }
 
 
   navigateBack() {
@@ -148,9 +183,6 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
   navigateToFinish(): void {
     this.router.navigate(['/finish'], { queryParams: { url: this.docs_url, type: "docs" } });
   }
-
-  isSelectDocs: boolean = false;
-
 
   getSortedProcesses(): [string, [boolean, number]][] {
     return Array.from(this.processMap.entries())

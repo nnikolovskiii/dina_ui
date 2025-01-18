@@ -62,6 +62,13 @@ export class LinksService {
     return this.http.get<void>(`${this.baseUrl}/activate_all_links_from_parent/`, { params });
   }
 
+  activateAllLinksFromParentRecursively(prevLink: string, activeStatus: boolean): Observable<void> {
+    const params = new HttpParams()
+      .set('prev_link', prevLink)
+      .set('active_status', activeStatus.toString());
+    return this.http.get<void>(`${this.baseUrl}/activate_all_links_from_parent_recursively/`, { params });
+  }
+
   /**
    * Activates or deactivates all links for a given document URL.
    * @param docsUrl The base document URL to update links.
@@ -88,7 +95,8 @@ export class LinksService {
       raw.base_url,
       raw.color,
       raw.is_parent,
-      raw.active
+      raw.active,
+      raw.processed
     );
   }
 }

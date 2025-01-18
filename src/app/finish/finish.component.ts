@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {firstValueFrom} from 'rxjs';
 import {DocsService} from '../docs.service';
+import {LinksService} from '../links.service';
 @Component({
   selector: 'app-finish',
   standalone: true,
@@ -16,7 +17,7 @@ export class FinishComponent implements OnInit, OnDestroy{
   @Input() type: string = '';
   constructor(
     private codeProcessService: CodeProcessService,
-    private docsFilesService: DocsService,
+    private linkService: LinksService,
     private router: Router,
     private route: ActivatedRoute,
     private location: Location,
@@ -34,7 +35,7 @@ export class FinishComponent implements OnInit, OnDestroy{
     if (this.type==="code") {
       this.codeProcessService.activate_tmp_files(this.url).subscribe()
     } else if (this.type === "docs"){
-      // this.docsFilesService.activateTmpFiles(this.url).subscribe()
+      this.linkService.processLinks(this.url).subscribe()
     }
 
     this.router.navigate(['/process'],);

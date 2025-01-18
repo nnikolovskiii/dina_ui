@@ -93,6 +93,10 @@
   border-radius: 50%;
 }
 
+.display-none{
+  display: none;
+}
+
 .button-group {
   display: flex;
   justify-content: center;
