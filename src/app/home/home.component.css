@@ -66,23 +66,27 @@ nav ul li a:hover {
   font-size: 1.25rem;
   margin-bottom: 2rem;
 }
-
 .hero button {
-  background-color: #ffcc00;
-  color: #333;
+  background: linear-gradient(45deg, #4768ff, #d7baff);
+  color: #fff;
   border: none;
   padding: 0.75rem 2rem;
   font-size: 1rem;
   font-weight: bold;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
+  transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
 }
 
 .hero button:hover {
-  background-color: #0078d7;
+  background: linear-gradient(45deg, #4768ff, #d7baff);
   color: #fff;
+  transform: scale(1.05); /* Slight zoom effect */
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15), 0 3px 5px rgba(0, 0, 0, 0.1);
 }
+
+
 
 .features {
   display: flex;

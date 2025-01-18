@@ -3,22 +3,22 @@ import {CodeProcessService} from '../code-process.service';
 import {ActivatedRoute, Router, RouterModule} from '@angular/router';
 import {CommonModule, Location} from '@angular/common';
 import {FormsModule} from '@angular/forms';
-import {DocsFilesService} from '../docs-files.service';
+import {DocsService} from '../docs.service';
 import {Url} from '../models/url';
 
 @Component({
-  selector: 'app-list-giturl',
+  selector: 'app-list-urls',
   standalone: true,
   imports: [CommonModule, RouterModule, FormsModule],
-  templateUrl: './list-giturl.component.html',
-  styleUrl: './list-giturl.component.css'
+  templateUrl: './list-urls.component.html',
+  styleUrl: './list-urls.component.css'
 })
-export class ListGiturlComponent {
+export class ListUrlsComponent {
   displayedUrls: Url[] | undefined;
 
   constructor(
     private codeProcessService: CodeProcessService,
-    private docsFilesService: DocsFilesService,
+    private docsService: DocsService,
     private router: Router,
     private route: ActivatedRoute,
     private location: Location,
@@ -27,21 +27,26 @@ export class ListGiturlComponent {
 
   ngOnInit() {
     this.route.queryParams.subscribe(async params => {
-        this.setToCode()
+        this.setToDocs()
     });
   }
+
   toggleUrlActive(url: Url): void {
     url.active = !url.active;
-    // Perform additional logic if needed
     if (this.selectedStatus === 'code') {
       this.codeProcessService.change_active_repos([url.url], [url.active]).subscribe()
     }else{
-      this.docsFilesService.changeActiveRepos([url.url], [url.active]).subscribe()
+      url.loaded = false
+      this.docsService.activateDocsUrl(url.url, url.active).subscribe(
+        (response) => {
+          url.loaded = true
+        }
+      )
     }
   }
 
 
-  selectedStatus = 'code';
+  selectedStatus = 'docs';
 
   changeDisplayUrls(status: string) {
     this.displayedUrls = []
@@ -54,9 +59,11 @@ export class ListGiturlComponent {
   }
 
   setToDocs() {
-    this.docsFilesService.getDocsUrls().subscribe(
+    this.docsService.getDocsUrls().subscribe(
       (urls: Url[]) => {
         this.displayedUrls = urls;
+        console.log(this.displayedUrls);
+
       },
       (error) => {
         console.error('Error fetching processes:', error);
