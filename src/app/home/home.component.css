@@ -17,13 +17,13 @@ body {
 }
 
 header {
-  background: transparent;  /* Make the header transparent */
+  background: transparent;
   color: #fff;
-  padding: 1rem 2rem;  /* Adjust padding as needed */
+  padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: absolute;  /* Position the header over the hero image */
+  position: absolute;
   width: 100%;
   z-index: 2;
 }
@@ -53,35 +53,159 @@ nav ul li a:hover {
 
 .hero {
   text-align: center;
-  background: url('/assets/gradient.jpg') no-repeat center/cover;
+  background: linear-gradient(300deg, #020a31, #020a31);
+  background-size: 300% 300%;
+  animation: gradient-animation 18s ease infinite;
   color: #fff;
-  padding: 6rem 2rem;  /* Increase the padding to cover the header area */
+  padding: 6rem 2rem;
   flex: 1;
-  position: relative;  /* Allow the header to overlap */
-  z-index: 1;  /* Set the hero section's image behind the header */
-}
-#welcomeText{
-  margin-top: 50px;
+  position: relative;
+  z-index: 1;
 }
 
+#bg-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Ensure the background is behind other content */
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Pulsating background */
+.bg-wrapper {
+  position: relative;
+  overflow: hidden;
+  height: 100vh; /* Make sure this covers full screen */
+}
+
+.bg-wrapper::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-image: radial-gradient(#69696959 1px, transparent 1px);
+  background-size: 34px 34px;
+  opacity: 0.8;
+  animation: pulsate 20s infinite;
+  z-index: -1; /* Ensures it stays in the background */
+}
+
+@keyframes pulsate {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+}
+
+.blob {
+  background: linear-gradient(200deg, #0bc94a 0%, #752bec 100%);
+  height: 400px;
+  width: 400px;
+  aspect-ratio: 1;
+  position: absolute;
+  top: 10%;  /* Positioned more to the top */
+  left: 20%; /* Positioned more to the left */
+  transform: translate(-50%, -50%); /* Center the blob relative to its position */
+  border-radius: 50%;
+  filter: blur(80px);
+  z-index: -2; /* Blob stays behind pulsating background */
+  animation: sway 3s ease-in-out infinite; /* Faster animation (3 seconds) */
+}
+
+@keyframes sway {
+  0%, 100% {
+    transform: translate(-50%, -50%) rotate(-10deg); /* Sway to the left */
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(10deg); /* Sway to the right */
+  }
+}
+/* Second blob - positioned more to the right and bottom */
+.blob2 {
+  background: linear-gradient(200deg, #0bc94a 0%, #752bec 100%);
+  height: 400px;
+  width: 400px;
+  aspect-ratio: 1;
+  position: absolute;
+  bottom: 10%; /* Positioned more to the bottom */
+  right: 20%;  /* Positioned more to the right */
+  transform: translate(50%, 50%); /* Center the blob relative to its position */
+  border-radius: 50%;
+  filter: blur(80px);
+  z-index: -2; /* Blob stays behind pulsating background */
+  animation: sway2 3s ease-in-out infinite; /* Faster animation (3 seconds) */
+}
+
+@keyframes sway2 {
+  0%, 100% {
+    transform: translate(50%, 50%) rotate(40deg) translateY(-10px); /* Sway right and up */
+  }
+  50% {
+    transform: translate(50%, 50%) rotate(-40deg) translateY(10px); /* Sway left and down */
+  }
+}
+@keyframes rotate-blob {
+  0% {
+    transform: rotate(0deg) translate(-50%, -50%);
+  }
+  100% {
+    transform: rotate(360deg) translate(-50%, -50%);
+  }
+}
+
+@keyframes rotate-blob2 {
+  0% {
+    transform: rotate(0deg) translate(50%, 50%);
+  }
+  100% {
+    transform: rotate(-360deg) translate(50%, 50%); /* Rotate in the opposite direction */
+  }
+}
 .hero h1 {
   font-size: 3rem;
   margin-bottom: 1rem;
+  margin-top: 4rem;
 }
+
 .logo {
   display: flex;
   align-items: center;
 }
 
 .logo-img {
-  width: 60px; /* Adjust size as needed */
+  width: 30px;
   height: auto;
-  margin-right: 10px; /* Space between the logo and the text */
+  margin-right: 10px;
 }
+
 .hero p {
   font-size: 1.25rem;
   margin-bottom: 2rem;
 }
+
 .hero button {
   background: linear-gradient(45deg, #4768ff, #d7baff);
   color: #fff;
@@ -98,11 +222,9 @@ nav ul li a:hover {
 .hero button:hover {
   background: linear-gradient(45deg, #4768ff, #d7baff);
   color: #fff;
-  transform: scale(1.05); /* Slight zoom effect */
+  transform: scale(1.05);
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15), 0 3px 5px rgba(0, 0, 0, 0.1);
 }
-
-
 
 .features {
   display: flex;
