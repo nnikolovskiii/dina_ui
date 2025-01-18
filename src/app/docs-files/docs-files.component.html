@@ -9,7 +9,6 @@
         class="breadcrumb-link"
         [routerLink]="['/docs-files']"
         [queryParams]="{ prevLink: breadcrumb[1] }"
-        (click)="saveCurrLinks()"
       >
         {{ breadcrumb[0] }}
       </a>
@@ -18,37 +17,10 @@
         </div>
       </div>
 
-      <!-- Checklist -->
-      <div class="card"
-           *ngFor="let link of getLinks(true, links)"
-           (mouseenter)="selectCard(link)"
-           (mouseleave)="deselectCard()">
-
-        <div>
-          <div class="folder-flex">
-            <img ngSrc="assets/folder.png" height="20" width="20"/>
-            <a class="card-label"
-               [routerLink]="['/docs-files']"
-               [queryParams]="{ prevLink: link.link, docs_url: docs_url }"
-               (click)="saveCurrLinks()">
-              {{ getLabel(link) }}
-            </a>
-
-            <button *ngIf="isCardHovered(link)" class="emoji-button plus" (click)="selectAll(link.link,true)">
-              <img src="../../assets/plus-symbol-button(1).png" height="12.8" width="12.8"/></button>
-
-            <button *ngIf="isCardHovered(link)" class="emoji-button minus" (click)="selectAll(link.link,false)">
-
-              <img src="../../assets/cancel(1).png" height="11.5" width="11.5"/></button>
-
-          </div>
-        </div>
-
-      </div>
 
 
       <div class="card"
-           [class.selected]="checkForParent(link)"
+           [class.selected]="link.active"
            *ngFor="let link of links"
            (mouseenter)="selectCard(link)"
            (mouseleave)="deselectCard()">
@@ -57,14 +29,20 @@
           <input
             type="checkbox"
             [value]="link"
-            [checked]="checkForParent(link)"
+            [checked]="link.active"
             (change)="toggleLinkSelection($event, link)"
           />
           <span class="checkmark"></span>
           {{ getLabel(link) }}
           <div class="folder-flex">
+            <img ngSrc="assets/folder.png" height="20" width="20"/>
+            <a class="card-label"
+               [routerLink]="['/docs-files']"
+               [queryParams]="{ prevLink: link.link, docs_url: docs_url }">
+              {{ getLabel(link) }}
+            </a>
 
-            <span class="folder-color" [style.backgroundColor]="get_color(link)"></span>
+            <span class="folder-color" [style.backgroundColor]="link.color"></span>
             <button class="emoji-button minus" *ngIf="isCardHovered(link)" (click)="navigateToLink(link.link)">
 
               <img src="../../assets/link.png" height="15" width="15"/></button>
@@ -82,10 +60,10 @@
     <div class="button-group sticky-bottom">
       <div class="last-button-group">
 
-        <button class="small-button" (click)="selectAllLinks()">Select Page</button>
-        <button class="small-button" (click)="deselectAllLinks()">Clear Page</button>
-        <button class="small-button" (click)="selectDocs(docs_url,true)">Select All</button>
-        <button class="small-button" (click)="selectDocs(docs_url, false)">Clear All</button>
+        <button class="small-button" (click)="selectPage(true)">Select Page</button>
+        <button class="small-button" (click)="selectPage(false)">Clear Page</button>
+        <button class="small-button" (click)="selectAllLinks(true)">Select All</button>
+        <button class="small-button" (click)="selectAllLinks(false)">Clear All</button>
 
 
 

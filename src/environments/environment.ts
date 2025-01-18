@@ -1,5 +1,5 @@
 export const environment = {
   production: false,
-  apiUrl: 'localhost',
-  port: 5000
+  apiUrl: 'https://0f0f-77-29-21-8.ngrok-free.app',
+  port: 80
 };
