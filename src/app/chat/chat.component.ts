@@ -403,8 +403,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit{
   }
 
   private highlightCode(): void {
-    const codeBlocks = this.el.nativeElement.querySelectorAll('pre code');
-    // console.log('Found Code Blocks:', codeBlocks);
+    const codeBlocks = this.el.nativeElement.querySelectorAll('.assistant-card pre code');
 
     codeBlocks.forEach((block: HTMLElement) => {
       hljs.highlightElement(block);
