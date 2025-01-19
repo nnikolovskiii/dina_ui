@@ -157,7 +157,7 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
   getColor(link: Link) {
     let color = null
     if(link.processed){
-      color = "#6495ED"
+      color = "#BA55D3"
     }
 
     if(link.active && !link.processed){
