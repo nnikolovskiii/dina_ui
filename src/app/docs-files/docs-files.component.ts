@@ -109,6 +109,8 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
     )
   }
 
+
+
   selectByParentRecursively(activeStatus: boolean, prevLink: string): void {
     this.isSelectDocs=true
     this.linksService.activateAllLinksFromParentRecursively(prevLink, activeStatus).subscribe(
@@ -226,4 +228,6 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
   navigateToDisplayContent(base_url: string, link: string) {
     this.router.navigate(['/collection-data'], { queryParams: { baseUrl: base_url, link: link } });
   }
+
+
 }
