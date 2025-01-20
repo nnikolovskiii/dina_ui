@@ -1,12 +1,116 @@
 /* General container styling */
+/*.form-container {*/
+/*  max-width: 500px;*/
+/*  margin: 50px auto;*/
+/*  padding: 20px;*/
+/*  background-color: #f9f9f9;*/
+/*  border-radius: 8px;*/
+/*  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);*/
+
+/*}*/
+
 .form-container {
-  max-width: 500px;
-  margin: 50px auto;
+  max-width: 900px;
+  margin: 0 auto;
   padding: 20px;
-  background-color: #f9f9f9;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  opacity: 0.95;
   border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  font-family: Arial, sans-serif;
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+}
+
+body, h1, h2, h3, p, ul, li, a {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+}
+.animated-input {
+  position: relative;
+  margin-top: 10px;
+}
+
+.animated-input .form-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s ease-in-out;
+}
+
+.animated-input .form-input {
+  border-color: #09427c;
+  border-radius: 10px;
+}
+
+.animated-input .form-input:focus {
+  border-color: #09427c;
+  border-radius: 10px;
+
+}
+
+.animated-input .input-placeholder {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: #aaa;
+  transition: all 0.3s ease-in-out;
+  pointer-events: none;
+}
+
+.animated-input .form-input:focus ~ .input-placeholder,
+.animated-input .form-input:not(:placeholder-shown) ~ .input-placeholder {
+  top: -20px;
+  font-size: 17px;
+  color: #020a31;
+  background-color: #ffffff;
+  padding: 0 0;
+
+}
+
+#selector , #true{
+  margin-top: 10px;
+}
+
+body {
+  padding-top: 80px; /* Adjust this to the height of the header */
+  font-family: Poppins, serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #020a31;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.logo-img {
+  width: 40px; /* Adjust as needed */
+  height: auto;
+}
+
+
+
+header {
+  position: fixed; /* Make it fixed at the top of the screen */
+  top: 0; /* Ensure it stays at the top */
+  left: 0;
+  width: 100%;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: transparent; /* You might want a darker background for the header */
+  color: #fff;
+}
+
+header .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
 h1 {
@@ -17,7 +121,8 @@ h1 {
 
 /* Form group styling */
 .form-group {
-  margin-bottom: 15px;
+  margin-top: 40px;
+  margin-bottom: 0;
 }
 
 label {
@@ -41,15 +146,116 @@ label {
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
+.bg-wrapper {
+  position: relative;
+  overflow: hidden;
+  height: 100vh; /* Make sure this covers full screen */
+  z-index: 1; /* Ensure it's above the body background */
+}
+
+.bg-wrapper::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-image: radial-gradient(rgba(193, 191, 191, 0.35) 1px, transparent 1px);
+  background-size: 50px 50px;
+  opacity: 0.7; /* Reduced overall opacity */
+  animation: pulsate 20s infinite;
+  z-index: -1;
+}
+
+@keyframes pulsate {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+}
+
+@keyframes pulsate {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+}
 .form-checkbox {
   margin-top: 10px;
   transform: scale(1.2);
 }
 
-/* Button styling */
-.form-actions {
-  display: flex;
-  justify-content: space-between;
+
+.blob {
+  background: linear-gradient(200deg, #09427c 0%, #09427c 100%);
+  height: 600px;
+  width: 600px;
+  aspect-ratio: 1;
+  position: absolute;
+  top: 10%;  /* Positioned more to the top */
+  left: 10%; /* Positioned more to the left */
+  transform: translate(-50%, -50%); /* Center the blob relative to its position */
+  border-radius: 50%;
+  filter: blur(100px);
+  z-index: -2; /* Blob stays behind pulsating background */
+  animation: sway 7s ease-in-out infinite; /* Faster animation (3 seconds) */
+}
+
+@keyframes sway {
+  0%, 100% {
+    transform: translate(-50%, -50%) rotate(-10deg) translateY(-50px) translateX(-20px); /* Sway to the left */
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(10deg) translateY(50px)  translateX(20px) ; /* Sway to the right */
+  }
+}
+/* Second blob - positioned more to the right and bottom */
+.blob2 {
+  background: linear-gradient(200deg, #134343 0%, #023b3b 100%);
+  height: 600px;
+  width: 600px;
+  aspect-ratio: 1;
+  position: absolute;
+  bottom: 05%; /* Positioned more to the bottom */
+  right: 10%;  /* Positioned more to the right */
+  transform: translate(50%, 50%); /* Center the blob relative to its position */
+  border-radius: 50%;
+  filter: blur(110px);
+  z-index: -2; /* Blob stays behind pulsating background */
+  animation: sway2 8s ease-in-out infinite; /* Faster animation (3 seconds) */
+}
+
+@keyframes sway2 {
+  0%, 100% {
+    transform: translate(50%, 50%) rotate(80deg) translateY(-30px); /* Sway right and up */
+  }
+  50% {
+    transform: translate(50%, 50%) rotate(-80deg) translateY(30px); /* Sway left and down */
+  }
+}
+@keyframes rotate-blob {
+  0% {
+    transform: rotate(0deg) translate(-50%, -50%);
+  }
+  100% {
+    transform: rotate(360deg) translate(-50%, -50%);
+  }
 }
 
 .btn {
@@ -161,7 +367,7 @@ input:checked + .slider:before {
 
 .add-button {
   display: inline-block;
-  background-color: #6ca0dc;
+  background-color: #008080;
   color: white;
   border: none;
   border-radius: 50%;
@@ -175,7 +381,7 @@ input:checked + .slider:before {
 }
 
 .add-button:hover {
-  background-color:rgb(88, 140, 200);
+  background-color: #023b3b;
 }
 
 .extract-heading {
@@ -193,24 +399,18 @@ input:checked + .slider:before {
   font-family: "Arial", sans-serif; /* Use a clear and legible font */
   font-weight: bold; /* Make the font clearer by making it bold */
   font-size: 1.0em; /* Optional: Adjust font size */
-  color: #666362;
+  color: #020a31;
 }
 
 .form-content{
   padding-top: 20px;
 }
 
-.form-container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+
 
 .extract-heading {
   text-align: center;
+  color:#020a31;
   margin-bottom: 20px;
 }
 
@@ -225,6 +425,7 @@ input:checked + .slider:before {
   border-radius: 4px;
   border: 1px solid #ccc;
   box-sizing: border-box;
+
 }
 
 .radio-group {
@@ -247,7 +448,7 @@ input[type="radio"] {
 }
 
 input[type="radio"]:checked + .radio-label {
-  background-color: #6ca0dc;;
+  background-color: #008080;;
   color: white;
 }
 
@@ -257,8 +458,25 @@ input[type="radio"]:checked + .radio-label {
 
 .form-actions {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* Keeps other elements spaced */
+  align-items: center;           /* Centers elements vertically */
 }
+
+.center-button {
+  margin: 0 auto; /* Centers the button inside the flex container */
+  background: linear-gradient(45deg, #008080, #008080);
+  color: #aaa7a7;
+  font-weight: bold;
+}
+.center-button:hover {
+  margin: 0 auto; /* Centers the button inside the flex container */
+  background: linear-gradient(45deg, #008080, #008080);
+  color: #023b3b;
+  transform: scale(1.05);
+  font-weight: bold;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15), 0 3px 5px rgba(0, 0, 0, 0.1);
+}
+
 
 .btn {
   padding: 10px 20px;
@@ -269,8 +487,8 @@ input[type="radio"]:checked + .radio-label {
 }
 
 .btn-primary {
-  background-color: #6ca0dc;;
-  color: #fff;
+  background-color: #008080;;
+  color: #ece9e9;
 }
 
 .btn-primary:disabled {
