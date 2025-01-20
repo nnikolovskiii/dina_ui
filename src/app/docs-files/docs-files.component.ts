@@ -6,6 +6,7 @@ import {Link} from '../models/link';
 import {ProcessService} from '../process.service';
 import {FormsModule} from '@angular/forms';
 import {LinksService} from '../links.service';
+import {Process} from '../models/process';
 
 @Component({
   selector: 'app-docs-files',
@@ -18,11 +19,12 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
   @Input() prevLink: string = '';
   @Input() docs_url: string = '';
   links$: Observable<Link[]> | null = null;
-  subscription: Subscription | null = null;
   hoveredCard: any = null;
   isFinished: boolean = false;
   processMap: Map<string, [boolean, number]> = new Map();
   isSelectDocs: boolean = false;
+  loadingSortedProcess: boolean = false;
+  currentProcess: Process | null = null;
 
 
   constructor(
@@ -174,8 +176,6 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
     return li[li.length-1][0]
   }
 
-  loadingSortedProcess: boolean = false;
-  processStatus: string = 'Initial Status';
   refresh(){
     this.loadingSortedProcess = false;
     this.getProcessesFromUrl()
@@ -191,7 +191,7 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
         let lastProcessType = this.getLastProcessType()
         this.processService.getProcess(this.docs_url, lastProcessType, "pre").subscribe(
           (response) => {
-            this.processStatus = response["status"] ?? 'Unknown';
+            this.currentProcess = response;
           },
         )
         this.loadingSortedProcess = true;
