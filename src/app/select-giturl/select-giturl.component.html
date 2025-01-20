@@ -14,7 +14,7 @@
 <section >
   <div class="blob2"></div>
 <div class="form-container">
-  <h1 class="extract-heading">Select Git/Docs Url</h1>
+  <h1 class="extract-heading">Select Documentation Url</h1>
   <div class="form-content">
     <div class="form-content">
       <div class="question">
@@ -30,7 +30,7 @@
             placeholder=" "
             (input)="checkLink()"
           />
-          <span class="input-placeholder">Enter Git/Docs repository URL</span>
+          <span class="input-placeholder">Docs repository URL</span>
         </div>
       </div>
 
@@ -72,7 +72,7 @@
               class="form-input"
               placeholder=" "
             />
-            <span class="input-placeholder">Enter Selector</span>
+            <span class="input-placeholder">Selector</span>
           </div>
         </div>
 
@@ -111,12 +111,13 @@
               class="form-input"
               placeholder=" "
             />
-            <span class="input-placeholder">Enter Selector Attributes</span>
+            <span class="input-placeholder">Selector Attributes</span>
           </div>
         </div>
 
         <div class="form-group">
           <label for="stringList" class="extract-heading1">List of Patterns (Optional)</label>
+          <button type="button" class="add-button" (click)="addPattern()">+</button>
           <div id="stringList" class="string-list-container">
             <div *ngFor="let item of patternList; let i = index; trackBy: trackByIndex" class="list-item">
               <div class="animated-input">
@@ -125,14 +126,14 @@
                   [(ngModel)]="patternList[i]"
                   [attr.name]="'pattern_' + i"
                   class="form-input list-input"
-                  placeholder="Enter regex pattern "
+                  placeholder="Enter regex pattern"
                 />
-<!--                <span class="input-placeholder">Enter regex pattern</span>-->
               </div>
             </div>
           </div>
-          <button type="button" class="add-button" (click)="addPattern()">+</button>
+
         </div>
+
       </ng-template>
     </div>
 
@@ -141,118 +142,7 @@
 <!--          <button type="button" class="btn btn-secondary" (click)="goBack()">Cancel</button>-->
         </div>
 
-    <!--    <div class="form-group">-->
-<!--      <label for="gitUrl" class="extract-heading1">Git URL</label>-->
-<!--      <input-->
-<!--        type="url"-->
-<!--        id="gitUrl"-->
-<!--        name="gitUrl"-->
-<!--        [(ngModel)]="gitUrl"-->
-<!--        class="form-input"-->
-<!--        required-->
-<!--        placeholder="Enter Git/Docs repository URL"-->
-<!--        (input)="checkLink()"-->
-<!--      />-->
-<!--    </div>-->
 
-<!--    <div *ngIf="codeForm;else docsForm" class="form-group">-->
-<!--      <label for="override" class="extract-heading1">Override</label>-->
-<!--      <label class="switch">-->
-<!--        <input-->
-<!--          type="checkbox"-->
-<!--          id="override"-->
-<!--          name="override"-->
-<!--          [(ngModel)]="override"-->
-<!--        />-->
-<!--        <span class="slider round"></span>-->
-<!--      </label>-->
-<!--    </div>-->
-
-<!--    <ng-template #docsForm>-->
-<!--      <div class="form-group">-->
-<!--        <label for="override1" class="extract-heading1">Override</label>-->
-<!--        <label class="switch">-->
-<!--          <input-->
-<!--            type="checkbox"-->
-<!--            id="override1"-->
-<!--            name="override"-->
-<!--            [(ngModel)]="override"-->
-<!--          />-->
-<!--          <span class="slider round"></span>-->
-<!--        </label>-->
-<!--      </div>-->
-
-<!--      <div class="form-group">-->
-<!--        <label for="selectorBs" class="extract-heading1">Selector</label>-->
-<!--        <input-->
-<!--          type="text"-->
-<!--          id="selectorBs"-->
-<!--          name="selectorBs"-->
-<!--          [(ngModel)]="selectorBs"-->
-<!--          class="form-input"-->
-<!--          placeholder="Enter Selector"-->
-<!--        />-->
-<!--      </div>-->
-
-<!--      <div class="form-group">-->
-<!--        <label class="extract-heading1">Selector Type</label>-->
-<!--        <div class="radio-group">-->
-<!--          <label>-->
-<!--            <input-->
-<!--              type="radio"-->
-<!--              name="selectorType"-->
-<!--              [(ngModel)]="selectorType"-->
-<!--              value="id"-->
-<!--            />-->
-<!--            <span class="radio-label">ID</span>-->
-<!--          </label>-->
-<!--          <label>-->
-<!--            <input-->
-<!--              type="radio"-->
-<!--              name="selectorType"-->
-<!--              [(ngModel)]="selectorType"-->
-<!--              value="class"-->
-<!--            />-->
-<!--            <span class="radio-label">Class</span>-->
-<!--          </label>-->
-<!--        </div>-->
-<!--      </div>-->
-
-<!--      <div class="form-group">-->
-<!--        <label for="selectorAttr" class="extract-heading1">Selector Attribute</label>-->
-<!--        <input-->
-<!--          type="text"-->
-<!--          id="selectorAttr"-->
-<!--          name="selectorAttr"-->
-<!--          [(ngModel)]="selectorAttr"-->
-<!--          class="form-input"-->
-<!--          placeholder="Enter Selector Attributes"-->
-<!--        />-->
-<!--      </div>-->
-
-<!--      <div class="form-group">-->
-<!--        <label for="stringList" class="extract-heading1">List of Patterns (Optional)</label>-->
-<!--        <div id="stringList" class="string-list-container">-->
-<!--          <div *ngFor="let item of patternList; let i = index; trackBy: trackByIndex" class="list-item">-->
-<!--            <input-->
-<!--              type="text"-->
-<!--              [(ngModel)]="patternList[i]"-->
-<!--              [attr.name]="'pattern_' + i"-->
-<!--              class="form-input list-input"-->
-<!--              placeholder="Enter regex pattern"-->
-<!--            />-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <button type="button" class="add-button" (click)="addPattern()">+</button>-->
-<!--      </div>-->
-
-<!--    </ng-template>-->
-
-
-<!--    <div class="form-actions">-->
-<!--      <button class="btn btn-primary" [disabled]="loading" (click)="extractLibraries(gitUrl, override)">Extract</button>-->
-<!--      <button type="button" class="btn btn-secondary" (click)="goBack()">Cancel</button>-->
-<!--    </div>-->
   </div>
 
 </div>

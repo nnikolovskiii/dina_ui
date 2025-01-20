@@ -17,6 +17,7 @@
   background-color: #ffffff;
   opacity: 0.95;
   border-radius: 8px;
+  z-index: 1;
   box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
 }
 
@@ -32,7 +33,7 @@ body, h1, h2, h3, p, ul, li, a {
 }
 
 .animated-input .form-input {
-  width: 100%;
+  width: 90%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -57,7 +58,7 @@ body, h1, h2, h3, p, ul, li, a {
   top: 50%;
   left: 10px;
   transform: translateY(-50%);
-  font-size: 16px;
+  font-size: 15px;
   color: #aaa;
   transition: all 0.3s ease-in-out;
   pointer-events: none;
@@ -66,7 +67,7 @@ body, h1, h2, h3, p, ul, li, a {
 .animated-input .form-input:focus ~ .input-placeholder,
 .animated-input .form-input:not(:placeholder-shown) ~ .input-placeholder {
   top: -20px;
-  font-size: 17px;
+  font-size: 15px;
   color: #020a31;
   background-color: #ffffff;
   padding: 0 0;
@@ -111,6 +112,7 @@ header {
 header .logo {
   font-size: 1.5rem;
   font-weight: bold;
+  z-index: 0;
 }
 
 h1 {
@@ -123,6 +125,16 @@ h1 {
 .form-group {
   margin-top: 40px;
   margin-bottom: 0;
+}
+
+
+.form-group label.extract-heading1 {
+  display: inline-block;
+  margin-right: 10px; /* Adjust the spacing between the label and the button */
+}
+
+.form-group button.add-button {
+  display: inline-block;
 }
 
 label {
@@ -237,7 +249,7 @@ label {
   transform: translate(50%, 50%); /* Center the blob relative to its position */
   border-radius: 50%;
   filter: blur(110px);
-  z-index: -2; /* Blob stays behind pulsating background */
+  z-index: -5; /* Blob stays behind pulsating background */
   animation: sway2 8s ease-in-out infinite; /* Faster animation (3 seconds) */
 }
 
@@ -349,12 +361,32 @@ input:checked + .slider:before {
   transform: translateX(18px);
 }
 
+/* Custom scrollbar style */
+/* Custom scrollbar for .string-list-container */
+/* Custom scrollbar for .string-list-container */
 .string-list-container {
-  max-height: 200px; /* Display 5 items, assuming ~40px per item */
+  max-height: 300px; /* Ensure the container allows scrolling */
   overflow-y: auto;
-  border: 0px solid #ccc;
-  border-radius: 4px;
 }
+
+/* WebKit-specific styles */
+.string-list-container::-webkit-scrollbar {
+  width: 15px; /* Scrollbar width */
+  height: 15px; /* Horizontal scrollbar height */
+}
+
+.string-list-container::-webkit-scrollbar-track {
+  background: rgba(67, 67, 67, 0.1); /* Track background color */
+  border-radius: 20px; /* Rounded corners for the track */
+}
+
+.string-list-container::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, #43e1b0, #008080FF); /* Gradient color for thumb */
+  border-radius: 20px; /* Rounded corners for the thumb */
+  border: 2px solid rgba(0, 0, 0, 0.1); /* Optional: adds a border around the thumb */
+}
+
+
 
 .list-item {
   margin-bottom: 5px;
@@ -386,8 +418,8 @@ input:checked + .slider:before {
 
 .extract-heading {
   letter-spacing: 2px; /* Adjust spacing between letters */
-  text-transform: uppercase; /* Convert text to uppercase */
-  font-family: "Arial", sans-serif; /* Use a clear and legible font */
+  /*text-transform: uppercase; !* Convert text to uppercase *!*/
+  font-family: "Poppins", serif; /* Use a clear and legible font */
   font-weight: bold; /* Make the font clearer by making it bold */
   font-size: 1.8em; /* Optional: Adjust font size */
   color: #666362;
@@ -395,11 +427,13 @@ input:checked + .slider:before {
 
 .extract-heading1 {
   letter-spacing: 1.3px; /* Adjust spacing between letters */
-  text-transform: uppercase; /* Convert text to uppercase */
-  font-family: "Arial", sans-serif; /* Use a clear and legible font */
+  /*text-transform: uppercase; !* Convert text to uppercase *!*/
+  font-family: "Poppins", serif; /* Use a clear and legible font */
   font-weight: bold; /* Make the font clearer by making it bold */
   font-size: 1.0em; /* Optional: Adjust font size */
+  margin-left: 0.70rem;
   color: #020a31;
+  margin-bottom: 0.4rem;
 }
 
 .form-content{
@@ -416,6 +450,9 @@ input:checked + .slider:before {
 
 .form-group {
   margin-bottom: 20px;
+  justify-content: center; /* Centers child elements horizontally */
+  align-items: center; /* Centers child elements vertically */
+
 }
 
 .form-input {
