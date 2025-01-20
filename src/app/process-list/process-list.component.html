@@ -23,8 +23,8 @@
               class="progress-bar"
               role="progressbar"
               [class.finished]="process.curr === process.end"
-              [style.width]="(process.curr / process.end) * 100 + '%'">
-              {{ (process.curr / process.end * 100).toFixed(2) }}%
+              [style.width]="((process.curr ?? 0) / (process.end ?? 1)) * 100 + '%'">
+              {{ ((process.curr ?? 0) / (process.end ?? 1) * 100).toFixed(2) }}%
             </div>
             <span class="progress-end">Total: {{ process.end }}</span>
           </div>

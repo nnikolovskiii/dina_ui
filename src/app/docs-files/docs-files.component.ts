@@ -6,6 +6,7 @@ import {Link} from '../models/link';
 import {ProcessService} from '../process.service';
 import {FormsModule} from '@angular/forms';
 import {LinksService} from '../links.service';
+import {Process} from '../models/process';
 
 @Component({
   selector: 'app-docs-files',
@@ -18,11 +19,12 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
   @Input() prevLink: string = '';
   @Input() docs_url: string = '';
   links$: Observable<Link[]> | null = null;
-  subscription: Subscription | null = null;
   hoveredCard: any = null;
   isFinished: boolean = false;
   processMap: Map<string, [boolean, number]> = new Map();
   isSelectDocs: boolean = false;
+  loadingSortedProcess: boolean = false;
+  currentProcess: Process | null = null;
 
 
   constructor(
@@ -40,30 +42,8 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
       this.docs_url = params['docs_url'] || '';
 
       this.links$ = this.linksService.getLinksFromParent(this.prevLink);
-
-      this.processService.getPreProcesses(this.docs_url).subscribe(
-        (response) => {
-          this.loadingSortedProcess = false;
-          this.isFinished = response.get("main")?.[0] ?? false;
-          console.log(response)
-          console.log(this.isFinished)
-          this.processMap = response;
-          let lastProcessType = this.getLastProcessType()
-          this.processService.getPreProcess(this.docs_url, lastProcessType).subscribe(
-            (response) => {
-              this.processStatus = response["status"] ?? 'Unknown';
-              console.log(response)
-              this.loadingSortedProcess = true;
-            },
-            (error) => {
-              console.error('Error:', error);
-            }
-          )
-        },
-        (error) => {
-          console.error('Error:', error);
-        }
-      )
+      console.log("lol")
+      this.getProcessesFromUrl()
     });
   }
 
@@ -198,28 +178,26 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
     return li[li.length-1][0]
   }
 
-  loadingSortedProcess: boolean = false;
-  processStatus: string = 'Initial Status';
   refresh(){
     this.loadingSortedProcess = false;
-    this.processService.getPreProcesses(this.docs_url).subscribe(
+    this.getProcessesFromUrl()
+  }
+
+  getProcessesFromUrl(){
+    console.log("in")
+    this.processService.getProcessesFromUrl(this.docs_url, "pre").subscribe(
       (response) => {
-        this.isFinished = response.get("main")?.[0] ?? false;
+        this.isFinished = response.get("main")?.[0] ?? true;
+        console.log(this.isFinished)
         this.processMap = response;
         let lastProcessType = this.getLastProcessType()
-        this.processService.getPreProcess(this.docs_url, lastProcessType).subscribe(
+        this.processService.getProcess(this.docs_url, lastProcessType, "pre").subscribe(
           (response) => {
-            this.processStatus = response["status"] ?? 'Unknown';
+            this.currentProcess = response;
           },
-          (error) => {
-            console.error('Error:', error);
-          }
         )
         this.loadingSortedProcess = true;
       },
-      (error) => {
-        console.error('Error:', error);
-      }
     )
   }
 

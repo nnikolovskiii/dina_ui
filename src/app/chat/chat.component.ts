@@ -21,7 +21,7 @@ import {environment} from '../../environments/environment';
   encapsulation: ViewEncapsulation.None
 })
 export class ChatComponent implements OnInit, OnDestroy, AfterViewInit{
-  @Input() chat_id: string = "";
+  @Input() chat_id: string | null = null;
   private ws: WebSocket | undefined;
   public inputMessage: string = '';
   public messages: string = '';  // Raw Markdown messages
@@ -48,50 +48,29 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit{
 
   async ngOnInit(): Promise<void> {
     this.route.queryParams.subscribe(async (params) => {
-      this.chat_id = params['chat_id'] || '';
-      let savedUserMessages = localStorage.getItem('userMessages');
-      let savedAssistantMessages = localStorage.getItem('assistantMessages');
-      let chat_id = localStorage.getItem('chat_id');
+      this.chat_id = params['chat_id'] || null;
 
-      console.log(savedUserMessages, savedAssistantMessages, chat_id)
+      if (this.chat_id !== null) {
+        this.chatService.get_chat_messages(this.chat_id ?? "").subscribe(
+          (response) => {
+            console.log(response);
+            let user_message_objs = response["user_messages"]
+            let assistant_message_objs = response["assistant_messages"]
+            for (let i = 0; i < user_message_objs.length; i++) {
+              this.userMessages.push(user_message_objs[i]["content"])
+            }
 
+            for (let i = 0; i < assistant_message_objs.length; i++) {
+              this.assistantMessages.push(assistant_message_objs[i]["content"])
+            }
 
-      if (chat_id && chat_id !== "" && savedUserMessages && savedAssistantMessages) {
-        let userMessages = JSON.parse(savedUserMessages);
-        let assistantMessages = JSON.parse(savedAssistantMessages);
-        await firstValueFrom(this.chatService.update_chat(chat_id, userMessages, assistantMessages));
-      } else if (savedUserMessages && savedAssistantMessages) {
-        console.log("yes")
-        let userMessages = JSON.parse(savedUserMessages);
-        let assistantMessages = JSON.parse(savedAssistantMessages);
-        if (userMessages.length > 0 && assistantMessages.length > 0) {
-          console.log(userMessages, assistantMessages)
-          await firstValueFrom(this.chatService.add_chat(userMessages, assistantMessages));
-        } else {
-          this.clearChat();
-        }
+            this.updateSanitizedMessages();
+            setTimeout(() => {
+              this.highlightCode();
+            });
+          }
+        )
       }
-
-      this.clearChat()
-
-
-      if (this.chat_id !== "") {
-        let response = await firstValueFrom(this.chatService.get_chat_messages(this.chat_id));
-        let user_message_objs = response["user_messages"]
-        let assistant_message_objs = response["assistant_messages"]
-        for (let i = 0; i < user_message_objs.length; i++) {
-          this.userMessages.push(user_message_objs[i]["content"])
-        }
-
-        for (let i = 0; i < assistant_message_objs.length; i++) {
-          this.assistantMessages.push(assistant_message_objs[i]["content"])
-        }
-      }
-
-      this.updateSanitizedMessages();
-      setTimeout(() => {
-        this.highlightCode();
-      });
 
       this.flagService.getFlag("vanilla").subscribe((flag: Flag) => {
         this.vanillaFlag = flag.active;
@@ -122,12 +101,12 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit{
           this.newAssistantMessages.push([this.messages, this.assistantMessages.length - 1]);
           setTimeout(() => {
             this.highlightCode();
-          }, 1000); // Waits for 1 second before calling highlightCode
+          }, 1000);
 
         }
         this.messages += event.data + "";
         this.updateSanitizedMessages();
-        this.saveChatData(); // Save updated data
+        this.saveChatData();
       };
 
       this.ws.onerror = (error) => {
@@ -158,11 +137,6 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit{
 
   }
 
-  clearChat(): void {
-    localStorage.removeItem('userMessages');
-    localStorage.removeItem('assistantMessages');
-    localStorage.removeItem('chat_id')
-  }
 
   ngOnDestroy(): void {
     if (this.ws) {
@@ -177,7 +151,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit{
     });
 
     if (this.ws && this.inputMessage.trim() !== '') {
-      this.ws.send(JSON.stringify([this.inputMessage, this.userMessages, this.assistantMessages]));
+      this.ws.send(JSON.stringify([this.inputMessage, this.chat_id]));
       this.userMessages.push(this.inputMessage);
       this.newUserMessages.push([this.inputMessage, this.userMessages.length - 1]);
       this.isFirst = false;
@@ -208,7 +182,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit{
   saveChatData(): void {
     localStorage.setItem('userMessages', JSON.stringify(this.newUserMessages));
     localStorage.setItem('assistantMessages', JSON.stringify(this.newAssistantMessages));
-    localStorage.setItem('chat_id', this.chat_id);
+    // localStorage.setItem('chat_id', this.chat_id);
   }
 
   getMarkedMessage(message: string): string | Promise<string> {
@@ -242,7 +216,6 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit{
     )
   }
   navigateToChat() {
-    this.clearChat();
     this.router.navigate(['/chat']).then(() => {
       window.location.reload();
     });
@@ -403,8 +376,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit{
   }
 
   private highlightCode(): void {
-    const codeBlocks = this.el.nativeElement.querySelectorAll('pre code');
-    // console.log('Found Code Blocks:', codeBlocks);
+    const codeBlocks = this.el.nativeElement.querySelectorAll('.assistant-card pre code');
 
     codeBlocks.forEach((block: HTMLElement) => {
       hljs.highlightElement(block);
