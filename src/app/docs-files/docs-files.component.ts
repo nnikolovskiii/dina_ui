@@ -40,30 +40,8 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
       this.docs_url = params['docs_url'] || '';
 
       this.links$ = this.linksService.getLinksFromParent(this.prevLink);
-
-      this.processService.getPreProcesses(this.docs_url).subscribe(
-        (response) => {
-          this.loadingSortedProcess = false;
-          this.isFinished = response.get("main")?.[0] ?? false;
-          console.log(response)
-          console.log(this.isFinished)
-          this.processMap = response;
-          let lastProcessType = this.getLastProcessType()
-          this.processService.getPreProcess(this.docs_url, lastProcessType).subscribe(
-            (response) => {
-              this.processStatus = response["status"] ?? 'Unknown';
-              console.log(response)
-              this.loadingSortedProcess = true;
-            },
-            (error) => {
-              console.error('Error:', error);
-            }
-          )
-        },
-        (error) => {
-          console.error('Error:', error);
-        }
-      )
+      console.log("lol")
+      this.getProcessesFromUrl()
     });
   }
 
@@ -200,24 +178,24 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
   processStatus: string = 'Initial Status';
   refresh(){
     this.loadingSortedProcess = false;
-    this.processService.getPreProcesses(this.docs_url).subscribe(
+    this.getProcessesFromUrl()
+  }
+
+  getProcessesFromUrl(){
+    console.log("in")
+    this.processService.getProcessesFromUrl(this.docs_url, "pre").subscribe(
       (response) => {
-        this.isFinished = response.get("main")?.[0] ?? false;
+        this.isFinished = response.get("main")?.[0] ?? true;
+        console.log(this.isFinished)
         this.processMap = response;
         let lastProcessType = this.getLastProcessType()
-        this.processService.getPreProcess(this.docs_url, lastProcessType).subscribe(
+        this.processService.getProcess(this.docs_url, lastProcessType, "pre").subscribe(
           (response) => {
             this.processStatus = response["status"] ?? 'Unknown';
           },
-          (error) => {
-            console.error('Error:', error);
-          }
         )
         this.loadingSortedProcess = true;
       },
-      (error) => {
-        console.error('Error:', error);
-      }
     )
   }
 

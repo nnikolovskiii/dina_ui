@@ -58,14 +58,11 @@ export class SelectGiturlComponent {
       console.log(patterns)
       console.log(this.selectorType)
 
-      this.processService.deletePreProcesses(url).subscribe(
+      this.processService.createProcesses(url, "pre").subscribe(
         (response) => {
           this.docsFilesService.extractDocs(url, override, this.selectorBs, this.selectorType, this.selectorAttr, patterns).subscribe();
           this.router.navigate(['/docs-files'], { queryParams: { docs_url: url, prevLink: url } });
         },
-        (error) => {
-          console.error('Error:', error);
-        }
       )
 
     }

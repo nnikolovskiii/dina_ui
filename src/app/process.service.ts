@@ -1,73 +1,63 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import {map, Observable} from 'rxjs';
-import {Link} from './models/link';
-import {DocsUrl} from './models/docs-url';
-import {Process} from './models/process';
-import {Folder} from './models/folder';
-import {SimpleProcess} from './models/simple-process';
-import {environment} from '../environments/environment';
+import { environment } from '../environments/environment';
+import { Process } from './models/process';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProcessService {
   private baseUrl = environment.port
     ? `${environment.protocol}://${environment.apiUrl}:${environment.port}/process`
     : `${environment.protocol}://${environment.apiUrl}/process`;
+
   constructor(private http: HttpClient) {}
 
-  getFinishedProcesses(): Observable<Process[]> {
-    return this.http.get<any>(`${this.baseUrl}/get_finished_processes/`).pipe(
-      map((response) =>
-        response.processes.map((process: any) => ({
-          id: process.id,
-          finished: process.finished,
-          end: process.end,
-          curr: process.curr,
-          process_type: process.process_type,
-          url: process.url,
-          type: process.type,
-        }))
-      )
+  getFinishedProcesses(group: string): Observable<Process[]> {
+    const url = `${this.baseUrl}/get_finished_processes/`;
+    return this.http.get<{ processes: Process[] }>(url, { params: { group } }).pipe(
+      map((response) => response.processes)
     );
   }
 
-  getOngoingProcesses(): Observable<Process[]> {
-    return this.http.get<any>(`${this.baseUrl}/get_ongoing_processes/`).pipe(
-      map((response) =>
-        response.processes.map((process: any) => ({
-          id: process.id,
-          finished: process.finished,
-          end: process.end,
-          curr: process.curr,
-          process_type: process.process_type,
-          url: process.url,
-          type: process.type,
-        }))
-      )
+  getOngoingProcesses(group: string): Observable<Process[]> {
+    const url = `${this.baseUrl}/get_ongoing_processes/`;
+    return this.http.get<{ processes: Process[] }>(url, { params: { group } }).pipe(
+      map((response) => response.processes)
     );
   }
 
-  refreshProgress(process_id: string): Observable<any> {
-    const params = { process_id: process_id };
-    return this.http.get(`${this.baseUrl}/refresh_progress/`,  { params });
+  refreshProgress(processId: string): Observable<Process> {
+    const url = `${this.baseUrl}/refresh_progress/`;
+    return this.http.get<Process>(url, { params: { process_id: processId } });
   }
 
-  getPreProcesses(url: string): Observable<Map<string, [boolean, number]>> {
-    const params = { url: url };
-    return this.http.get<Record<string, [boolean, number]>>(`${this.baseUrl}/get_pre_processes/`, { params }).pipe(
-      map(response => new Map(Object.entries(response)))
+  getProcessesFromUrl(url: string, group: string): Observable<Map<string, [boolean, number]>> {
+    const endpoint = `${this.baseUrl}/get_processes_from_url/`;
+    return this.http.get<Record<string, [boolean, number]>>(endpoint, { params: { url, group } }).pipe(
+      map((response) => {
+        const resultMap = new Map<string, [boolean, number]>();
+        Object.entries(response).forEach(([key, value]) => {
+          resultMap.set(key, value);
+        });
+        return resultMap;
+      })
     );
   }
 
-  getPreProcess(url: string, processType: string): Observable<SimpleProcess> {
-    const params = { url: url , process_type: processType};
-    return this.http.get<SimpleProcess>(`${this.baseUrl}/get_pre_process/`, { params })
+
+  getProcess(url: string, processType: string, group: string): Observable<Process> {
+    const endpoint = `${this.baseUrl}/get_process/`;
+    return this.http.get<Process>(endpoint, {
+      params: { url, process_type: processType, group },
+    });
   }
 
-  deletePreProcesses(url: string): Observable<boolean> {
-    const params = { url };
-    return this.http.delete<boolean>(`${this.baseUrl}/delete_pre_process/`, { params });
+  createProcesses(url: string, group: string): Observable<boolean> {
+    const endpoint = `${this.baseUrl}/create_processes/`;
+    return this.http.delete<boolean>(endpoint, {
+      params: { url, group },
+    });
   }
 }

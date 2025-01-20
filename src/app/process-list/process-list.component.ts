@@ -11,7 +11,6 @@ import {firstValueFrom} from 'rxjs';
   standalone: true,
   imports: [
     NgForOf,
-    JsonPipe,
     MatTabsModule,
     NgIf,
     NgOptimizedImage
@@ -75,7 +74,7 @@ export class ProcessListComponent implements OnInit {
   }
 
   setToFinished() {
-    this.processService.getFinishedProcesses().subscribe(
+    this.processService.getFinishedProcesses("post").subscribe(
       (processes: Process[]) => {
         this.displayedProcesses = processes;
       },
@@ -87,14 +86,12 @@ export class ProcessListComponent implements OnInit {
   }
 
   setToOngoing() {
-    this.processService.getOngoingProcesses().subscribe(
+    this.processService.getOngoingProcesses("post").subscribe(
       (processes: Process[]) => {
         this.displayedProcesses = processes;
+        console.log(processes);
       },
-      (error) => {
-        console.error('Error fetching processes:', error);
-        // Handle error appropriately, e.g., show error message to user
-      }
+
     );
   }
 }
