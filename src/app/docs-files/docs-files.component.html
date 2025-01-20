@@ -131,7 +131,17 @@
 
     <div class="progress-box">
       <h3 class="progress-title">Progress Status</h3>
-      <p *ngIf="loadingSortedProcess; else loadingContainer" class="progress-text">{{ this.processStatus }}</p>
+      <div *ngIf="loadingSortedProcess; else loadingContainer" class="progress">
+        <p class="progress-text">{{ currentProcess?.status }}</p>
+        <div
+          class="progress-bar"
+          role="progressbar"
+          [class.finished]="currentProcess?.curr === currentProcess?.end"
+          [style.width]="((currentProcess?.curr ?? 0) / (currentProcess?.end ?? 1)) * 100 + '%'">
+          {{ ((currentProcess?.curr ?? 0) / (currentProcess?.end ?? 1) * 100).toFixed(2) }}%
+        </div>
+        <span class="progress-end">Total: {{ currentProcess?.end }}</span>
+      </div>
       <ng-template #loadingContainer>
         <img src="../../assets/loading-gif-black.gif" height="50" width="50"/>
       </ng-template>

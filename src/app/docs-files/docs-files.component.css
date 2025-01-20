@@ -340,8 +340,7 @@
 /* Box styling */
 .progress-box {
   background-color: #f9f9f9;
-  padding: 20px;
-  max-width: 300px;
+  max-width: 100%;
   margin: 0 auto;
   text-align: center;
   border-radius: 12px;
@@ -430,4 +429,34 @@
   color: #333;
   text-align: center;
   font-weight: 500;
+}
+
+.progress {
+  background-color: #e9ecef;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.progress-bar {
+  background-color: rgba( 0, 166, 147);
+  color: #ffffff;
+  text-align: center;
+  line-height: 20px;
+  transition: background-color 0.3s;
+}
+
+.progress-bar.finished {
+  background-color:rgba(84, 98, 111);
+}
+
+.progress-end {
+  position: absolute;
+  right: 10px;
+  color: rgba(84, 98, 111);
+  font-size: 1.0em;
+  font-weight: bold;
 }
