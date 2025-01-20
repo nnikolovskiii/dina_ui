@@ -7,7 +7,7 @@ body, h1, h2, h3, p, ul, li, a {
 }
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: Poppins, serif;
   line-height: 1.6;
   color: #333;
   background-color: #f9f9f9;
@@ -127,20 +127,20 @@ nav ul li a:hover {
   aspect-ratio: 1;
   position: absolute;
   top: 10%;  /* Positioned more to the top */
-  left: 20%; /* Positioned more to the left */
+  left: 10%; /* Positioned more to the left */
   transform: translate(-50%, -50%); /* Center the blob relative to its position */
   border-radius: 50%;
-  filter: blur(80px);
+  filter: blur(90px);
   z-index: -2; /* Blob stays behind pulsating background */
-  animation: sway 3s ease-in-out infinite; /* Faster animation (3 seconds) */
+  animation: sway 7s ease-in-out infinite; /* Faster animation (3 seconds) */
 }
 
 @keyframes sway {
   0%, 100% {
-    transform: translate(-50%, -50%) rotate(-10deg); /* Sway to the left */
+    transform: translate(-50%, -50%) rotate(-10deg) translateY(-50px) translateX(-20px); /* Sway to the left */
   }
   50% {
-    transform: translate(-50%, -50%) rotate(10deg); /* Sway to the right */
+    transform: translate(-50%, -50%) rotate(10deg) translateY(50px)  translateX(20px) ; /* Sway to the right */
   }
 }
 /* Second blob - positioned more to the right and bottom */
@@ -150,21 +150,21 @@ nav ul li a:hover {
   width: 400px;
   aspect-ratio: 1;
   position: absolute;
-  bottom: 10%; /* Positioned more to the bottom */
-  right: 20%;  /* Positioned more to the right */
+  bottom: 05%; /* Positioned more to the bottom */
+  right: 10%;  /* Positioned more to the right */
   transform: translate(50%, 50%); /* Center the blob relative to its position */
   border-radius: 50%;
-  filter: blur(80px);
+  filter: blur(110px);
   z-index: -2; /* Blob stays behind pulsating background */
-  animation: sway2 3s ease-in-out infinite; /* Faster animation (3 seconds) */
+  animation: sway2 8s ease-in-out infinite; /* Faster animation (3 seconds) */
 }
 
 @keyframes sway2 {
   0%, 100% {
-    transform: translate(50%, 50%) rotate(40deg) translateY(-10px); /* Sway right and up */
+    transform: translate(50%, 50%) rotate(80deg) translateY(-30px); /* Sway right and up */
   }
   50% {
-    transform: translate(50%, 50%) rotate(-40deg) translateY(10px); /* Sway left and down */
+    transform: translate(50%, 50%) rotate(-80deg) translateY(30px); /* Sway left and down */
   }
 }
 @keyframes rotate-blob {
@@ -196,7 +196,7 @@ nav ul li a:hover {
 }
 
 .logo-img {
-  width: 30px;
+  width: 50px;
   height: auto;
   margin-right: 10px;
 }
@@ -207,12 +207,13 @@ nav ul li a:hover {
 }
 
 .hero button {
-  background: linear-gradient(45deg, #4768ff, #d7baff);
+  background: linear-gradient(45deg, #008080, #43E1B0);
   color: #fff;
   border: none;
-  padding: 0.75rem 2rem;
+  padding: 0.40rem 1.75rem;
   font-size: 1rem;
   font-weight: bold;
+  font-family: Poppins, serif;
   border-radius: 5px;
   cursor: pointer;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
@@ -220,8 +221,8 @@ nav ul li a:hover {
 }
 
 .hero button:hover {
-  background: linear-gradient(45deg, #4768ff, #d7baff);
-  color: #fff;
+  background: linear-gradient(45deg, #008080, #43E1B0);
+  color: #023b3b;
   transform: scale(1.05);
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15), 0 3px 5px rgba(0, 0, 0, 0.1);
 }
@@ -229,14 +230,17 @@ nav ul li a:hover {
 .features {
   display: flex;
   justify-content: space-around;
-  padding: 3rem 2rem;
+  padding: 3rem 1rem;
 }
 
 .feature {
   text-align: center;
-  background-color: #fff;
+  background-color: transparent;
   border: 1px solid #ddd;
   padding: 2rem;
+
+  margin-right: 1rem;
+  margin-left: 1rem;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s;
@@ -244,15 +248,30 @@ nav ul li a:hover {
 
 .feature:hover {
   transform: translateY(-10px);
+  background: rgba(255, 255, 255, 0.1); /* Transparent background */
+
+  transition: 0.3s ease; /* Smooth transition */
+
+  border: 5px solid #97FCDC ; /* Adjust thickness as needed */
+  /*border-image: linear-gradient(to right, #008080, #43E1B0, #97FCDC) 1;*/
+  border-radius: 20px; /* Optional for rounded corners */
+
 }
+
+.feature:hover h3{
+  color: #43E1B0;
+}
+
 
 .feature h3 {
   margin-bottom: 1rem;
-  color: #0078d7;
+  color: #79DDFF;
+  font-weight: bold;
+  font-style: italic;
 }
 
 .feature p {
-  color: #666;
+  color: #fff;
 }
 
 footer {
