@@ -1,3 +1,39 @@
+body, h1, h2, h3, p, ul, li, a {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+}
+
+.logo-img {
+  width: 40px; /* Adjust as needed */
+  height: auto;
+}
+
+body {
+  padding-top: 80px; /* Adjust this to the height of the header */
+  font-family: Poppins, serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #020a31;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+header {
+  position: fixed; /* Make it fixed at the top of the screen */
+  top: 0; /* Ensure it stays at the top */
+  left: 0;
+  width: 100%;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: transparent; /* You might want a darker background for the header */
+  color: #fff;
+}
+
+
 .card-list {
   display: flex;
   flex-direction: column;
@@ -301,6 +337,10 @@
   background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .progress-container {
   display: flex;
@@ -315,6 +355,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 10px;
+  border: 0.5px solid rgba(89, 110, 202, 0.91);
+  box-shadow: 1px 2px 2px rgba(47, 60, 122, 0.91);
+
 }
 
 .dot {
@@ -339,12 +385,14 @@
 }
 /* Box styling */
 .progress-box {
-  background-color: #f9f9f9;
+  background-color: #ffffff;
   max-width: 100%;
   margin: 0 auto;
+  height: 250px;
+  padding: 20px;
   text-align: center;
   border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -355,8 +403,12 @@
 /* Title styling */
 .progress-title {
   font-size: 1.5em;
-  color: #333;
+  color: #042243;
   margin-bottom: 10px;
+  text-align: center; /* Centers the text horizontally */
+  display: flex;
+  justify-content: center; /* Centers the content horizontally within the container */
+  align-items: center; /* Centers the content vertically within the container */
 }
 
 /* Progress text styling */
@@ -391,11 +443,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 20px;
+  gap: 12px;
   padding: 20px;
-  background-color: #f9f9f9;
+  background-color: #ffffff;
   border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: -20px;
+  /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
 }
 
 /* Dot container styling */
@@ -431,32 +484,216 @@
   font-weight: 500;
 }
 
-.progress {
-  background-color: #e9ecef;
-  border-radius: 10px;
-  overflow: hidden;
-  height: 20px;
-  display: flex;
-  align-items: center;
+.bg-wrapper {
   position: relative;
+  overflow: hidden;
+  height: 100vh; /* Make sure this covers full screen */
+  z-index: 1; /* Ensure it's above the body background */
 }
 
+.bg-wrapper::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-image: radial-gradient(rgba(193, 191, 191, 0.35) 1px, transparent 1px);
+  background-size: 50px 50px;
+  opacity: 0.7; /* Reduced overall opacity */
+  animation: pulsate 20s infinite;
+  z-index: -1;
+}
+
+@keyframes pulsate {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+}
+
+@keyframes pulsate {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+}
+.form-checkbox {
+  margin-top: 10px;
+  transform: scale(1.2);
+}
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.green {
+  background-color: green;
+}
+
+.gray {
+  background-color: gray;
+}
+
+
+.blob {
+  background: linear-gradient(200deg, #09427c 0%, #09427c 100%);
+  height: 600px;
+  width: 600px;
+  aspect-ratio: 1;
+  position: absolute;
+  top: 10%;  /* Positioned more to the top */
+  left: 10%; /* Positioned more to the left */
+  transform: translate(-50%, -50%); /* Center the blob relative to its position */
+  border-radius: 50%;
+  filter: blur(100px);
+  z-index: -2; /* Blob stays behind pulsating background */
+  animation: sway 7s ease-in-out infinite; /* Faster animation (3 seconds) */
+}
+
+@keyframes sway {
+  0%, 100% {
+    transform: translate(-50%, -50%) rotate(-10deg) translateY(-50px) translateX(-20px); /* Sway to the left */
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(10deg) translateY(50px)  translateX(20px) ; /* Sway to the right */
+  }
+}
+/* Second blob - positioned more to the right and bottom */
+.blob2 {
+  background: linear-gradient(200deg, #134343 0%, #023b3b 100%);
+  height: 600px;
+  width: 600px;
+  aspect-ratio: 1;
+  position: absolute;
+  bottom: 05%; /* Positioned more to the bottom */
+  right: 10%;  /* Positioned more to the right */
+  transform: translate(50%, 50%); /* Center the blob relative to its position */
+  border-radius: 50%;
+  filter: blur(110px);
+  z-index: -5; /* Blob stays behind pulsating background */
+  animation: sway2 8s ease-in-out infinite; /* Faster animation (3 seconds) */
+}
+
+@keyframes sway2 {
+  0%, 100% {
+    transform: translate(50%, 50%) rotate(80deg) translateY(-30px); /* Sway right and up */
+  }
+  50% {
+    transform: translate(50%, 50%) rotate(-80deg) translateY(30px); /* Sway left and down */
+  }
+}
+/* Main container for the progress */
+.progress {
+  background-color: #ffffff; /* Softer background */
+  border-radius: 10px;
+  overflow: hidden;
+  height: 300px; /* Increased height for better spacing */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  /*padding: 70px; !* Added padding *!*/
+
+}
+/* Circular progress container */
+.circular-progress {
+  position: relative;
+  width: 140px;
+  height: 140px;
+}
+
+/* SVG wrapper */
+.progress-ring {
+  transform: rotate(-90deg);
+  width: 100%;
+  height: 100%;
+}
+
+/* Background circle */
+.progress-ring__background {
+  fill: none;
+  stroke: #dadada;
+  stroke-width: 8;
+}
+
+/* Progress circle */
+.progress-ring__circle {
+  fill: none;
+  stroke-width: 10;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.35s ease-in-out;
+  /*filter: drop-shadow(0 0 1px rgba(47, 60, 122, 0.91)); !* Glow effect *!*/
+}
+
+/* Centered percentage text */
+.percentage-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #333;
+}
+
+
+/* Progress bar styles for the linear progress */
 .progress-bar {
-  background-color: rgba( 0, 166, 147);
+  background: linear-gradient(200deg, #09427c 0%, #09427c 100%);
   color: #ffffff;
   text-align: center;
   line-height: 20px;
-  transition: background-color 0.3s;
+  border-radius: 5px;
+  transition: background-color 0.3s, width 0.3s ease-in-out;
 }
 
+/* Style for completed progress bar */
 .progress-bar.finished {
-  background-color:rgba(84, 98, 111);
+  background-color: rgba(84, 98, 111, 0.8); /* Darker color for finished state */
 }
 
+/* Total progress marker on the right */
 .progress-end {
   position: absolute;
   right: 10px;
-  color: rgba(84, 98, 111);
+  color: rgba(84, 98, 111, 0.8);
   font-size: 1.0em;
   font-weight: bold;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .progress {
+    height: auto;
+    flex-direction: column; /* Stack items vertically */
+    padding: 20px;
+  }
+
+  .circular-progress {
+    width: 150px;
+    height: 150px;
+  }
+
+  .percentage-text {
+    font-size: 1em;
+  }
 }
