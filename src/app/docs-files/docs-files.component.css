@@ -337,6 +337,10 @@ header {
   background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .progress-container {
   display: flex;
@@ -351,6 +355,12 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 10px;
+  border: 0.5px solid rgba(89, 110, 202, 0.91);
+  box-shadow: 1px 2px 2px rgba(47, 60, 122, 0.91);
+
 }
 
 .dot {
@@ -375,12 +385,14 @@ header {
 }
 /* Box styling */
 .progress-box {
-  background-color: #f9f9f9;
+  background-color: #ffffff;
   max-width: 100%;
   margin: 0 auto;
+  height: 250px;
+  padding: 20px;
   text-align: center;
   border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -391,8 +403,12 @@ header {
 /* Title styling */
 .progress-title {
   font-size: 1.5em;
-  color: #333;
+  color: #042243;
   margin-bottom: 10px;
+  text-align: center; /* Centers the text horizontally */
+  display: flex;
+  justify-content: center; /* Centers the content horizontally within the container */
+  align-items: center; /* Centers the content vertically within the container */
 }
 
 /* Progress text styling */
@@ -427,11 +443,12 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 20px;
+  gap: 12px;
   padding: 20px;
-  background-color: #f9f9f9;
+  background-color: #ffffff;
   border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: -20px;
+  /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
 }
 
 /* Dot container styling */
@@ -584,33 +601,99 @@ header {
     transform: translate(50%, 50%) rotate(-80deg) translateY(30px); /* Sway left and down */
   }
 }
-
+/* Main container for the progress */
 .progress {
-  background-color: #e9ecef;
+  background-color: #ffffff; /* Softer background */
   border-radius: 10px;
   overflow: hidden;
-  height: 20px;
+  height: 300px; /* Increased height for better spacing */
   display: flex;
+  justify-content: center;
   align-items: center;
   position: relative;
+  /*padding: 70px; !* Added padding *!*/
+
+}
+/* Circular progress container */
+.circular-progress {
+  position: relative;
+  width: 140px;
+  height: 140px;
 }
 
+/* SVG wrapper */
+.progress-ring {
+  transform: rotate(-90deg);
+  width: 100%;
+  height: 100%;
+}
+
+/* Background circle */
+.progress-ring__background {
+  fill: none;
+  stroke: #dadada;
+  stroke-width: 8;
+}
+
+/* Progress circle */
+.progress-ring__circle {
+  fill: none;
+  stroke-width: 10;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.35s ease-in-out;
+  /*filter: drop-shadow(0 0 1px rgba(47, 60, 122, 0.91)); !* Glow effect *!*/
+}
+
+/* Centered percentage text */
+.percentage-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #333;
+}
+
+
+/* Progress bar styles for the linear progress */
 .progress-bar {
-  background-color: rgba( 0, 166, 147);
+  background: linear-gradient(200deg, #09427c 0%, #09427c 100%);
   color: #ffffff;
   text-align: center;
   line-height: 20px;
-  transition: background-color 0.3s;
+  border-radius: 5px;
+  transition: background-color 0.3s, width 0.3s ease-in-out;
 }
 
+/* Style for completed progress bar */
 .progress-bar.finished {
-  background-color:rgba(84, 98, 111);
+  background-color: rgba(84, 98, 111, 0.8); /* Darker color for finished state */
 }
 
+/* Total progress marker on the right */
 .progress-end {
   position: absolute;
   right: 10px;
-  color: rgba(84, 98, 111);
+  color: rgba(84, 98, 111, 0.8);
   font-size: 1.0em;
   font-weight: bold;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .progress {
+    height: auto;
+    flex-direction: column; /* Stack items vertically */
+    padding: 20px;
+  }
+
+  .circular-progress {
+    width: 150px;
+    height: 150px;
+  }
+
+  .percentage-text {
+    font-size: 1em;
+  }
 }

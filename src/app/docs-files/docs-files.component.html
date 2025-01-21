@@ -20,7 +20,7 @@
 
 <section>
   <div class="blob"></div>
-  <div *ngIf="!isFinished; else process">
+  <div *ngIf="isFinished; else process">
     <div *ngIf="!isSelectDocs; else loading">
       <div *ngIf="links$| async as links ; else loading" class="card-list container">
         <div class="breadcrumb sticky-top">
@@ -121,9 +121,56 @@
       </div>
     </ng-template>
   </div>
-
   <ng-template #process>
+
     <div class="card-list container">
+
+      <h3 class="progress-title">Progress Status</h3>
+
+
+      <div class="progress-box">
+
+        <div *ngIf="loadingSortedProcess; else loadingContainer" class="progress">
+          <div class="circular-progress">
+            <svg class="progress-ring" viewBox="0 0 100 100">
+              <defs>
+                <!-- Gradient Definition -->
+                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#3a30a8" />
+                  <stop offset="25%" stop-color="#5359bf" />
+                  <stop offset="50%" stop-color="#6d82d1" />
+                  <stop offset="75%" stop-color="#89abe3" />
+                  <stop offset="100%" stop-color="#a9bcf5" />
+                </linearGradient>
+              </defs>
+              <!-- Background Circle -->
+              <circle
+                class="progress-ring__background"
+                cx="50"
+                cy="50"
+                r="45"
+              ></circle>
+              <!-- Gradient Progress Circle -->
+              <circle
+                class="progress-ring__circle"
+                cx="50"
+                cy="50"
+                r="45"
+                stroke="url(#gradient)"
+                [attr.stroke-dasharray]="circumference"
+                [attr.stroke-dashoffset]="strokeDashoffset"
+              ></circle>
+            </svg>
+            <div class="percentage-text">
+              {{ progressPercentage.toFixed(2) }}%
+            </div>
+          </div>
+        </div>
+        <ng-template #loadingContainer>
+          <img src="../../assets/loading-gif-black.gif" height="50" width="50" />
+        </ng-template>
+<!--        <button class="refresh-button" (click)="refresh()">Refresh</button>-->
+      </div>
       <div class="progress-container"> <!-- Displays progress stages -->
         <div class="dot-container" *ngFor="let values of getSortedProcesses()">
           <div class="dot" [ngClass]="{'green': true, 'gray': !true}"></div>
@@ -131,23 +178,7 @@
         </div>
       </div>
 
-    <div class="progress-box">
-      <h3 class="progress-title">Progress Status</h3>
-      <div *ngIf="loadingSortedProcess; else loadingContainer" class="progress">
-        <p class="progress-text">{{ currentProcess?.status }}</p>
-        <div
-          class="progress-bar"
-          role="progressbar"
-          [class.finished]="currentProcess?.curr === currentProcess?.end"
-          [style.width]="((currentProcess?.curr ?? 0) / (currentProcess?.end ?? 1)) * 100 + '%'">
-          {{ ((currentProcess?.curr ?? 0) / (currentProcess?.end ?? 1) * 100).toFixed(2) }}%
-        </div>
-        <span class="progress-end">Total: {{ currentProcess?.end }}</span>
-      </div>
-      <ng-template #loadingContainer>
-        <img src="../../assets/loading-gif-black.gif" height="50" width="50"/>
-      </ng-template>
-      <button class="refresh-button" (click)="refresh()">Refresh</button>
     </div>
-  </div>
-</ng-template>
+  </ng-template>
+
+</section>

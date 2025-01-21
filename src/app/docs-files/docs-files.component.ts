@@ -1,7 +1,7 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {CommonModule, Location, NgOptimizedImage} from '@angular/common';
 import {ActivatedRoute, Router, RouterModule} from '@angular/router';
-import {catchError, filter, forkJoin, Observable, of, Subscription} from 'rxjs';
+import {catchError, filter, forkJoin, interval, Observable, of, Subscription} from 'rxjs';
 import {Link} from '../models/link';
 import {ProcessService} from '../process.service';
 import {FormsModule} from '@angular/forms';
@@ -25,6 +25,20 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
   isSelectDocs: boolean = false;
   loadingSortedProcess: boolean = false;
   currentProcess: Process | null = null;
+  radius = 45; // Radius of the circular progress bar
+  circumference = 2 * Math.PI * this.radius; // Calculate the circumference
+  private autoRefreshSubscription: Subscription | null = null;
+
+  get progressPercentage(): number {
+
+    return ((this.currentProcess?.curr ?? 0) / (this.currentProcess?.end ?? 1)) * 100;
+  }
+
+  get strokeDashoffset(): number {
+
+    return this.circumference - (this.progressPercentage / 100) * this.circumference;
+  }
+
 
 
   constructor(
@@ -33,6 +47,7 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute,
     private location: Location,
+    private cdr: ChangeDetectorRef
   ) {
   }
 
@@ -44,8 +59,28 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
       this.links$ = this.linksService.getLinksFromParent(this.prevLink);
       console.log("lol")
       this.getProcessesFromUrl()
+      this.startAutoRefresh(); // Start the auto-refresh process
     });
   }
+
+
+
+  private startAutoRefresh(): void {
+    // Set up polling every 5 seconds
+    this.autoRefreshSubscription = interval(1000).subscribe(() => {
+      this.getProcessesFromUrl();
+    });
+  }
+
+  private stopAutoRefresh(): void {
+    // Unsubscribe from the interval to prevent memory leaks
+    if (this.autoRefreshSubscription) {
+      this.autoRefreshSubscription.unsubscribe();
+    }
+  }
+
+
+
 
   navigateToLink(link: string): void {
     if (link) {
@@ -156,6 +191,7 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy(): void {
+    this.stopAutoRefresh(); // Clean up when the component is destroyed
   }
 
   getLinks(is_parent: boolean, links: Link[]): Link[] {
@@ -183,23 +219,26 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
     this.getProcessesFromUrl()
   }
 
-  getProcessesFromUrl(){
-    console.log("in")
+  getProcessesFromUrl(): void {
+    console.log("Fetching process data...");
     this.processService.getProcessesFromUrl(this.docs_url, "pre").subscribe(
-      (response) => {
+      response => {
         this.isFinished = response.get("main")?.[0] ?? true;
-        console.log(this.isFinished)
         this.processMap = response;
-        let lastProcessType = this.getLastProcessType()
+
+        let lastProcessType = this.getLastProcessType();
         this.processService.getProcess(this.docs_url, lastProcessType, "pre").subscribe(
-          (response) => {
+          response => {
             this.currentProcess = response;
+            this.cdr.detectChanges(); // Force Angular to detect changes
           },
-        )
+        );
         this.loadingSortedProcess = true;
       },
-    )
+    );
   }
+
+
 
   protected readonly of = of;
 
