@@ -579,7 +579,7 @@ header {
 }
 /* Second blob - positioned more to the right and bottom */
 .blob2 {
-  background: linear-gradient(200deg, #134343 0%, #023b3b 100%);
+  background: linear-gradient(200deg, #134343 0%, #013737 100%);
   height: 600px;
   width: 600px;
   aspect-ratio: 1;
@@ -654,6 +654,7 @@ header {
   font-weight: bold;
   color: #333;
 }
+
 
 
 /* Progress bar styles for the linear progress */
