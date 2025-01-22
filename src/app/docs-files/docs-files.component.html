@@ -12,7 +12,7 @@
 
 <section>
   <div class="blob"></div>
-  <div *ngIf="isFinished; else process">
+  <div *ngIf="!isFinished; else process">
     <div *ngIf="!isSelectDocs; else loading">
       <div *ngIf="links$| async as links ; else loading" class="card-list container">
 
