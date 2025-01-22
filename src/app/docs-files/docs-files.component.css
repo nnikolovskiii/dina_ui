@@ -342,6 +342,13 @@ header {
   background-color: rgba(220, 220, 220);
   color: #fff;
 }
+.loading-spinner
+{
+  width: 100%;
+
+  height: 100%;
+}
+
 
 section {
 
@@ -622,22 +629,23 @@ section {
 }
 /* Main container for the progress */
 .progress {
-  background-color: #ffffff; /* Softer background */
+  background-color: #ffffff;
   border-radius: 10px;
   overflow: hidden;
-  height: 300px; /* Increased height for better spacing */
+  height: 300px;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-  /*padding: 70px; !* Added padding *!*/
-
 }
 /* Circular progress container */
 .circular-progress {
   position: relative;
-  width: 140px;
-  height: 140px;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* SVG wrapper */
@@ -673,7 +681,6 @@ section {
   font-weight: bold;
   color: #333;
 }
-
 
 
 /* Progress bar styles for the linear progress */

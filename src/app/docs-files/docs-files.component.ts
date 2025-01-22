@@ -67,7 +67,7 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
 
   private startAutoRefresh(): void {
     // Set up polling every 5 seconds
-    this.autoRefreshSubscription = interval(1000).subscribe(() => {
+    this.autoRefreshSubscription = interval(3000).subscribe(() => {
       this.getProcessesFromUrl();
     });
   }

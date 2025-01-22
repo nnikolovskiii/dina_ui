@@ -6,14 +6,6 @@
 
     Code Explore
   </div>
-<!--  <nav>-->
-<!--    <ul>-->
-<!--      <li><a href="#">Home</a></li>-->
-<!--      <li><a href="#">About</a></li>-->
-<!--      <li><a href="#">Services</a></li>-->
-<!--      <li><a href="#">Contact</a></li>-->
-<!--    </ul>-->
-<!--  </nav>-->
 </header>
 
 
@@ -121,7 +113,7 @@
     <ng-template #loading>
       <div class="card-list container loading-screen">
         <div class="loading">
-          <img src="/assets/loading-gif-black.gif" alt="Loading..."/>
+          <img src="../../assets/spinner.gif"  style="width: 300px; height: 300px;"/>
           <p>Loading your docs...</p>
         </div>
       </div>
@@ -138,42 +130,16 @@
 
         <div *ngIf="loadingSortedProcess; else loadingContainer" class="progress">
           <div class="circular-progress">
-            <svg class="progress-ring" viewBox="0 0 100 100">
-              <defs>
-                <!-- Gradient Definition -->
-                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stop-color="#3a30a8" />
-                  <stop offset="25%" stop-color="#5359bf" />
-                  <stop offset="50%" stop-color="#6d82d1" />
-                  <stop offset="75%" stop-color="#89abe3" />
-                  <stop offset="100%" stop-color="#a9bcf5" />
-                </linearGradient>
-              </defs>
-              <!-- Background Circle -->
-              <circle
-                class="progress-ring__background"
-                cx="50"
-                cy="50"
-                r="45"
-              ></circle>
-              <!-- Gradient Progress Circle -->
-              <circle
-                class="progress-ring__circle"
-                cx="50"
-                cy="50"
-                r="45"
-                stroke="url(#gradient)"
-                [attr.stroke-dasharray]="circumference"
-                [attr.stroke-dashoffset]="strokeDashoffset"
-              ></circle>
-            </svg>
+            <!-- Larger GIF for loading spinner -->
+            <img class="loading-spinner" src="../../assets/spinner.gif" alt="Loading..."
+                 style="width: 300px; height: 300px;"/>
             <div class="percentage-text">
               {{ progressPercentage.toFixed(2) }}%
             </div>
           </div>
         </div>
         <ng-template #loadingContainer>
-          <img src="../../assets/loading-gif-black.gif" height="50" width="50" />
+          <img src="../../assets/spinner.gif"  style="width: 300px; height: 300px;" />
         </ng-template>
 <!--        <button class="refresh-button" (click)="refresh()">Refresh</button>-->
       </div>
