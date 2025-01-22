@@ -7,13 +7,13 @@ import {DocsService} from '../docs.service';
 import {Url} from '../models/url';
 
 @Component({
-  selector: 'app-list-urls',
+  selector: 'app-collections',
   standalone: true,
   imports: [CommonModule, RouterModule, FormsModule],
-  templateUrl: './list-urls.component.html',
-  styleUrl: './list-urls.component.css'
+  templateUrl: './collections.component.html',
+  styleUrl: './collections.component.css'
 })
-export class ListUrlsComponent {
+export class CollectionsComponent {
   displayedUrls: Url[] | undefined;
 
   constructor(
@@ -29,6 +29,10 @@ export class ListUrlsComponent {
     this.route.queryParams.subscribe(async params => {
         this.setToDocs()
     });
+  }
+
+  getLabel(title: string) {
+    return title.split('https://')[1]
   }
 
   toggleUrlActive(url: Url): void {
