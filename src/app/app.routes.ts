@@ -4,7 +4,7 @@ import {ChatComponent} from './chat/chat.component';
 import {CodeProcessComponent} from './code-process/code-process.component';
 import {FinishComponent} from './finish/finish.component';
 import {SelectGiturlComponent} from './select-giturl/select-giturl.component';
-import {ListUrlsComponent} from './list-urls/list-urls.component';
+import {CollectionsComponent} from './collections/collections.component';
 import {DocsFilesComponent} from './docs-files/docs-files.component';
 import {ProcessListComponent} from './process-list/process-list.component';
 import {HomeComponent} from './home/home.component';
@@ -20,7 +20,7 @@ export const routes: Routes = [
   {path: 'finish', component: FinishComponent},
   {path: 'finish', component: FinishComponent},
   {path:'extract-url', component: SelectGiturlComponent},
-  {path:'collections', component: ListUrlsComponent},
+  {path:'collections', component: CollectionsComponent},
   {path:'process', component: ProcessListComponent},
   {path:'home', component: HomeComponent},
   {path:'side-bar', component: SideBarComponent},

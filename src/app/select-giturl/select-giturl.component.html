@@ -18,7 +18,6 @@
   <div class="form-content">
     <div class="form-content">
       <div class="question">
-<!--        <label for="gitUrl" class="extract-heading1">Git URL</label>-->
         <div class="animated-input">
           <input
             type="url"
@@ -48,18 +47,6 @@
       </div>
 
       <ng-template #docsForm>
-<!--        <div class="form-group" id="true">-->
-<!--          <label for="override1" class="extract-heading1">TRUE</label>-->
-<!--          <label class="switch">-->
-<!--            <input-->
-<!--              type="checkbox"-->
-<!--              id="override1"-->
-<!--              name="override"-->
-<!--              [(ngModel)]="override"-->
-<!--            />-->
-<!--            <span class="slider round"></span>-->
-<!--          </label>-->
-<!--        </div>-->
 
         <div class="form-group">
 <!--          <label for="selectorBs" class="extract-heading1">Selector</label>-->
@@ -101,7 +88,6 @@
         </div>
 
         <div class="form-group">
-<!--          <label for="selectorAttr" class="extract-heading1">Selector Attribute</label>-->
           <div class="animated-input">
             <input
               type="text"
@@ -126,7 +112,7 @@
                   [(ngModel)]="patternList[i]"
                   [attr.name]="'pattern_' + i"
                   class="form-input list-input"
-                  placeholder="Enter regex pattern"
+                  placeholder="regex pattern"
                 />
               </div>
             </div>

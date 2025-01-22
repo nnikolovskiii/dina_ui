@@ -24,7 +24,7 @@ export class SelectGiturlComponent {
   selectorType: string = "class";
   loading: boolean = false;
   codeForm: boolean = false;
-  patternList: string[] = [""]
+  patternList: string[] = ["", ""]
 
   constructor(
     private codeProcessService: CodeProcessService,
