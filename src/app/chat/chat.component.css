@@ -1,4 +1,5 @@
-/* Toggle button styles */
+
+
 .toggle-button {
   cursor: pointer;
 }
@@ -8,11 +9,10 @@
   z-index: 1000;
   font-size: 16px;
   cursor: pointer;
-  color: white;
   border: none;
   width: 50px;
   height: 100%;
-  background-color:  rgb(238,239,240);
+  background-color: #2a2d31;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,7 +29,7 @@
   left: -250px; /* Hidden position */
   width: 250px;
   height: 100%;
-  background-color: rgb(238,239,240);
+  background-color: #2a2d31;
   overflow-y: auto;
   transition: left 0.3s ease;
 }
@@ -37,7 +37,6 @@
 .subheading {
   font-size: 1.2em; /* Larger font size */
   font-weight: bold; /* Make it bold */
-  color: #666362; /* A calming blue shade */
   text-align: center; /* Center the text */
   margin: 5px 0; /* Add spacing around it */
   text-transform: uppercase; /* Make the text uppercase for emphasis */
@@ -279,7 +278,6 @@
 
 .add-model-input button:first-of-type {
   background-color: rgb(128, 180, 240);
-  color: white;
 }
 
 .add-model-input button:first-of-type:hover {
@@ -288,7 +286,6 @@
 
 .add-model-input button:last-of-type {
   background-color: rgba(211,211,211); /* Red */
-  color: white;
 }
 
 .add-model-input button:last-of-type:hover {
@@ -298,7 +295,7 @@
 .main-div {
   margin: 0;
   font-family: Arial, sans-serif;
-  background-color: #f4f4f9;
+  background-color: #1e1f22;
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -338,16 +335,17 @@
   padding-right: 100px;
   flex-flow: column;
   align-items: center;
+  overflow-y: auto;
 }
 
 .messages {
   flex: 1;
   padding: 15px;
   width: 900px;
-  overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 20px;
+  margin-bottom: 50px;
 }
 
 .assistant-card {
@@ -364,7 +362,7 @@
 
 .user-card {
   align-self: flex-end;
-  background-color:  rgba(100, 149, 237, 0.3);
+  background-color: #34373b ;
   border-radius: 10px;
   padding: 10px 15px;
   max-width: 70%;
@@ -379,13 +377,16 @@
 form {
   display: flex;
   justify-content: center; /* Center horizontally */
-  align-items: center;
-  gap: 0px; /* Center vertically */
-  background-color: rgba(255, 255, 255, 0); /* Fully transparent background */
-  /* or use opacity if you want the entire form to be transparent
-  opacity: 0.5; */
+  align-items: center; /* Center vertically */
+  gap: 0px; /* Gap between items */
+  background-color: #1e1f22; /* Fully transparent background */
   width: 900px;
+  position: fixed; /* Fix the form in place */
+  bottom: 0; /* Place it at the bottom of the viewport */
+  left: 50%; /* Move to the center horizontally */
+  transform: translateX(-50%); /* Adjust for true center */
 }
+
 
 #form-div{
   flex: 1;
@@ -393,8 +394,8 @@ form {
   justify-content: space-between; /* Center horizontally */
   align-items: center;
   gap: 3px;/* Center vertically */
-  background-color:  rgb(232,233,234);
-  border-radius: 13px;
+  background-color: #34373b;
+  border-radius: 10px;
   padding-left: 10px;
   padding-right: 10px;
   flex-flow:column;
@@ -434,13 +435,12 @@ textarea {
   padding: 10px 10px 3px;
   font-size: 16px;
   outline: none;
-  background-color:    rgb(232,233,234);
-  color: rgba( 102, 99, 98);
+  background-color:   #34373b;
+  color:#e9e3e7;
 }
 
 .chat_button {
   background-color:  rgb(232,233,234);
-  color: black;
   border: none;
   border-radius: 0px;
   cursor: pointer;
@@ -461,13 +461,11 @@ textarea {
 }
 
 a{
-  color:gray;
   text-decoration: underline;
+  color: #e9e3e7;
 }
 
 a:hover{
-  color:gray;
-
 }
 
 .chat-container .assistant-card h3 {
@@ -487,12 +485,10 @@ a:hover{
 
 h1, h2, h3, h4, h5, h6 {
   margin-top: 20px; /* Adjust the value to increase or decrease the space */
-  color: rgba( 102, 99, 98);
 }
 
 .references{
   margin-top: 20px; /* Adjust the value to increase or decrease the space */
-  color: rgba( 102, 99, 98);
   font-size: 14px;
 }
 .reference_header{
@@ -510,7 +506,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .reference a:hover{
-  color:rgb(118, 170, 230);
 }
 
 h1::before,
@@ -533,7 +528,6 @@ p{
 /*  color: rgba(190, 190, 190)*/
 /*}*/
 .assistant-card p{
-  color: rgba( 102, 99, 98)
 }
 
 li{
@@ -542,13 +536,11 @@ li{
 }
 
 .assistant-card li{
-  color: rgba( 102, 99, 98)
 }
 
 .chat-button-extra{
   display: flex;
   flex-flow: row;
-  color: #f4f4f9;
   align-items: center;
   background-color: rgb(108, 160, 220);
   padding-left: 4px;
@@ -580,3 +572,44 @@ li{
 /*.vanilla{*/
 /*  padding-right: 8px;*/
 /*}*/
+
+/* Add this to your global styles or component-specific styles */
+.hljs {
+  background-color: #2a2d31 !important;
+}
+
+.assistant-card code{
+  color: #e9e3e7;
+}
+
+p, div{
+}
+
+.bg-wrapper {
+  position: relative;
+  overflow: hidden;
+  height: 100vh; /* Make sure this covers full screen */
+  z-index: 1; /* Ensure it's above the body background */
+}
+
+.bg-wrapper::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-image: radial-gradient(rgba(193, 191, 191, 0.35) 1px, transparent 1px);
+  background-size: 50px 50px;
+  opacity: 0.7; /* Reduced overall opacity */
+  animation: pulsate 20s infinite;
+  z-index: -1;
+}
+
+body{
+  color: #e9e3e7;
+}
+
+.assistant-card pre{
+  border-radius: 10px;
+}
