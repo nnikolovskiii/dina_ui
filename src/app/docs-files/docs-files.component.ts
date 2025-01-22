@@ -108,7 +108,9 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
   }
 
   getLabel(link: Link): string {
-    return link.link.split("//")[1];
+    let label = link.link.split(this.prevLink + "/")[1];
+    label = label.replaceAll("/", "-")
+    return label
   }
 
   selectPage(activeStatus: boolean): void {
@@ -181,7 +183,7 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
 
 
   navigateBack() {
-    this.location.back();
+    this.router.navigate(['/collections']);
   }
 
 
