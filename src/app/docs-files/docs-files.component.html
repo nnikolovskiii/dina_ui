@@ -6,14 +6,6 @@
 
     Code Explore
   </div>
-<!--  <nav>-->
-<!--    <ul>-->
-<!--      <li><a href="#">Home</a></li>-->
-<!--      <li><a href="#">About</a></li>-->
-<!--      <li><a href="#">Services</a></li>-->
-<!--      <li><a href="#">Contact</a></li>-->
-<!--    </ul>-->
-<!--  </nav>-->
 </header>
 
 
@@ -23,6 +15,7 @@
   <div *ngIf="isFinished; else process">
     <div *ngIf="!isSelectDocs; else loading">
       <div *ngIf="links$| async as links ; else loading" class="card-list container">
+
         <div class="breadcrumb sticky-top">
           <button class="back-button" (click)="navigateBack()"> Back</button>
           <div class="breadcrumb-links">
@@ -39,83 +32,88 @@
           </div>
         </div>
 
+        <div class="button-group sticky-bottom">
+          <div class="last-button-group">
 
-        <div class="card"
-             [class.selected]="link.active"
-             *ngFor="let link of links"
-             (mouseenter)="selectCard(link)"
-             (mouseleave)="deselectCard()">
+            <button class="small-button" (click)="selectPage(true)">Select Page</button>
+            <button class="small-button" (click)="selectPage(false)">Clear Page</button>
+            <button class="small-button" (click)="selectAllLinks(true)">Select All</button>
+            <button class="small-button" (click)="selectAllLinks(false)">Clear All</button>
 
-          <label class="card-label">
-            <input
-              type="checkbox"
-              [value]="link"
-              [checked]="link.active"
-              (change)="toggleLinkSelection($event, link)"
-            />
-            <span class="checkmark"></span>
-            <div *ngIf="!link.is_parent; else parent">
-              {{ getLabel(link) }}
-            </div>
 
-            <ng-template #parent>
-              <img ngSrc="assets/folder.png" height="20" width="20"/>
-              <a class="card-label"
-                 [routerLink]="['/docs-files']"
-                 [queryParams]="{ prevLink: link.link, docs_url: docs_url }">
+          </div>
+          <div class="finish-button">
+            <button class="small-button-finish" (click)="navigateToFinish()">
+
+            </button>
+          </div>
+        </div>
+
+
+
+        <div class="scrollable-cards">
+          <div class="card"
+               [class.selected]="link.active"
+               *ngFor="let link of links"
+               (mouseenter)="selectCard(link)"
+               (mouseleave)="deselectCard()">
+
+            <label class="card-label">
+              <input
+                type="checkbox"
+                [value]="link"
+                [checked]="link.active"
+                (change)="toggleLinkSelection($event, link)"
+              />
+              <span class="checkmark"></span>
+              <div *ngIf="!link.is_parent; else parent">
                 {{ getLabel(link) }}
-              </a>
-            </ng-template>
-            <div class="folder-flex">
-              <ng-container *ngIf="getColor(link) != null">
-                <span class="folder-color" [style.backgroundColor]="getColor(link)"></span>
-              </ng-container>
+              </div>
 
-              <button class="emoji-button minus" *ngIf="isCardHovered(link)" (click)="navigateToLink(link.link)">
+              <ng-template #parent>
+                <img ngSrc="assets/folder.png" height="20" width="20"/>
+                <a class="card-label"
+                   [routerLink]="['/docs-files']"
+                   [queryParams]="{ prevLink: link.link, docs_url: docs_url }">
+                  {{ getLabel(link) }}
+                </a>
+              </ng-template>
+              <div class="folder-flex">
+                <ng-container *ngIf="getColor(link) != null">
+                  <span class="folder-color" [style.backgroundColor]="getColor(link)"></span>
+                </ng-container>
 
-                <img src="../../assets/link.png" height="15" width="15"/></button>
-              <button *ngIf="isCardHovered(link)" class="emoji-button minus"
-                      (click)="navigateToDisplayContent(link.base_url,link.link)">
+                <button class="emoji-button minus" *ngIf="isCardHovered(link)" (click)="navigateToLink(link.link)">
 
-                <img src="../../assets/find.png" height="15" width="15"/></button>
+                  <img src="../../assets/link.png" height="15" width="15"/></button>
+                <button *ngIf="isCardHovered(link)" class="emoji-button minus"
+                        (click)="navigateToDisplayContent(link.base_url,link.link)">
 
-              <ng-container *ngIf="link.is_parent">
-                <button *ngIf="isCardHovered(link)" class="emoji-button plus" (click)="selectByParentRecursively(true, link.link)">
-                  <img src="../../assets/plus-symbol-button(1).png" height="12.8" width="12.8"/></button>
+                  <img src="../../assets/find.png" height="15" width="15"/></button>
 
-                <button *ngIf="isCardHovered(link)" class="emoji-button minus" (click)="selectByParentRecursively(false, link.link)">
+                <ng-container *ngIf="link.is_parent">
+                  <button *ngIf="isCardHovered(link)" class="emoji-button plus" (click)="selectByParentRecursively(true, link.link)">
+                    <img src="../../assets/plus-symbol-button(1).png" height="12.8" width="12.8"/></button>
 
-                  <img src="../../assets/cancel(1).png" height="11.5" width="11.5"/></button>
-              </ng-container>
-            </div>
-          </label>
+                  <button *ngIf="isCardHovered(link)" class="emoji-button minus" (click)="selectByParentRecursively(false, link.link)">
+
+                    <img src="../../assets/cancel(1).png" height="11.5" width="11.5"/></button>
+                </ng-container>
+              </div>
+            </label>
+          </div>
         </div>
 
 
         <!-- Button group -->
 
       </div>
-      <div class="button-group sticky-bottom">
-        <div class="last-button-group">
 
-          <button class="small-button" (click)="selectPage(true)">Select Page</button>
-          <button class="small-button" (click)="selectPage(false)">Clear Page</button>
-          <button class="small-button" (click)="selectAllLinks(true)">Select All</button>
-          <button class="small-button" (click)="selectAllLinks(false)">Clear All</button>
-
-
-        </div>
-        <div class="finish-button">
-          <button class="small-button-finish" (click)="navigateToFinish()">
-
-          </button>
-        </div>
-      </div>
     </div>
     <ng-template #loading>
       <div class="card-list container loading-screen">
         <div class="loading">
-          <img src="/assets/loading-gif-black.gif" alt="Loading..."/>
+          <img src="../../assets/spinner.gif"  style="width: 300px; height: 300px;"/>
           <p>Loading your docs...</p>
         </div>
       </div>
@@ -132,42 +130,16 @@
 
         <div *ngIf="loadingSortedProcess; else loadingContainer" class="progress">
           <div class="circular-progress">
-            <svg class="progress-ring" viewBox="0 0 100 100">
-              <defs>
-                <!-- Gradient Definition -->
-                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stop-color="#3a30a8" />
-                  <stop offset="25%" stop-color="#5359bf" />
-                  <stop offset="50%" stop-color="#6d82d1" />
-                  <stop offset="75%" stop-color="#89abe3" />
-                  <stop offset="100%" stop-color="#a9bcf5" />
-                </linearGradient>
-              </defs>
-              <!-- Background Circle -->
-              <circle
-                class="progress-ring__background"
-                cx="50"
-                cy="50"
-                r="45"
-              ></circle>
-              <!-- Gradient Progress Circle -->
-              <circle
-                class="progress-ring__circle"
-                cx="50"
-                cy="50"
-                r="45"
-                stroke="url(#gradient)"
-                [attr.stroke-dasharray]="circumference"
-                [attr.stroke-dashoffset]="strokeDashoffset"
-              ></circle>
-            </svg>
+            <!-- Larger GIF for loading spinner -->
+            <img class="loading-spinner" src="../../assets/spinner.gif" alt="Loading..."
+                 style="width: 300px; height: 300px;"/>
             <div class="percentage-text">
               {{ progressPercentage.toFixed(2) }}%
             </div>
           </div>
         </div>
         <ng-template #loadingContainer>
-          <img src="../../assets/loading-gif-black.gif" height="50" width="50" />
+          <img src="../../assets/spinner.gif"  style="width: 300px; height: 300px;" />
         </ng-template>
 <!--        <button class="refresh-button" (click)="refresh()">Refresh</button>-->
       </div>
