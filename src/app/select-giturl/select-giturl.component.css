@@ -19,6 +19,10 @@
   border-radius: 8px;
   z-index: 1;
   box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+  overflow-y: scroll;
+  overflow-x: hidden;
+  /*max-height: 90vh;*/
+  height: 750px; /* Fixed height */
 }
 
 body, h1, h2, h3, p, ul, li, a {
@@ -32,8 +36,8 @@ body, h1, h2, h3, p, ul, li, a {
   margin-top: 10px;
 }
 
+
 .animated-input .form-input {
-  width: 90%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -366,8 +370,14 @@ input:checked + .slider:before {
 /* Custom scrollbar for .string-list-container */
 /* Custom scrollbar for .string-list-container */
 .string-list-container {
-  max-height: 300px; /* Ensure the container allows scrolling */
+  max-height: 120px; /* Ensure the container allows scrolling */
   overflow-y: auto;
+  overflow-x: hidden; /* Prevent horizontal overflow */
+}
+
+body{
+  overflow-y: scroll;
+  height: 100%;
 }
 
 /* WebKit-specific styles */
@@ -393,9 +403,8 @@ input:checked + .slider:before {
   margin-bottom: 5px;
 }
 
-.list-input {
+.animated-input .list-input {
   width: calc(100% - 10px);
-  margin: 0 5px;
 }
 
 .add-button {
@@ -439,6 +448,8 @@ input:checked + .slider:before {
 
 .form-content{
   padding-top: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 

@@ -40,7 +40,6 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
   }
 
 
-
   constructor(
     private linksService: LinksService,
     private processService: ProcessService,
@@ -63,13 +62,12 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
     });
   }
 
-
-
   private startAutoRefresh(): void {
-    // Set up polling every 5 seconds
-    this.autoRefreshSubscription = interval(3000).subscribe(() => {
-      this.getProcessesFromUrl();
-    });
+    if(this.isFinished) {
+      this.autoRefreshSubscription = interval(3000).subscribe(() => {
+        this.getProcessesFromUrl();
+      });
+    }
   }
 
   private stopAutoRefresh(): void {
@@ -78,8 +76,6 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
       this.autoRefreshSubscription.unsubscribe();
     }
   }
-
-
 
 
   navigateToLink(link: string): void {
@@ -112,34 +108,35 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
   }
 
   getLabel(link: Link): string {
-    return link.link.split("//")[1];
+    let label = link.link.split(this.prevLink + "/")[1];
+    label = label.replaceAll("/", "-")
+    return label
   }
 
   selectPage(activeStatus: boolean): void {
-    this.isSelectDocs=true
+    this.isSelectDocs = true
     this.linksService.activateAllLinksFromParent(this.prevLink, activeStatus).subscribe(
       (response) => {
-        this.isSelectDocs=false
+        this.isSelectDocs = false
       }
     )
   }
 
 
-
   selectByParentRecursively(activeStatus: boolean, prevLink: string): void {
-    this.isSelectDocs=true
+    this.isSelectDocs = true
     this.linksService.activateAllLinksFromParentRecursively(prevLink, activeStatus).subscribe(
       (response) => {
-        this.isSelectDocs=false
+        this.isSelectDocs = false
       }
     )
   }
 
   selectAllLinks(activeStatus: boolean): void {
-    this.isSelectDocs=true
+    this.isSelectDocs = true
     this.linksService.activateAllLinksFromDocsUrl(this.docs_url, activeStatus).subscribe(
       (response) => {
-        this.isSelectDocs=false
+        this.isSelectDocs = false
       }
     )
   }
@@ -160,12 +157,12 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
       if (link !== '') {
         if (counter > 0) {
           acc += "/" + link
-        }else{
+        } else {
           acc += link
         }
         breadcrumbs.push([link, acc]);
       }
-      counter+=1
+      counter += 1
     }
 
     return breadcrumbs;
@@ -173,11 +170,11 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
 
   getColor(link: Link) {
     let color = null
-    if(link.processed){
+    if (link.processed) {
       color = "#BA55D3"
     }
 
-    if(link.active && !link.processed){
+    if (link.active && !link.processed) {
       color = "#98FB98"
     }
 
@@ -186,7 +183,7 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
 
 
   navigateBack() {
-    this.location.back();
+    this.router.navigate(['/collections']);
   }
 
 
@@ -199,7 +196,7 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
   }
 
   navigateToFinish(): void {
-    this.router.navigate(['/finish'], { queryParams: { url: this.docs_url, type: "docs" } });
+    this.router.navigate(['/finish'], {queryParams: {url: this.docs_url, type: "docs"}});
   }
 
   getSortedProcesses(): [string, [boolean, number]][] {
@@ -211,10 +208,10 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
   getLastProcessType(): string {
     let li = Array.from(this.processMap.entries())
       .sort((a, b) => a[1][1] - b[1][1]);
-    return li[li.length-1][0]
+    return li[li.length - 1][0]
   }
 
-  refresh(){
+  refresh() {
     this.loadingSortedProcess = false;
     this.getProcessesFromUrl()
   }
@@ -239,11 +236,10 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
   }
 
 
-
   protected readonly of = of;
 
   navigateToDisplayContent(base_url: string, link: string) {
-    this.router.navigate(['/collection-data'], { queryParams: { baseUrl: base_url, link: link } });
+    this.router.navigate(['/collection-data'], {queryParams: {baseUrl: base_url, link: link}});
   }
 
 

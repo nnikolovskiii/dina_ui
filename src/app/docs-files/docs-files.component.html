@@ -1,13 +1,12 @@
 <body class="bg-wrapper">
 <header>
   <div class="logo">
-    <img src="../../assets/logo2.png" alt="Logo" class="logo-img">
+    <img src="../../assets/logoTransparent.png" alt="Logo" class="logo-img">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
     Code Explore
   </div>
 </header>
-
 
 
 <section>
@@ -23,7 +22,7 @@
       <a
         class="breadcrumb-link"
         [routerLink]="['/docs-files']"
-        [queryParams]="{ prevLink: breadcrumb[1] }"
+        [queryParams]="{ prevLink: breadcrumb[1], docs_url: docs_url }"
       >
         {{ breadcrumb[0] }}
       </a>
@@ -48,7 +47,6 @@
             </button>
           </div>
         </div>
-
 
 
         <div class="scrollable-cards">
@@ -92,10 +90,12 @@
                   <img src="../../assets/find.png" height="15" width="15"/></button>
 
                 <ng-container *ngIf="link.is_parent">
-                  <button *ngIf="isCardHovered(link)" class="emoji-button plus" (click)="selectByParentRecursively(true, link.link)">
+                  <button *ngIf="isCardHovered(link)" class="emoji-button plus"
+                          (click)="selectByParentRecursively(true, link.link)">
                     <img src="../../assets/plus-symbol-button(1).png" height="12.8" width="12.8"/></button>
 
-                  <button *ngIf="isCardHovered(link)" class="emoji-button minus" (click)="selectByParentRecursively(false, link.link)">
+                  <button *ngIf="isCardHovered(link)" class="emoji-button minus"
+                          (click)="selectByParentRecursively(false, link.link)">
 
                     <img src="../../assets/cancel(1).png" height="11.5" width="11.5"/></button>
                 </ng-container>
@@ -113,7 +113,7 @@
     <ng-template #loading>
       <div class="card-list container loading-screen">
         <div class="loading">
-          <img src="../../assets/spinner.gif"  style="width: 300px; height: 300px;"/>
+          <img src="../../assets/spinner.gif" style="width: 300px; height: 300px;"/>
           <p>Loading your docs...</p>
         </div>
       </div>
@@ -139,9 +139,9 @@
           </div>
         </div>
         <ng-template #loadingContainer>
-          <img src="../../assets/spinner.gif"  style="width: 300px; height: 300px;" />
+          <img src="../../assets/spinner.gif" style="width: 300px; height: 300px;"/>
         </ng-template>
-<!--        <button class="refresh-button" (click)="refresh()">Refresh</button>-->
+        <!--        <button class="refresh-button" (click)="refresh()">Refresh</button>-->
       </div>
       <div class="progress-container"> <!-- Displays progress stages -->
         <div class="dot-container" *ngFor="let values of getSortedProcesses()">
@@ -154,3 +154,4 @@
   </ng-template>
 
 </section>
+</body>
