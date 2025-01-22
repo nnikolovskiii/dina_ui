@@ -11,35 +11,51 @@
 
 <section>
   <div class="blob"></div>
-  <div class="container">
+  <div class="container" *ngIf="!loading; else loading1;">
     <!--  <div class="tabs">-->
     <!--    <div class="tab" [class.active]="selectedStatus === 'code'" (click)="changeDisplayUrls('code')">Code</div>-->
     <!--    <div class="tab" [class.active]="selectedStatus === 'docs'" (click)="changeDisplayUrls('docs')">Docs</div>-->
     <!--  </div>-->
 
     <div *ngIf="selectedStatus==='docs';else code">
-      <div class="card"
-           *ngFor="let url of displayedUrls"
-      >
 
-        <a class="card-label"
-           [routerLink]="['/docs-files']"
-           [queryParams]="{ prevLink: url.url, docs_url: url.url }"
-           (click)="refresh()">
-          {{ getLabel(url.url) }}
-        </a>
-        <label class="switch">
-          <div *ngIf="url.loaded; else loading1">
-            <input type="checkbox"
-                   [checked]="url.active"
-                   (change)="toggleUrlActive(url)"
-            >
-            <span class="slider round"></span>
+      <div *ngFor="let url of displayedUrls">
+        <div class="card" *ngIf="url.loaded; else loading1;">
+          <a class="card-label"
+             [routerLink]="['/docs-files']"
+             [queryParams]="{ prevLink: url.url, docs_url: url.url }"
+             (click)="refresh()">
+            {{ getLabel(url.url) }}
+          </a>
+          <label class="switch">
+            <div>
+              <input type="checkbox"
+                     [checked]="url.active"
+                     (change)="toggleUrlActive(url)"
+              >
+              <span class="slider round"></span>
+            </div>
+          </label>
+        </div>
+        <ng-template #loading1>
+          <div class="card pulse-element">
+            <a class="card-label"
+               [routerLink]="['/docs-files']"
+               [queryParams]="{ prevLink: url.url, docs_url: url.url }"
+               (click)="refresh()">
+              {{ getLabel(url.url) }}
+            </a>
+            <label class="switch">
+              <div>
+                <input type="checkbox"
+                       [checked]="url.active"
+                       (change)="toggleUrlActive(url)"
+                >
+                <span class="slider round"></span>
+              </div>
+            </label>
           </div>
-          <ng-template #loading1>
-            <img src="/assets/loading-gif-black.gif" alt="Loading..." height="40" width="40"/>
-          </ng-template>
-        </label>
+        </ng-template>
       </div>
     </div>
 
@@ -70,5 +86,14 @@
       </div>
     </ng-template>
   </div>
+
+  <ng-template #loading1>
+    <div class="card-list container">
+      <div class="loading">
+        <img src="../../assets/spinner.gif" style="width: 300px; height: 300px;"/>
+        <p>Loading your docs...</p>
+      </div>
+    </div>
+  </ng-template>
 </section>
 </body>

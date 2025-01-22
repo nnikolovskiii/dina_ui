@@ -1,14 +1,17 @@
 import {Component, OnInit, OnDestroy, Input} from '@angular/core';
 import {CodeProcessService} from '../code-process.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Location} from '@angular/common';
+import {Location, NgForOf, NgIf} from '@angular/common';
 import {firstValueFrom} from 'rxjs';
 import {DocsService} from '../docs.service';
 import {LinksService} from '../links.service';
 @Component({
   selector: 'app-finish',
   standalone: true,
-  imports: [],
+  imports: [
+    NgForOf,
+    NgIf
+  ],
   templateUrl: './finish.component.html',
   styleUrl: './finish.component.css'
 })

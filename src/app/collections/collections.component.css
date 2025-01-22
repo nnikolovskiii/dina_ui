@@ -92,12 +92,10 @@ header .logo {
   display: flex;
   flex-direction: column;
   margin-bottom: 60px;
-  max-height: 750px;
+  height: 750px;
   gap: 0;
   overflow-y: scroll;
   overflow-x: hidden;
-  /*justify-content: center;*/
-  /*align-items: center;*/
 }
 
 .tabs {
@@ -441,7 +439,6 @@ header .logo {
   color: #fff;
 }
 
-
 .switch {
   position: relative;
   display: inline-block;
@@ -481,7 +478,7 @@ header .logo {
 }
 
 input:checked + .slider {
-  background-color: rgba(100, 149, 237, 1);
+  background-color:#ade5ff;
 }
 
 input:checked + .slider:before {
@@ -494,4 +491,26 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.pulse-element {
+  text-align: center;
+  background: linear-gradient(300deg, #ade5ff, #18738f);
+  background-size: 300% 300%;
+  animation: gradient-animation 4s ease infinite;
+  color: #fff;
+  position: relative;
+  z-index: 1;
 }

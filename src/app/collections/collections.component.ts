@@ -15,13 +15,12 @@ import {Url} from '../models/url';
 })
 export class CollectionsComponent {
   displayedUrls: Url[] | undefined;
+  loading: boolean = true;
 
   constructor(
     private codeProcessService: CodeProcessService,
     private docsService: DocsService,
-    private router: Router,
     private route: ActivatedRoute,
-    private location: Location,
   ) {
   }
 
@@ -37,15 +36,24 @@ export class CollectionsComponent {
 
   toggleUrlActive(url: Url): void {
     url.active = !url.active;
+
     if (this.selectedStatus === 'code') {
-      this.codeProcessService.change_active_repos([url.url], [url.active]).subscribe()
-    }else{
-      url.loaded = false
-      this.docsService.activateDocsUrl(url.url, url.active).subscribe(
-        (response) => {
-          url.loaded = true
-        }
-      )
+      this.codeProcessService.change_active_repos([url.url], [url.active]).subscribe();
+    } else {
+      url.loaded = false;
+
+      // Delay the API call by 3 seconds
+      setTimeout(() => {
+        this.docsService.activateDocsUrl(url.url, url.active).subscribe(
+          (response) => {
+            url.loaded = true;
+          },
+          (error) => {
+            console.error('Error activating/deactivating URL:', error);
+            url.loaded = true;
+          }
+        );
+      }, 1000);
     }
   }
 
@@ -67,12 +75,8 @@ export class CollectionsComponent {
       (urls: Url[]) => {
         this.displayedUrls = urls;
         console.log(this.displayedUrls);
-
+        this.loading = false;
       },
-      (error) => {
-        console.error('Error fetching processes:', error);
-        // Handle error appropriately, e.g., show error message to user
-      }
     );
   }
 

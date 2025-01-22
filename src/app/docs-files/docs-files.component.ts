@@ -56,7 +56,6 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
       this.docs_url = params['docs_url'] || '';
 
       this.links$ = this.linksService.getLinksFromParent(this.prevLink);
-      console.log("lol")
       this.getProcessesFromUrl()
       this.startAutoRefresh(); // Start the auto-refresh process
     });
@@ -241,6 +240,5 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
   navigateToDisplayContent(base_url: string, link: string) {
     this.router.navigate(['/collection-data'], {queryParams: {baseUrl: base_url, link: link}});
   }
-
 
 }
