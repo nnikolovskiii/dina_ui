@@ -1,4 +1,15 @@
+<body class="bg-wrapper">
+<header>
+  <div class="logo">
+    <img src="../../../../../assets/logoTransparent.png" alt="Logo" class="logo-img">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+    Code Explore
+  </div>
+</header>
+
 <div class="container">
+  <div class="blob"></div>
   <div class="tabs">
     <div class="tab" [class.active]="selectedStatus === 'ongoing'" (click)="changeDisplayProcesses('ongoing')">Ongoing</div>
     <div class="tab" [class.active]="selectedStatus === 'finished'" (click)="changeDisplayProcesses('finished')">Finished</div>
@@ -37,3 +48,4 @@
 <!--    </div>-->
   </div>
 </div>
+</body>
