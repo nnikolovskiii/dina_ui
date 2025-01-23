@@ -1,0 +1,48 @@
+<body>
+<header>
+  <div class="logo">
+    <img src="../../../../../assets/logoTransparent.png" alt="Logo" class="logo-img">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+    Code Explore
+  </div>
+  <nav>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Services</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero bg-wrapper ">
+  <div class="blob"></div>
+  <h1 id="welcomeText">Welcome to Code Explore</h1>
+  <p>Chat with code docs and GitHub repos.</p>
+  <button (click)="navigateToChat()">START CHAT</button>
+  <div class="blob2"></div>
+
+
+  <section class="features">
+    <div class="feature" (click)="navigateToExtractUrl()">
+      <h3>Add Documents or Repositories</h3>
+      <p>Effortlessly include new documentation or repositories in your collection and get ready to chat with them.</p>
+    </div>
+    <div class="feature" (click)="navigateToUrls()">
+      <h3>Manage Your Collections</h3>
+      <p>Browse and manage your saved docs and repos, toggle their active status, and customize embeddings with
+        ease.</p>
+    </div>
+    <div class="feature" (click)="navigateToProgress()">
+      <h3>Track Your Progress</h3>
+      <p>Monitor the creation, context extraction, and embedding progress of your collections in real-time.</p>
+    </div>
+  </section>
+
+</section>
+
+<footer>
+  <p>&copy; 2024 Code Explorer. All rights reserved.</p>
+</footer>
+</body>
