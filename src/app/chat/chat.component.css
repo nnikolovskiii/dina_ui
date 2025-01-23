@@ -1,5 +1,3 @@
-
-
 .toggle-button {
   cursor: pointer;
 }
@@ -34,6 +32,18 @@
   transition: left 0.3s ease;
 }
 
+/* WebKit-specific styles */
+.sliding-bar::-webkit-scrollbar {
+  width: 10px; /* Scrollbar width */
+  height: 5px; /* Horizontal scrollbar height */
+}
+
+.sliding-bar::-webkit-scrollbar-thumb {
+  background: rgb(67,69,74); /* Gradient color for thumb */
+  border-radius: 1px; /* Rounded corners for the thumb */
+}
+
+
 .subheading {
   font-size: 1.2em; /* Larger font size */
   font-weight: bold; /* Make it bold */
@@ -43,6 +53,8 @@
   letter-spacing: 1.5px;
   margin-right: 3px/* Add some spacing between letters */
 }
+
+
 
 
 .chat-history-heading{
@@ -71,11 +83,17 @@
 
 .chat-entry:hover {
   cursor: pointer;
-  background-color: rgba(211, 211, 211, 1);
+  background-color: #43454a;
   margin-right: 20px;
   border-radius: 5px;
 }
 
+#block{
+  display: block;
+  width: 100%;
+  height: 100px;
+  flex-shrink: 0;
+}
 .add-chat{
   height: 100%;
   display: flex;
@@ -126,7 +144,7 @@
 #new-chat-button {
   width: 30px;
   height: 30px;
-  background-image: url('../../assets/chat.png');
+  background-image: url('../../assets/new-message.png');
   background-size: cover; /* Ensures the image covers the entire div */
   background-position: center; /* Centers the image */
   cursor: pointer;
@@ -156,12 +174,12 @@
   flex-flow: column;
   align-items: center;
   padding-top:37px;
-  gap: 30px;
+  gap: 15px;
 }
 
 .image-div{
-  width: 100%;
-  height: 34px;
+  width: 40px;
+  height: 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -169,16 +187,56 @@
 }
 
 .image-div:hover {
-  border-right: 3px solid #666362;
-  border-radius: 5px; /* Add a radius */
+  background-color: #43454a;
   cursor: pointer;
+  border-radius: 5px;
 }
 
 .image-div.selected {
-  border-right: 3px solid #666362;
-  border-radius: 5px; /* Add a radius */
+  background-color: #43454a;
+  border-radius: 5px;
 }
 
+.assistant-card {
+  position: relative;
+  padding-right: 25px; /* Space for dot */
+}
+
+.streaming-dot-container {
+  position: absolute;
+  right: 8px;
+  bottom: 12px;
+}
+
+.streaming-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  animation: pulse 1.2s infinite ease-in-out;
+  opacity: 0;
+  animation-delay: 0.2s;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.6;
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.2);
+  }
+  70% {
+    transform: scale(1.1);
+    opacity: 1;
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0);
+  }
+  100% {
+    transform: scale(0.9);
+    opacity: 0.6;
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+  }
+}
+
+/*new code*/
 .chat-models{
   height: 100%;
   flex:5;
@@ -243,13 +301,13 @@
 
 
 .chat-model-name:hover{
-  background-color: rgba(211, 211, 211, 1);
+  background-color: #43454a;
   border-radius: 5px;
   cursor: pointer;
 }
 
 .chat-model-name.selected{
-  background-color: rgba(211, 211, 211, 1);
+  background-color: #43454a;
   border-radius: 5px;
   cursor: pointer;
 }
@@ -338,6 +396,17 @@
   overflow-y: auto;
 }
 
+/* WebKit-specific styles */
+.chat-container::-webkit-scrollbar {
+  width: 10px; /* Scrollbar width */
+  height: 5px; /* Horizontal scrollbar height */
+}
+
+.chat-container::-webkit-scrollbar-thumb {
+  background: rgb(67,69,74); /* Gradient color for thumb */
+  border-radius: 1px; /* Rounded corners for the thumb */
+}
+
 .messages {
   flex: 1;
   padding: 15px;
@@ -379,21 +448,37 @@ form {
   justify-content: center; /* Center horizontally */
   align-items: center; /* Center vertically */
   gap: 0px; /* Gap between items */
+  background-color: transparent; /* Fully transparent background */
+  width: 900px;
+  position: fixed; /* Fix the form in place */
+  bottom: 5px; /* Place it at the bottom of the viewport */
+  left: 50%; /* Move to the center horizontally */
+  transform: translateX(-50%); /* Adjust for true center */
+  z-index: 1;
+}
+
+#block1 {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  gap: 0px; /* Gap between items */
   background-color: #1e1f22; /* Fully transparent background */
   width: 900px;
   position: fixed; /* Fix the form in place */
-  bottom: 0; /* Place it at the bottom of the viewport */
+  bottom: 0px; /* Place it at the bottom of the viewport */
   left: 50%; /* Move to the center horizontally */
   transform: translateX(-50%); /* Adjust for true center */
+  height:10px;
+  /*z-index: 0;*/
 }
 
 
 #form-div{
   flex: 1;
   display: flex;
-  justify-content: space-between; /* Center horizontally */
+  justify-content: space-between;
   align-items: center;
-  gap: 3px;/* Center vertically */
+  gap: 3px;
   background-color: #34373b;
   border-radius: 10px;
   padding-left: 10px;
@@ -407,7 +492,10 @@ form {
   width: 100%;
   height: 100%;
   align-items: center;
-  padding: 5px 5px 7px;
+  padding-left: 5px;
+  padding-right: 5px;
+  /*padding-top: 3px;*/
+  padding-bottom: 3px;
 }
 
 .left-chat-buttons{
@@ -440,7 +528,6 @@ textarea {
 }
 
 .chat_button {
-  background-color:  rgb(232,233,234);
   border: none;
   border-radius: 0px;
   cursor: pointer;
@@ -508,18 +595,6 @@ h1, h2, h3, h4, h5, h6 {
 .reference a:hover{
 }
 
-h1::before,
-h2::before,
-h3::before,
-h4::before,
-h5::before,
-h6::before{
-  content: "";
-  display: block;
-  height: 1px; /* Adjust the height to make the line thicker or thinner */
-  background-color: rgba(220, 220, 220); /* Change the color of the line */
-  margin-bottom: 10px; /* Adjust the margin to increase or decrease the space between the line and the heading */
-}
 
 p{
   margin-bottom: 0px;
@@ -542,7 +617,7 @@ li{
   display: flex;
   flex-flow: row;
   align-items: center;
-  background-color: rgb(108, 160, 220);
+  background-color: #43454a;
   padding-left: 4px;
   padding-right: 4px;
   border-radius: 5px;
@@ -551,22 +626,44 @@ li{
 }
 
 .chat-button-extra:hover{
-  background-color: rgb(118, 170, 230);
+  background-color: #43454a;
   transition: background-color 0.3s ease;
 }
 
 .chat-button-extra:hover .chat_button{
-  background-color: rgb(118, 170, 230);
+  background-color: #43454a;
   transition: background-color 0.3s ease;
 }
 
 .chat-button-extra .chat_button{
-  background-color: rgb(108, 160, 220);
+  background-color: #43454a;
   padding:2px;
 }
 
 .chat-button-extra-text{
   padding:2px;
+}
+
+.left-chat-buttons .chat_button{
+  height: 30px;
+  width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+}
+
+.right-chat-buttons .chat_button{
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+}
+
+.left-chat-buttons  .chat_button:hover{
+  background-color: #43454a;
 }
 
 /*.vanilla{*/
@@ -612,4 +709,38 @@ body{
 
 .assistant-card pre{
   border-radius: 10px;
+}
+
+/* Update copy button styles */
+.copy-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 4px;
+  padding: 4px 8px;
+  cursor: pointer;
+  color: #ffffff;
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  transform: translateY(-5px);
+  transition: opacity 0.3s ease, transform 0.3s ease, background 0.2s ease;
+  pointer-events: none; /* Add this line */
+}
+
+pre:hover .copy-btn {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto; /* Add this line */
+}
+
+/* Add this new rule */
+pre:has(.copy-btn:hover) .copy-btn {
+  opacity: 1 !important;
+}
+
+
+pre {
+  position: relative !important;
 }
