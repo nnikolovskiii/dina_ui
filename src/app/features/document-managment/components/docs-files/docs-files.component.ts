@@ -45,7 +45,6 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
     private processService: ProcessService,
     private router: Router,
     private route: ActivatedRoute,
-    private location: Location,
     private cdr: ChangeDetectorRef
   ) {
   }
@@ -198,12 +197,27 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
     this.router.navigate(['/finish'], {queryParams: {url: this.docs_url, type: "docs"}});
   }
 
-  getSortedProcesses(): [string, [boolean, number]][] {
-    return Array.from(this.processMap.entries())
-      .filter(([key, value]) => value[1] !== 0)
-      .sort((a, b) => a[1][1] - b[1][1]);
-  }
+  getProcesses(): [string, number][] {
+    let li:[string,number][] = []
+    let setCurrent = false;
+    for(let processName of ["traverse", "extract", "check", "parents"]){
+      if(processName == this.currentProcess?.process_type){
+        setCurrent = true;
+        li.push([processName, 1])
+      }else{
+        if (setCurrent) {
+          li.push([processName, 0])
+        }else{
+          li.push([processName, 2])
+        }
+      }
+    }
 
+    if (!setCurrent) {
+      return [["traverse", 0], ["extract",0], ["check",0], ["parents",0]]
+    }
+    return li
+  }
   getLastProcessType(): string {
     let li = Array.from(this.processMap.entries())
       .sort((a, b) => a[1][1] - b[1][1]);
@@ -216,7 +230,6 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
   }
 
   getProcessesFromUrl(): void {
-    console.log("Fetching process data...");
     this.processService.getProcessesFromUrl(this.docs_url, "pre").subscribe(
       response => {
         this.isFinished = response.get("main")?.[0] ?? true;
@@ -234,11 +247,31 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
     );
   }
 
+  isCurrent(name: string){
+    return this.currentProcess?.process_type == name;
+  }
+
 
   protected readonly of = of;
 
   navigateToDisplayContent(base_url: string, link: string) {
     this.router.navigate(['/collection-data'], {queryParams: {baseUrl: base_url, link: link}});
+  }
+
+  getBorderClass(status: number): string {
+    return {
+      0: 'border-gray-300',
+      2: 'border-green-300',
+      1: 'border-indigo-300',
+    }[status] ?? 'border-gray-300'; // Default to gray border
+  }
+
+  getDotClass(status: number): string {
+    return {
+      0: 'bg-gray-300',
+      2: 'bg-green-500',
+      1: 'bg-indigo-500',
+    }[status] ?? 'bg-gray-300'; // Default to gray dot
   }
 
 }

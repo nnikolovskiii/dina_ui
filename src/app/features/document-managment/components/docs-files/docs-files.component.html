@@ -119,6 +119,8 @@
       </div>
     </ng-template>
   </div>
+
+
   <ng-template #process>
 
     <div class="card-list container">
@@ -130,9 +132,35 @@
 
         <div *ngIf="loadingSortedProcess; else loadingContainer" class="progress">
           <div class="circular-progress">
-            <!-- Larger GIF for loading spinner -->
-            <img class="loading-spinner" src="../../../../../assets/spinner.gif" alt="Loading..."
-                 style="width: 300px; height: 300px;"/>
+            <svg class="progress-ring" viewBox="0 0 100 100">
+              <defs>
+                <!-- Gradient Definition -->
+                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#3a30a8"/>
+                  <stop offset="25%" stop-color="#5359bf"/>
+                  <stop offset="50%" stop-color="#6d82d1"/>
+                  <stop offset="75%" stop-color="#89abe3"/>
+                  <stop offset="100%" stop-color="#a9bcf5"/>
+                </linearGradient>
+              </defs>
+              <!-- Background Circle -->
+              <circle
+                class="progress-ring__background"
+                cx="50"
+                cy="50"
+                r="45"
+              ></circle>
+              <!-- Gradient Progress Circle -->
+              <circle
+                class="progress-ring__circle"
+                cx="50"
+                cy="50"
+                r="45"
+                stroke="url(#gradient)"
+                [attr.stroke-dasharray]="circumference"
+                [attr.stroke-dashoffset]="strokeDashoffset"
+              ></circle>
+            </svg>
             <div class="percentage-text">
               {{ progressPercentage.toFixed(2) }}%
             </div>
@@ -143,13 +171,31 @@
         </ng-template>
         <!--        <button class="refresh-button" (click)="refresh()">Refresh</button>-->
       </div>
-      <div class="progress-container"> <!-- Displays progress stages -->
-        <div class="dot-container" *ngFor="let values of getSortedProcesses()">
-          <div class="dot" [ngClass]="{'green': true, 'gray': !true}"></div>
-          <div class="label">{{ values[0] }}</div>
+      <div class="mx-auto flex gap-[40px] flex-row items-center">
+        <div
+          *ngFor="let value of getProcesses()"
+          class="w-20 flex flex-col items-center p-[10px] bg-white rounded-[10px] shadow-sm border-4"
+          [ngClass]="getBorderClass(value[1])"
+        >
+          <div
+            class="w-[15px] h-[15px] rounded-full transition-colors duration-300"
+            [ngClass]="getDotClass(value[1])"
+          ></div>
+          <div class="text-gray-700 text-[14px] mt-[5px]">
+            {{ value[0] }}
+          </div>
         </div>
       </div>
 
+      <div class="h-[200px]">
+      </div>
+      <div class="flex justify-center items-center h-screen">
+        <button
+          (click)="refresh()"
+          class="px-6 py-2 bg-gradient-to-r from-indigo-400 to-indigo-500 text-white font-semibold rounded-lg shadow-lg hover:from-indigo-500 hover:to-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-75 transition-all duration-300 transform hover:scale-105 active:scale-95">
+          Refresh
+        </button>
+      </div>
     </div>
   </ng-template>
 
