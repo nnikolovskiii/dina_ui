@@ -7,6 +7,8 @@ import {CollectionsComponent} from './features/document-managment/components/col
 import {DocsFilesComponent} from './features/document-managment/components/docs-files/docs-files.component';
 import {ListProcesses} from './features/show-process/components/list-processes/list-processes';
 import {HomeComponent} from './features/home/components/home/home.component';
+import {ModelsSidebarComponent} from './features/chat/components/models-sidebar/models-sidebar.component';
+import {HistorySidebarComponent} from './features/chat/components/history-sidebar/history-sidebar.component';
 
 
 export const routes: Routes = [
@@ -18,5 +20,7 @@ export const routes: Routes = [
   {path:'collections', component: CollectionsComponent},
   {path:'process', component: ListProcesses},
   {path:'home', component: HomeComponent},
+  {path:'test', component: ModelsSidebarComponent},
+  {path:'test1', component: HistorySidebarComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];

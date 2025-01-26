@@ -1,0 +1,85 @@
+  <div class="sliding-bar-column">
+    <div class="chat-history-heading">
+      <div (click)="toggleChatModels()">
+        <img src="../../../../../assets/arrow.png" height="22" width="22"/>
+      </div>
+
+      <p class="subheading">Chat Models</p>
+    </div>
+    <div class="line-div">
+      <div class="blank-space">
+      </div>
+
+      <div class="line"></div>
+    </div>
+    <div class="chat-models-segment-2">
+      <div class="chat-apis">
+        <div
+          class="image-div"
+          [class.selected]="selectedApi === 'openai'"
+          (click)="getModelInfo('openai')">
+          <img src="../../../../../assets/open-ai-logo(1).png" height="23"/>
+        </div>
+        <div
+          class="image-div"
+          [class.selected]="selectedApi === 'hugging_face'"
+          (click)="getModelInfo('hugging_face')">
+          <img src="../../../../../assets/hf-logo-removebg-preview.png" height="29"/>
+        </div>
+        <div
+          class="image-div"
+          [class.selected]="selectedApi === 'deepseek'"
+          (click)="getModelInfo('deepseek')">
+          <img src="../../../../../assets/deepseek-removebg-preview.png" height="19"/>
+        </div>
+      </div>
+
+      <div class="chat-models">
+        <div class="model-list">
+          <div
+            class="model-name"
+            [class.selected]="selectedInfo === 'models'"
+            (click)="changeSelectedInfo('models')">
+            MODELS
+          </div>
+          <div
+            class="model-name"
+            [class.selected]="selectedInfo === 'api'"
+            (click)="changeSelectedInfo('api')">
+            API
+          </div>
+        </div>
+        <div *ngIf="selectedInfo === 'models'; else api" class="all-models">
+          <div
+            [class.selected]="activeModel?.name === chatModel.name"
+            *ngFor="let chatModel of chatModels;  let i = index" class="chat-model-name">
+            <div
+              (click)="setActiveChatModel(chatModel.name)">
+              {{ chatModel.name }}
+            </div>
+          </div>
+
+          <div *ngIf="isAddingModel" class="add-model-input">
+            <input type="text" [(ngModel)]="newModelName" placeholder="Enter model name"/>
+            <button (click)="confirmAddModel()"><img src="../../../../../assets/check.png" height="15" width="15"/>
+            </button>
+            <button (click)="cancelAddModel()"><img src="../../../../../assets/close(1).png" height="12" width="12"/>
+            </button>
+          </div>
+
+
+          <!-- Add button -->
+          <div class="chat-model-name flex justify-center items-center" *ngIf="!isAddingModel" (click)="addChatModel()">
+            <img src="../../../../../assets/add(4).png" class="h-3 w-3"/>
+          </div>
+        </div>
+
+
+        <ng-template #api>
+          <div class="all-models api">
+            <div class="fixed-scrollable">{{ chatApi["api_key"] }}</div>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>

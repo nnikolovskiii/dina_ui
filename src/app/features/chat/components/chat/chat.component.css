@@ -20,186 +20,57 @@
 
 
 
-/* Sliding bar styles */
 .sliding-bar {
   position: fixed;
   top: 0;
-  left: -250px; /* Hidden position */
+  left: -250px;
   width: 250px;
   height: 100%;
-  background-color: #2a2d31;
   overflow-y: auto;
   transition: left 0.3s ease;
+  background-color: #2a2d31;
 }
 
-/* WebKit-specific styles */
 .sliding-bar::-webkit-scrollbar {
-  width: 10px; /* Scrollbar width */
-  height: 5px; /* Horizontal scrollbar height */
+  width: 10px;
+  height: 5px;
 }
 
 .sliding-bar::-webkit-scrollbar-thumb {
-  background: rgb(67,69,74); /* Gradient color for thumb */
-  border-radius: 1px; /* Rounded corners for the thumb */
+  background: rgb(67,69,74);
+  border-radius: 1px;
 }
 
 
-.subheading {
-  font-size: 1.2em; /* Larger font size */
-  font-weight: bold; /* Make it bold */
-  text-align: center; /* Center the text */
-  margin: 5px 0; /* Add spacing around it */
-  text-transform: uppercase; /* Make the text uppercase for emphasis */
-  letter-spacing: 1.5px;
-  margin-right: 3px/* Add some spacing between letters */
-}
-
-
-
-
-.chat-history-heading{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-top: 20px;
-}
-
-.sliding-bar-column{
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-.chat-history{
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  padding-top: 15px;
-  padding-left: 30px;
-}
-
-.chat-entry:hover {
-  cursor: pointer;
-  background-color: #43454a;
-  margin-right: 20px;
-  border-radius: 5px;
-}
-
-#block{
-  display: block;
-  width: 100%;
-  height: 100px;
-  flex-shrink: 0;
-}
-.add-chat{
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
-  padding-bottom: 15px;
-}
-
-.chat-entry{
-  font-size:14px;
-  padding: 4px 0px;
-  padding-left: 10px;
-}
-
-.history-header{
-  font-size: 10.5px;
-  font-weight: bold;
-}
 
 .sliding-bar.open {
-  left: 0; /* Visible position */
+  left: 0;
 }
 
-/* Content area styles */
 .content {
   margin-left: 0;
   transition: margin-left 0.3s ease;
 }
 
 .sliding-bar.open ~ .content {
-  margin-left: 250px; /* Adjust main docs-content when bar is open */
+  margin-left: 250px;
 }
 
-.chat-models-segment-2{
-  display: flex;
-  flex-direction: row;
-  height: 100%;
-  padding-left: 12px;
-}
 
-.breaker{
-  height: 100%;
-  width: 4px;
-  background-color: rgba(211, 211, 211, 1);
-}
 
 #new-chat-button {
   width: 30px;
   height: 30px;
   background-image: url('../../../../../assets/new-message.png');
-  background-size: cover; /* Ensures the image covers the entire div */
-  background-position: center; /* Centers the image */
+  background-size: cover;
+  background-position: center;
   cursor: pointer;
-  transition: background-image 0.2s ease; /* Adds a transition for the background image */
-}
-
-/*#new-chat-button:hover {*/
-/*  background-image: url('../../assets/chat(1).png');*/
-/*  background-size: cover; !* Ensures the image covers the entire div *!*/
-/*  background-position: center; !* Centers the image *!*/
-/*  cursor: pointer;*/
-/*}*/
-.breaker1{
-  width: 100%;
-  height: 2px;
-  background-color: rgba(211, 211, 211, 1);
-}
-
-.references{
-
-}
-
-.chat-apis{
-  height: 100%;
-  flex:1;
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  padding-top:37px;
-  gap: 15px;
-}
-
-.image-div{
-  width: 40px;
-  height: 40px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.image-div:hover {
-  background-color: #43454a;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.image-div.selected {
-  background-color: #43454a;
-  border-radius: 5px;
+  transition: background-image 0.2s ease;
 }
 
 .assistant-card {
   position: relative;
-  padding-right: 25px; /* Space for dot */
+  padding-right: 25px;
 }
 
 .streaming-dot-container {
@@ -234,120 +105,6 @@
     opacity: 0.6;
     box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
   }
-}
-
-/*new code*/
-.chat-models{
-  height: 100%;
-  flex:5;
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-}
-
-.model-list{
-  display: flex;
-  flex-flow: row;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  width: 100%;
-  padding-right: 20px;
-}
-
-.model-name{
-  width:100%;
-  text-align: center;
-  cursor: pointer;
-}
-.model-name:hover {
-  border-bottom: 2px solid #666362;
-}
-
-.model-name.selected {
-  border-bottom: 2px solid #666362;
-}
-
-.all-models{
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  width: 100%;
-  padding-right: 20px;
-  padding-top: 15px;
-  padding-left: 20px;
-}
-
-
-.chat-model-name{
-  width:100%;
-  text-align: center;
-  letter-spacing: 1px;
-  font-size: 0.8em;
-  padding: 10px 4px;
-}
-
-.fixed-scrollable {
-  width: 160px; /* Set a fixed width */
-  overflow-x: auto; /* Enable horizontal scrolling if docs-content overflows */
-  white-space: nowrap; /* Prevent text from wrapping to a new line */
-  border: 1px solid #ccc; /* Optional: Add a border for better visibility */
-  padding: 5px; /* Optional: Add padding for spacing */
-}
-
-.api{
-  padding-top: 11px;
-}
-
-
-.chat-model-name:hover{
-  background-color: #43454a;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.chat-model-name.selected{
-  background-color: #43454a;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-
-.add-model-input input {
-  width: 100%;
-  padding: 10px 10px;
-  font-size: 0.8em;
-  border: 1px solid #ccc;
-  background-color: rgba(211, 211, 211, 1);
-  border-radius: 4px;
-  outline: none;
-  transition: border-color 0.3s;
-}
-
-
-.add-model-input button {
-  padding: 2px 8px; /* Reduced padding for a smaller button size */
-  font-size: 12px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-.add-model-input button:first-of-type {
-  background-color: rgb(128, 180, 240);
-}
-
-.add-model-input button:first-of-type:hover {
-  background-color: rgb(148, 200, 260);
-}
-
-.add-model-input button:last-of-type {
-  background-color: rgba(211,211,211); /* Red */
-}
-
-.add-model-input button:last-of-type:hover {
-  background-color: rgba(181,181,181);
 }
 
 .main-div {
@@ -396,15 +153,13 @@
   overflow-y: auto;
 }
 
-/* WebKit-specific styles */
 .chat-container::-webkit-scrollbar {
-  width: 10px; /* Scrollbar width */
-  height: 5px; /* Horizontal scrollbar height */
+  width: 10px;
+  height: 5px;
 }
-
 .chat-container::-webkit-scrollbar-thumb {
-  background: rgb(67,69,74); /* Gradient color for thumb */
-  border-radius: 1px; /* Rounded corners for the thumb */
+  background: rgb(67,69,74);
+  border-radius: 1px;
 }
 
 .messages {
@@ -422,7 +177,7 @@
   border-radius: 10px;
   padding: 10px 20px;
   max-width: 100%;
-  width: fit-content; /* Ensure the card fits its docs-content */
+  width: fit-content;
   word-wrap: break-word;
   overflow-wrap: break-word;
   margin-left: 0;
@@ -435,7 +190,7 @@
   border-radius: 10px;
   padding: 10px 15px;
   max-width: 70%;
-  width: fit-content; /* Ensure the card fits its docs-content */
+  width: fit-content;
   word-wrap: break-word;
   overflow-wrap: break-word;
   margin-left: auto;
@@ -445,31 +200,30 @@
 
 form {
   display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-  gap: 0px; /* Gap between items */
-  background-color: transparent; /* Fully transparent background */
+  justify-content: center;
+  align-items: center;
+  gap: 0px;
+  background-color: transparent;
   width: 900px;
-  position: fixed; /* Fix the form in place */
-  bottom: 5px; /* Place it at the bottom of the viewport */
-  left: 50%; /* Move to the center horizontally */
-  transform: translateX(-50%); /* Adjust for true center */
+  position: fixed;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 1;
 }
 
 #block1 {
   display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-  gap: 0px; /* Gap between items */
-  background-color: #1e1f22; /* Fully transparent background */
+  justify-content: center;
+  align-items: center;
+  gap: 0px;
+  background-color: #1e1f22;
   width: 900px;
-  position: fixed; /* Fix the form in place */
-  bottom: 0px; /* Place it at the bottom of the viewport */
-  left: 50%; /* Move to the center horizontally */
-  transform: translateX(-50%); /* Adjust for true center */
+  position: fixed;
+  bottom: 0px;
+  left: 50%;
+  transform: translateX(-50%);
   height:10px;
-  /*z-index: 0;*/
 }
 
 
@@ -494,7 +248,6 @@ form {
   align-items: center;
   padding-left: 5px;
   padding-right: 5px;
-  /*padding-top: 3px;*/
   padding-bottom: 3px;
 }
 
@@ -518,7 +271,6 @@ textarea {
   flex: 1;
   width: 100%;
   resize: none;
-  border: 0px solid #ccc;
   border-radius: 13px;
   padding: 10px 10px 3px;
   font-size: 16px;
@@ -527,21 +279,16 @@ textarea {
   color:#e9e3e7;
 }
 
+textarea:focus {
+  outline: none;
+  box-shadow: none;
+}
+
 .chat_button {
   border: none;
   border-radius: 0px;
   cursor: pointer;
 }
-
-/*.chat_button img:hover {*/
-/*  transform: scale(1.1); !* Makes the image 10% bigger *!*/
-/*  transition: transform 0.2s ease; !* Smooth transition for the scale effect *!*/
-/*}*/
-
-/*code{*/
-/*  color:rgb(108, 160, 220);*/
-/*  font-weight: 600;*/
-/*}*/
 
 #gap {
   padding-bottom: 20px;
@@ -560,9 +307,6 @@ a:hover{
   font-weight: 600;
 }
 
-/*pre code{*/
-/*  margin-left: 20px;*/
-/*}*/
 
 .blank-space2{
   height:20px;
@@ -571,11 +315,11 @@ a:hover{
 }
 
 h1, h2, h3, h4, h5, h6 {
-  margin-top: 20px; /* Adjust the value to increase or decrease the space */
+  margin-top: 20px;
 }
 
 .references{
-  margin-top: 20px; /* Adjust the value to increase or decrease the space */
+  margin-top: 20px;
   font-size: 14px;
 }
 .reference_header{
@@ -599,9 +343,7 @@ h1, h2, h3, h4, h5, h6 {
 p{
   margin-bottom: 0px;
 }
-/*strong{*/
-/*  color: rgba(190, 190, 190)*/
-/*}*/
+
 .assistant-card p{
 }
 
@@ -666,11 +408,6 @@ li{
   background-color: #43454a;
 }
 
-/*.vanilla{*/
-/*  padding-right: 8px;*/
-/*}*/
-
-/* Add this to your global styles or component-specific styles */
 .hljs {
   background-color: #2a2d31 !important;
 }
@@ -685,8 +422,8 @@ p, div{
 .bg-wrapper {
   position: relative;
   overflow: hidden;
-  height: 100vh; /* Make sure this covers full screen */
-  z-index: 1; /* Ensure it's above the body background */
+  height: 100vh;
+  z-index: 1;
 }
 
 .bg-wrapper::before {
@@ -698,7 +435,7 @@ p, div{
   left: 0;
   background-image: radial-gradient(rgba(193, 191, 191, 0.35) 1px, transparent 1px);
   background-size: 50px 50px;
-  opacity: 0.7; /* Reduced overall opacity */
+  opacity: 0.7;
   animation: pulsate 20s infinite;
   z-index: -1;
 }
@@ -726,7 +463,6 @@ body{
   border-radius: 10px;
 }
 
-/* Update copy button styles */
 .copy-btn {
   position: absolute;
   top: 8px;
@@ -741,16 +477,15 @@ body{
   opacity: 0;
   transform: translateY(-5px);
   transition: opacity 0.3s ease, transform 0.3s ease, background 0.2s ease;
-  pointer-events: none; /* Add this line */
+  pointer-events: none;
 }
 
 pre:hover .copy-btn {
   opacity: 1;
   transform: translateY(0);
-  pointer-events: auto; /* Add this line */
+  pointer-events: auto;
 }
 
-/* Add this new rule */
 pre:has(.copy-btn:hover) .copy-btn {
   opacity: 1 !important;
 }

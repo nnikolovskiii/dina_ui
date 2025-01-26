@@ -13,13 +13,14 @@ import {CommonModule} from '@angular/common';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 import * as marked from 'marked';
 import {ChatService} from '../../services/chat.service';
-import {firstValueFrom, Observable} from 'rxjs';
 import {ActivatedRoute, Router, RouterModule} from '@angular/router';
 import {FlagService} from '../../../show-process/services/flag/flag.service';
 import {Flag} from '../../../show-process/models/flag';
 import {Chat, ChatApi, ChatModel} from '../../models/chat';
 import hljs from 'highlight.js';
 import {environment} from '../../../../../environments/environment';
+import {HistorySidebarComponent} from '../history-sidebar/history-sidebar.component';
+import {ModelsSidebarComponent} from '../models-sidebar/models-sidebar.component';
 
 interface Message {
   content: string;
@@ -31,7 +32,7 @@ interface Message {
 @Component({
   selector: 'app-chat',
   standalone: true,
-  imports: [FormsModule, CommonModule, RouterModule],
+  imports: [FormsModule, CommonModule, RouterModule, HistorySidebarComponent, ModelsSidebarComponent],
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css'],
   encapsulation: ViewEncapsulation.None
@@ -117,10 +118,6 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit{
     }
   }
 
-
-  getMarkedMessage(message: string): string | Promise<string> {
-    return marked.parse(message);
-  }
 
   expandFlag: boolean = false;
 
@@ -214,17 +211,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit{
       this.barStatus = "history"
     }
 
-    if (!this.initChats) {
-      this.chatService.getChats().subscribe(
-        (chats: any) => {
-          this.chats = chats;
-          console.log(this.chats["today"])
-        },
-        (error) => {
-          console.error('Error fetching chats:', error);
-        })
-    }
-    this.initChats = true;
+    console.log(this.barStatus)
   }
 
   // chats: Chat[] | null = null
@@ -239,68 +226,8 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit{
   }
 
   selectedApi: string = "openai"
-  getModelInfo(model:string){
-    this.selectedApi = model;
-    this.chatService.getChatApiAndModels(model).subscribe(
-      (response) => {
-        this.chatApi = response["api"]
-        this.chatModels = response["models"]
-        console.log(this.chatApi, this.chatModels)
-      },
-      (error) => {
-        console.error('Error fetching chats:', error);
-      })
-  }
 
-  selectedInfo: string = "models"
-  changeSelectedInfo(newSelected:string){
-    this.selectedInfo = newSelected;
-  }
 
-  selectChat(chatId: string) {
-    this.router.navigate(['/chat'], { queryParams: { chat_id: chatId } })
-      .then(() => {
-        // Refresh the site after navigation
-        window.location.reload();
-      });
-  }
-
-  isAddingModel = false; // State to track if we are adding a model
-  newModelName = '';
-
-  addChatModel() {
-    this.isAddingModel = true; // Display the input field and button
-  }
-
-  confirmAddModel() {
-    if (this.newModelName.trim()) {
-      let chatModel = new ChatModel(this.newModelName, this.selectedApi)
-      this.chatService.addChatModel(this.newModelName, this.selectedApi).subscribe(
-        (response) => {
-          this.chatModels?.push(chatModel);
-          this.newModelName = '';
-          this.isAddingModel = false;
-        },
-        (error) => {
-          console.error('Error:', error);
-        }
-      )
-    }
-  }
-
-  cancelAddModel() {
-    this.newModelName = '';
-    this.isAddingModel = false;
-  }
-
-  setActiveChatModel(model:string) {
-    console.log(model, this.selectedApi)
-    this.chatService.setActiveChatModel(model, this.selectedApi).subscribe(
-      (response) => {
-        this.activeModel = new ChatModel(model, this.selectedApi)
-      }
-    )
-  }
 
   ngAfterViewInit(): void {
     setTimeout(() => {
@@ -317,11 +244,6 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit{
     }
   }
 
-  getChats(timePeriod: string) {
-    if (this.chats != null) {
-      return this.chats[timePeriod];
-    }
-  }
   private finalizeCurrentMessage(): void {
     const lastMessage = this.messages[this.messages.length - 1];
     if (lastMessage.type === 'assistant') {
@@ -402,8 +324,6 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit{
       }
     };
 
-    // Keep other WebSocket handlers (onopen, onerror, onclose)
-    // ...
   }
 
 
