@@ -18,37 +18,23 @@
           class="image-div"
           [class.selected]="selectedApi === 'openai'"
           (click)="getModelInfo('openai')">
-          <img src="../../../../../assets/open-ai-logo(1).png" height="23"/>
+          <img src="../../../../../assets/open-ai-logo(1).png" class="h-6"/>
         </div>
         <div
           class="image-div"
           [class.selected]="selectedApi === 'hugging_face'"
           (click)="getModelInfo('hugging_face')">
-          <img src="../../../../../assets/hf-logo-removebg-preview.png" height="29"/>
+          <img src="../../../../../assets/hf-logo-removebg-preview.png"  class="h-7"/>
         </div>
         <div
           class="image-div"
           [class.selected]="selectedApi === 'deepseek'"
           (click)="getModelInfo('deepseek')">
-          <img src="../../../../../assets/deepseek-removebg-preview.png" height="19"/>
+          <img src="../../../../../assets/deepseek-removebg-preview.png"  class="h-5"/>
         </div>
       </div>
 
       <div class="chat-models">
-        <div class="model-list">
-          <div
-            class="model-name"
-            [class.selected]="selectedInfo === 'models'"
-            (click)="changeSelectedInfo('models')">
-            MODELS
-          </div>
-          <div
-            class="model-name"
-            [class.selected]="selectedInfo === 'api'"
-            (click)="changeSelectedInfo('api')">
-            API
-          </div>
-        </div>
         <div *ngIf="selectedInfo === 'models'; else api" class="all-models">
           <div
             [class.selected]="activeModel?.name === chatModel.name"
