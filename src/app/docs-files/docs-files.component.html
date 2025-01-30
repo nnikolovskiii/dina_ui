@@ -11,7 +11,7 @@
 
 <section>
   <div class="blob"></div>
-  <div *ngIf="!isFinished; else process">
+  <div *ngIf="isFinished; else process">
     <div *ngIf="!isSelectDocs; else loading">
       <div *ngIf="links$| async as links ; else loading" class="card-list container">
 
@@ -131,15 +131,14 @@
         <div *ngIf="loadingSortedProcess; else loadingContainer" class="progress">
           <div class="circular-progress">
             <!-- Larger GIF for loading spinner -->
-            <img class="loading-spinner" src="../../assets/spinner.gif" alt="Loading..."
-                 style="width: 300px; height: 300px;"/>
+            <img class="loading-spinner" src="../../assets/final.gif" alt="Loading..."/>
             <div class="percentage-text">
               {{ progressPercentage.toFixed(2) }}%
             </div>
           </div>
         </div>
         <ng-template #loadingContainer>
-          <img src="../../assets/spinner.gif" style="width: 300px; height: 300px;"/>
+          <img src="../../assets/final.gif" style="width: 300px; height: 300px;"/>
         </ng-template>
         <!--        <button class="refresh-button" (click)="refresh()">Refresh</button>-->
       </div>
