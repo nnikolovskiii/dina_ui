@@ -10,7 +10,7 @@
 
 
 <section>
-  <div class="blob"></div>
+  <div class="blob2"></div>
   <div *ngIf="isFinished; else process">
     <div *ngIf="!isSelectDocs; else loading">
       <div *ngIf="links$| async as links ; else loading" class="card-list container">
@@ -198,6 +198,6 @@
       </div>
     </div>
   </ng-template>
-
+  <div class="blob"></div>
 </section>
 </body>
