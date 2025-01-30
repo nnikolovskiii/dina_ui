@@ -1,3 +1,88 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.bg-wrapper {
+  position: relative;
+  overflow: hidden;
+  height: 100vh;
+  z-index: 1;
+}
+
+.bg-wrapper::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-image: radial-gradient(rgba(193, 191, 191, 0.35) 1px, transparent 1px);
+  background-size: 50px 50px;
+  opacity: 0.7; /* Reduced overall opacity */
+  animation: pulsate 20s infinite;
+  z-index: -1;
+}
+
+@keyframes pulsate {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+}
+
+.blob{
+  background: linear-gradient(200deg, #09427c 0%, #09427c 100%);
+  height: 600px;
+  width: 600px;
+  aspect-ratio: 1;
+  position: absolute;
+  top: 10%;  /* Positioned more to the top */
+  left: 10%; /* Positioned more to the left */
+  transform: translate(-50%, -50%); /* Center the blob relative to its position */
+  border-radius: 50%;
+  filter: blur(100px);
+  z-index: -2; /* Blob stays behind pulsating background */
+  animation: sway 7s ease-in-out infinite; /* Faster animation (3 seconds) */
+}
+
+@keyframes sway {
+  0%, 100% {
+    transform: translate(-50%, -50%) rotate(-10deg) translateY(-50px) translateX(-20px); /* Sway to the left */
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(10deg) translateY(50px)  translateX(20px) ; /* Sway to the right */
+  }
+}
+/* Second blob - positioned more to the right and bottom */
+.blob2 {
+  background: linear-gradient(200deg, #134343 0%, #023b3b 100%);
+  height: 600px;
+  width: 600px;
+  aspect-ratio: 1;
+  position: absolute;
+  bottom: 05%; /* Positioned more to the bottom */
+  right: 10%;  /* Positioned more to the right */
+  transform: translate(50%, 50%); /* Center the blob relative to its position */
+  border-radius: 50%;
+  filter: blur(110px);
+  z-index: -5; /* Blob stays behind pulsating background */
+  animation: sway2 8s ease-in-out infinite; /* Faster animation (3 seconds) */
+}
+
+@keyframes sway2 {
+  0%, 100% {
+    transform: translate(50%, 50%) rotate(80deg) translateY(-30px); /* Sway right and up */
+  }
+  50% {
+    transform: translate(50%, 50%) rotate(-80deg) translateY(30px); /* Sway left and down */
+  }
+}
