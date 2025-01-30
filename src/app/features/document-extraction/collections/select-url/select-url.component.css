@@ -83,32 +83,6 @@ body {
   min-height: 100vh;
 }
 
-.logo-img {
-  width: 40px; /* Adjust as needed */
-  height: auto;
-}
-
-
-
-header {
-  position: fixed; /* Make it fixed at the top of the screen */
-  top: 0; /* Ensure it stays at the top */
-  left: 0;
-  width: 100%;
-  padding: 1rem 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: transparent; /* You might want a darker background for the header */
-  color: #fff;
-}
-
-header .logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  z-index: 0;
-}
-
 h1 {
   text-align: center;
   color: #333;
