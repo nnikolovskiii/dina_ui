@@ -6,32 +6,18 @@ body, h1, h2, h3, p, ul, li, a {
   text-decoration: none;
 }
 
-body {
-  font-family: Poppins, serif;
-  line-height: 1.6;
-  color: #333;
-  background-color: #f9f9f9;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
 
-header {
-  background: transparent;
-  color: #fff;
-  padding: 1rem 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: absolute;
-  width: 100%;
-  z-index: 2;
-}
-
-header .logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-}
+/*header {*/
+/*  background: transparent;*/
+/*  color: #fff;*/
+/*  padding: 1rem 2rem;*/
+/*  display: flex;*/
+/*  justify-content: space-between;*/
+/*  align-items: center;*/
+/*  position: absolute;*/
+/*  width: 100%;*/
+/*  z-index: 2;*/
+/*}*/
 
 nav ul {
   display: flex;
@@ -84,49 +70,14 @@ nav ul li a:hover {
   }
 }
 
-/* Pulsating background */
-.bg-wrapper {
-  position: relative;
-  overflow: hidden;
-  height: 100vh; /* Make sure this covers full screen */
-}
 
-.bg-wrapper::before {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  background-image: radial-gradient(#69696959 1px, transparent 1px);
-  background-size: 34px 34px;
-  opacity: 0.8;
-  animation: pulsate 20s infinite;
-  z-index: -1; /* Ensures it stays in the background */
-}
-
-@keyframes pulsate {
-  0% {
-    transform: scale(1);
-    opacity: 0.8;
-  }
-  50% {
-    transform: scale(1.1);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 0.8;
-  }
-}
-
-.blob {
+.blobHome {
   background: linear-gradient(200deg, #0bc94a 0%, #752bec 100%);
   height: 400px;
   width: 400px;
   aspect-ratio: 1;
   position: absolute;
-  top: 10%;  /* Positioned more to the top */
+  top: 10%; /* Positioned more to the top */
   left: 10%; /* Positioned more to the left */
   transform: translate(-50%, -50%); /* Center the blob relative to its position */
   border-radius: 50%;
@@ -140,18 +91,19 @@ nav ul li a:hover {
     transform: translate(-50%, -50%) rotate(-10deg) translateY(-50px) translateX(-20px); /* Sway to the left */
   }
   50% {
-    transform: translate(-50%, -50%) rotate(10deg) translateY(50px)  translateX(20px) ; /* Sway to the right */
+    transform: translate(-50%, -50%) rotate(10deg) translateY(50px) translateX(20px); /* Sway to the right */
   }
 }
+
 /* Second blob - positioned more to the right and bottom */
-.blob2 {
+.blobHome2 {
   background: linear-gradient(200deg, #0bc94a 0%, #752bec 100%);
   height: 400px;
   width: 400px;
   aspect-ratio: 1;
   position: absolute;
   bottom: 05%; /* Positioned more to the bottom */
-  right: 10%;  /* Positioned more to the right */
+  right: 10%; /* Positioned more to the right */
   transform: translate(50%, 50%); /* Center the blob relative to its position */
   border-radius: 50%;
   filter: blur(110px);
@@ -167,39 +119,13 @@ nav ul li a:hover {
     transform: translate(50%, 50%) rotate(-80deg) translateY(30px); /* Sway left and down */
   }
 }
-@keyframes rotate-blob {
-  0% {
-    transform: rotate(0deg) translate(-50%, -50%);
-  }
-  100% {
-    transform: rotate(360deg) translate(-50%, -50%);
-  }
-}
 
-@keyframes rotate-blob2 {
-  0% {
-    transform: rotate(0deg) translate(50%, 50%);
-  }
-  100% {
-    transform: rotate(-360deg) translate(50%, 50%); /* Rotate in the opposite direction */
-  }
-}
 .hero h1 {
   font-size: 3rem;
   margin-bottom: 1rem;
   margin-top: 4rem;
 }
 
-.logo {
-  display: flex;
-  align-items: center;
-}
-
-.logo-img {
-  width: 70px;
-  height: auto;
-  margin-right: 10px;
-}
 
 .hero p {
   font-size: 1.25rem;
@@ -231,6 +157,7 @@ nav ul li a:hover {
   display: flex;
   justify-content: space-around;
   padding: 3rem 1rem;
+  z-index:3;
 }
 
 .feature {
@@ -238,7 +165,7 @@ nav ul li a:hover {
   background-color: transparent;
   border: 3px solid #ddd;
   padding: 2rem;
-  flex:1;
+  flex: 1;
   margin-right: 1rem;
   margin-left: 1rem;
   border-radius: 10px;
@@ -248,17 +175,17 @@ nav ul li a:hover {
 
 .feature:hover {
   transform: translateY(-10px);
-  background: rgb(42,45,49, 0.5); /* Transparent background */
+  background: rgb(42, 45, 49, 0.5); /* Transparent background */
 
   transition: 0.3s ease; /* Smooth transition */
 
-  border: 3px solid #97FCDC ; /* Adjust thickness as needed */
+  border: 3px solid #97FCDC; /* Adjust thickness as needed */
   /*border-image: linear-gradient(to right, #008080, #43E1B0, #97FCDC) 1;*/
   border-radius: 10px; /* Optional for rounded corners */
 
 }
 
-.feature:hover h3{
+.feature:hover h3 {
   color: #43E1B0;
 }
 
@@ -270,7 +197,7 @@ nav ul li a:hover {
   font-style: italic;
 }
 
-.feature button{
+.feature button {
   background: linear-gradient(45deg, #298daf, #79DDFF);
   font-size: 15px;
   width: 130px;
@@ -278,7 +205,7 @@ nav ul li a:hover {
   height: 30px;
 }
 
-.feature:hover button{
+.feature:hover button {
   background: linear-gradient(45deg, #008080, #43E1B0);
 }
 
