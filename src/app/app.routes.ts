@@ -1,29 +1,26 @@
 import { Routes } from '@angular/router';
-import {DisplayContentComponent} from './display-content/display-content.component';
-import {ChatComponent} from './chat/chat.component';
-import {CodeProcessComponent} from './code-process/code-process.component';
-import {FinishComponent} from './finish/finish.component';
-import {SelectGiturlComponent} from './select-giturl/select-giturl.component';
-import {CollectionsComponent} from './collections/collections.component';
-import {DocsFilesComponent} from './docs-files/docs-files.component';
-import {ProcessListComponent} from './process-list/process-list.component';
-import {HomeComponent} from './home/home.component';
-import {SideBarComponent} from './side-bar/side-bar.component';
-import {HighlightComponent} from './highlight/highlight.component';
+import {DisplayContentComponent} from './features/document-managment/components/display-content/display-content.component';
+import {ChatComponent} from './features/chat/components/chat/chat.component';
+import {ConfirmProcessingComponent} from './features/document-managment/components/confirm-processing/confirm-processing.component';
+import {SelectUrlComponent} from './features/document-extraction/collections/select-url/select-url.component';
+import {CollectionsComponent} from './features/document-managment/components/collections/collections.component';
+import {DocsFilesComponent} from './features/document-managment/components/docs-files/docs-files.component';
+import {ListProcesses} from './features/show-process/components/list-processes/list-processes';
+import {HomeComponent} from './features/home/components/home/home.component';
+import {ModelsSidebarComponent} from './features/chat/components/models-sidebar/models-sidebar.component';
+import {HistorySidebarComponent} from './features/chat/components/history-sidebar/history-sidebar.component';
 
 
 export const routes: Routes = [
   {path: 'collection-data', component: DisplayContentComponent },
   {path: 'chat', component: ChatComponent },
-  {path: 'code-process', component: CodeProcessComponent},
   {path: 'docs-files', component: DocsFilesComponent},
-  {path: 'finish', component: FinishComponent},
-  {path: 'finish', component: FinishComponent},
-  {path:'extract-url', component: SelectGiturlComponent},
+  {path: 'finish', component: ConfirmProcessingComponent},
+  {path:'extract-url', component: SelectUrlComponent},
   {path:'collections', component: CollectionsComponent},
-  {path:'process', component: ProcessListComponent},
+  {path:'process', component: ListProcesses},
   {path:'home', component: HomeComponent},
-  {path:'side-bar', component: SideBarComponent},
-  {path:'h1', component: HighlightComponent},
+  {path:'test', component: ModelsSidebarComponent},
+  {path:'test1', component: HistorySidebarComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];
