@@ -1,0 +1,137 @@
+
+<body class="bg-wrapper">
+<header>
+  <div class="logo">
+    <img src="../../../../../assets/logoTransparent.png" alt="Logo" class="logo-img">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+    Code Explore
+  </div>
+
+</header>
+
+
+<section >
+  <div class="blob2"></div>
+<div class="form-container">
+  <h1 class="extract-heading">Select Documentation Url</h1>
+  <div class="form-content">
+    <div class="form-content">
+      <div class="question">
+        <div class="animated-input">
+          <input
+            type="url"
+            id="gitUrl"
+            name="gitUrl"
+            [(ngModel)]="gitUrl"
+            class="form-input"
+            required
+            placeholder=" "
+            (input)="checkLink()"
+          />
+          <span class="input-placeholder">Docs repository URL</span>
+        </div>
+      </div>
+
+      <div *ngIf="codeForm;else docsForm" class="form-group">
+        <label for="override" class="extract-heading1">Override</label>
+        <label class="switch">
+          <input
+            type="checkbox"
+            id="override"
+            name="override"
+            [(ngModel)]="override"
+          />
+          <span class="slider round"></span>
+        </label>
+      </div>
+
+      <ng-template #docsForm>
+
+        <div class="form-group">
+<!--          <label for="selectorBs" class="extract-heading1">Selector</label>-->
+          <div class="animated-input">
+            <input
+              type="text"
+              id="selectorBs"
+              name="selectorBs"
+              [(ngModel)]="selectorBs"
+              class="form-input"
+              placeholder=" "
+            />
+            <span class="input-placeholder">Selector</span>
+          </div>
+        </div>
+
+        <div class="form-group" id="selector">
+          <label class="extract-heading1">Selector Type</label>
+          <div class="radio-group">
+            <label>
+              <input
+                type="radio"
+                name="selectorType"
+                [(ngModel)]="selectorType"
+                value="id"
+              />
+              <span class="radio-label">ID</span>
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="selectorType"
+                [(ngModel)]="selectorType"
+                value="class"
+              />
+              <span class="radio-label">Class</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="animated-input">
+            <input
+              type="text"
+              id="selectorAttr"
+              name="selectorAttr"
+              [(ngModel)]="selectorAttr"
+              class="form-input"
+              placeholder=" "
+            />
+            <span class="input-placeholder">Selector Attributes</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="stringList" class="extract-heading1">List of Patterns (Optional)</label>
+          <button type="button" class="add-button" (click)="addPattern()">+</button>
+          <div id="stringList" class="string-list-container">
+            <div *ngFor="let item of patternList; let i = index; trackBy: trackByIndex" class="list-item">
+              <div class="animated-input">
+                <input
+                  type="text"
+                  [(ngModel)]="patternList[i]"
+                  [attr.name]="'pattern_' + i"
+                  class="form-input list-input"
+                  placeholder="regex pattern"
+                />
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </ng-template>
+    </div>
+
+        <div class="form-actions">
+          <button class="btn btn-primary center-button" [disabled]="loading" (click)="extractLibraries(gitUrl, override)">Extract</button>
+<!--          <button type="button" class="btn btn-secondary" (click)="goBack()">Cancel</button>-->
+        </div>
+
+
+  </div>
+
+</div>
+  <div class="blob"></div>
+</section>
+</body>
