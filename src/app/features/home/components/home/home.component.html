@@ -17,11 +17,18 @@
 </header>
 
 <section class="hero bg-wrapper">
-  <div class="blobHome"></div>
+  <app-blob
+    [background]="'linear-gradient(200deg, #0bc94a 0%, #752bec 100%)'"
+    [left]="'10%'"
+    [top]="'10%'"
+    [blurEffect]="'blur(110px)'"
+    [animation]="'sway 8s ease-in-out infinite'">
+  </app-blob>
+
   <h1 id="welcomeText">Welcome to Code Explore</h1>
   <p>Chat with code docs and GitHub repos.</p>
   <button class="main-button" (click)="navigateToChat()">START CHAT</button>
-  <div class="blobHome2"></div>
+
 
 
   <section class="features">
@@ -43,6 +50,13 @@
       <button (click)="navigateToProgress()">Track Now</button>
     </div>
   </section>
+  <app-blob
+    [background]="'linear-gradient(200deg, #0bc94a 0%, #752bec 100%)'"
+    [top]="'50%'"
+    [left]="'75%'"
+    [blurEffect]="'blur(90px)'"
+    [animation]="'sway2 7s ease-in-out infinite'">
+  </app-blob>
 
 </section>
 

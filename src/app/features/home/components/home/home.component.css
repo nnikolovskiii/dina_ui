@@ -71,55 +71,6 @@ nav ul li a:hover {
 }
 
 
-.blobHome {
-  background: linear-gradient(200deg, #0bc94a 0%, #752bec 100%);
-  height: 400px;
-  width: 400px;
-  aspect-ratio: 1;
-  position: absolute;
-  top: 10%; /* Positioned more to the top */
-  left: 10%; /* Positioned more to the left */
-  transform: translate(-50%, -50%); /* Center the blob relative to its position */
-  border-radius: 50%;
-  filter: blur(90px);
-  z-index: -2; /* Blob stays behind pulsating background */
-  animation: sway 7s ease-in-out infinite; /* Faster animation (3 seconds) */
-}
-
-@keyframes sway {
-  0%, 100% {
-    transform: translate(-50%, -50%) rotate(-10deg) translateY(-50px) translateX(-20px); /* Sway to the left */
-  }
-  50% {
-    transform: translate(-50%, -50%) rotate(10deg) translateY(50px) translateX(20px); /* Sway to the right */
-  }
-}
-
-/* Second blob - positioned more to the right and bottom */
-.blobHome2 {
-  background: linear-gradient(200deg, #0bc94a 0%, #752bec 100%);
-  height: 400px;
-  width: 400px;
-  aspect-ratio: 1;
-  position: absolute;
-  bottom: 05%; /* Positioned more to the bottom */
-  right: 10%; /* Positioned more to the right */
-  transform: translate(50%, 50%); /* Center the blob relative to its position */
-  border-radius: 50%;
-  filter: blur(110px);
-  z-index: -2; /* Blob stays behind pulsating background */
-  animation: sway2 8s ease-in-out infinite; /* Faster animation (3 seconds) */
-}
-
-@keyframes sway2 {
-  0%, 100% {
-    transform: translate(50%, 50%) rotate(80deg) translateY(-30px); /* Sway right and up */
-  }
-  50% {
-    transform: translate(50%, 50%) rotate(-80deg) translateY(30px); /* Sway left and down */
-  }
-}
-
 .hero h1 {
   font-size: 3rem;
   margin-bottom: 1rem;
