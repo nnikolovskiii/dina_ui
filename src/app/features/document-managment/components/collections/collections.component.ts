@@ -4,11 +4,12 @@ import {CommonModule, Location} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {DocsService} from '../../services/docs/docs.service';
 import {Url} from '../../models/url';
+import {BlobComponent} from '../../../../global-features/components/blob/blob.component';
 
 @Component({
   selector: 'app-collections',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule],
+  imports: [CommonModule, RouterModule, FormsModule, BlobComponent],
   templateUrl: './collections.component.html',
   styleUrl: './collections.component.css'
 })
