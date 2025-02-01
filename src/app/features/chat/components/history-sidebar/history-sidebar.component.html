@@ -13,7 +13,7 @@
     </div>
     <div class="chat-history">
       <p class="history-header">Today</p>
-      <div *ngFor="let chat of getChats('today')">
+      <div *ngFor="let chat of getChatsByTime('today')">
         <div (click)="selectChat(chat.id)">
           <p class="chat-entry">{{ chat.title }}</p>
         </div>
@@ -21,7 +21,7 @@
 
       <div class="blank-space2">&nbsp;</div>
       <p class="history-header">Yesterday</p>
-      <div *ngFor="let chat of getChats('yesterday')">
+      <div *ngFor="let chat of getChatsByTime('yesterday')">
         <div (click)="selectChat(chat.id)">
           <p class="chat-entry">{{ chat.title }}</p>
         </div>
@@ -29,14 +29,14 @@
 
       <div class="blank-space2">&nbsp;</div>
       <p class="history-header">Previous 7 days</p>
-      <div *ngFor="let chat of getChats('previous_7_days')">
+      <div *ngFor="let chat of getChatsByTime('previous_7_days')">
         <div (click)="selectChat(chat.id)">
           <p class="chat-entry">{{ chat.title }}</p>
         </div>
       </div>
       <div class="blank-space2">&nbsp;</div>
       <p class="history-header">Previous 30 days</p>
-      <div *ngFor="let chat of getChats('previous_30_days')">
+      <div *ngFor="let chat of getChatsByTime('previous_30_days')">
         <div (click)="selectChat(chat.id)">
           <p class="chat-entry">{{ chat.title }}</p>
         </div>

@@ -22,7 +22,6 @@ export class ModelsSidebarComponent implements OnInit {
   public chatApi: any | null = null;
   public chatModels: ChatModel[] | null = null;
   public activeModel: ChatModel | null = null;
-  public barStatus = "chat_models"
   public selectedApi: string = "openai"
   public selectedInfo: string = "models"
   public isAddingModel = false;
@@ -46,6 +45,7 @@ export class ModelsSidebarComponent implements OnInit {
       (response) => {
         this.activeModel = response;
         this.selectedApi = this.activeModel!.chat_api_type;
+        console.log(this.activeModel, this.selectedApi)
         this.chatService.getChatApiAndModels(this.activeModel!.chat_api_type).subscribe(
           (response) => {
             this.chatApi = response["api"];

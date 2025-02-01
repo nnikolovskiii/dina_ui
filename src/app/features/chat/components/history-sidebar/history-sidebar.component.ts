@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ChatService} from '../../services/chat.service';
 import {Router} from '@angular/router';
@@ -12,6 +12,7 @@ import {Router} from '@angular/router';
 })
 export class HistorySidebarComponent implements OnInit {
   @Output() toggleRequested = new EventEmitter<void>();
+  @Input() isVisible :boolean = false;
 
   constructor(
     private chatService: ChatService,
@@ -20,11 +21,7 @@ export class HistorySidebarComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    this.chatService.getChats().subscribe(
-      (chats: any) => {
-        this.chats = chats;
-        console.log(this.chats["today"])
-      })
+    this.getChats()
   }
 
   chats: any | null = null
@@ -32,9 +29,13 @@ export class HistorySidebarComponent implements OnInit {
 
   toggleHistoryBar() {
     this.toggleRequested.emit();
+    if (this.isVisible) {
+      this.getChats()
+      console.log("getChats")
+    }
   }
 
-  getChats(timePeriod: string) {
+  getChatsByTime(timePeriod: string) {
     if (this.chats != null) {
       return this.chats[timePeriod];
     }
@@ -45,5 +46,13 @@ export class HistorySidebarComponent implements OnInit {
       .then(() => {
         window.location.reload();
       });
+  }
+
+  getChats(){
+    this.chatService.getChats().subscribe(
+      (chats: any) => {
+        this.chats = chats;
+        console.log(this.chats["today"])
+      })
   }
 }

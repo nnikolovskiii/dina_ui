@@ -15,6 +15,7 @@
 </div>
 <div [class.open]="this.barStatus == 'history'" class="sliding-bar">
   <app-history-sidebar
+    [isVisible]="barStatus == 'history'"
     (toggleRequested)="toggleHistoryBar()">
   </app-history-sidebar>
 </div>

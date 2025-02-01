@@ -200,9 +200,6 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit{
   }
 
   barStatus = "close"
-  initChats = false;
-  chats: any | null = null
-
 
   toggleHistoryBar() {
     if (this.barStatus == "history") {
@@ -213,8 +210,6 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit{
 
     console.log(this.barStatus)
   }
-
-  // chats: Chat[] | null = null
 
 
   toggleChatModels() {
@@ -252,10 +247,11 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit{
         <string>marked.parse(lastMessage.content)
       );
 
-      // Add copy buttons after slight delay
       setTimeout(() => {
         this.addCopyButtonsToLatestMessage();
       }, 100);
+
+      this.highlightCode();
     }
   }
 
@@ -340,7 +336,6 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit{
         }
       }
 
-      // Delay highlighting until after view updates
       setTimeout(() => {
         this.highlightCode();
       });
@@ -349,8 +344,6 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit{
     });
   }
 
-// Add to your component class
-  // Update addCopyButtons method
   private addCopyButtons(container: HTMLElement): void {
     const codeContainers = container.querySelectorAll('pre');
     codeContainers.forEach((preElement: HTMLElement) => {
@@ -360,7 +353,6 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit{
         btn.innerHTML = '📋';
         btn.title = 'Copy to clipboard';
 
-        // Force show button temporarily for initialization
         btn.style.opacity = '1';
         btn.style.transform = 'translateY(0)';
 
@@ -386,7 +378,6 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit{
   private copyCode(container: HTMLElement): void {
     const code = container.querySelector('code')?.textContent || '';
     navigator.clipboard.writeText(code).then(() => {
-      // Optional: Show feedback
       const btn = container.querySelector('.copy-btn') as HTMLElement;
       if (btn) {
         btn.textContent = '✓';
@@ -395,7 +386,6 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit{
     });
   }
 
-// Update highlightCode()
   private highlightCode(): void {
     requestAnimationFrame(() => {
       const codeBlocks = this.el.nativeElement.querySelectorAll('pre code');
