@@ -232,6 +232,7 @@ export class DocsFilesComponent implements OnInit, OnDestroy {
   getProcessesFromUrl(): void {
     this.processService.getProcessesFromUrl(this.docs_url, "pre").subscribe(
       response => {
+        console.log(response)
         this.isFinished = response.get("main")?.[0] ?? true;
         this.processMap = response;
 

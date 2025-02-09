@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  apiUrl: 'nnikolovskiii.ngrok.dev',
-  port: null,
-  protocol: "https"
+  apiUrl: 'localhost',
+  port: 5000,
+  protocol: "http"
 };

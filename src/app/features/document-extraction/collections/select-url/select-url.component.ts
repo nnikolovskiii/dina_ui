@@ -17,7 +17,7 @@ import {ProcessService} from '../../../show-process/services/process/process.ser
 
 export class SelectUrlComponent {
   gitUrl: string = '';
-  override: boolean = true;
+  override: boolean = false;
   selectorBs: string = "";
   selectorAttr: string = "";
   selectorType: string = "class";
