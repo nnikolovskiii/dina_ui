@@ -5,16 +5,18 @@ import {JsonPipe, Location, NgForOf, NgIf, NgOptimizedImage} from '@angular/comm
 import {MatTabsModule} from '@angular/material/tabs';
 import {ActivatedRoute, Router} from '@angular/router';
 import {firstValueFrom} from 'rxjs';
+import {BlobComponent} from "../../../../global-features/components/blob/blob.component";
 
 @Component({
   selector: 'app-list-processes',
   standalone: true,
-  imports: [
-    NgForOf,
-    MatTabsModule,
-    NgIf,
-    NgOptimizedImage
-  ],
+    imports: [
+        NgForOf,
+        MatTabsModule,
+        NgIf,
+        NgOptimizedImage,
+        BlobComponent
+    ],
   templateUrl: './list-processes.html',
   styleUrl: './list-processes.css'
 })

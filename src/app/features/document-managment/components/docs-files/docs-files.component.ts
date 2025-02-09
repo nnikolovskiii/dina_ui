@@ -7,11 +7,12 @@ import {ProcessService} from '../../../show-process/services/process/process.ser
 import {FormsModule} from '@angular/forms';
 import {DocsLinksService} from '../../services/docs-links/docs-links.service';
 import {Process} from '../../../show-process/models/process';
+import {BlobComponent} from '../../../../global-features/components/blob/blob.component';
 
 @Component({
   selector: 'app-docs-files',
   standalone: true,
-  imports: [CommonModule, RouterModule, NgOptimizedImage, FormsModule],
+  imports: [CommonModule, RouterModule, NgOptimizedImage, FormsModule, BlobComponent],
   templateUrl: './docs-files.component.html',
   styleUrl: './docs-files.component.css'
 })

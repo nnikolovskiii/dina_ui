@@ -1,0 +1,27 @@
+.blob {
+  height: 400px;
+  width: 400px;
+  aspect-ratio: 1;
+  position: absolute;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index:-2;
+}
+
+@keyframes sway {
+  0%, 100% {
+    transform: translate(-50%, -50%) rotate(-10deg) translateY(-50px) translateX(-20px);
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(10deg) translateY(50px) translateX(20px);
+  }
+}
+
+@keyframes sway2 {
+  0%, 100% {
+    transform: translate(50%, 50%) rotate(80deg) translateY(-30px);
+  }
+  50% {
+    transform: translate(50%, 50%) rotate(-80deg) translateY(30px);
+  }
+}

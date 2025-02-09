@@ -5,12 +5,13 @@ import {CommonModule, Location, NgOptimizedImage} from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {DocsService} from '../../../document-managment/services/docs/docs.service';
 import {ProcessService} from '../../../show-process/services/process/process.service';
+import {BlobComponent} from '../../../../global-features/components/blob/blob.component';
 
 
 @Component({
   selector: 'app-select-url',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule],
+  imports: [CommonModule, RouterModule, FormsModule, BlobComponent],
   templateUrl: './select-url.component.html',
   styleUrl: './select-url.component.css'
 })

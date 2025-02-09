@@ -9,7 +9,13 @@
 </header>
 
 <div class="container ">
-  <div class="blob2"></div>
+  <app-blob
+    [background]="'linear-gradient(200deg, #09427c 0%, #09427c 100%)'"
+    [left]="'10%'"
+    [top]="'10%'"
+    [blurEffect]="'blur(110px)'"
+    [animation]="'sway 8s ease-in-out infinite'">
+  </app-blob>
   <div class="tabs">
     <div class="tab" [class.active]="selectedStatus === 'ongoing'" (click)="changeDisplayProcesses('ongoing')">Ongoing</div>
     <div class="tab" [class.active]="selectedStatus === 'finished'" (click)="changeDisplayProcesses('finished')">Finished</div>
@@ -48,6 +54,14 @@
 <!--    </div>-->
   </div>
 
-  <div class="blob"></div>
+  <app-blob
+    [background]="'linear-gradient(200deg, #134343 0%, #023b3b 100%)'"
+    [bottom]="'0%'"
+    [right]="'0%'"
+    [left]="'90%'"
+    [top]="'85%'"
+    [blurEffect]="'blur(90px)'"
+    [animation]="'sway2 7s ease-in-out infinite'">
+  </app-blob>
 </div>
 </body>

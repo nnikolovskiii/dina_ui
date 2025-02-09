@@ -2,10 +2,13 @@ import {Component, OnInit, OnDestroy, Input} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location, NgForOf, NgIf} from '@angular/common';
 import {DocsLinksService} from '../../services/docs-links/docs-links.service';
+import {BlobComponent} from '../../../../global-features/components/blob/blob.component';
 @Component({
   selector: 'app-confirm-processing',
   standalone: true,
-  imports: [],
+  imports: [
+    BlobComponent
+  ],
   templateUrl: './confirm-processing.component.html',
   styleUrl: './confirm-processing.component.css'
 })
