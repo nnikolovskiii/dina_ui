@@ -1,0 +1,13 @@
+<div class="container" #container>
+  <section class="section" id="section1">Segment 1</section>
+  <section class="section" id="section2">Segment 2</section>
+  <section class="section" id="section3">Segment 3</section>
+</div>
+
+<ul class="dots">
+  <li
+    *ngFor="let dot of dotsArray; let i = index"
+    [class.active]="i === activeIndex"
+    (click)="scrollToSection(i)">
+  </li>
+</ul>

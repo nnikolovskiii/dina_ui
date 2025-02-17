@@ -9,6 +9,10 @@ import {ListProcesses} from './features/show-process/components/list-processes/l
 import {HomeComponent} from './features/home/components/home/home.component';
 import {ModelsSidebarComponent} from './features/chat/components/models-sidebar/models-sidebar.component';
 import {HistorySidebarComponent} from './features/chat/components/history-sidebar/history-sidebar.component';
+import {DinaHomeComponent} from './features/dina-home/components/dina-home/dina-home.component';
+import {SignInComponent} from './features/auth/components/sign-in/sign-in.component';
+import {LoginComponent} from './features/auth/components/login/login.component';
+import {RandomLightsComponent} from './features/dina-home/components/random-lights/random-lights.component';
 
 
 export const routes: Routes = [
@@ -22,5 +26,9 @@ export const routes: Routes = [
   {path:'home', component: HomeComponent},
   {path:'test', component: ModelsSidebarComponent},
   {path:'test1', component: HistorySidebarComponent},
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  {path:'dina-home', component: DinaHomeComponent},
+  {path:'sign-in', component: SignInComponent},
+  {path:'login', component: LoginComponent},
+  {path: 'lights', component: RandomLightsComponent},
+  { path: '', redirectTo: 'dina-home', pathMatch: 'full' },
 ];

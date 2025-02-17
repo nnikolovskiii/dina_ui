@@ -1,0 +1,109 @@
+.lol{
+  gap: 20px;
+}
+
+.lol1{
+  letter-spacing: 6px;
+  font-size: 90px;
+}
+
+.lol2{
+  letter-spacing: 0.8px;
+  font-size: 25px;
+}
+
+.lol3{
+  font-size: 20px;
+}
+
+.lol4{
+  font-size: 18px;
+}
+
+
+.call-to-action {
+  background-color: #ff5722;
+  border: none;
+  padding: 1rem 2rem;
+  color: #fff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border-radius: 8px;
+
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(255, 87, 34, 0.7);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(255, 87, 34, 0.7);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(255, 87, 34, 0.7);
+  }
+}
+
+
+:host {
+  display: block;
+  height: 100vh;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.container {
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+}
+
+.container::-webkit-scrollbar {
+  display: none;
+}
+.container {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.section {
+  height: 100vh;
+  scroll-snap-align: start;
+  font-size: 2em;
+}
+
+.section:nth-child(3) { background-color: #2980b9; }
+
+.dots {
+  position: fixed;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  z-index: 10;
+}
+
+.dots li {
+  margin: 10px 0;
+  width: 12px;
+  height: 12px;
+  background: lightgray;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.dots li.active {
+  background: black;
+}
+

@@ -2,81 +2,81 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  /*padding-top: 80px;*/
-  font-family: Poppins, serif;
-  line-height: 1.6;
-  color: #333;
-  background-color: #1e1f22;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+/*body {*/
+/*  !*padding-top: 80px;*!*/
+/*  font-family: Poppins, serif;*/
+/*  line-height: 1.6;*/
+/*  color: #333;*/
+/*  background-color: #1e1f22;*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*  min-height: 100vh;*/
 
-}
+/*}*/
 
-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  padding: 1rem 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: transparent !important;
-  color: #fff;
-  z-index: 2;
-}
+/*header {*/
+/*  position: fixed;*/
+/*  top: 0;*/
+/*  left: 0;*/
+/*  width: 100%;*/
+/*  padding: 1rem 2rem;*/
+/*  display: flex;*/
+/*  justify-content: space-between;*/
+/*  align-items: center;*/
+/*  background: transparent !important;*/
+/*  color: #fff;*/
+/*  z-index: 2;*/
+/*}*/
 
-.logo {
-  display: flex;
-  align-items: center;
-}
+/*.logo {*/
+/*  display: flex;*/
+/*  align-items: center;*/
+/*}*/
 
-.logo-img {
-  width: 70px;
-  height: auto;
-  margin-right: 10px;
-}
+/*.logo-img {*/
+/*  width: 70px;*/
+/*  height: auto;*/
+/*  margin-right: 10px;*/
+/*}*/
 
-header .logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-}
+/*header .logo {*/
+/*  font-size: 1.5rem;*/
+/*  font-weight: bold;*/
+/*}*/
 
 
-.bg-wrapper {
-  position: relative;
-  overflow: hidden;
-  height: 100vh;
-  z-index: 1;
-}
+/*.bg-wrapper {*/
+/*  position: relative;*/
+/*  overflow: hidden;*/
+/*  height: 100vh;*/
+/*  z-index: 1;*/
+/*}*/
 
-.bg-wrapper::before {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  background-image: radial-gradient(rgba(193, 191, 191, 0.35) 1px, transparent 1px);
-  background-size: 50px 50px;
-  opacity: 0.7; /* Reduced overall opacity */
-  animation: pulsate 20s infinite;
-  z-index: -1;
-}
+/*.bg-wrapper::before {*/
+/*  content: "";*/
+/*  position: absolute;*/
+/*  width: 100%;*/
+/*  height: 100%;*/
+/*  top: 0;*/
+/*  left: 0;*/
+/*  background-image: radial-gradient(rgba(193, 191, 191, 0.35) 1px, transparent 1px);*/
+/*  background-size: 50px 50px;*/
+/*  opacity: 0.7; !* Reduced overall opacity *!*/
+/*  animation: pulsate 20s infinite;*/
+/*  z-index: -1;*/
+/*}*/
 
-@keyframes pulsate {
-  0% {
-    transform: scale(1);
-    opacity: 0.8;
-  }
-  50% {
-    transform: scale(1.1);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 0.8;
-  }
-}
+/*@keyframes pulsate {*/
+/*  0% {*/
+/*    transform: scale(1);*/
+/*    opacity: 0.8;*/
+/*  }*/
+/*  50% {*/
+/*    transform: scale(1.1);*/
+/*    opacity: 1;*/
+/*  }*/
+/*  100% {*/
+/*    transform: scale(1);*/
+/*    opacity: 0.8;*/
+/*  }*/
+/*}*/

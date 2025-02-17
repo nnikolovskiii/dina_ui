@@ -1,0 +1,77 @@
+<div class="container" #container>
+  <section class="section" id="section1">
+    <div class="flex flex-col justify-center items-center">
+      <div id="header" class="mt-4 px-12 flex w-full h-full justify-between items-center">
+        <div class="flex justify-center items-center gap-3">
+          <img src="../../../../../assets/dina_logo.png" class="h-16 w-16"/>
+          <div class="ml-2.5 w-2 h-[52px] bg-gray-300 rounded">
+          </div>
+          <img src="../../../../../assets/ministerstvo-logo.png" height="72" width="421"/>
+        </div>
+        <div class="flex justify-center items-center lol">
+          <p class="lol3">МДТ</p>
+          <p class="lol3">Примери</p>
+          <p class="lol3">За Дина</p>
+          <div class="w-2 h-[52px] bg-gray-300 rounded">
+          </div>
+          <button class="lol3" (click)="navigateToLink('/login')">Најави се</button>
+          <button class="lol4 inline-flex items-center justify-center px-8 py-3.5 text-sm
+      text-white no-underline transition-all duration-200 bg-gradient-to-r from-[#ff3131] to-[#ff904d]
+      rounded-lg hover:scale-105 active:scale-95 shadow-lg
+      hover:shadow-blue-500/40 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                  (click)="navigateToLink('/sign-in')">
+            Регистрирај се
+          </button>
+        </div>
+      </div>
+
+      <div class="w-full h-[150px] bg-transparent">
+
+      </div>
+
+      <div id="text" class="flex flex-col justify-center items-center">
+        <p class="lol1 dina-heading">ДИНА</p>
+        <p class="lol2 tagline">Национален административен асистент!</p>
+      </div>
+
+      <div class="w-full h-[80px] bg-transparent">
+
+      </div>
+
+      <div id="buttons" class="flex justify-center items-center">
+        <button class="lol4 inline-flex items-center justify-center px-8 py-3.5 text-sm font-semibold
+      text-white no-underline transition-all duration-200 bg-gradient-to-r from-[#ff3131] to-[#ff904d]
+      rounded-xl hover:scale-105 active:scale-95 shadow-lg
+      hover:shadow-blue-500/40 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 w-[210px]  h-[60px]">
+          Прашај ја ДИНА!
+        </button>
+        <div class="w-[300px] h-full bg-transparent">
+        </div>
+        <button class="lol4 inline-flex items-center justify-center px-8 py-3.5 text-[12px]
+      text-white no-underline transition-all duration-200 bg-gradient-to-r bg-gray-900
+      rounded-xl hover:scale-105 active:scale-95 shadow-lg
+      hover:shadow-blue-500/40 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 w-[210px] h-[60px]">
+          Превземи ја Апликацијата
+        </button>
+      </div>
+    </div>
+  </section>
+  <section class="section" id="section2">
+    <div class="flex justify-center items-center h-full w-full gap-[60px]">
+      <div class="flex-1 bg-[#231815] aspect-[4/5] rounded-2xl"></div>
+      <div class="flex-1 bg-[#231815] aspect-[4/5] rounded-2xl"></div>
+      <div class="flex-1 bg-[#231815] aspect-[4/5] rounded-2xl"></div>
+    </div>
+  </section>
+
+  <section class="section" id="section3">Segment 3</section>
+</div>
+
+<ul class="dots">
+  <li
+    *ngFor="let dot of dotsArray; let i = index"
+    [class.active]="i === activeIndex"
+    (click)="scrollToSection(i)">
+  </li>
+</ul>
+

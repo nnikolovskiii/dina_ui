@@ -15,9 +15,10 @@ export class ChatService {
 
   constructor(private http: HttpClient) {
   }
-
   getChats(): Observable<Map<string, Chat[]>> {
-    return this.http.get<any>(`${this.baseUrl}get_chats/`)
+    return this.http.get<Map<string, Chat[]>>(`${this.baseUrl}get_chats/`, {
+      withCredentials: true 
+    });
   }
 
 

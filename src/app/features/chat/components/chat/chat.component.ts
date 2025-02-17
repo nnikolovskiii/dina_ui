@@ -313,7 +313,8 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit{
     this.ws = new WebSocket(url);
 
     this.ws.onmessage = (event: MessageEvent) => {
-      if (event.data === "<ASTOR>") {
+      if (event.data.includes("<ASTOR>")) {
+        this.chat_id = event.data.split(":")[1]
         this.finalizeCurrentMessage();
       } else {
         this.updateStreamingMessage(event.data);
