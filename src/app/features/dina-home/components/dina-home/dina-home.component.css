@@ -80,8 +80,6 @@ html, body {
   font-size: 2em;
 }
 
-.section:nth-child(3) { background-color: #2980b9; }
-
 .dots {
   position: fixed;
   top: 50%;
@@ -107,3 +105,18 @@ html, body {
   background: black;
 }
 
+.card-description{
+  color: #fff;
+  text-align: center;
+  font-size: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.lol5{
+  font-size: 24px;
+}
+
+.lol6{
+  font-size: 18px;
+}

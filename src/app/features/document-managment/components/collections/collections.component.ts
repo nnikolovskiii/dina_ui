@@ -5,11 +5,12 @@ import {FormsModule} from '@angular/forms';
 import {DocsService} from '../../services/docs/docs.service';
 import {Url} from '../../models/url';
 import {BlobComponent} from '../../../../global-features/components/blob/blob.component';
+import {HeaderComponent} from "../../../../global-features/components/header/header.component";
 
 @Component({
   selector: 'app-collections',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule, BlobComponent],
+    imports: [CommonModule, RouterModule, FormsModule, BlobComponent, HeaderComponent],
   templateUrl: './collections.component.html',
   styleUrl: './collections.component.css'
 })

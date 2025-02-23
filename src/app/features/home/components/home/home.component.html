@@ -1,20 +1,6 @@
 <body>
-<header>
-  <div class="logo">
-    <img src="../../../../../assets/logoTransparent.png" alt="Logo" class="logo-img">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-
-    Code Explore
-  </div>
-  <nav>
-    <ul>
-      <li><a href="#">Home</a></li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Services</a></li>
-      <li><a href="#">Contact</a></li>
-    </ul>
-  </nav>
-</header>
+<app-header>
+</app-header>
 
 <section class="hero bg-wrapper">
   <app-blob
@@ -25,17 +11,16 @@
     [animation]="'sway 8s ease-in-out infinite'">
   </app-blob>
 
-  <h1 id="welcomeText">Welcome to Code Explore</h1>
+  <h1 id="welcomeText">Welcome to Remora</h1>
   <p>Chat with code docs and GitHub repos.</p>
   <button class="main-button" (click)="navigateToChat()">START CHAT</button>
-
 
 
   <section class="features">
     <div class="feature">
       <h3>Add Documents or Repositories</h3>
       <p>Effortlessly include new documentation or repositories in your collection and get ready to chat with them.</p>
-      <button  (click)="navigateToExtractUrl()">Add Now</button>
+      <button (click)="navigateToExtractUrl()">Add Now</button>
     </div>
     <div class="feature">
       <h3>Manage Your Collections</h3>

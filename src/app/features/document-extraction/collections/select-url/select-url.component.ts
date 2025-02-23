@@ -6,12 +6,13 @@ import { FormsModule } from '@angular/forms';
 import {DocsService} from '../../../document-managment/services/docs/docs.service';
 import {ProcessService} from '../../../show-process/services/process/process.service';
 import {BlobComponent} from '../../../../global-features/components/blob/blob.component';
+import {HeaderComponent} from "../../../../global-features/components/header/header.component";
 
 
 @Component({
   selector: 'app-select-url',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule, BlobComponent],
+    imports: [CommonModule, RouterModule, FormsModule, BlobComponent, HeaderComponent],
   templateUrl: './select-url.component.html',
   styleUrl: './select-url.component.css'
 })

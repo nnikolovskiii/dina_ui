@@ -1,0 +1,30 @@
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: transparent !important;
+  color: #fff;
+  z-index: 2;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.logo-img {
+  width: 70px;
+  height: auto;
+  margin-right: 10px;
+}
+
+header .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}

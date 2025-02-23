@@ -2,12 +2,14 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {AuthService} from '../../../auth/services/auth/auth.service';
 import {Router} from '@angular/router';
 import {NgForOf} from '@angular/common';
+import {BlobComponent} from '../../../../global-features/components/blob/blob.component';
 
 @Component({
   selector: 'app-dina-home',
   standalone: true,
   imports: [
-    NgForOf
+    NgForOf,
+    BlobComponent
   ],
   templateUrl: './dina-home.component.html',
   styleUrl: './dina-home.component.css'

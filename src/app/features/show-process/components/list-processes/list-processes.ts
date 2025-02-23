@@ -6,6 +6,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {ActivatedRoute, Router} from '@angular/router';
 import {firstValueFrom} from 'rxjs';
 import {BlobComponent} from "../../../../global-features/components/blob/blob.component";
+import {HeaderComponent} from "../../../../global-features/components/header/header.component";
 
 @Component({
   selector: 'app-list-processes',
@@ -15,7 +16,8 @@ import {BlobComponent} from "../../../../global-features/components/blob/blob.co
         MatTabsModule,
         NgIf,
         NgOptimizedImage,
-        BlobComponent
+        BlobComponent,
+        HeaderComponent
     ],
   templateUrl: './list-processes.html',
   styleUrl: './list-processes.css'

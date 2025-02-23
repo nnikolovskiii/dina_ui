@@ -29,6 +29,6 @@ export const routes: Routes = [
   {path:'dina-home', component: DinaHomeComponent},
   {path:'sign-in', component: SignInComponent},
   {path:'login', component: LoginComponent},
-  {path: 'lights', component: RandomLightsComponent},
-  { path: '', redirectTo: 'dina-home', pathMatch: 'full' },
+  {path: 'tmp', component: RandomLightsComponent},
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];

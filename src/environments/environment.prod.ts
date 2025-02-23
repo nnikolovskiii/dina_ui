@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
-  apiUrl: 'mkpatka.duckdns.org',
-  port: 8080
+  apiUrl: 'localhost',
+  port: 5000,
+  protocol: "http"
 };
