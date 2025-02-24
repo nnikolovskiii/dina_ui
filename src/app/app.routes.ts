@@ -30,5 +30,5 @@ export const routes: Routes = [
   {path:'sign-in', component: SignInComponent},
   {path:'login', component: LoginComponent},
   {path: 'tmp', component: RandomLightsComponent},
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: 'dina-home', pathMatch: 'full' },
 ];
