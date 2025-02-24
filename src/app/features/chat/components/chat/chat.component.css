@@ -170,17 +170,17 @@
   margin-bottom: 50px;
 }
 
-.assistant-card {
-  align-self: flex-start;
-  border-radius: 10px;
-  padding: 10px 20px;
-  max-width: 100%;
-  width: fit-content;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  margin-left: 0;
-  margin-right: auto;
-}
+/*.assistant-card {*/
+/*  align-self: flex-start;*/
+/*  border-radius: 10px;*/
+/*  padding: 10px 20px;*/
+/*  max-width: 100%;*/
+/*  width: fit-content;*/
+/*  word-wrap: break-word;*/
+/*  overflow-wrap: break-word;*/
+/*  margin-left: 0;*/
+/*  margin-right: auto;*/
+/*}*/
 
 .user-card {
   align-self: flex-end;
@@ -455,4 +455,31 @@ pre:has(.copy-btn:hover) .copy-btn {
 
 pre {
   position: relative !important;
+}
+
+
+.assistant-card {
+  background: #333333;
+  border-radius: 15px;
+  padding-left: 8px;
+  margin: 8px 0;
+  margin-left:16px;
+  max-width: 80%;
+}
+
+
+.assistant-content {
+  display: flex;
+  align-items: flex-start;  /* Align items to top */
+  gap: 8px; /* Space between logo and text */
+}
+
+.logo-container {
+  margin-top: 8px;
+  margin-left: -3em;
+  flex-shrink: 0;  /* Prevent logo from shrinking */
+}
+
+.message-content {
+  flex-grow: 1;/* Take remaining space */
 }

@@ -83,7 +83,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit{
       this.historyFlag = flag.active;
     });
     this.flagService.getFlag("docs").subscribe((flag: Flag) => {
-      this.docsFlag = flag.active;
+      this.docsFlag = false;
     });
     this.flagService.getFlag("code").subscribe((flag: Flag) => {
       this.codeFlag = flag.active;
