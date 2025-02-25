@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="input-group" *ngFor="let key of Object.keys(formFields)">
+    <label class="input-label" [for]="'input-' + key">{{ key }}</label>
+
+    <!-- Text Inputs -->
+    <input *ngIf="formFields[key].type === 'text' || formFields[key].type === 'email'"
+           class="input-field"
+           [type]="formFields[key].type"
+           [id]="'input-' + key"
+           [placeholder]="'Enter your ' + key.toLowerCase()"
+           [(ngModel)]="formFields[key].value">
+
+    <!-- Checkbox -->
+    <div *ngIf="formFields[key].type === 'checkbox'" class="checkbox-container">
+      <input class="ml-4" type="checkbox"
+             [id]="'input-' + key"
+             [(ngModel)]="formFields[key].value">
+    </div>
+
+    <!-- Dropdown -->
+    <select *ngIf="formFields[key].type === 'dropdown'"
+            class="input-field"
+            [id]="'input-' + key"
+            [(ngModel)]="formFields[key].value">
+      <option value="" disabled>Select {{ key.toLowerCase() }}</option>
+      <option class="select-options" *ngFor="let option of formFields[key].options" [value]="option">
+        {{ option }}
+      </option>
+    </select>
+
+    <!-- Textarea -->
+    <textarea *ngIf="formFields[key].type === 'textarea'"
+              class="input-field"
+              [id]="'input-' + key"
+              [placeholder]="'Enter your ' + key.toLowerCase()"
+              [(ngModel)]="formFields[key].value"></textarea>
+  </div>
+
+  <div class="flex-div">
+    <button class="button">
+      <span>Генерирај</span>
+    </button>
+  </div>
+</div>

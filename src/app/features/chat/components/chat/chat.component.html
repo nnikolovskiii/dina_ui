@@ -1,13 +1,13 @@
 <div *ngIf="this.barStatus == 'close'" class="banter">
-<!--  <div (click)="toggleHistoryBar()" class="toggle-button">-->
-<!--    <img src="../../../../../assets/8726046_history_icon.png" height="30" width="30"/>-->
-<!--  </div>-->
-<!--  <div (click)="toggleChatModels()" class="toggle-button">-->
-<!--    <img src="../../../../../assets/setting(2).png" height="26" width="26"/>-->
-<!--  </div>-->
+  <div (click)="toggleHistoryBar()" class="toggle-button">
+    <img src="../../../../../assets/8726046_history_icon.png" height="30" width="30"/>
+  </div>
+  <!--  <div (click)="toggleChatModels()" class="toggle-button">-->
+  <!--    <img src="../../../../../assets/setting(2).png" height="26" width="26"/>-->
+  <!--  </div>-->
   <div class="h-full pb-[15px] flex flex-col justify-end items-center">
     <div
-      id = "new-chat-button"
+      id="new-chat-button"
       (click)="navigateToChat()"
       class="toggle-button">
     </div>
@@ -36,8 +36,7 @@
             <div *ngSwitchCase="'user'" class="user-card" [innerHtml]="message.sanitizedContent"></div>
 
 
-
-            <div *ngSwitchCase="'assistant'" class="assistant-card">
+            <div *ngSwitchCase="'assistant'">
               <div class="assistant-content">
                 <!-- Logo -->
                 <div class="logo-container">
@@ -60,11 +59,13 @@
                 </div>
               </div>
             </div>
-          <div id="gap"></div>
+            <div id="gap"></div>
+          </div>
+
         </div>
-      </div>
-      <form>
-        <div id="form-div">
+
+        <form>
+          <div id="form-div">
     <textarea
       #messageArea
       [(ngModel)]="inputMessage"
@@ -75,82 +76,83 @@
       (keydown)="handleKeyDown($event, messageArea)"
     >
     </textarea>
-          <div class="chat-button-div">
-            <div class="left-chat-buttons">
-<!--              <div *ngIf="!docsFlag; else selected_docs" class="chat_button" (click)="setDocsFlag()">-->
-<!--                <img src="../../../../../assets/document.png" height="18" width="18"/>-->
-<!--              </div>-->
-<!--              <ng-template #selected_docs>-->
-<!--                <div class="chat-button-extra" (click)="setDocsFlag()">-->
-<!--                  <div class="chat_button">-->
-<!--                    <img src="../../../../../assets/document.png" height="18" width="18"/>-->
-<!--                  </div>-->
-<!--                  <div class="chat-button-extra-text">Docs</div>-->
-<!--                </div>-->
-<!--              </ng-template>-->
+            <div class="chat-button-div">
+              <div class="left-chat-buttons">
+                <!--              <div *ngIf="!docsFlag; else selected_docs" class="chat_button" (click)="setDocsFlag()">-->
+                <!--                <img src="../../../../../assets/document.png" height="18" width="18"/>-->
+                <!--              </div>-->
+                <!--              <ng-template #selected_docs>-->
+                <!--                <div class="chat-button-extra" (click)="setDocsFlag()">-->
+                <!--                  <div class="chat_button">-->
+                <!--                    <img src="../../../../../assets/document.png" height="18" width="18"/>-->
+                <!--                  </div>-->
+                <!--                  <div class="chat-button-extra-text">Docs</div>-->
+                <!--                </div>-->
+                <!--              </ng-template>-->
 
-<!--              <div *ngIf="!vanillaFlag; else selected_vanilla" class="chat_button" (click)="setVanillaFlag()">-->
-<!--                <img src="../../assets/ice-cream-cone.png" height="18" width="18"/>-->
-<!--              </div>-->
-<!--              <ng-template #selected_vanilla>-->
-<!--                <div class="chat-button-extra" (click)="setVanillaFlag()">-->
-<!--                  <div class="chat_button">-->
-<!--                    <img src="../../assets/ice-cream-cone_white.png" height="18" width="18"/>-->
-<!--                  </div>-->
-<!--                  <div class="chat-button-extra-text vanilla">Vanilla</div>-->
-<!--                </div>-->
-<!--              </ng-template>-->
+                <!--              <div *ngIf="!vanillaFlag; else selected_vanilla" class="chat_button" (click)="setVanillaFlag()">-->
+                <!--                <img src="../../assets/ice-cream-cone.png" height="18" width="18"/>-->
+                <!--              </div>-->
+                <!--              <ng-template #selected_vanilla>-->
+                <!--                <div class="chat-button-extra" (click)="setVanillaFlag()">-->
+                <!--                  <div class="chat_button">-->
+                <!--                    <img src="../../assets/ice-cream-cone_white.png" height="18" width="18"/>-->
+                <!--                  </div>-->
+                <!--                  <div class="chat-button-extra-text vanilla">Vanilla</div>-->
+                <!--                </div>-->
+                <!--              </ng-template>-->
 
-<!--              <div *ngIf="!historyFlag; else selected_history" class="chat_button" (click)="setHistoryFlag()">-->
-<!--                <img src="../../../../../assets/history(3).png" height="18" width="18"/>-->
-<!--              </div>-->
-<!--              <ng-template #selected_history>-->
-<!--                <div class="chat-button-extra" (click)="setHistoryFlag()">-->
-<!--                  <div class="chat_button">-->
-<!--                    <img src="../../../../../assets/history(3).png" height="18" width="18"/>-->
-<!--                  </div>-->
-<!--                  <div class="chat-button-extra-text">History</div>-->
-<!--                </div>-->
-<!--              </ng-template>-->
+                <!--              <div *ngIf="!historyFlag; else selected_history" class="chat_button" (click)="setHistoryFlag()">-->
+                <!--                <img src="../../../../../assets/history(3).png" height="18" width="18"/>-->
+                <!--              </div>-->
+                <!--              <ng-template #selected_history>-->
+                <!--                <div class="chat-button-extra" (click)="setHistoryFlag()">-->
+                <!--                  <div class="chat_button">-->
+                <!--                    <img src="../../../../../assets/history(3).png" height="18" width="18"/>-->
+                <!--                  </div>-->
+                <!--                  <div class="chat-button-extra-text">History</div>-->
+                <!--                </div>-->
+                <!--              </ng-template>-->
 
-<!--              <div *ngIf="!codeFlag; else selected_code" class="chat_button" (click)="setCodeFlag()">-->
-<!--                <img src="../../assets/code_chat_button.png" height="18" width="18"/>-->
-<!--              </div>-->
-<!--              <ng-template #selected_code>-->
-<!--                <div class="chat-button-extra" (click)="setCodeFlag()">-->
-<!--                  <div class="chat_button">-->
-<!--                    <img src="../../assets/code_white.png" height="18" width="18"/>-->
-<!--                  </div>-->
-<!--                  <div class="chat-button-extra-text">Code</div>-->
-<!--                </div>-->
-<!--              </ng-template>-->
+                <!--              <div *ngIf="!codeFlag; else selected_code" class="chat_button" (click)="setCodeFlag()">-->
+                <!--                <img src="../../assets/code_chat_button.png" height="18" width="18"/>-->
+                <!--              </div>-->
+                <!--              <ng-template #selected_code>-->
+                <!--                <div class="chat-button-extra" (click)="setCodeFlag()">-->
+                <!--                  <div class="chat_button">-->
+                <!--                    <img src="../../assets/code_white.png" height="18" width="18"/>-->
+                <!--                  </div>-->
+                <!--                  <div class="chat-button-extra-text">Code</div>-->
+                <!--                </div>-->
+                <!--              </ng-template>-->
 
-              <div *ngIf="!expandFlag; else selected_expand" class="chat_button" (click)="expandChat(messageArea)">
-                <img src="../../../../../assets/expand-screen.png" height="16" width="16"/>
-              </div>
-              <ng-template #selected_expand>
-                <div class="chat-button-extra" (click)="expandChat(messageArea)">
-                  <div class="chat_button">
-                    <img src="../../../../../assets/expand-screen.png" height="16" width="16"/>
-                  </div>
-                  <div class="chat-button-extra-text">Expanded</div>
+                <div *ngIf="!expandFlag; else selected_expand" class="chat_button" (click)="expandChat(messageArea)">
+                  <img src="../../../../../assets/expand-screen.png" height="16" width="16"/>
                 </div>
-              </ng-template>
-            </div>
-            <div class="right-chat-buttons">
-              <div class="chat_button" (click)="sendMessage()">
-                <img src="../../../../../assets/send-message.png" height="20" width="20"/>
+                <ng-template #selected_expand>
+                  <div class="chat-button-extra" (click)="expandChat(messageArea)">
+                    <div class="chat_button">
+                      <img src="../../../../../assets/expand-screen.png" height="16" width="16"/>
+                    </div>
+                    <div class="chat-button-extra-text">Expanded</div>
+                  </div>
+                </ng-template>
+              </div>
+              <div class="right-chat-buttons">
+                <div class="chat_button" (click)="sendMessage()">
+                  <img src="../../../../../assets/send-message.png" height="20" width="20"/>
+                </div>
               </div>
             </div>
           </div>
+        </form>
+
+        <div id="block1">
+
         </div>
-      </form>
-
-      <div id="block1">
-
       </div>
     </div>
+
+
   </div>
-
-
 </div>

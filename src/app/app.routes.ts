@@ -13,6 +13,7 @@ import {DinaHomeComponent} from './features/dina-home/components/dina-home/dina-
 import {SignInComponent} from './features/auth/components/sign-in/sign-in.component';
 import {LoginComponent} from './features/auth/components/login/login.component';
 import {RandomLightsComponent} from './features/dina-home/components/random-lights/random-lights.component';
+import {DocumentFormComponent} from './features/dina-home/components/document-form/document-form.component';
 
 
 export const routes: Routes = [
@@ -29,6 +30,6 @@ export const routes: Routes = [
   {path:'dina-home', component: DinaHomeComponent},
   {path:'sign-in', component: SignInComponent},
   {path:'login', component: LoginComponent},
-  {path: 'tmp', component: RandomLightsComponent},
+  {path: 'tmp', component: DocumentFormComponent},
   { path: '', redirectTo: 'dina-home', pathMatch: 'full' },
 ];
