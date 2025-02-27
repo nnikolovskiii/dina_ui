@@ -21,6 +21,7 @@ import hljs from 'highlight.js';
 import {environment} from '../../../../../environments/environment';
 import {HistorySidebarComponent} from '../history-sidebar/history-sidebar.component';
 import {ModelsSidebarComponent} from '../models-sidebar/models-sidebar.component';
+import {DocumentFormComponent} from '../../../dina-home/components/document-form/document-form.component';
 
 interface Message {
   content: string;
@@ -29,15 +30,26 @@ interface Message {
   sanitizedContent: SafeHtml;
 }
 
+export class WebsocketData {
+  data_type: string;
+  data: any;
+
+  constructor(data_type: string, data: any) {
+    this.data_type = data_type;
+    this.data = data;
+  }
+}
+
+
 @Component({
   selector: 'app-chat',
   standalone: true,
-  imports: [FormsModule, CommonModule, RouterModule, HistorySidebarComponent, ModelsSidebarComponent],
+  imports: [FormsModule, CommonModule, RouterModule, HistorySidebarComponent, ModelsSidebarComponent, DocumentFormComponent],
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class ChatComponent implements OnInit, OnDestroy, AfterViewInit{
+export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() chat_id: string | null = null;
   private ws: WebSocket | undefined;
   public inputMessage: string = '';
@@ -145,11 +157,13 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit{
       }
     )
   }
+
   navigateToChat() {
     this.router.navigate(['/chat']).then(() => {
       window.location.reload();
     });
   }
+
   codeFlag: boolean = false;
 
   setCodeFlag() {
@@ -204,7 +218,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit{
   toggleHistoryBar() {
     if (this.barStatus == "history") {
       this.barStatus = "close"
-    }else{
+    } else {
       this.barStatus = "history"
     }
 
@@ -215,13 +229,12 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit{
   toggleChatModels() {
     if (this.barStatus == "chat_models") {
       this.barStatus = "close"
-    }else{
+    } else {
       this.barStatus = "chat_models"
     }
   }
 
   selectedApi: string = "openai"
-
 
 
   ngAfterViewInit(): void {
@@ -288,8 +301,11 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit{
       sanitizedContent: this.sanitizer.bypassSecurityTrustHtml('')
     });
 
+
+
     if (this.ws) {
-      this.ws.send(JSON.stringify([this.inputMessage, this.chat_id]));
+      let websocketData = new WebsocketData("chat", [this.inputMessage, this.chat_id])
+      this.ws.send(JSON.stringify(websocketData));
     }
 
     this.inputMessage = '';
@@ -304,6 +320,9 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit{
       sanitizedContent: this.sanitizer.bypassSecurityTrustHtml(<string>marked.parse(content))
     };
   }
+  showForm:boolean = false
+  formFields: any = null
+  formId: any= null
 
   private initializeWebSocket(): void {
     const url = environment.port ?
@@ -313,11 +332,35 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit{
     this.ws = new WebSocket(url);
 
     this.ws.onmessage = (event: MessageEvent) => {
-      if (event.data.includes("<ASTOR>")) {
-        this.chat_id = event.data.split(":")[1]
+      console.log(event.data)
+      const jsonObject = JSON.parse(event.data);
+      if (jsonObject.data_type === "stream") {
+        let data_m = jsonObject.data;
+
+        console.log(data_m)
+        if (data_m.includes("<ASTOR>")) {
+          this.chat_id = data_m.split(":")[1]
+          this.finalizeCurrentMessage();
+        } else {
+          this.updateStreamingMessage(data_m);
+
+        }
+      }
+      else if(jsonObject.data_type === "form"){
+        this.showForm = true;
+        console.log(jsonObject.data);
+        this.formFields = jsonObject.data[0];
+        this.formId = jsonObject.data[1];
+      }
+      else if(jsonObject.data_type === "no_stream"){
+        this.messages.push({
+          content:jsonObject.data,
+          type: 'assistant',
+          isStreaming: true,
+          sanitizedContent: this.sanitizer.bypassSecurityTrustHtml('')
+        });
         this.finalizeCurrentMessage();
-      } else {
-        this.updateStreamingMessage(event.data);
+
       }
     };
 
@@ -367,6 +410,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit{
       }
     });
   }
+
   private addCopyButtonsToLatestMessage(): void {
     const messages = this.el.nativeElement.querySelectorAll('.assistant-card');
     const lastMessage = messages[messages.length - 1];
@@ -396,6 +440,14 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit{
         }
       });
     });
+  }
+
+  handleGenerate(formData: any) {
+    if (this.ws) {
+      let websocketData = new WebsocketData("form", [formData, this.formId])
+      this.ws.send(JSON.stringify(websocketData));
+      this.showForm = false;
+    }
   }
 
 }

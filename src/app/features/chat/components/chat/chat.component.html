@@ -30,7 +30,7 @@
 <div class="content">
   <div class="main-div bg-wrapper">
     <div class="chat-container">
-      <div class="messages">
+      <div class="messages pb-5">
         <div *ngFor="let message of messages">
           <div [ngSwitch]="message.type">
             <div *ngSwitchCase="'user'" class="user-card" [innerHtml]="message.sanitizedContent"></div>
@@ -63,6 +63,37 @@
           </div>
 
         </div>
+
+
+
+        <div *ngIf="showForm; else lol">
+          <div class="assistant">
+            <div class="assistant-content">
+              <!-- Logo -->
+              <div class="logo-container">
+                <img src="../../../../../assets/whiteDina.png"
+                     alt="Dina Logo"
+                     class="logo-image"
+                     height="23"
+                     width="23"/>
+              </div>
+
+              <!-- Message Content -->
+              <div class="assistant-card">
+                <div class="message-content">
+                  <div>
+                    <app-document-form
+                      [formFields]="formFields"
+                      (generate)="handleGenerate($event)"> <!-- Pass $event to receive data -->                    >
+                    </app-document-form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <ng-template #lol></ng-template>
 
         <form>
           <div id="form-div">

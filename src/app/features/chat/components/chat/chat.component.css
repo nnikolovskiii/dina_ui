@@ -579,3 +579,26 @@ pre {
 .button:hover:after {
   opacity: 1;
 }
+
+
+.pdf-links{
+  padding-top: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.pdf-link{
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  align-items: center;
+}
+
+.pdf-image {
+  width: 17px;
+  height: 17px;
+  background-image: url('../../../../../assets/pdf.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}

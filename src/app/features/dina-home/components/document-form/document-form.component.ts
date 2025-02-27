@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -7,11 +7,10 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './document-form.component.html',
-  styleUrl: './document-form.component.css'
+  styleUrls: ['./document-form.component.css'] // note plural 'styleUrls'
 })
 export class DocumentFormComponent {
-  // Form field configuration with type and options
-  formFields: {
+  @Input() formFields: {
     [key: string]: {
       type: string;
       value: any;
@@ -25,6 +24,12 @@ export class DocumentFormComponent {
     'Message': { type: 'textarea', value: '' }
   };
 
-  // Expose Object to template for iteration
   Object = Object;
+
+  @Output() generate = new EventEmitter<any>(); // <-- Changed to emit any data
+
+  onGenerateClick() {
+    // Emit the current form data
+    this.generate.emit(this.formFields);
+  }
 }
