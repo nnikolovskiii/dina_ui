@@ -78,28 +78,11 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
         this.loadExistingMessages();
       }
 
-      this.initializeFlags();
-
       this.initializeWebSocket();
       this.initializeChatModels();
 
     });
 
-  }
-
-  private initializeFlags(): void {
-    this.flagService.getFlag("vanilla").subscribe((flag: Flag) => {
-      this.vanillaFlag = flag.active;
-    });
-    this.flagService.getFlag("history").subscribe((flag: Flag) => {
-      this.historyFlag = flag.active;
-    });
-    this.flagService.getFlag("docs").subscribe((flag: Flag) => {
-      this.docsFlag = false;
-    });
-    this.flagService.getFlag("code").subscribe((flag: Flag) => {
-      this.codeFlag = flag.active;
-    });
   }
 
   private initializeChatModels(): void {
@@ -145,63 +128,12 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
 
-  docsFlag: boolean = false;
-
-  setDocsFlag() {
-    this.flagService.setFlag("docs", !this.docsFlag).subscribe(
-      (response) => {
-        this.docsFlag = !this.docsFlag;
-      },
-      (error) => {
-        console.error('Error:', error);
-      }
-    )
-  }
-
   navigateToChat() {
     this.router.navigate(['/chat']).then(() => {
       window.location.reload();
     });
   }
 
-  codeFlag: boolean = false;
-
-  setCodeFlag() {
-    this.flagService.setFlag("code", !this.codeFlag).subscribe(
-      (response) => {
-        this.codeFlag = !this.codeFlag;
-      },
-      (error) => {
-        console.error('Error:', error);
-      }
-    )
-  }
-
-  vanillaFlag: boolean = false;
-
-  setVanillaFlag() {
-    this.flagService.setFlag("vanilla", !this.vanillaFlag).subscribe(
-      (response) => {
-        this.vanillaFlag = !this.vanillaFlag;
-      },
-      (error) => {
-        console.error('Error:', error);
-      }
-    )
-  }
-
-  historyFlag: boolean = false;
-
-  setHistoryFlag() {
-    this.flagService.setFlag("history", !this.historyFlag).subscribe(
-      (response) => {
-        this.historyFlag = !this.historyFlag;
-      },
-      (error) => {
-        console.error('Error:', error);
-      }
-    )
-  }
 
   handleKeyDown(event: KeyboardEvent, textarea: HTMLTextAreaElement): void {
     if (event.key === 'Enter') {
@@ -239,8 +171,6 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngAfterViewInit(): void {
     setTimeout(() => {
-      this.highlightCode();
-      this.addCopyButtons(this.el.nativeElement); // Add this line
     }, 500);
   }
 
@@ -260,11 +190,6 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
         <string>marked.parse(lastMessage.content)
       );
 
-      setTimeout(() => {
-        this.addCopyButtonsToLatestMessage();
-      }, 100);
-
-      this.highlightCode();
     }
   }
 
@@ -278,29 +203,24 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
         <string>marked.parse(lastMessage.content)
       );
 
-      // Force DOM update and highlight immediately
       this.cdRef.detectChanges();
-      this.highlightCode();
 
-      // Auto-scroll to bottom
       this.scrollToBottom();
     }
   }
 
   sendMessage(): void {
+    this.showForm = false;
     if (!this.inputMessage.trim()) return;
 
-    // Add user message
     this.messages.push(this.createMessage('user', this.inputMessage));
 
-    // Add temporary assistant message
     this.messages.push({
       content: '',
       type: 'assistant',
       isStreaming: true,
       sanitizedContent: this.sanitizer.bypassSecurityTrustHtml('')
     });
-
 
 
     if (this.ws) {
@@ -320,9 +240,10 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
       sanitizedContent: this.sanitizer.bypassSecurityTrustHtml(<string>marked.parse(content))
     };
   }
-  showForm:boolean = false
+
+  showForm: boolean = false
   formFields: any = null
-  formId: any= null
+  formId: any = null
 
   private initializeWebSocket(): void {
     const url = environment.port ?
@@ -345,16 +266,14 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
           this.updateStreamingMessage(data_m);
 
         }
-      }
-      else if(jsonObject.data_type === "form"){
+      } else if (jsonObject.data_type === "form") {
         this.showForm = true;
         console.log(jsonObject.data);
         this.formFields = jsonObject.data[0];
         this.formId = jsonObject.data[1];
-      }
-      else if(jsonObject.data_type === "no_stream"){
+      } else if (jsonObject.data_type === "no_stream") {
         this.messages.push({
-          content:jsonObject.data,
+          content: jsonObject.data,
           type: 'assistant',
           isStreaming: true,
           sanitizedContent: this.sanitizer.bypassSecurityTrustHtml('')
@@ -379,68 +298,9 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
           this.messages.push(this.createMessage('assistant', assistantMessages[i].content));
         }
       }
-
-      setTimeout(() => {
-        this.highlightCode();
-      });
-
-      setTimeout(() => this.addCopyButtons(this.el.nativeElement), 200);
     });
   }
 
-  private addCopyButtons(container: HTMLElement): void {
-    const codeContainers = container.querySelectorAll('pre');
-    codeContainers.forEach((preElement: HTMLElement) => {
-      if (!preElement.querySelector('.copy-btn')) {
-        const btn = document.createElement('button');
-        btn.className = 'copy-btn';
-        btn.innerHTML = '📋';
-        btn.title = 'Copy to clipboard';
-
-        btn.style.opacity = '1';
-        btn.style.transform = 'translateY(0)';
-
-        setTimeout(() => {
-          btn.style.opacity = '';
-          btn.style.transform = '';
-        }, 100);
-
-        btn.addEventListener('click', () => this.copyCode(preElement));
-        preElement.appendChild(btn);
-      }
-    });
-  }
-
-  private addCopyButtonsToLatestMessage(): void {
-    const messages = this.el.nativeElement.querySelectorAll('.assistant-card');
-    const lastMessage = messages[messages.length - 1];
-    if (lastMessage) {
-      this.addCopyButtons(lastMessage);
-    }
-  }
-
-
-  private copyCode(container: HTMLElement): void {
-    const code = container.querySelector('code')?.textContent || '';
-    navigator.clipboard.writeText(code).then(() => {
-      const btn = container.querySelector('.copy-btn') as HTMLElement;
-      if (btn) {
-        btn.textContent = '✓';
-        setTimeout(() => btn.textContent = '📋', 2000);
-      }
-    });
-  }
-
-  private highlightCode(): void {
-    requestAnimationFrame(() => {
-      const codeBlocks = this.el.nativeElement.querySelectorAll('pre code');
-      codeBlocks.forEach((block: HTMLElement) => {
-        if (!block.classList.contains('hljs')) {
-          hljs.highlightElement(block);
-        }
-      });
-    });
-  }
 
   handleGenerate(formData: any) {
     if (this.ws) {
