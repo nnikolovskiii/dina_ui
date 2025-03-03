@@ -84,6 +84,7 @@
   animation: pulse 1.2s infinite ease-in-out;
   opacity: 0;
   animation-delay: 0.2s;
+
 }
 
 /* From Uiverse.io by xXJollyHAKERXx */
@@ -175,6 +176,7 @@
   flex-flow: column;
   align-items: center;
   overflow-y: auto;
+  margin-top:40px;
 }
 
 .chat-container::-webkit-scrollbar {

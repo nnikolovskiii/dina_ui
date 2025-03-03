@@ -80,7 +80,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
 
       this.initializeWebSocket();
       this.initializeChatModels();
-
+      this.addDummyStreamingMessage()
     });
 
   }
@@ -313,22 +313,46 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  // Add this method to your ChatComponent class
   addDummyStreamingMessage() {
+    const fullMessage = 'Здраво, јас сум Дина! Како можам да ти помогнам денес?';
+    const words = fullMessage.split(' ');
+
+    // Initial empty message with streaming state
     this.messages.push({
-      content: 'This is a streaming response...',
+      content: '',
       type: 'assistant',
       isStreaming: true,
-      sanitizedContent: this.sanitizer.bypassSecurityTrustHtml(
-        ""
-      )
+      sanitizedContent: this.sanitizer.bypassSecurityTrustHtml("")
     });
-    //
-    // // Optional: Automatically finalize after delay for demo purposes
-    // setTimeout(() => {
-    //   this.finalizeCurrentMessage();
-    // }, 3000);
+
+    // Add initial delay before starting
+    setTimeout(() => {
+      words.forEach((word, index) => {
+        setTimeout(() => {
+          const lastIndex = this.messages.length - 1;
+          const currentMessage = this.messages[lastIndex].content + (index > 0 ? ' ' : '') + word;
+
+          this.messages[lastIndex] = {
+            content: currentMessage,
+            type: 'assistant',
+            isStreaming: index < words.length - 1,
+            sanitizedContent: this.sanitizer.bypassSecurityTrustHtml(
+              <string>marked.parse(currentMessage)
+            )
+          };
+
+          this.cdRef.detectChanges();
+          this.scrollToBottom();
+
+          if (index === words.length - 1) {
+            this.finalizeCurrentMessage();
+          }
+        }, 100 * index); // 1 second per word
+      });
+    }, 1000); // Initial 1-second delay
   }
+
+
 
 
   @ViewChild('messageArea') messageArea!: ElementRef<HTMLTextAreaElement>;
