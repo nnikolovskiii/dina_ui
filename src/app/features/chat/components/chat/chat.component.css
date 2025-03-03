@@ -256,10 +256,10 @@
   outline: none;
   border: none;
   padding-left: 10px;
-  color: white;
+  color: #e9e3e7;
   font-size: 14px;
-  margin-top: 8px;
-  margin-bottom: 8px;
+  margin-top: 12px;
+  margin-bottom: 12px;
 }
 
 
@@ -741,5 +741,10 @@ textarea {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+}
+
+textarea::placeholder { /* Modern browsers */
+  color:  #e9e3e7;
+  opacity: 1; /* Firefox fix */
 }
 
