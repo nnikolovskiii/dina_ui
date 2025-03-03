@@ -11,10 +11,12 @@
            [(ngModel)]="formFields[key].value">
 
     <!-- Checkbox -->
-    <div *ngIf="formFields[key].type === 'checkbox'" class="checkbox-container">
-      <input class="ml-4" type="checkbox"
-             [id]="'input-' + key"
-             [(ngModel)]="formFields[key].value">
+    <div *ngIf="formFields[key].type === 'checkbox'" class="ml-2">
+      <label class="cool-switch">
+        <input type="checkbox"  [id]="'input-' + key"
+               [(ngModel)]="formFields[key].value">
+        <span class="cool-slider"></span>
+      </label>
     </div>
 
     <!-- Dropdown -->
@@ -28,6 +30,26 @@
       </option>
     </select>
 
+    <!-- Add this block for checkbox groups -->
+    <div *ngIf="formFields[key].type === 'checkbox-group'" class="checkboxes" >
+      <div *ngFor="let option of formFields[key].options" class="checkbox-group">
+        <label class="container-checkboxes">
+          <input
+            type="checkbox"
+            [id]="'input-' + key + '-' + option"
+            [checked]="formFields[key].value.includes(option)"
+            (change)="toggleSelection(key, option)"
+          >
+          <svg viewBox="0 0 64 64" height="15px" width="15px">
+            <path
+              d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
+              pathLength="575.0541381835938" class="path"></path>
+          </svg>
+        </label>
+        <p>{{ option }}</p>
+      </div>
+    </div>
+
     <!-- Textarea -->
     <textarea *ngIf="formFields[key].type === 'textarea'"
               class="input-field"
@@ -37,7 +59,7 @@
   </div>
 
   <div class="flex-div">
-    <button class="button"  (click)="onGenerateClick()">
+    <button class="button" (click)="onGenerateClick()">
       <span>Генерирај</span>
     </button>
   </div>

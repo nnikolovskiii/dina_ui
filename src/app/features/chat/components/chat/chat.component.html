@@ -79,8 +79,31 @@
                   <div>
                     <app-document-form
                       [formFields]="formFields"
-                      (generate)="handleGenerate($event)"> <!-- Pass $event to receive data -->                    >
+                      (generate)="handleGenerate($event)">                 >
                     </app-document-form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="payment; else lol">
+          <div class="assistant">
+            <div class="assistant-content">
+              <!-- Logo -->
+              <div class="logo-container">
+                <img src="../../../../../assets/whiteDina.png"
+                     alt="Dina Logo"
+                     class="logo-image"
+                     height="23"
+                     width="23"/>
+              </div>
+              <!-- Message Content -->
+              <div class="assistant-card">
+                <div class="message-content">
+                  <div>
+                    <app-payment>                 >
+                    </app-payment>
                   </div>
                 </div>
               </div>

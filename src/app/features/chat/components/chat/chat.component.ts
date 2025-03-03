@@ -22,6 +22,7 @@ import {environment} from '../../../../../environments/environment';
 import {HistorySidebarComponent} from '../history-sidebar/history-sidebar.component';
 import {ModelsSidebarComponent} from '../models-sidebar/models-sidebar.component';
 import {DocumentFormComponent} from '../../../dina-home/components/document-form/document-form.component';
+import {PaymentComponent} from '../../../dina-home/components/payment/payment.component';
 
 interface Message {
   content: string;
@@ -44,7 +45,7 @@ export class WebsocketData {
 @Component({
   selector: 'app-chat',
   standalone: true,
-  imports: [FormsModule, CommonModule, RouterModule, HistorySidebarComponent, ModelsSidebarComponent, DocumentFormComponent],
+  imports: [FormsModule, CommonModule, RouterModule, HistorySidebarComponent, ModelsSidebarComponent, DocumentFormComponent, PaymentComponent],
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css'],
   encapsulation: ViewEncapsulation.None
@@ -76,11 +77,14 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
 
       if (this.chat_id) {
         this.loadExistingMessages();
+      } else {
+        this.addDummyStreamingMessage()
+
       }
 
       this.initializeWebSocket();
       this.initializeChatModels();
-      this.addDummyStreamingMessage()
+
     });
 
   }
@@ -243,6 +247,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   showForm: boolean = false
+  payment: boolean = false
   formFields: any = null
   formId: any = null
   serviceType: any = null
@@ -283,6 +288,8 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
         });
         this.finalizeCurrentMessage();
 
+      } else if (jsonObject.data_type === "payment") {
+        this.payment = true;
       }
     };
 
@@ -301,6 +308,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
           this.messages.push(this.createMessage('assistant', assistantMessages[i].content));
         }
       }
+
     });
   }
 
@@ -351,8 +359,6 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
       });
     }, 1000); // Initial 1-second delay
   }
-
-
 
 
   @ViewChild('messageArea') messageArea!: ElementRef<HTMLTextAreaElement>;

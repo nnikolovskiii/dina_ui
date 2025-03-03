@@ -14,6 +14,7 @@ import {SignInComponent} from './features/auth/components/sign-in/sign-in.compon
 import {LoginComponent} from './features/auth/components/login/login.component';
 import {RandomLightsComponent} from './features/dina-home/components/random-lights/random-lights.component';
 import {DocumentFormComponent} from './features/dina-home/components/document-form/document-form.component';
+import {PaymentComponent} from './features/dina-home/components/payment/payment.component';
 
 
 export const routes: Routes = [
@@ -31,5 +32,6 @@ export const routes: Routes = [
   {path:'sign-in', component: SignInComponent},
   {path:'login', component: LoginComponent},
   {path: 'tmp', component: DocumentFormComponent},
+  {path:'payment', component: PaymentComponent},
   { path: '', redirectTo: 'dina-home', pathMatch: 'full' },
 ];

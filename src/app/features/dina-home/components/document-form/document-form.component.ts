@@ -21,7 +21,12 @@ export class DocumentFormComponent {
     'Email Address': { type: 'email', value: '' },
     'Subscribe': { type: 'checkbox', value: false },
     'Country': { type: 'dropdown', value: '', options: ['USA', 'Canada', 'UK'] },
-    'Message': { type: 'textarea', value: '' }
+    'Message': { type: 'textarea', value: '' },
+    'Interests': {
+      type: 'checkbox-group',
+      value: [],
+      options: ['Sports', 'Music', 'Reading']
+    }
   };
 
   Object = Object;
@@ -31,5 +36,16 @@ export class DocumentFormComponent {
   onGenerateClick() {
     // Emit the current form data
     this.generate.emit(this.formFields);
+  }
+
+  // Add this method to handle checkbox group selections
+  toggleSelection(fieldKey: string, optionValue: string) {
+    const field = this.formFields[fieldKey];
+    const index = field.value.indexOf(optionValue);
+    if (index === -1) {
+      field.value.push(optionValue);
+    } else {
+      field.value.splice(index, 1);
+    }
   }
 }
