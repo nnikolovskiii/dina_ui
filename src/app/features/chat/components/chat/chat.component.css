@@ -54,6 +54,7 @@
   margin-left: 250px;
 }
 
+
 #new-chat-button {
   width: 30px;
   height: 30px;
@@ -72,6 +73,7 @@
   position: absolute;
   right: 2px;
   bottom: 12px;
+  padding-right: 10px;
 }
 
 .streaming-dot {
@@ -82,6 +84,32 @@
   animation: pulse 1.2s infinite ease-in-out;
   opacity: 0;
   animation-delay: 0.2s;
+}
+
+/* From Uiverse.io by xXJollyHAKERXx */
+.spinner {
+  background-image: linear-gradient(rgb(186, 66, 255) 35%,rgb(0, 225, 255));
+  width: 10px;
+  height: 10px;
+  animation: spinning82341 1.7s linear infinite;
+  text-align: center;
+  border-radius: 50px;
+  filter: blur(1px);
+  box-shadow: 0px -5px 20px 0px rgb(186, 66, 255), 0px 5px 20px 0px rgb(0, 225, 255);
+}
+
+.spinner1 {
+  background-color: rgb(36, 36, 36);
+  width: 10px;
+  height: 10px;
+  border-radius: 50px;
+  filter: blur(10px);
+}
+
+@keyframes spinning82341 {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes pulse {
@@ -184,8 +212,102 @@
 }
 
 
-form {
+/*message area new*/
+/* From Uiverse.io by vinodjangid07 */
+.messageBox {
+  min-height: 50px;
+  height: auto;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #34373b;
+  padding: 0 15px;
+  border-radius: 10px;
+  border: 1px solid rgb(63, 63, 63);
+  width: 900px;
+  position: fixed;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  gap: 14px;
+}
+.messageBox:focus-within {
+  border: 1.5px solid rgb(110, 110, 110);
+}
+
+/* Add transition to the form */
+.messageBox {
+  transition: left 0.3s ease;
+}
+
+/* Adjust form position when sidebar is open */
+.sliding-bar.open ~ .content .messageBox{
+  left: calc(50% + 125px);
+}
+
+
+#messageInput {
+  max-height: 150px;
+  overflow-y: auto;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  padding-left: 10px;
+  color: white;
+  font-size: 14px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+
+#messageInput::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+#messageInput::-webkit-scrollbar-thumb {
+  background: rgb(67, 69, 74);
+  border-radius: 1px;
+}
+
+#messageInput:focus ~ .send-button #sendButton svg path,
+#messageInput:valid ~ .send-button #sendButton svg path {
+  fill: #3c3c3c;
+  stroke: white;
+}
+
+#sendButton {
+  width: fit-content;
+  height: 100%;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+#sendButton svg {
+  height: 20px;
+  transition: all 0.3s;
+}
+#sendButton svg path {
+  transition: all 0.3s;
+}
+#sendButton:hover svg path {
+  fill: #3c3c3c;
+  stroke: white;
+}
+
+/*message area new*/
+
+.message-area {
+  display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 0px;
@@ -197,6 +319,7 @@ form {
   transform: translateX(-50%);
   z-index: 1;
 }
+
 
 #block1 {
   display: flex;
@@ -210,6 +333,17 @@ form {
   left: 50%;
   transform: translateX(-50%);
   height: 10px;
+}
+
+/* Add transition to the form */
+.message-area, #block1 {
+  transition: left 0.3s ease;
+}
+
+/* Adjust form position when sidebar is open */
+.sliding-bar.open ~ .content .message-area,
+.sliding-bar.open ~ .content #block1 {
+  left: calc(50% + 125px);
 }
 
 
@@ -253,22 +387,6 @@ form {
   align-items: center;
 }
 
-textarea {
-  flex: 1;
-  width: 100%;
-  resize: none;
-  border-radius: 13px;
-  padding: 10px 10px 3px;
-  font-size: 16px;
-  outline: none;
-  background-color: #34373b;
-  color: #e9e3e7;
-}
-
-textarea:focus {
-  outline: none;
-  box-shadow: none;
-}
 
 .chat_button {
   border: none;
@@ -456,7 +574,7 @@ pre {
   margin-right: 16px;
   word-wrap: break-word;
   overflow-wrap: break-word;
-  display:inline-block
+  display: inline-block
 }
 
 
@@ -475,9 +593,13 @@ pre {
 .message-content {
   flex-grow: 1; /* Take remaining space */
   margin-left: 6px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
 }
-
-
 
 
 .container {
@@ -509,7 +631,7 @@ pre {
 
 .input-field:focus {
   outline: none;
-  box-shadow: 0 0 0 2px rgba(255,255, 255, 0.6);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.6);
 }
 
 .input-field:hover {
@@ -527,7 +649,7 @@ pre {
   }
 }
 
-.flex-div{
+.flex-div {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -581,13 +703,13 @@ pre {
 }
 
 
-.pdf-links{
+.pdf-links {
   padding-top: 8px;
   display: flex;
   flex-direction: column;
 }
 
-.pdf-link{
+.pdf-link {
   display: flex;
   flex-direction: row;
   gap: 5px;
@@ -602,3 +724,22 @@ pre {
   background-position: center;
   background-repeat: no-repeat;
 }
+
+textarea {
+  resize: none;
+}
+
+
+.messages {
+  transition: padding-bottom 0.2s ease-out;
+  /* Remove fixed padding-bottom: 160px */
+}
+
+.send-button{
+  width: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+

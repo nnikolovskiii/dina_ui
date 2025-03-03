@@ -6,7 +6,7 @@ import {
   ViewEncapsulation,
   ElementRef,
   AfterViewInit,
-  ChangeDetectorRef
+  ChangeDetectorRef, ViewChild
 } from '@angular/core';
 import {FormGroup, FormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
@@ -230,6 +230,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
 
     this.inputMessage = '';
     this.cdRef.detectChanges();
+    this.autoResize();
   }
 
   private createMessage(type: 'user' | 'assistant', content: string, isStreaming = false) {
@@ -244,6 +245,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
   showForm: boolean = false
   formFields: any = null
   formId: any = null
+  serviceType: any = null
 
   private initializeWebSocket(): void {
     const url = environment.port ?
@@ -271,6 +273,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
         console.log(jsonObject.data);
         this.formFields = jsonObject.data[0];
         this.formId = jsonObject.data[1];
+        this.serviceType = jsonObject.data[2];
       } else if (jsonObject.data_type === "no_stream") {
         this.messages.push({
           content: jsonObject.data,
@@ -304,10 +307,52 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
 
   handleGenerate(formData: any) {
     if (this.ws) {
-      let websocketData = new WebsocketData("form", [formData, this.formId])
+      let websocketData = new WebsocketData("form", [formData, this.formId, this.serviceType])
       this.ws.send(JSON.stringify(websocketData));
       this.showForm = false;
     }
   }
+
+  // Add this method to your ChatComponent class
+  addDummyStreamingMessage() {
+    this.messages.push({
+      content: 'This is a streaming response...',
+      type: 'assistant',
+      isStreaming: true,
+      sanitizedContent: this.sanitizer.bypassSecurityTrustHtml(
+        ""
+      )
+    });
+    //
+    // // Optional: Automatically finalize after delay for demo purposes
+    // setTimeout(() => {
+    //   this.finalizeCurrentMessage();
+    // }, 3000);
+  }
+
+
+  @ViewChild('messageArea') messageArea!: ElementRef<HTMLTextAreaElement>;
+
+  @ViewChild('messagesContainer') messagesContainer!: ElementRef<HTMLDivElement>;
+  basePadding = 0; // Base padding below textarea in pixels
+
+  autoResize() {
+    const textarea = this.messageArea.nativeElement;
+    const maxHeight = 150;
+
+    textarea.style.height = 'auto';
+    const newHeight = Math.min(textarea.scrollHeight, maxHeight);
+
+    // Set textarea height
+    textarea.style.height = `${newHeight}px`;
+    textarea.style.overflowY = newHeight >= maxHeight ? 'auto' : 'hidden';
+
+    // Update messages container padding
+    if (this.messagesContainer) {
+      const totalPadding = newHeight + this.basePadding;
+      this.messagesContainer.nativeElement.style.paddingBottom = `${totalPadding}px`;
+    }
+  }
+
 
 }
