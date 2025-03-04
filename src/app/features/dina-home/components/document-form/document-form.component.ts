@@ -26,7 +26,7 @@ export class DocumentFormComponent {
       type: 'checkbox-group',
       value: [],
       options: ['Sports', 'Music', 'Reading']
-    }
+    },
   };
 
   Object = Object;

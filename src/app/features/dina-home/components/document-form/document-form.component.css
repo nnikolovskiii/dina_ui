@@ -1,9 +1,9 @@
 .container {
   background-color: #34373b;
-  max-width: 600px;
   font-family: Arial, sans-serif;
   padding-bottom: 4px;
   color: white;
+  width: 500px;
 }
 
 
@@ -235,3 +235,17 @@ textarea.input-field {
 .cool-switch input[type="checkbox"]:checked:active + .cool-slider::after {
   transform: translateX(calc(var(--button-width) - var(--toggle-wider) - var(--button-toggle-offset)));
 }
+
+/* Hide number input arrows */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+

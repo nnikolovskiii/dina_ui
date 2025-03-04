@@ -1,32 +1,31 @@
-<app-blob
-  [background]="'linear-gradient(200deg, #D0312D 0%, #efcc00 100%)'"
-  [left]="'10%'"
-  [top]="'10%'"
-  [blurEffect]="'blur(110px)'"
-  [animation]="'sway 8s ease-in-out infinite !important'">
-</app-blob>
 <div class="container" #container>
   <section class="section" id="section1">
     <div class="flex flex-col justify-center items-center">
       <div id="header" class="mt-4 px-12 flex w-full h-full justify-between items-center">
-        <div class="flex justify-center items-center gap-3">
+        <div class="flex justify-center items-center gap-[16px]">
           <img src="../../../../../assets/dina_logo.png" class="h-16 w-16"/>
-          <div class="ml-2.5 w-1.5 h-[52px] bg-gray-700 rounded">
+
+          <div class="ml-2.5 w-[3px] h-[52px] bg-gray-600 rounded">
           </div>
           <img src="../../../../../assets/ministerstvo-logo.png" height="72" width="421"/>
         </div>
         <div class="flex justify-center items-center lol">
-          <p class="lol3">МДТ</p>
-          <p class="lol3">Примери</p>
-          <p class="lol3">За Дина</p>
-          <div class="w-1.5 h-[52px] bg-gray-300 rounded">
+          <button class="cta">
+            <span class="hover-underline-animation"> МДТ </span>
+          </button>
+          <button class="cta">
+            <span class="hover-underline-animation"> Примери </span>
+          </button>
+          <button class="cta">
+            <span class="hover-underline-animation"> За Дина</span>
+          </button>
+          <div class="w-[3px] h-[52px] bg-gray-600 rounded">
           </div>
-          <button class="lol3" (click)="navigateToLink('/login')">Најави се</button>
-          <button class="lol4 inline-flex items-center justify-center px-8 py-3.5 text-sm
-      text-white no-underline transition-all duration-200 bg-gradient-to-r from-[#ff3131] to-[#ff904d]
-      rounded-lg hover:scale-105 active:scale-95 shadow-lg
-      hover:shadow-blue-500/40 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                  (click)="navigateToLink('/sign-in')">
+
+          <button class="cta" (click)="navigateToLink('/login')">
+            <span class="hover-underline-animation">Најави се</span>
+          </button>
+          <button class="register-button" (click)="navigateToLink('sign-in')">
             Регистрирај се
           </button>
         </div>
@@ -46,19 +45,128 @@
       </div>
 
       <div id="buttons" class="flex justify-center items-center">
-        <button class="lol4 inline-flex items-center justify-center px-8 py-3.5 text-sm font-semibold
-      text-white no-underline transition-all duration-200 bg-gradient-to-r from-[#ff3131] to-[#ff904d]
-      rounded-xl hover:scale-105 active:scale-95 shadow-lg
-      hover:shadow-blue-500/40 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 w-[210px]  h-[60px]"
-                (click)="navigateToLink('chat')">
-          Прашај ја ДИНА!
+        <button class="star-button" (click)="navigateToLink('chat')">
+          Прашај ја Дина!
+          <div class="star-1">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              xml:space="preserve"
+              version="1.1"
+              style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+              viewBox="0 0 784.11 815.53"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+            >
+      <defs></defs>
+              <g id="Layer_x0020_1">
+        <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                <path
+                  class="fil0"
+                  d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                ></path>
+      </g>
+    </svg>
+          </div>
+          <div class="star-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              xml:space="preserve"
+              version="1.1"
+              style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+              viewBox="0 0 784.11 815.53"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+            >
+      <defs></defs>
+              <g id="Layer_x0020_1">
+        <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                <path
+                  class="fil0"
+                  d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                ></path>
+      </g>
+    </svg>
+          </div>
+          <div class="star-3">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              xml:space="preserve"
+              version="1.1"
+              style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+              viewBox="0 0 784.11 815.53"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+            >
+      <defs></defs>
+              <g id="Layer_x0020_1">
+        <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                <path
+                  class="fil0"
+                  d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                ></path>
+      </g>
+    </svg>
+          </div>
+          <div class="star-4">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              xml:space="preserve"
+              version="1.1"
+              style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+              viewBox="0 0 784.11 815.53"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+            >
+      <defs></defs>П
+              <g id="Layer_x0020_1">
+        <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                <path
+                  class="fil0"
+                  d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                ></path>
+      </g>
+    </svg>
+          </div>
+          <div class="star-5">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              xml:space="preserve"
+              version="1.1"
+              style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+              viewBox="0 0 784.11 815.53"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+            >
+      <defs></defs>
+              <g id="Layer_x0020_1">
+        <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                <path
+                  class="fil0"
+                  d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                ></path>
+      </g>
+    </svg>
+          </div>
+          <div class="star-6">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              xml:space="preserve"
+              version="1.1"
+              style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+              viewBox="0 0 784.11 815.53"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+            >
+      <defs></defs>
+              <g id="Layer_x0020_1">
+        <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                <path
+                  class="fil0"
+                  d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                ></path>
+      </g>
+    </svg>
+          </div>
         </button>
+
+
         <div class="w-[300px] h-full bg-transparent">
         </div>
-        <button class="lol4 inline-flex items-center justify-center px-8 py-3.5 text-[12px]
-      text-white no-underline transition-all duration-200 bg-gradient-to-r bg-gray-900
-      rounded-xl hover:scale-105 active:scale-95 shadow-lg
-      hover:shadow-blue-500/40 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 w-[210px] h-[60px]">
+        <button class="black-button">
           Превземи ја Апликацијата
         </button>
       </div>
@@ -140,12 +248,4 @@
     (click)="scrollToSection(i)">
   </li>
 </ul>
-<app-blob
-  [background]="'linear-gradient(100deg, #D0312D 0%, #efcc00 100%)'"
-  [bottom]="'0%'"
-  [right]="'0%'"
-  [left]="'90%'"
-  [top]="'85%'"
-  [blurEffect]="'blur(150px)'"
-  [animation]="'sway2 7s ease-in-out infinite !important'">
-</app-blob>
+x
