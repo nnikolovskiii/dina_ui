@@ -349,16 +349,37 @@ html, body {
 
 .star-button {
   position: relative;
-  padding: 12px 35px;
-  background: #ff954e;
-  font-size: 17px;
+  padding: 20px 50px;
+  background: linear-gradient(90deg, #ff3d00, #ff5722, #ff9800);
+  /*background: #ff954e;*/
+  font-size: 24px;
   font-weight: 500;
-  color: #181818;
-  border: 5px solid #ff954e;
+  color: #ffffff;
+  border: 1px solid #ff954e;
   border-radius: 8px;
   box-shadow: 0 0 0 #fec1958c;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+
+.text-button {
+  background: transparent;
+  border: none;
+  color: #000000;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  text-decoration: none;
+  padding: 8px 16px;
+}
+
+.text-button:hover {
+  color: rgb(255, 98, 0);
+  text-decoration: underline;
+  transform: translateY(-2px);
 }
 
 .star-1 {
@@ -429,7 +450,7 @@ html, body {
 
 .star-button:hover {
   background: #fab585;
-  /*color: #fec195;*/
+  color: #000000;
   box-shadow: 0 0 25px #fec1958c;
 }
 
