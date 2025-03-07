@@ -15,6 +15,7 @@ import {LoginComponent} from './features/auth/components/login/login.component';
 import {RandomLightsComponent} from './features/dina-home/components/random-lights/random-lights.component';
 import {DocumentFormComponent} from './features/dina-home/components/document-form/document-form.component';
 import {PaymentComponent} from './features/dina-home/components/payment/payment.component';
+import {StarButtonComponent} from './global-features/buttons/star-button/star-button.component';
 
 
 export const routes: Routes = [
@@ -33,5 +34,6 @@ export const routes: Routes = [
   {path:'login', component: LoginComponent},
   {path: 'tmp', component: DocumentFormComponent},
   {path:'payment', component: PaymentComponent},
+  {path: 'star', component: StarButtonComponent},
   { path: '', redirectTo: 'dina-home', pathMatch: 'full' },
 ];

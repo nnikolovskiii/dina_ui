@@ -3,13 +3,15 @@ import {AuthService} from '../../../auth/services/auth/auth.service';
 import {Router} from '@angular/router';
 import {NgForOf} from '@angular/common';
 import {BlobComponent} from '../../../../global-features/components/blob/blob.component';
+import {StarButtonComponent} from '../../../../global-features/buttons/star-button/star-button.component';
 
 @Component({
   selector: 'app-dina-home',
   standalone: true,
   imports: [
     NgForOf,
-    BlobComponent
+    BlobComponent,
+    StarButtonComponent
   ],
   templateUrl: './dina-home.component.html',
   styleUrl: './dina-home.component.css'
