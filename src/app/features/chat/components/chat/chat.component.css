@@ -89,7 +89,7 @@
 
 /* From Uiverse.io by xXJollyHAKERXx */
 .spinner {
-  background-image: linear-gradient(rgb(186, 66, 255) 35%,rgb(0, 225, 255));
+  background-image: linear-gradient(rgb(186, 66, 255) 35%, rgb(0, 225, 255));
   width: 10px;
   height: 10px;
   animation: spinning82341 1.7s linear infinite;
@@ -176,7 +176,7 @@
   flex-flow: column;
   align-items: center;
   overflow-y: auto;
-  margin-top:40px;
+  margin-top: 40px;
 }
 
 .chat-container::-webkit-scrollbar {
@@ -234,6 +234,7 @@
   z-index: 1;
   gap: 14px;
 }
+
 .messageBox:focus-within {
   border: 1.5px solid rgb(110, 110, 110);
 }
@@ -244,7 +245,7 @@
 }
 
 /* Adjust form position when sidebar is open */
-.sliding-bar.open ~ .content .messageBox{
+.sliding-bar.open ~ .content .messageBox {
   left: calc(50% + 125px);
 }
 
@@ -293,13 +294,16 @@
   cursor: pointer;
   transition: all 0.3s;
 }
+
 #sendButton svg {
   height: 20px;
   transition: all 0.3s;
 }
+
 #sendButton svg path {
   transition: all 0.3s;
 }
+
 #sendButton:hover svg path {
   fill: #3c3c3c;
   stroke: white;
@@ -737,7 +741,7 @@ textarea {
   /* Remove fixed padding-bottom: 160px */
 }
 
-.send-button{
+.send-button {
   width: 20px;
   display: flex;
   align-items: center;
@@ -746,7 +750,7 @@ textarea {
 }
 
 textarea::placeholder { /* Modern browsers */
-  color:  #e9e3e7;
+  color: #e9e3e7;
   opacity: 1; /* Firefox fix */
 }
 

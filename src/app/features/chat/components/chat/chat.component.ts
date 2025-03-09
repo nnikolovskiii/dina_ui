@@ -251,6 +251,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
   formFields: any = null
   formId: any = null
   serviceType: any = null
+  formOrder: number|null = null
 
   private initializeWebSocket(): void {
     const url = environment.port ?
@@ -274,12 +275,27 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
 
         }
       } else if (jsonObject.data_type === "form") {
-        this.showForm = true;
-        console.log(jsonObject.data);
-        this.formFields = jsonObject.data[0];
-        this.formId = jsonObject.data[1];
-        this.serviceType = jsonObject.data[2];
-      } else if (jsonObject.data_type === "no_stream") {
+        this.formOrder = jsonObject.data[0];
+        if(this.formOrder == 0) {
+          this.showForm = true;
+          console.log(jsonObject.data);
+          this.formFields = jsonObject.data[1];
+          this.formId = jsonObject.data[2];
+          this.serviceType = jsonObject.data[3];
+        }else if (this.formOrder == 1){
+          this.showForm = true;
+          console.log(jsonObject.data);
+          this.formFields = jsonObject.data[1];
+          this.formId = jsonObject.data[2];
+        } else if(this.formOrder==2){
+          this.messages.pop()
+          this.payment = true;
+          console.log(jsonObject.data);
+          this.formFields = jsonObject.data[1];
+          this.formId = jsonObject.data[2];
+        }
+      }else if (jsonObject.data_type === "no_stream") {
+        this.messages.pop()
         this.messages.push({
           content: jsonObject.data,
           type: 'assistant',
@@ -314,10 +330,19 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
 
 
   handleGenerate(formData: any) {
+    console.log("LOOOOOLZI")
+    console.log([formData, this.formId, this.serviceType, this.formOrder]);
     if (this.ws) {
-      let websocketData = new WebsocketData("form", [formData, this.formId, this.serviceType])
+      let websocketData = new WebsocketData("form", [[formData, this.formId, this.serviceType, this.formOrder], this.chat_id])
       this.ws.send(JSON.stringify(websocketData));
       this.showForm = false;
+      this.payment = false;
+      this.messages.push({
+        content: '',
+        type: 'assistant',
+        isStreaming: true,
+        sanitizedContent: this.sanitizer.bypassSecurityTrustHtml('')
+      });
     }
   }
 
