@@ -69,11 +69,19 @@
     </div>
 
   </div>
-
   <div class="flex-div">
-    <button class="button" (click)="onGenerateClick()">
-      <span>Продоложи</span>
-    </button>
+    <app-star-button
+      [bgColor]="'#ffd9b5'"
+      [haveStars]="false"
+      [hoverBgColor]="'#fde5cb'"
+      [paddingX]="'6px'"
+      [paddingY]="'26px'"
+      [text]="'Продолжи'"
+      [textColor]="'black'"
+      [boxShadow]="'#fec1958c'"
+      (buttonClicked)="onGenerateClick()"
+    >
+    </app-star-button>
   </div>
 </div>
 

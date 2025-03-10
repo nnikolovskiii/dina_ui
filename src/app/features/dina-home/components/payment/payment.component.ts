@@ -1,14 +1,16 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {NgIf} from '@angular/common';
+import {CommonModule, NgIf} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {StarButtonComponent} from '../../../../global-features/buttons/star-button/star-button.component';
 
 @Component({
   selector: 'app-payment',
   standalone: true,
   imports: [
-    NgIf,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    StarButtonComponent,
+  CommonModule,
   ],
   templateUrl: './payment.component.html',
   styleUrl: './payment.component.css'
@@ -21,6 +23,13 @@ export class PaymentComponent {
       options?: string[];
     }
   } = {
+    // Payment-specific fields
+    'card_number': {type: 'text', value: ''},
+    'card_holder': {type: 'text', value: ''},
+    'valid_to': {type: 'text', value: ''},
+    'cvv_number': {type: 'password', value: ''},
+
+    // Existing fields (keep these if you need them)
     'First Name': {type: 'text', value: ''},
     'Email Address': {type: 'email', value: ''},
     'Subscribe': {type: 'checkbox', value: false},

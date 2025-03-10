@@ -1,11 +1,12 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import {StarButtonComponent} from '../../../../global-features/buttons/star-button/star-button.component';
 
 @Component({
   selector: 'app-document-form',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, StarButtonComponent],
   templateUrl: './document-form.component.html',
   styleUrls: ['./document-form.component.css'] // note plural 'styleUrls'
 })

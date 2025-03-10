@@ -1,6 +1,6 @@
 <div *ngIf="this.barStatus == 'close'" class="banter">
   <div (click)="toggleHistoryBar()" class="toggle-button">
-    <img src="../../../../../assets/8726046_history_icon.png" height="30" width="30"/>
+    <img src="../../../../../assets/history_icon.png" height="38" width="38"/>
   </div>
   <!--  <div (click)="toggleChatModels()" class="toggle-button">-->
   <!--    <img src="../../../../../assets/setting(2).png" height="26" width="26"/>-->
@@ -36,11 +36,6 @@
               <div class="assistant-content">
                 <!-- Logo -->
                 <div class="logo-container">
-                  <img src="../../../../../assets/whiteDina.png"
-                       alt="Dina Logo"
-                       class="logo-image"
-                       height="23"
-                       width="23"/>
                 </div>
                 <!-- Message Content -->
                 <div class="assistant-card">
@@ -66,20 +61,13 @@
           <div class="assistant">
             <div class="assistant-content">
               <!-- Logo -->
-              <div class="logo-container">
-                <img src="../../../../../assets/whiteDina.png"
-                     alt="Dina Logo"
-                     class="logo-image"
-                     height="23"
-                     width="23"/>
-              </div>
               <!-- Message Content -->
               <div class="assistant-card">
                 <div class="message-content">
                   <div>
                     <app-document-form
                       [formFields]="formFields"
-                      (generate)="handleGenerate($event)">                 >
+                      (generate)="handleGenerate($event)"> >
                     </app-document-form>
                   </div>
                 </div>
@@ -90,14 +78,6 @@
         <div *ngIf="payment; else lol">
           <div class="assistant">
             <div class="assistant-content">
-              <!-- Logo -->
-              <div class="logo-container">
-                <img src="../../../../../assets/whiteDina.png"
-                     alt="Dina Logo"
-                     class="logo-image"
-                     height="23"
-                     width="23"/>
-              </div>
               <!-- Message Content -->
               <div class="assistant-card">
                 <div class="message-content">
@@ -119,21 +99,21 @@
           >
           </textarea>
           <div class="send-button">
-          <button id="sendButton" (click)="sendMessage()">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 664 663">
-              <path
-                fill="none"
-                d="M646.293 331.888L17.7538 17.6187L155.245 331.888M646.293 331.888L17.753 646.157L155.245 331.888M646.293 331.888L318.735 330.228L155.245 331.888"
-              ></path>
-              <path
-                stroke-linejoin="round"
-                stroke-linecap="round"
-                stroke-width="33.67"
-                stroke="#6c6c6c"
-                d="M646.293 331.888L17.7538 17.6187L155.245 331.888M646.293 331.888L17.753 646.157L155.245 331.888M646.293 331.888L318.735 330.228L155.245 331.888"
-              ></path>
-            </svg>
-          </button>
+            <button id="sendButton" (click)="sendMessage()">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 664 663">
+                <path
+                  fill="none"
+                  d="M646.293 331.888L17.7538 17.6187L155.245 331.888M646.293 331.888L17.753 646.157L155.245 331.888M646.293 331.888L318.735 330.228L155.245 331.888"
+                ></path>
+                <path
+                  stroke-linejoin="round"
+                  stroke-linecap="round"
+                  stroke-width="33.67"
+                  stroke="#6c6c6c"
+                  d="M646.293 331.888L17.7538 17.6187L155.245 331.888M646.293 331.888L17.753 646.157L155.245 331.888M646.293 331.888L318.735 330.228L155.245 331.888"
+                ></path>
+              </svg>
+            </button>
           </div>
         </div>
 

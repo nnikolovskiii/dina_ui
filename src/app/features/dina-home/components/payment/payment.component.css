@@ -7,8 +7,8 @@
   height: 180px;
   background-image: radial-gradient(
     circle 897px at 9% 80.3%,
-    rgba(55, 60, 245, 1) 0%,
-    rgba(234, 161, 15, 0.9) 100.2%
+    #ffd9b5 0%,
+    #fa0202 100.2%
   );
   border-radius: 10px;
   padding: 20px;
@@ -32,13 +32,13 @@
   width: auto;
 }
 .inputstyle::placeholder {
-  color: #ffffff;
+  color: black;
 }
 .inputstyle {
   background-color: transparent;
   border: none;
   outline: none;
-  color: white;
+  color: black;
   caret-color: red;
   font-size: 13px;
   height: 25px;
@@ -83,7 +83,7 @@
 .input-label {
   font-size: 8px;
   letter-spacing: 1.5px;
-  color: #e2e2e2;
+  color: black;
   width: 100%;
 }
 
@@ -141,10 +141,10 @@
 }
 
 .container {
-  background-color: #34373b;
+  background-color: #f9f9f9;
   font-family: Arial, sans-serif;
   padding-bottom: 4px;
-  color: white;
+  color: black;
   width: 350px;
   align-items: center;
   justify-content: center;

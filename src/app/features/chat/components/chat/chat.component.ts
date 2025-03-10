@@ -6,10 +6,10 @@ import {
   ViewEncapsulation,
   ElementRef,
   AfterViewInit,
-  ChangeDetectorRef, ViewChild
+  ChangeDetectorRef, ViewChild, Renderer2, Inject
 } from '@angular/core';
 import {FormGroup, FormsModule} from '@angular/forms';
-import {CommonModule} from '@angular/common';
+import {CommonModule, DOCUMENT} from '@angular/common';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 import * as marked from 'marked';
 import {ChatService} from '../../services/chat.service';
@@ -59,6 +59,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
   public chatModels: ChatModel[] | null = null;
   public activeModel: ChatModel | null = null;
   public isStreaming = false;
+  public lightMode: boolean = false;
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -67,7 +68,9 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
     private router: Router,
     private route: ActivatedRoute,
     private el: ElementRef,
-    private cdRef: ChangeDetectorRef
+    private cdRef: ChangeDetectorRef,
+    private renderer: Renderer2,
+    @Inject(DOCUMENT) private document: Document
   ) {
   }
 
@@ -84,7 +87,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
 
       this.initializeWebSocket();
       this.initializeChatModels();
-
+      this.updateTheme()
     });
 
   }
@@ -409,5 +412,14 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
+  private updateTheme() {
+    if (this.lightMode) {
+      this.renderer.addClass(this.document.body, 'dark-theme');
+      this.renderer.removeClass(this.document.body, 'light-theme');
+    } else {
+      this.renderer.addClass(this.document.body, 'light-theme');
+      this.renderer.removeClass(this.document.body, 'dark-theme');
+    }
+  }
 
 }
