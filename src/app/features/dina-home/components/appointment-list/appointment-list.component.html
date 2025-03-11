@@ -1,0 +1,40 @@
+<!-- appointment-list.component.html -->
+<div class="container">
+  <h2>Appointments</h2>
+
+  <div *ngIf="appointments.length === 0" class="no-appointments">
+    <p>No appointments found. 🎉</p>
+    <small>Add new appointments to see them here.</small>
+  </div>
+
+  <div *ngIf="appointments.length > 0">
+    <div class="appointment-card" *ngFor="let appointment of displayedAppointments">
+      <div class="appointment-header">
+        <h3>{{ appointment.title }}</h3>
+        <span class="date-badge">{{ appointment.date | date:'short' }}</span>
+      </div>
+      <div class="appointment-details">
+        <p><strong>Location:</strong> {{ appointment.location }}</p>
+        <p *ngIf="appointment.description">{{ appointment.description }}</p>
+      </div>
+    </div>
+
+    <div class="pagination-controls">
+      <button
+        (click)="previousPage()"
+        [disabled]="currentPage === 1"
+        class="pagination-button"
+      >
+        Previous
+      </button>
+      <span>Page {{ currentPage }} of {{ totalPages }}</span>
+      <button
+        (click)="nextPage()"
+        [disabled]="currentPage === totalPages"
+        class="pagination-button"
+      >
+        Next
+      </button>
+    </div>
+  </div>
+</div>

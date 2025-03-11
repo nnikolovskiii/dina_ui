@@ -16,6 +16,7 @@ import {RandomLightsComponent} from './features/dina-home/components/random-ligh
 import {DocumentFormComponent} from './features/dina-home/components/document-form/document-form.component';
 import {PaymentComponent} from './features/dina-home/components/payment/payment.component';
 import {StarButtonComponent} from './global-features/buttons/star-button/star-button.component';
+import {AppointmentListComponent} from './features/dina-home/components/appointment-list/appointment-list.component';
 
 
 export const routes: Routes = [
@@ -35,5 +36,6 @@ export const routes: Routes = [
   {path: 'tmp', component: DocumentFormComponent},
   {path:'payment', component: PaymentComponent},
   {path: 'star', component: StarButtonComponent},
+  {path: 'appointment', component: AppointmentListComponent},
   { path: '', redirectTo: 'dina-home', pathMatch: 'full' },
 ];
