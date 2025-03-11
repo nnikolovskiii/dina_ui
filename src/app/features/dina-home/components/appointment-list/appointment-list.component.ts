@@ -1,87 +1,63 @@
+// appointment-list.component.ts
 import { Component } from '@angular/core';
-import {CommonModule, DatePipe} from '@angular/common';
-
-interface Appointment {
-  title: string;
-  date: string;
-  location: string;
-  description?: string;
-}
-
+import { CommonModule, DatePipe } from '@angular/common';
+import { CollectionDataService } from '../../services/collection-data/collection-data.service';
 
 @Component({
   selector: 'app-appointment-list',
   standalone: true,
-  imports: [
-    DatePipe,
-    CommonModule,
-  ],
+  imports: [DatePipe, CommonModule],
   templateUrl: './appointment-list.component.html',
-  styleUrl: './appointment-list.component.css'
+  styleUrls: ['./appointment-list.component.css']
 })
 export class AppointmentListComponent {
-  appointments: Appointment[] = [
-    // Sample data - replace with actual data
-    {
-      title: 'Doctor Consultation',
-      date: '2024-03-20 14:30',
-      location: 'City Medical Center',
-      description: 'Annual physical checkup with Dr. Smith'
-    },
-    {
-      title: 'Team Meeting',
-      date: '2024-03-22 09:00',
-      location: 'Office Conference Room',
-      description: 'Quarterly project review'
-    },
-    {
-      title: 'Doctor Consultation',
-      date: '2024-03-20 14:30',
-      location: 'City Medical Center',
-      description: 'Annual physical checkup with Dr. Smith'
-    },
-    {
-      title: 'Team Meeting',
-      date: '2024-03-22 09:00',
-      location: 'Office Conference Room',
-      description: 'Quarterly project review'
-    },
-    {
-      title: 'Doctor Consultation',
-      date: '2024-03-20 14:30',
-      location: 'City Medical Center',
-      description: 'Annual physical checkup with Dr. Smith'
-    },
-    {
-      title: 'Team Meeting',
-      date: '2024-03-22 09:00',
-      location: 'Office Conference Room',
-      description: 'Quarterly project review'
-    },
-  ];
+  appointments: any[] = [];
+  totalAppointments: number = 0;
+  isLoading: boolean = false;
+  errorMessage: string | null = null;
+  currentPage: number = 1;
+  itemsPerPage: number = 5;
 
-  currentPage = 1;
-  itemsPerPage = 5;
+  constructor(private collectionDataService: CollectionDataService) { }
 
-  get displayedAppointments(): Appointment[] {
-    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-    const endIndex = startIndex + this.itemsPerPage;
-    return this.appointments.slice(startIndex, endIndex);
+  ngOnInit(): void {
+    this.loadAppointments();
+  }
+
+  loadAppointments(): void {
+    this.isLoading = true;
+    this.errorMessage = null;
+
+    this.collectionDataService.getCollectionData('Appointment', this.currentPage)
+      .subscribe({
+        next: (response) => {
+          this.appointments = response.appointments;
+          this.totalAppointments = response.total;
+          this.isLoading = false;
+        },
+        error: (err) => {
+          this.errorMessage = 'Failed to load appointments. Please try again later.';
+          this.isLoading = false;
+          console.error(err);
+        }
+      });
   }
 
   get totalPages(): number {
-    return Math.ceil(this.appointments.length / this.itemsPerPage);
+    return Math.ceil(this.totalAppointments / this.itemsPerPage);
   }
 
-  previousPage() {
+  previousPage(): void {
     if (this.currentPage > 1) {
       this.currentPage--;
+      this.loadAppointments();
     }
   }
 
-  nextPage() {
+  nextPage(): void {
     if (this.currentPage < this.totalPages) {
       this.currentPage++;
+      this.loadAppointments();
     }
   }
 }
