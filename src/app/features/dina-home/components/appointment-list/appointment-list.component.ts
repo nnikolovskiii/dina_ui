@@ -3,6 +3,15 @@ import { Component } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { CollectionDataService } from '../../services/collection-data/collection-data.service';
 
+export  interface  Appointment{
+  id: number;
+  email: string;
+  appointment: string;
+  // title: string;
+  // location: string;
+  // description: string;
+}
+
 @Component({
   selector: 'app-appointment-list',
   standalone: true,
@@ -11,7 +20,7 @@ import { CollectionDataService } from '../../services/collection-data/collection
   styleUrls: ['./appointment-list.component.css']
 })
 export class AppointmentListComponent {
-  appointments: any[] = [];
+  appointments: Appointment[] = [];
   totalAppointments: number = 0;
   isLoading: boolean = false;
   errorMessage: string | null = null;

@@ -1,42 +1,52 @@
 <!-- appointment-list.component.html -->
 <div class="container">
-  <h2 class="header">Appointments</h2>
-
-  <div *ngIf="isLoading" class="loading">
-    <div class="spinner"></div>
-    Loading appointments...
+  <div *ngIf="appointments.length === 0" class="no-appointments">
+    <p>No appointments found. 🎉</p>
+    <small>Add new appointments to see them here.</small>
   </div>
 
-  <div *ngIf="errorMessage" class="error-message">
-    ⚠️ {{ errorMessage }}
-  </div>
-
-  <div *ngIf="!isLoading && !errorMessage">
-    <div class="summary">
-      <p class="total">Showing {{ appointments.length }} of {{ totalAppointments }} appointments</p>
-    </div>
-
-    <div class="appointments-container">
-      <div *ngFor="let appointment of appointments" class="appointment-card">
-        <h2 class="card-title">{{ appointment.title }}</h2>
+<!--  TODO: It needs pagination and scrollable-->
+  <div *ngIf="appointments.length > 0">
+    <div class="card-flex" *ngFor="let appointment of appointments">
+      <div class="appointment-card">
+        <h2 class="card-title">Сликање за лична карта</h2>
         <div class="details-container">
           <div class="date-section">
             <div class="label">Date</div>
-            <div class="date">{{ appointment.date | date:'longDate' }}</div>
+            <div class="date">25 October 2023</div>
           </div>
           <div class="time-section">
             <div class="label">Time</div>
-            <div class="time">{{ appointment.time }}</div>
+            <div class="time">10:30 AM</div>
           </div>
         </div>
-        <div class="status" [class]="appointment.status.toLowerCase()">
-          {{ appointment.status }}
+        <div class="flex-div">
+          <div class="status">
+            <img src="../../../../../assets/location.png" height="17" width="17"/>
+            <div>Полициска станица Центар</div>
+          </div>
+        </div>
+      </div>
+      <div class="appointment-card">
+        <h2 class="card-title">Сликање за лична карта</h2>
+        <div class="details-container">
+          <div class="date-section">
+            <div class="label">Date</div>
+            <div class="date">25 October 2023</div>
+          </div>
+          <div class="time-section">
+            <div class="label">Time</div>
+            <div class="time">10:30 AM</div>
+          </div>
+        </div>
+        <div class="flex-div">
+          <div class="status">
+            <img src="../../../../../assets/location.png" height="17" width="17"/>
+            <div>Полициска станица Центар</div>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="pagination-info" *ngIf="totalAppointments > itemsPerPage">
-      <span class="page-info">Page {{ currentPage }} of {{ totalPages }}</span>
-    </div>
   </div>
 </div>
