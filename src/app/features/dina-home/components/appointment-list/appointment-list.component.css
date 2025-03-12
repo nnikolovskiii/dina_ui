@@ -7,6 +7,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 8px;
 }
 
 .appointment-card {
@@ -109,7 +110,14 @@
 .card-flex{
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
   align-items: center;
   justify-content: flex-start;
+}
+
+.flex-bpx{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
 }

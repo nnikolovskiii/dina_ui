@@ -6,7 +6,7 @@
   </div>
 
   <!--  TODO: It needs pagination and scroll-->
-  <div *ngIf="appointments.length > 0">
+  <div *ngIf="appointments.length > 0" class="flex-bpx">
     <div class="card-flex" *ngFor="let appointment of appointments">
       <div class="appointment-card">
         <h2 class="card-title">{{ appointment.title }}</h2>
