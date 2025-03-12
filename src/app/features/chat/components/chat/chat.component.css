@@ -17,7 +17,7 @@ body.light-theme {
   --input-field-hover:  #333333;
   --three-color-gradient: linear-gradient(45deg, #e35e0c, #f6a202, #f40622);
   --logo:url('../../../../../assets/dina_logo.png');
-  --new-chat-img: url('../../../../../assets/new-message-black.png');
+  --new-chat-img: url('../../../../../assets/post.png');
   --user-card: #ffd9b5;
 }
 
@@ -69,7 +69,7 @@ body.dark-theme {
 .sliding-bar {
   position: fixed;
   top: 0;
-  left: -250px;
+  left: -300px;
   width: 300px;
   height: 100%;
   overflow-y: auto;
@@ -617,8 +617,8 @@ pre {
   margin-top: 8px;
   margin-left: -3em;
   flex-shrink: 0; /* Prevent logo from shrinking */
-  width: 39px;
-  height: 39px;
+  width: 41px;
+  height: 41px;
   background-image: var(--logo);
   background-size: cover;
   background-position: center;

@@ -1,5 +1,5 @@
 // appointment-list.component.ts
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { CollectionDataService } from '../../services/collection-data/collection-data.service';
 
@@ -21,6 +21,7 @@ export  interface  Appointment{
   styleUrls: ['./appointment-list.component.css']
 })
 export class AppointmentListComponent {
+  @Input() width: string = '250px';
   appointments: Appointment[] = [];
   totalAppointments: number = 0;
   isLoading: boolean = false;

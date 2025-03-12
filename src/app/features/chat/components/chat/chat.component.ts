@@ -24,6 +24,9 @@ import {ModelsSidebarComponent} from '../models-sidebar/models-sidebar.component
 import {DocumentFormComponent} from '../../../dina-home/components/document-form/document-form.component';
 import {PaymentComponent} from '../../../dina-home/components/payment/payment.component';
 import {AppointmentListComponent} from '../../../dina-home/components/appointment-list/appointment-list.component';
+import {
+  AppointmentSidebarComponent
+} from '../../../dina-home/components/appointment-sidebar/appointment-sidebar.component';
 
 interface Message {
   content: string;
@@ -46,7 +49,7 @@ export class WebsocketData {
 @Component({
   selector: 'app-chat',
   standalone: true,
-  imports: [FormsModule, CommonModule, RouterModule, HistorySidebarComponent, ModelsSidebarComponent, DocumentFormComponent, PaymentComponent, AppointmentListComponent],
+  imports: [FormsModule, CommonModule, RouterModule, HistorySidebarComponent, ModelsSidebarComponent, DocumentFormComponent, PaymentComponent, AppointmentListComponent, AppointmentSidebarComponent],
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css'],
   encapsulation: ViewEncapsulation.None
@@ -161,7 +164,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
     } else {
       this.barStatus = "history"
     }
-
+    console.log("lolllllll")
     console.log(this.barStatus)
   }
 
@@ -172,6 +175,9 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
     } else {
       this.barStatus = "chat_models"
     }
+    console.log("lolllllll")
+    console.log(this.barStatus)
+
   }
 
   selectedApi: string = "openai"
