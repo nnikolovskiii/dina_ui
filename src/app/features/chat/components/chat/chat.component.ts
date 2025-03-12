@@ -23,6 +23,7 @@ import {HistorySidebarComponent} from '../history-sidebar/history-sidebar.compon
 import {ModelsSidebarComponent} from '../models-sidebar/models-sidebar.component';
 import {DocumentFormComponent} from '../../../dina-home/components/document-form/document-form.component';
 import {PaymentComponent} from '../../../dina-home/components/payment/payment.component';
+import {AppointmentListComponent} from '../../../dina-home/components/appointment-list/appointment-list.component';
 
 interface Message {
   content: string;
@@ -45,7 +46,7 @@ export class WebsocketData {
 @Component({
   selector: 'app-chat',
   standalone: true,
-  imports: [FormsModule, CommonModule, RouterModule, HistorySidebarComponent, ModelsSidebarComponent, DocumentFormComponent, PaymentComponent],
+  imports: [FormsModule, CommonModule, RouterModule, HistorySidebarComponent, ModelsSidebarComponent, DocumentFormComponent, PaymentComponent, AppointmentListComponent],
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css'],
   encapsulation: ViewEncapsulation.None
@@ -218,6 +219,8 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
 
   sendMessage(): void {
     this.showForm = false;
+    this.showAppointments = false;
+
     if (!this.inputMessage.trim()) return;
 
     this.messages.push(this.createMessage('user', this.inputMessage));
@@ -255,6 +258,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
   formId: any = null
   serviceType: any = null
   formOrder: number|null = null
+  showAppointments: boolean = false
 
   private initializeWebSocket(): void {
     const url = environment.port ?
@@ -296,6 +300,9 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
           console.log(jsonObject.data);
           this.formFields = jsonObject.data[1];
           this.formId = jsonObject.data[2];
+        } else if(this.formOrder == 3){
+          this.showAppointments = true;
+          console.log(jsonObject.data);
         }
       }else if (jsonObject.data_type === "no_stream") {
         this.messages.pop()

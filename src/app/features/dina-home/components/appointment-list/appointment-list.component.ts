@@ -7,9 +7,10 @@ export  interface  Appointment{
   id: number;
   email: string;
   appointment: string;
-  // title: string;
-  // location: string;
-  // description: string;
+  title: string;
+  date: string;
+  time: string;
+  location: string;
 }
 
 @Component({

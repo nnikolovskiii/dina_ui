@@ -2,6 +2,9 @@
   <div (click)="toggleHistoryBar()" class="toggle-button">
     <img src="../../../../../assets/history_icon.png" height="38" width="38"/>
   </div>
+  <div>
+
+    <img src="../../../../../assets/calendar.png" height="36" width="36"/></div>
   <!--  <div (click)="toggleChatModels()" class="toggle-button">-->
   <!--    <img src="../../../../../assets/setting(2).png" height="26" width="26"/>-->
   <!--  </div>-->
@@ -19,11 +22,12 @@
     (toggleRequested)="toggleHistoryBar()">
   </app-history-sidebar>
 </div>
-<div [class.open]="this.barStatus == 'chat_models'" class="sliding-bar">
-  <app-models-sidebar
-    (toggleRequested)="toggleChatModels()">
-  </app-models-sidebar>
-</div>
+
+<!--<div [class.open]="this.barStatus == 'chat_models'" class="sliding-bar">-->
+<!--  <app-models-sidebar-->
+<!--    (toggleRequested)="toggleChatModels()">-->
+<!--  </app-models-sidebar>-->
+<!--</div>-->
 <div class="content">
   <div class="main-div bg-wrapper">
     <div class="chat-container" #messagesContainer>
@@ -86,6 +90,22 @@
                       [formFields]="formFields"
                       (generate)="handleGenerate($event)">
                     </app-payment>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="showAppointments; else lol">
+          <div class="assistant">
+            <div class="assistant-content">
+              <!-- Message Content -->
+              <div class="assistant-card top-left-corner">
+                <div class="message-content">
+                  <div>
+                    <app-appointment-list>
+                    </app-appointment-list>
                   </div>
                 </div>
               </div>
