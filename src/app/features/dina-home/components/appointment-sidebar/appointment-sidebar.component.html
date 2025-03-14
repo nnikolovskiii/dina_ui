@@ -12,8 +12,9 @@
     <div class="line"></div>
   </div>
   <div class="chat-history">
-    <app-appointment-list>
-
-    </app-appointment-list>
+    <app-appointment-list
+      #appointmentSidebar
+      [refreshTrigger]="refreshCount"></app-appointment-list>
   </div>
+<!--  <button (click)="refreshAppointments()">Refresh</button> &lt;!&ndash; Add this button &ndash;&gt;-->
 </div>

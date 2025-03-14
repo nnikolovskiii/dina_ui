@@ -26,6 +26,7 @@
 
 <div [class.open]="barStatus == 'chat_models'" class="sliding-bar">
   <app-appointment-sidebar
+    #appointmentSidebar
     [isVisible]="barStatus == 'chat_models'"
     (toggleRequested)="toggleChatModels()">
   </app-appointment-sidebar>

@@ -1,5 +1,5 @@
 // appointment-list.component.ts
-import {Component, Input} from '@angular/core';
+import {Component, Input, SimpleChanges} from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { CollectionDataService } from '../../services/collection-data/collection-data.service';
 
@@ -30,6 +30,14 @@ export class AppointmentListComponent {
   itemsPerPage: number = 5;
 
   constructor(private collectionDataService: CollectionDataService) { }
+
+  @Input() refreshTrigger: number = 0; // Add this input
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['refreshTrigger']) {
+      this.loadAppointments();
+    }
+  }
 
   ngOnInit(): void {
     this.loadAppointments();

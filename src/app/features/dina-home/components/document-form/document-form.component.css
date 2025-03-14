@@ -162,7 +162,7 @@ textarea.input-field {
 
 .path {
   fill: none;
-  stroke: white;
+  stroke: black;
   stroke-width: 6;
   stroke-linecap: round;
   stroke-linejoin: round;

@@ -49,12 +49,13 @@ export class WebsocketData {
 @Component({
   selector: 'app-chat',
   standalone: true,
-  imports: [FormsModule, CommonModule, RouterModule, HistorySidebarComponent, ModelsSidebarComponent, DocumentFormComponent, PaymentComponent, AppointmentListComponent, AppointmentSidebarComponent],
+  imports: [FormsModule, CommonModule, RouterModule, HistorySidebarComponent, DocumentFormComponent, PaymentComponent, AppointmentListComponent, AppointmentSidebarComponent],
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css'],
   encapsulation: ViewEncapsulation.None
 })
 export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
+  @ViewChild('appointmentSidebar') appointmentSidebar!: AppointmentSidebarComponent;
   @Input() chat_id: string | null = null;
   private ws: WebSocket | undefined;
   public inputMessage: string = '';
@@ -171,8 +172,10 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
 
   toggleChatModels() {
     if (this.barStatus == "chat_models") {
+      this.appointmentSidebar.refreshAppointments();
       this.barStatus = "close"
     } else {
+      this.appointmentSidebar.refreshAppointments();
       this.barStatus = "chat_models"
     }
     console.log("lolllllll")
@@ -263,6 +266,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
   formFields: any = null
   formId: any = null
   serviceType: any = null
+  serviceName: any = null
   formOrder: number|null = null
   showAppointments: boolean = false
 
@@ -295,6 +299,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
           this.formFields = jsonObject.data[1];
           this.formId = jsonObject.data[2];
           this.serviceType = jsonObject.data[3];
+          this.serviceName = jsonObject.data[4];
         }else if (this.formOrder == 1){
           this.showForm = true;
           console.log(jsonObject.data);
@@ -349,7 +354,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
     console.log("LOOOOOLZI")
     console.log([formData, this.formId, this.serviceType, this.formOrder]);
     if (this.ws) {
-      let websocketData = new WebsocketData("form", [[formData, this.formId, this.serviceType, this.formOrder], this.chat_id])
+      let websocketData = new WebsocketData("form", [[formData, this.formId, this.serviceType,this.serviceName, this.formOrder], this.chat_id])
       this.ws.send(JSON.stringify(websocketData));
       this.showForm = false;
       this.payment = false;

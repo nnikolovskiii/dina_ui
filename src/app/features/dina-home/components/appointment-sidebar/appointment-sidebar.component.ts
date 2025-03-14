@@ -29,36 +29,12 @@ export class AppointmentSidebarComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.updateTheme()
-    this.getChats()
   }
-
-  chats: any | null = null
 
 
   toggleHistoryBar() {
     this.toggleRequested.emit();
 
-  }
-
-  getChatsByTime(timePeriod: string) {
-    if (this.chats != null) {
-      return this.chats[timePeriod];
-    }
-  }
-
-  selectChat(chatId: string) {
-    this.router.navigate(['/chat'], {queryParams: {chat_id: chatId}})
-      .then(() => {
-        window.location.reload();
-      });
-  }
-
-  getChats() {
-    this.chatService.getChats().subscribe(
-      (chats: any) => {
-        this.chats = chats;
-        console.log(this.chats["today"])
-      })
   }
 
 
@@ -72,5 +48,10 @@ export class AppointmentSidebarComponent implements OnInit {
     }
   }
 
+  refreshCount: number = 0;
+
+  refreshAppointments() {
+    this.refreshCount++;
+  }
 }
 
