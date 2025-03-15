@@ -38,10 +38,12 @@ interface Message {
 export class WebsocketData {
   data_type: string;
   data: any;
+  step?: number | null;
 
-  constructor(data_type: string, data: any) {
+  constructor(data_type: string, data: any, step?: number) {
     this.data_type = data_type;
     this.data = data;
+    this.step = step;
   }
 }
 
@@ -267,7 +269,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
   formId: any = null
   serviceType: any = null
   serviceName: any = null
-  formOrder: number|null = null
+  formStep: number|null = null
   showAppointments: boolean = false
 
   private initializeWebSocket(): void {
@@ -279,9 +281,9 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
 
     this.ws.onmessage = (event: MessageEvent) => {
       console.log(event.data)
-      const jsonObject = JSON.parse(event.data);
-      if (jsonObject.data_type === "stream") {
-        let data_m = jsonObject.data;
+      const wsData = JSON.parse(event.data);
+      if (wsData.data_type === "stream") {
+        let data_m = wsData.data;
 
         console.log(data_m)
         if (data_m.includes("<ASTOR>")) {
@@ -291,41 +293,41 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
           this.updateStreamingMessage(data_m);
 
         }
-      } else if (jsonObject.data_type === "form") {
-        this.formOrder = jsonObject.data[0];
-        if(this.formOrder == 0) {
+      } else if (wsData.data_type === "form") {
+        this.formStep = wsData.step;
+        if(this.formStep == 0) {
           this.showForm = true;
-          console.log(jsonObject.data);
-          this.formFields = jsonObject.data[1];
-          this.formId = jsonObject.data[2];
-          this.serviceType = jsonObject.data[3];
-          this.serviceName = jsonObject.data[4];
-        }else if (this.formOrder == 1){
+          console.log(wsData.data);
+          this.formFields = wsData.data[0];
+          this.formId = wsData.data[1];
+          this.serviceType = wsData.data[2];
+          this.serviceName = wsData.data[3];
+        }else if (this.formStep == 1){
           this.showForm = true;
-          console.log(jsonObject.data);
-          this.formFields = jsonObject.data[1];
-          this.formId = jsonObject.data[2];
-        } else if(this.formOrder==2){
+          console.log(wsData.data);
+          this.formFields = wsData.data[0];
+          this.formId = wsData.data[1];
+        } else if(this.formStep==2){
           this.messages.pop()
           this.payment = true;
-          console.log(jsonObject.data);
-          this.formFields = jsonObject.data[1];
-          this.formId = jsonObject.data[2];
-        } else if(this.formOrder == 3){
+          console.log(wsData.data);
+          this.formFields = wsData.data[0];
+          this.formId = wsData.data[1];
+        } else if(this.formStep == 3){
           this.showAppointments = true;
-          console.log(jsonObject.data);
+          console.log(wsData.data);
         }
-      }else if (jsonObject.data_type === "no_stream") {
+      }else if (wsData.data_type === "no_stream") {
         this.messages.pop()
         this.messages.push({
-          content: jsonObject.data,
+          content: wsData.data,
           type: 'assistant',
           isStreaming: true,
           sanitizedContent: this.sanitizer.bypassSecurityTrustHtml('')
         });
         this.finalizeCurrentMessage();
 
-      } else if (jsonObject.data_type === "payment") {
+      } else if (wsData.data_type === "payment") {
         this.payment = true;
       }
     };
@@ -352,9 +354,9 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
 
   handleGenerate(formData: any) {
     console.log("LOOOOOLZI")
-    console.log([formData, this.formId, this.serviceType, this.formOrder]);
+    console.log([formData, this.formId, this.serviceType, this.formStep]);
     if (this.ws) {
-      let websocketData = new WebsocketData("form", [[formData, this.formId, this.serviceType,this.serviceName, this.formOrder], this.chat_id])
+      let websocketData = new WebsocketData("form", [[formData, this.formId, this.serviceType,this.serviceName], this.chat_id],  this.formStep!)
       this.ws.send(JSON.stringify(websocketData));
       this.showForm = false;
       this.payment = false;
