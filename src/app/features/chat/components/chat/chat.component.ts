@@ -47,6 +47,25 @@ export class WebsocketData {
   }
 }
 
+export class FormData {
+  form_id?: string;
+  form_data?: any;
+}
+
+export enum FormServiceStatus {
+  NO_INFO = "no_info",
+  INFO = "info",
+  NO_SERVICE = "no_service"
+}
+
+export class FormServiceData extends FormData {
+  service_type?: string;
+  service_name?: string;
+  download_link?: string;
+  status?: FormServiceStatus;
+  status_message?: string;
+}
+
 
 @Component({
   selector: 'app-chat',
@@ -265,10 +284,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
 
   showForm: boolean = false
   payment: boolean = false
-  formFields: any = null
-  formId: any = null
-  serviceType: any = null
-  serviceName: any = null
+  formData: FormServiceData | null = null;
   formStep: number|null = null
   showAppointments: boolean = false
 
@@ -295,27 +311,20 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
         }
       } else if (wsData.data_type === "form") {
         this.formStep = wsData.step;
+        let formData = new FormServiceData();
+        Object.assign(formData, wsData.data);
+
+        this.formData = formData
+
         if(this.formStep == 0) {
           this.showForm = true;
-          console.log(wsData.data);
-          this.formFields = wsData.data[0];
-          this.formId = wsData.data[1];
-          this.serviceType = wsData.data[2];
-          this.serviceName = wsData.data[3];
         }else if (this.formStep == 1){
           this.showForm = true;
-          console.log(wsData.data);
-          this.formFields = wsData.data[0];
-          this.formId = wsData.data[1];
         } else if(this.formStep==2){
           this.messages.pop()
           this.payment = true;
-          console.log(wsData.data);
-          this.formFields = wsData.data[0];
-          this.formId = wsData.data[1];
         } else if(this.formStep == 3){
           this.showAppointments = true;
-          console.log(wsData.data);
         }
       }else if (wsData.data_type === "no_stream") {
         this.messages.pop()
@@ -326,7 +335,6 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
           sanitizedContent: this.sanitizer.bypassSecurityTrustHtml('')
         });
         this.finalizeCurrentMessage();
-
       } else if (wsData.data_type === "payment") {
         this.payment = true;
       }
@@ -353,10 +361,8 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
 
 
   handleGenerate(formData: any) {
-    console.log("LOOOOOLZI")
-    console.log([formData, this.formId, this.serviceType, this.formStep]);
     if (this.ws) {
-      let websocketData = new WebsocketData("form", [[formData, this.formId, this.serviceType,this.serviceName], this.chat_id],  this.formStep!)
+      let websocketData = new WebsocketData("form", [this.formData, this.chat_id],  this.formStep!)
       this.ws.send(JSON.stringify(websocketData));
       this.showForm = false;
       this.payment = false;
