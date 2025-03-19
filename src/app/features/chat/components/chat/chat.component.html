@@ -73,7 +73,7 @@
                 <div class="message-content">
                   <div>
                     <app-document-form
-                      [formFields]="formFields"
+                      [formFields]="formData?.form_data"
                       (generate)="handleGenerate($event)"> >
                     </app-document-form>
                   </div>
@@ -90,7 +90,7 @@
                 <div class="message-content">
                   <div>
                     <app-payment
-                      [formFields]="formFields"
+                      [formFields]="formData?.form_data"
                       (generate)="handleGenerate($event)">
                     </app-payment>
                   </div>
