@@ -17,13 +17,13 @@ describe('AppComponent', () => {
   it(`should have the 'untitled1' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('untitled1');
+    expect(app.title).toEqual('dina-ui');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, untitled1');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, dina-ui');
   });
 });
