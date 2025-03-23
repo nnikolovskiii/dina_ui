@@ -15,12 +15,9 @@ import * as marked from 'marked';
 import {ChatService} from '../../services/chat.service';
 import {ActivatedRoute, Router, RouterModule} from '@angular/router';
 import {FlagService} from '../../../show-process/services/flag/flag.service';
-import {Flag} from '../../../show-process/models/flag';
 import {Chat, ChatApi, ChatModel} from '../../models/chat';
-import hljs from 'highlight.js';
 import {environment} from '../../../../../environments/environment';
 import {HistorySidebarComponent} from '../history-sidebar/history-sidebar.component';
-import {ModelsSidebarComponent} from '../models-sidebar/models-sidebar.component';
 import {DocumentFormComponent} from '../../../dina-home/components/document-form/document-form.component';
 import {PaymentComponent} from '../../../dina-home/components/payment/payment.component';
 import {AppointmentListComponent} from '../../../dina-home/components/appointment-list/appointment-list.component';
@@ -38,12 +35,22 @@ interface Message {
 export class WebsocketData {
   data_type: string;
   data: any;
-  step?: number | null;
+  intercept_type?: string | null;
+  actions: string[];
+  next_action: number;
 
-  constructor(data_type: string, data: any, step?: number) {
+  constructor(
+    data_type: string,
+    data: any,
+    intercept_type?: string,
+    actions: string[] = [],
+    next_action: number = 0
+  ) {
     this.data_type = data_type;
     this.data = data;
-    this.step = step;
+    this.intercept_type = intercept_type;
+    this.actions = actions;
+    this.next_action = next_action;
   }
 }
 
@@ -53,9 +60,12 @@ export class FormData {
 }
 
 export enum FormServiceStatus {
+  HAS_APPOINTMENT = "has_appointment",
+  HAS_DOCUMENT = "has_document",
+  NO_SERVICE = "no_service",
+  HAS_NOTHING = "has_nothing",
   NO_INFO = "no_info",
-  INFO = "info",
-  NO_SERVICE = "no_service"
+  INFO = "info"
 }
 
 export class FormServiceData extends FormData {
@@ -150,7 +160,6 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
   expandFlag: boolean = false;
 
   expandChat(textarea: HTMLTextAreaElement) {
-    console.log("expand")
     if (textarea.rows == 1) {
       textarea.rows = 10;
       this.expandFlag = true;
@@ -186,8 +195,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
     } else {
       this.barStatus = "history"
     }
-    console.log("lolllllll")
-    console.log(this.barStatus)
+
   }
 
 
@@ -199,8 +207,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
       this.appointmentSidebar.refreshAppointments();
       this.barStatus = "chat_models"
     }
-    console.log("lolllllll")
-    console.log(this.barStatus)
+
 
   }
 
@@ -285,7 +292,10 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
   showForm: boolean = false
   payment: boolean = false
   formData: FormServiceData | null = null;
-  formStep: number|null = null
+  actions: string[] | null = null;
+  next_action: number | null = null;
+  dataType: string | null = null;
+  interceptType: string | null = null
   showAppointments: boolean = false
 
   private initializeWebSocket(): void {
@@ -296,37 +306,55 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
     this.ws = new WebSocket(url);
 
     this.ws.onmessage = (event: MessageEvent) => {
-      console.log(event.data)
-      const wsData = JSON.parse(event.data);
+      const wsData: WebsocketData = JSON.parse(event.data);
+      if (wsData.data_type != "stream" && wsData.data != "no_stream") {
+        this.actions = wsData.actions!;
+        this.next_action = wsData.next_action!;
+      }
+
       if (wsData.data_type === "stream") {
         let data_m = wsData.data;
 
-        console.log(data_m)
         if (data_m.includes("<ASTOR>")) {
           this.chat_id = data_m.split(":")[1]
           this.finalizeCurrentMessage();
         } else {
           this.updateStreamingMessage(data_m);
-
         }
       } else if (wsData.data_type === "form") {
-        this.formStep = wsData.step;
+        this.dataType = "form"
+
+        this.interceptType = wsData.intercept_type!;
         let formData = new FormServiceData();
         Object.assign(formData, wsData.data);
 
         this.formData = formData
 
-        if(this.formStep == 0) {
+        if (this.interceptType == "document_data" || this.interceptType == "appointment_data") {
           this.showForm = true;
-        }else if (this.formStep == 1){
-          this.showForm = true;
-        } else if(this.formStep==2){
+        } else if (this.interceptType == "payment_data") {
           this.messages.pop()
           this.payment = true;
-        } else if(this.formStep == 3){
+        } else if (this.interceptType == "show_appointments") {
           this.showAppointments = true;
         }
-      }else if (wsData.data_type === "no_stream") {
+      } else if (wsData.data_type === "list") {
+        this.dataType = "list"
+
+        this.showAppointments = true;
+      } else if (wsData.data_type === "form1") {
+        this.dataType = "form1"
+        console.log(this.dataType)
+
+        this.interceptType = wsData.intercept_type!;
+        let formData = new FormServiceData();
+        Object.assign(formData, wsData.data);
+
+        this.formData = formData
+
+        this.showForm = true;
+
+      } else if (wsData.data_type === "no_stream") {
         this.messages.pop()
         this.messages.push({
           content: wsData.data,
@@ -348,6 +376,8 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
       const userMessages = response["user_messages"];
       const assistantMessages = response["assistant_messages"];
 
+      console.log(userMessages, assistantMessages)
+
       this.messages = [];
       for (let i = 0; i < userMessages.length; i++) {
         this.messages.push(this.createMessage('user', userMessages[i].content));
@@ -356,13 +386,14 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
         }
       }
 
+
     });
   }
 
 
   handleGenerate(formData: any) {
     if (this.ws) {
-      let websocketData = new WebsocketData("form", [this.formData, this.chat_id],  this.formStep!)
+      let websocketData = new WebsocketData(this.dataType!, [this.formData, this.chat_id], this.interceptType!, this.actions!, this.next_action!)
       this.ws.send(JSON.stringify(websocketData));
       this.showForm = false;
       this.payment = false;
@@ -378,7 +409,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
   addDummyStreamingMessage() {
     const fullMessage = 'Здраво, јас сум Дина! Како можам да ти помогнам денес?';
     const words = fullMessage.split(' ');
-
+3
     // Initial empty message with streaming state
     this.messages.push({
       content: '',
