@@ -336,6 +336,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
           this.messages.pop()
           this.payment = true;
         } else if (this.interceptType == "show_appointments") {
+          this.messages.pop()
           this.showAppointments = true;
         }
       } else if (wsData.data_type === "list") {
