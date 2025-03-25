@@ -1,7 +1,7 @@
 body.light-theme {
   --light-bg-color: #f9f9f9;
   --darker-bg-color: #ffffff;
-  --even-lighter-bg-color: #f9f9f9;
+  --even-lighter-bg-color: rgba(249, 249, 249, 0.76);
   --lighter-3-bg-color: #f0f0f0;
   --spinner-bg1: #ff8c00;
   --spinner-bg2: #fa0202;
@@ -216,7 +216,7 @@ body.dark-theme {
   width: 900px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 4px;
   margin-bottom: 50px;
 }
 
@@ -598,8 +598,6 @@ pre {
   background: var(--even-lighter-bg-color);
   border-radius: 10px;
   padding: 10px 15px;
-  margin-left: 16px;
-  margin-right: 16px;
   word-wrap: break-word;
   overflow-wrap: break-word;
   display: inline-block;
@@ -616,6 +614,7 @@ pre {
 .logo-container {
   margin-top: 8px;
   margin-left: -3em;
+  margin-right: 4px;
   flex-shrink: 0; /* Prevent logo from shrinking */
   width: 41px;
   height: 41px;

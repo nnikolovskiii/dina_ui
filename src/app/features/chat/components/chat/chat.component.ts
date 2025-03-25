@@ -466,4 +466,26 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
+  shouldShowLogo(index: number): boolean {
+    // First message always shows logo
+    if (index === 0) return true;
+
+    const previousMessage = this.messages[index - 1];
+    const currentMessage = this.messages[index];
+
+    // Show logo if previous message was different type
+    return previousMessage.type !== currentMessage.type;
+  }
+
+  shouldShowGap(index: number): boolean {
+    // No gap after last message
+    if (index === this.messages.length - 1) return false;
+
+    const current = this.messages[index];
+    const next = this.messages[index + 1];
+
+    // Only show gap if messages are different types
+    return current.type !== next.type;
+  }
+
 }

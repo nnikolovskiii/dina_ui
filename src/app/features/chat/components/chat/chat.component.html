@@ -35,14 +35,14 @@
   <div class="main-div bg-wrapper">
     <div class="chat-container" #messagesContainer>
       <div class="messages pb-5">
-        <div *ngFor="let message of messages">
+        <div *ngFor="let message of messages; let i = index">
           <div [ngSwitch]="message.type">
             <div *ngSwitchCase="'user'" class="user-card" [innerHtml]="message.sanitizedContent">
             </div>
             <div *ngSwitchCase="'assistant'">
               <div class="assistant-content">
-                <!-- Logo -->
-                <div class="logo-container">
+                <div class="logo-container"
+                     *ngIf="shouldShowLogo(i)">
                 </div>
                 <!-- Message Content -->
                 <div class="assistant-card">
@@ -61,7 +61,7 @@
                 </div>
               </div>
             </div>
-            <div id="gap"></div>
+            <div id="gap" *ngIf="shouldShowGap(i)"></div>
           </div>
         </div>
         <div *ngIf="showForm; else lol">
@@ -99,7 +99,7 @@
             </div>
           </div>
         </div>
-        <div  *ngIf="startLoading; else lol">
+        <div *ngIf="startLoading; else lol">
           <div class="assistant">
             <div class="assistant-content">
               <!-- Logo -->
@@ -108,12 +108,12 @@
               <!-- Message Content -->
               <div class="assistant-card">
                 <div class="message-content">
-                  <div class="w-2 h-4"> </div>
+                  <div class="w-2 h-4"></div>
                   <ng-template #empty>
                     <div class="p-2 bg-transparent"></div>
                   </ng-template>
                   <div
-                       class="streaming-dot-container">
+                    class="streaming-dot-container">
                     <div class="spinner">
                       <div class="spinner1"></div>
                     </div>
