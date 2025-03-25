@@ -265,14 +265,6 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
 
     this.messages.push(this.createMessage('user', this.inputMessage));
 
-    // this.messages.push({
-    //   content: '',
-    //   type: 'assistant',
-    //   isStreaming: true,
-    //   sanitizedContent: this.sanitizer.bypassSecurityTrustHtml('')
-    // });
-
-
     if (this.ws) {
       let websocketData = new WebsocketData("chat", [this.inputMessage, this.chat_id])
       this.ws.send(JSON.stringify(websocketData));
@@ -323,15 +315,14 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
         if (data_m.includes("<ASTOR>")) {
           this.chat_id = data_m.split(":")[1]
           this.finalizeCurrentMessage();
-        }else if (data_m.includes("<KASTOR>")) {
+        } else if (data_m.includes("<KASTOR>")) {
           this.messages.push({
             content: '',
             type: 'assistant',
             isStreaming: true,
             sanitizedContent: this.sanitizer.bypassSecurityTrustHtml('')
           });
-        }
-        else {
+        } else {
           this.updateStreamingMessage(data_m);
         }
       } else if (wsData.data_type === "form") {
@@ -356,6 +347,31 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
         this.showAppointments = true;
       } else if (wsData.data_type === "payment") {
         this.payment = true;
+      } else if (wsData.data_type === "echo") {
+        this.showForm = false;
+        this.showAppointments = false;
+        this.startLoading = true;
+
+        if (this.ws) {
+          let websocketData = new WebsocketData("chat", [wsData.data, this.chat_id])
+          this.ws.send(JSON.stringify(websocketData));
+        }
+
+        this.cdRef.detectChanges();
+        this.autoResize();
+      } else if (wsData.data_type === "echo_form") {
+        this.dataType = "form"
+        console.log("Send echooo!")
+        this.interceptType = wsData.intercept_type!;
+        let formData = new FormServiceData();
+        Object.assign(formData, wsData.data);
+        this.formData = formData
+
+        let websocketData = new WebsocketData(this.dataType!, [this.formData, this.chat_id], this.interceptType!, this.actions!, this.next_action!)
+        this.ws!.send(JSON.stringify(websocketData));
+        this.showForm = false;
+        this.payment = false;
+        this.startLoading = true;
       }
     };
 
