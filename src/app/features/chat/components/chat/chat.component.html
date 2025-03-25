@@ -99,6 +99,30 @@
             </div>
           </div>
         </div>
+        <div  *ngIf="startLoading; else lol">
+          <div class="assistant">
+            <div class="assistant-content">
+              <!-- Logo -->
+              <div class="logo-container">
+              </div>
+              <!-- Message Content -->
+              <div class="assistant-card">
+                <div class="message-content">
+                  <div class="w-2 h-4"> </div>
+                  <ng-template #empty>
+                    <div class="p-2 bg-transparent"></div>
+                  </ng-template>
+                  <div
+                       class="streaming-dot-container">
+                    <div class="spinner">
+                      <div class="spinner1"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <div *ngIf="showAppointments; else lol">
           <div class="assistant">

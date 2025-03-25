@@ -254,20 +254,23 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
+  startLoading: boolean = false
+
   sendMessage(): void {
     this.showForm = false;
     this.showAppointments = false;
+    this.startLoading = true;
 
     if (!this.inputMessage.trim()) return;
 
     this.messages.push(this.createMessage('user', this.inputMessage));
 
-    this.messages.push({
-      content: '',
-      type: 'assistant',
-      isStreaming: true,
-      sanitizedContent: this.sanitizer.bypassSecurityTrustHtml('')
-    });
+    // this.messages.push({
+    //   content: '',
+    //   type: 'assistant',
+    //   isStreaming: true,
+    //   sanitizedContent: this.sanitizer.bypassSecurityTrustHtml('')
+    // });
 
 
     if (this.ws) {
@@ -306,7 +309,9 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
     this.ws = new WebSocket(url);
 
     this.ws.onmessage = (event: MessageEvent) => {
+      this.startLoading = false;
       const wsData: WebsocketData = JSON.parse(event.data);
+      console.log(wsData)
       if (wsData.data_type != "stream" && wsData.data != "no_stream") {
         this.actions = wsData.actions!;
         this.next_action = wsData.next_action!;
@@ -318,7 +323,15 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
         if (data_m.includes("<ASTOR>")) {
           this.chat_id = data_m.split(":")[1]
           this.finalizeCurrentMessage();
-        } else {
+        }else if (data_m.includes("<KASTOR>")) {
+          this.messages.push({
+            content: '',
+            type: 'assistant',
+            isStreaming: true,
+            sanitizedContent: this.sanitizer.bypassSecurityTrustHtml('')
+          });
+        }
+        else {
           this.updateStreamingMessage(data_m);
         }
       } else if (wsData.data_type === "form") {
@@ -333,25 +346,14 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
         if (this.interceptType == "document_data" || this.interceptType == "appointment_data") {
           this.showForm = true;
         } else if (this.interceptType == "payment_data") {
-          this.messages.pop()
           this.payment = true;
         } else if (this.interceptType == "show_appointments") {
-          this.messages.pop()
           this.showAppointments = true;
         }
       } else if (wsData.data_type === "list") {
         this.dataType = "list"
 
         this.showAppointments = true;
-      } else if (wsData.data_type === "no_stream") {
-        this.messages.pop()
-        this.messages.push({
-          content: wsData.data,
-          type: 'assistant',
-          isStreaming: true,
-          sanitizedContent: this.sanitizer.bypassSecurityTrustHtml('')
-        });
-        this.finalizeCurrentMessage();
       } else if (wsData.data_type === "payment") {
         this.payment = true;
       }
@@ -386,19 +388,15 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
       this.ws.send(JSON.stringify(websocketData));
       this.showForm = false;
       this.payment = false;
-      this.messages.push({
-        content: '',
-        type: 'assistant',
-        isStreaming: true,
-        sanitizedContent: this.sanitizer.bypassSecurityTrustHtml('')
-      });
     }
+
+    this.startLoading = true;
   }
 
   addDummyStreamingMessage() {
     const fullMessage = 'Здраво, јас сум Дина! Како можам да ти помогнам денес?';
     const words = fullMessage.split(' ');
-3
+
     // Initial empty message with streaming state
     this.messages.push({
       content: '',
