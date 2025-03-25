@@ -343,18 +343,6 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
         this.dataType = "list"
 
         this.showAppointments = true;
-      } else if (wsData.data_type === "form1") {
-        this.dataType = "form1"
-        console.log(this.dataType)
-
-        this.interceptType = wsData.intercept_type!;
-        let formData = new FormServiceData();
-        Object.assign(formData, wsData.data);
-
-        this.formData = formData
-
-        this.showForm = true;
-
       } else if (wsData.data_type === "no_stream") {
         this.messages.pop()
         this.messages.push({
