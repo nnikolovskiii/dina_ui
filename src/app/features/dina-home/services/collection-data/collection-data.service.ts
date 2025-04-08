@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError, map, Observable, throwError } from 'rxjs';
-import { environment } from '../../../../../environments/environment';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {catchError, map, Observable, throwError} from 'rxjs';
+import {environment} from '../../../../../environments/environment';
 
 interface CollectionDataResponse {
-  appointments: any[];
+  items: any[];
   total: number;
 }
 
@@ -16,19 +16,18 @@ export class CollectionDataService {
     ? `${environment.protocol}://${environment.apiUrl}:${environment.port}/collection_data/`
     : `${environment.protocol}://${environment.apiUrl}/collection_data/`;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   getCollectionData(collectionName: string, page: number = 1): Observable<CollectionDataResponse> {
     const url = `${this.baseUrl}get_collection_data_page/${page}`;
-    return this.http.post<any[]>(url, { collection_name: collectionName }, { withCredentials: true })
-      .pipe(
-        // Map the array response to the CollectionDataResponse structure
-        map((response: any[]) => ({
-          appointments: response[0],
-          total: response[1]
-        })),
-        catchError(this.handleError)
-      );
+    return this.http.post<CollectionDataResponse>(
+      url,
+      {name: collectionName},
+      {withCredentials: true}
+    ).pipe(
+      catchError(this.handleError)
+    );
   }
 
   private handleError(error: HttpErrorResponse) {

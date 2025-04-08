@@ -16,7 +16,7 @@ export  interface  Appointment{
 @Component({
   selector: 'app-appointment-list',
   standalone: true,
-  imports: [DatePipe, CommonModule],
+  imports: [CommonModule],
   templateUrl: './appointment-list.component.html',
   styleUrls: ['./appointment-list.component.css']
 })
@@ -47,10 +47,10 @@ export class AppointmentListComponent {
     this.isLoading = true;
     this.errorMessage = null;
 
-    this.collectionDataService.getCollectionData('Appointment', this.currentPage)
+    this.collectionDataService.getCollectionData('Appointment', 1)
       .subscribe({
         next: (response) => {
-          this.appointments = response.appointments;
+          this.appointments = response.items;
           this.totalAppointments = response.total;
           this.isLoading = false;
         },

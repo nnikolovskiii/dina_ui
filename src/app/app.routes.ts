@@ -17,6 +17,9 @@ import {DocumentFormComponent} from './features/dina-home/components/document-fo
 import {PaymentComponent} from './features/dina-home/components/payment/payment.component';
 import {StarButtonComponent} from './global-features/buttons/star-button/star-button.component';
 import {AppointmentListComponent} from './features/dina-home/components/appointment-list/appointment-list.component';
+import {
+  AboutUsPageComponent
+} from '../../../remora-ui/src/app/global-features/components/about-us-page/about-us-page.component';
 
 
 export const routes: Routes = [
@@ -37,5 +40,7 @@ export const routes: Routes = [
   {path:'payment', component: PaymentComponent},
   {path: 'star', component: StarButtonComponent},
   {path: 'appointment', component: AppointmentListComponent},
+  {path: 'about_us', component: AboutUsPageComponent},
   { path: '', redirectTo: 'dina-home', pathMatch: 'full' },
+
 ];
