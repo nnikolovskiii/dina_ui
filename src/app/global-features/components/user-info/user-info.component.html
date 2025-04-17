@@ -1,0 +1,103 @@
+<div class="container">
+  <div class="input-group">
+    <label class="input-label" for="input-e_id">E-ID</label>
+    <input
+      class="input-field"
+      type="text"
+      id="input-e_id"
+      placeholder="Enter your e-ID"
+      [(ngModel)]="userModel.e_id">
+  </div>
+
+  <div class="input-group">
+    <label class="input-label" for="input-father_name">Father's Name</label>
+    <input
+      class="input-field"
+      type="text"
+      id="input-father_name"
+      placeholder="Enter your father's name"
+      [(ngModel)]="userModel.father_name">
+  </div>
+
+  <div class="input-group">
+    <label class="input-label" for="input-mother_name">Mother's Name</label>
+    <input
+      class="input-field"
+      type="text"
+      id="input-mother_name"
+      placeholder="Enter your mother's name"
+      [(ngModel)]="userModel.mother_name">
+  </div>
+
+  <div class="input-group">
+    <label class="input-label" for="input-date_of_birth">Date of Birth</label>
+    <input
+      class="input-field"
+      type="date"
+      id="input-date_of_birth"
+      [(ngModel)]="userModel.date_of_birth">
+  </div>
+
+  <div class="input-group">
+    <label class="input-label" for="input-gender">Gender</label>
+    <select
+      class="input-field"
+      id="input-gender"
+      [(ngModel)]="userModel.gender">
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+    </select>
+  </div>
+
+  <div class="input-group">
+    <label class="input-label" for="input-living_address">Living Address</label>
+    <textarea
+      class="input-field"
+      id="input-living_address"
+      placeholder="Enter your living address"
+      [(ngModel)]="userModel.living_address"></textarea>
+  </div>
+
+  <div class="input-group">
+    <label class="input-label" for="input-passport_number">Passport Number</label>
+    <input
+      class="input-field"
+      type="text"
+      id="input-passport_number"
+      placeholder="Enter your passport number"
+      [(ngModel)]="userModel.passport_number">
+  </div>
+
+  <div class="input-group">
+    <label class="input-label" for="input-id_card_number">ID Card Number</label>
+    <input
+      class="input-field"
+      type="text"
+      id="input-id_card_number"
+      placeholder="Enter your ID card number"
+      [(ngModel)]="userModel.id_card_number">
+  </div>
+
+  <div class="flex-div">
+    <app-star-button
+      [bgColor]="'#ffd9b5'"
+      [haveStars]="false"
+      [hoverBgColor]="'#fde5cb'"
+      [paddingX]="'6px'"
+      [paddingY]="'26px'"
+      [text]="'Submit'"
+      [textColor]="'black'"
+      [boxShadow]="'#fec1958c'"
+      (buttonClicked)="addUser()"
+    >
+    </app-star-button>
+  </div>
+
+  <div *ngIf="addUserSuccess" class="alert alert-success mt-3">
+    User information saved successfully!
+  </div>
+
+  <div *ngIf="addUserError" class="alert alert-danger mt-3">
+    {{ addUserError }}
+  </div>
+</div>

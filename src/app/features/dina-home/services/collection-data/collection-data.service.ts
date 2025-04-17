@@ -8,6 +8,13 @@ interface CollectionDataResponse {
   total: number;
 }
 
+interface OperationResponse {
+  status: string;
+  message: string;
+  object_id: string;
+  collection: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -24,6 +31,41 @@ export class CollectionDataService {
     return this.http.post<CollectionDataResponse>(
       url,
       {name: collectionName},
+      {withCredentials: true}
+    ).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  updateEntry(collectionName: string, objId: string, attributes: any): Observable<OperationResponse> {
+    const url = `${this.baseUrl}update_entry/${objId}`;
+    return this.http.post<OperationResponse>(
+      url,
+      {name: collectionName, attributes: attributes},
+      {withCredentials: true}
+    ).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  deleteEntry(collectionName: string, objId: string): Observable<OperationResponse> {
+    const url = `${this.baseUrl}delete_entry/${objId}`;
+    return this.http.delete<OperationResponse>(
+      url,
+      {
+        body: {name: collectionName},
+        withCredentials: true
+      }
+    ).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  addEntry(collectionName: string, attributes: any): Observable<OperationResponse> {
+    const url = `${this.baseUrl}add_entry/`;
+    return this.http.post<OperationResponse>(
+      url,
+      {name: collectionName, attributes: attributes},
       {withCredentials: true}
     ).pipe(
       catchError(this.handleError)

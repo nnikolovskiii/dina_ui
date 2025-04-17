@@ -21,6 +21,7 @@ import {
   AboutUsPageComponent
 } from '../../../remora-ui/src/app/global-features/components/about-us-page/about-us-page.component';
 import {CvComponentComponent} from './global-features/components/cv-component/cv-component.component';
+import {UserInfoComponent} from './global-features/components/user-info/user-info.component';
 
 
 export const routes: Routes = [
@@ -42,5 +43,6 @@ export const routes: Routes = [
   {path: 'appointment', component: AppointmentListComponent},
   {path: 'about_us', component: AboutUsPageComponent},
   {path: 'cv-component', component: CvComponentComponent},
+  {path: 'user-info', component: UserInfoComponent},
   { path: '', redirectTo: 'dina-home', pathMatch: 'full' },
 ];

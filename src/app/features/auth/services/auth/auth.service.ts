@@ -3,6 +3,23 @@ import { environment } from '../../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+interface UserInfo {
+  email?: string ;
+  id?: string;
+  name?: string;
+  surname?: string;
+  e_id: string;
+  father_name: string;
+  mother_name: string;
+  date_of_birth: Date;
+  gender: string;
+  living_address: string;
+  passport_number: string;
+  id_card_number: string;
+}
+
+export type { UserInfo };
+
 @Injectable({
   providedIn: 'root'
 })
@@ -34,6 +51,24 @@ export class AuthService {
 
   getProtectedData(): Observable<any> {
     return this.http.get(`${this.baseUrl}me`, {
+      withCredentials: true
+    });
+  }
+
+  addUserInfo(userInfo: UserInfo): Observable<any> {
+    return this.http.post(`${this.baseUrl}add-user-info`, userInfo, {
+      withCredentials: true
+    });
+  }
+
+  getUserInfo(email: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}get-user-info?email=${email}`, {
+      withCredentials: true
+    });
+  }
+
+  hasUserInfo(): Observable<boolean> {
+    return this.http.get<boolean>(`${this.baseUrl}has-user-info`, {
       withCredentials: true
     });
   }

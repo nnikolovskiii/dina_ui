@@ -37,7 +37,14 @@
         </div>
       </div>
 
-      <div [class.disabled-content]="!isLoggedIn">
+      <div *ngIf="!hasUserInfoAvailable" class="login-alert">
+        <div class="alert alert-warning" role="alert">
+          You need to fill in your information. Please <a [routerLink]="['/user-info']">fill info</a> to continue using the chat.
+        </div>
+      </div>
+
+
+      <div [class.disabled-content]="!isLoggedIn || !hasUserInfoAvailable">
 
         <div class="messages pb-5">
           <div *ngFor="let message of messages; let i = index">

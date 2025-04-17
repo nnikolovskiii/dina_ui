@@ -94,6 +94,9 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
   public lightMode: boolean = false;
   public isLoggedIn: boolean = false;
 
+  // Add a property to track whether user info is available
+  public hasUserInfoAvailable: boolean = false;
+
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -110,6 +113,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
 
   async ngOnInit(): Promise<void> {
     this.checkAuthStatus();
+    this.checkUserInfo(); // Add this line to check user info
 
     this.route.queryParams.subscribe(async (params) => {
       this.chat_id = params['chat_id'] || null;
@@ -118,7 +122,6 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
         this.loadExistingMessages();
       } else {
         this.addDummyStreamingMessage()
-
       }
 
       this.initializeWebSocket();
@@ -127,6 +130,21 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
     });
 
   }
+
+  // Add this new method
+  private checkUserInfo(): void {
+    this.authService.hasUserInfo().subscribe(
+      (hasInfo) => {
+        // User has info
+        this.hasUserInfoAvailable = hasInfo;
+      },
+      (error) => {
+        // Error occurred, treat as not having info
+        this.hasUserInfoAvailable = false;
+      }
+    );
+  }
+
 
   private checkAuthStatus(): void {
     this.authService.getProtectedData().subscribe(
@@ -320,8 +338,8 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private initializeWebSocket(): void {
     const url = environment.port ?
-      `wss://${environment.apiUrl}:${environment.port}/websocket/` :
-      `wss://${environment.apiUrl}/websocket/`;
+      `ws://${environment.apiUrl}:${environment.port}/websocket/` :
+      `ws://${environment.apiUrl}/websocket/`;
 
     this.ws = new WebSocket(url);
 
