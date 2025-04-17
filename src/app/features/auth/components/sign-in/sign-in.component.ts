@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, AbstractControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, AbstractControl, ValidatorFn } from '@angular/forms';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { FormsModule } from '@angular/forms';
 import { NgClass, NgIf } from '@angular/common';
@@ -26,11 +26,28 @@ export class SignInComponent {
     private fb: FormBuilder
   ) {
     this.signInForm = this.fb.group({
-      fullName: ['', [Validators.required, Validators.minLength(3)]],
+      fullName: ['', [Validators.required, Validators.minLength(3), this.fullNameFormatValidator()]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(3)]],
       passwordAgain: ['', Validators.required]
     }, { validator: this.checkPasswords });
+  }
+
+  // Custom validator for full name format (name surname)
+  fullNameFormatValidator(): ValidatorFn {
+    return (control: AbstractControl): {[key: string]: any} | null => {
+      const value = control.value;
+
+      if (!value) {
+        return null; // Let required validator handle empty values
+      }
+
+      // Check if the full name contains at least one space between words
+      const nameParts = value.trim().split(/\s+/);
+      const validFormat = nameParts.length >= 2 && nameParts[0].length > 0 && nameParts[1].length > 0;
+
+      return validFormat ? null : { invalidFormat: true };
+    };
   }
 
   // Custom validator to check if passwords match
@@ -68,6 +85,7 @@ export class SignInComponent {
     if (control.errors['required']) return 'This field is required';
     if (control.errors['minlength']) return `Must be at least ${control.errors['minlength'].requiredLength} characters`;
     if (control.errors['email']) return 'Please enter a valid email address';
+    if (control.errors['invalidFormat']) return 'Full name must be in format "name surname"';
 
     return 'Invalid input';
   }
