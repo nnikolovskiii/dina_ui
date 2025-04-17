@@ -155,9 +155,10 @@
           </div>
           <ng-template #lol></ng-template>
           <div class="messageBox">
-          <textarea #messageArea [(ngModel)]="inputMessage" required="" [placeholder]="placeholderText" type="text"
-                    id="messageInput" (keydown)="handleKeyDown($event, messageArea)" rows="1" (input)="autoResize()">
+     <textarea #messageArea [(ngModel)]="inputMessage" required="" [placeholder]="'пр. ' + placeholderText" type="text"
+               id="messageInput" (keydown)="handleKeyDown($event, messageArea)" rows="1" (input)="autoResize()">
 </textarea>
+
 
             <div class="send-button">
               <button id="sendButton" (click)="sendMessage()">
