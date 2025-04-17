@@ -14,8 +14,6 @@ import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 import * as marked from 'marked';
 import {ChatService} from '../../services/chat.service';
 import {ActivatedRoute, Router, RouterModule} from '@angular/router';
-import {FlagService} from '../../../show-process/services/flag/flag.service';
-import {Chat, ChatApi, ChatModel} from '../../models/chat';
 import {environment} from '../../../../../environments/environment';
 import {HistorySidebarComponent} from '../history-sidebar/history-sidebar.component';
 import {DocumentFormComponent} from '../../../dina-home/components/document-form/document-form.component';
@@ -125,6 +123,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
 
       this.initializeWebSocket();
       this.updateTheme()
+      this.startPlaceholderRotation();
     });
 
   }
@@ -143,11 +142,34 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
 
+  private placeholderTexts: string[] = [
+    "Kако можам да извадам пасош?",
+    "Закажи ми термин за лична карта.",
+    "Извади ми документ за извод на родени.",
+    "Покажи ми ги сите мои закажани термини.",
+  ];
+  currentPlaceholderIndex: number = 0;
+  placeholderText: string = this.placeholderTexts[0];
+  placeholderInterval: any;
+
+
+  private startPlaceholderRotation(): void {
+    this.placeholderInterval = setInterval(() => {
+      this.currentPlaceholderIndex = (this.currentPlaceholderIndex + 1) % this.placeholderTexts.length;
+      this.placeholderText = this.placeholderTexts[this.currentPlaceholderIndex];
+      this.cdRef.detectChanges(); // Trigger change detection
+    }, 3000); // Change every 3 seconds
+  }
+
 
 
   ngOnDestroy(): void {
     if (this.ws) {
       this.ws.close();
+    }
+
+    if (this.placeholderInterval) {
+      clearInterval(this.placeholderInterval);
     }
   }
 
@@ -256,12 +278,20 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
     this.showAppointments = false;
     this.startLoading = true;
 
-    if (!this.inputMessage.trim()) return;
+    let messageToSend = this.inputMessage.trim();
 
-    this.messages.push(this.createMessage('user', this.inputMessage));
+    // If no message was typed, use the current placeholder
+    if (!messageToSend) {
+      messageToSend = this.placeholderText;
+    }
+
+    console.log(messageToSend);
+    if (!messageToSend) return; // This should never happen now
+
+    this.messages.push(this.createMessage('user', messageToSend));
 
     if (this.ws) {
-      let websocketData = new WebsocketData("chat", [this.inputMessage, this.chat_id])
+      let websocketData = new WebsocketData("chat", [messageToSend, this.chat_id])
       this.ws.send(JSON.stringify(websocketData));
     }
 

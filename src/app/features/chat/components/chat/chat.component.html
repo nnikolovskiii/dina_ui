@@ -148,10 +148,10 @@
           </div>
           <ng-template #lol></ng-template>
           <div class="messageBox">
-          <textarea #messageArea [(ngModel)]="inputMessage" required="" placeholder="Разговарај со Дина ..." type="text"
-                    id="messageInput" (keydown)="handleKeyDown($event, messageArea)" rows="1" (input)="autoResize()"
-          >
-          </textarea>
+          <textarea #messageArea [(ngModel)]="inputMessage" required="" [placeholder]="placeholderText" type="text"
+                    id="messageInput" (keydown)="handleKeyDown($event, messageArea)" rows="1" (input)="autoResize()">
+</textarea>
+
             <div class="send-button">
               <button id="sendButton" (click)="sendMessage()">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 664 663">
