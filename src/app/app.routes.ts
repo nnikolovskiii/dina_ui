@@ -6,20 +6,15 @@ import {SelectUrlComponent} from './features/document-extraction/collections/sel
 import {CollectionsComponent} from './features/document-managment/components/collections/collections.component';
 import {DocsFilesComponent} from './features/document-managment/components/docs-files/docs-files.component';
 import {ListProcesses} from './features/show-process/components/list-processes/list-processes';
-import {HomeComponent} from './features/home/components/home/home.component';
 import {ModelsSidebarComponent} from './features/chat/components/models-sidebar/models-sidebar.component';
 import {HistorySidebarComponent} from './features/chat/components/history-sidebar/history-sidebar.component';
 import {DinaHomeComponent} from './features/dina-home/components/dina-home/dina-home.component';
 import {SignInComponent} from './features/auth/components/sign-in/sign-in.component';
 import {LoginComponent} from './features/auth/components/login/login.component';
-import {RandomLightsComponent} from './features/dina-home/components/random-lights/random-lights.component';
 import {DocumentFormComponent} from './features/dina-home/components/document-form/document-form.component';
 import {PaymentComponent} from './features/dina-home/components/payment/payment.component';
 import {StarButtonComponent} from './global-features/buttons/star-button/star-button.component';
 import {AppointmentListComponent} from './features/dina-home/components/appointment-list/appointment-list.component';
-import {
-  AboutUsPageComponent
-} from '../../../remora-ui/src/app/global-features/components/about-us-page/about-us-page.component';
 import {UserInfoComponent} from './global-features/components/user-info/user-info.component';
 
 
@@ -40,7 +35,6 @@ export const routes: Routes = [
   {path:'payment', component: PaymentComponent},
   {path: 'star', component: StarButtonComponent},
   {path: 'appointment', component: AppointmentListComponent},
-  {path: 'about_us', component: AboutUsPageComponent},
   {path: 'user-info', component: UserInfoComponent},
   { path: '', redirectTo: 'dina-home', pathMatch: 'full' },
 ];
