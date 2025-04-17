@@ -2,42 +2,30 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {AuthService} from '../../../auth/services/auth/auth.service';
 import {Router} from '@angular/router';
 import {NgForOf} from '@angular/common';
-import {BlobComponent} from '../../../../global-features/components/blob/blob.component';
-import {StarButtonComponent} from '../../../../global-features/buttons/star-button/star-button.component';
+import {UserProfileComponent} from '../../../../user-profile/user-profile.component';
 
 @Component({
   selector: 'app-dina-home',
   standalone: true,
   imports: [
     NgForOf,
+    UserProfileComponent,
   ],
   templateUrl: './dina-home.component.html',
   styleUrl: './dina-home.component.css'
 })
 export class DinaHomeComponent implements OnInit {
-  userData: any;
   @ViewChild('container') container!: ElementRef;
 
   activeIndex: number = 0;
 
-  constructor(private authService: AuthService, private router: Router,
+  constructor(private router: Router,
   ) {
   }
 
   ngOnInit() {
-    this.loadUserData();
-    console.log(this.userData)
   }
 
-  loadUserData() {
-    this.authService.getProtectedData().subscribe({
-      next: (data) => {
-        this.userData = data
-        console.log(this.userData)
-      },
-      error: (err) => console.error('Failed to load data:', err)
-    });
-  }
 
   navigateToLink(link: string) {
     this.router.navigate(['/' + link]);
