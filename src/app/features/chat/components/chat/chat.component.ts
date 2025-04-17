@@ -295,8 +295,8 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private initializeWebSocket(): void {
     const url = environment.port ?
-      `ws://${environment.apiUrl}:${environment.port}/websocket/` :
-      `ws://${environment.apiUrl}/websocket/`;
+      `wss://${environment.apiUrl}:${environment.port}/websocket/` :
+      `wss://${environment.apiUrl}/websocket/`;
 
     this.ws = new WebSocket(url);
 

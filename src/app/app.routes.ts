@@ -20,6 +20,8 @@ import {AppointmentListComponent} from './features/dina-home/components/appointm
 import {
   AboutUsPageComponent
 } from '../../../remora-ui/src/app/global-features/components/about-us-page/about-us-page.component';
+import {TmpComponentComponent} from './tmp-component/tmp-component.component';
+import {CvComponentComponent} from './cv-component/cv-component.component';
 
 
 export const routes: Routes = [
@@ -30,7 +32,7 @@ export const routes: Routes = [
   {path:'extract-url', component: SelectUrlComponent},
   {path:'collections', component: CollectionsComponent},
   {path:'process', component: ListProcesses},
-  {path:'home', component: HomeComponent},
+  {path:'home', component: TmpComponentComponent},
   {path:'test', component: ModelsSidebarComponent},
   {path:'test1', component: HistorySidebarComponent},
   {path:'dina-home', component: DinaHomeComponent},
@@ -41,6 +43,6 @@ export const routes: Routes = [
   {path: 'star', component: StarButtonComponent},
   {path: 'appointment', component: AppointmentListComponent},
   {path: 'about_us', component: AboutUsPageComponent},
+  {path: 'cv-component', component: CvComponentComponent},
   { path: '', redirectTo: 'dina-home', pathMatch: 'full' },
-
 ];

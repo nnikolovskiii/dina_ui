@@ -37,17 +37,50 @@
 /*  z-index: -1;*/
 /*}*/
 
-@keyframes pulsate {
-  0% {
-    transform: scale(1);
-    opacity: 0.8;
-  }
-  50% {
-    transform: scale(1.1);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 0.8;
-  }
+
+/* ================================================================ */
+/* === PLACE THIS PART IN YOUR GLOBAL styles.css or styles.scss === */
+/* ================================================================ */
+:root {
+  /* Refined colors based on image */
+  --primary-purple: #7A5FEC; /* Slightly adjusted purple */
+  --light-purple: #EDE9FE; /* Light purple for active states */
+  --dark-grey: #374151;    /* Darker text/elements */
+  --medium-grey: #6B7280;  /* Medium text/icons */
+  --light-grey: #D1D5DB;   /* Lighter icons/borders */
+  --border-grey: #E5E7EB;  /* Borders */
+  --bg-grey: #F9FAFB;      /* Main background */
+  --text-color: var(--dark-grey);
+  --sidebar-bg: #FFFFFF;
+  --content-bg: #FFFFFF;
+
+  --complete-green: #3DCC85; /* Brighter green for status text */
+  --complete-bg: #D1FAE5;    /* Lighter green background for status */
+  --todo-grey: #6B7280;      /* To Do status text (same as medium grey) */
+  --todo-bg: #F3F4F6;        /* Slightly darker light grey for To Do background */
+
+  --upgrade-orange: #FF6F61; /* Coral/red for upgrade button */
+  --avatar-yellow: #FBBF24;  /* Adjusted yellow for avatar */
+
+  /* Suggested Priority Flag Colors (if not using inline styles) */
+  /* --priority-red: #EF4444; */
+  /* --priority-orange: #F97316; */
+  /* --priority-grey: #9CA3AF; */
 }
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  background-color: #ffffff;
+  line-height: 1.5;
+}
+/* ================================================================ */
+/* === END OF GLOBAL STYLES PART                             === */
+/* ================================================================ */
+
