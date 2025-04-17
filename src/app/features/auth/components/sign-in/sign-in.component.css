@@ -1,0 +1,37 @@
+/* In your component CSS or global styles */
+.success-snackbar {
+  background: #4CAF50 !important;
+  color: white !important;
+  font-weight: 500;
+}
+
+.error-snackbar {
+  background: #f44336 !important;
+  color: white !important;
+  font-weight: 500;
+}
+
+.mat-mdc-snack-bar-label {
+  text-align: center !important;
+  width: 100% !important;
+}
+
+/* For better input validation visibility */
+.ng-invalid.ng-touched {
+  border-color: #f44336 !important;
+  ring-color: #f44336 !important;
+}
+
+/* Gradient button hover fix */
+button[type="submit"] {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button[type="submit"]:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 6px -1px rgba(255, 144, 77, 0.4);
+}
+
+button[type="submit"]:active {
+  transform: scale(0.95);
+}

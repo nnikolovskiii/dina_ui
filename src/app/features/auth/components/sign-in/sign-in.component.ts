@@ -1,15 +1,13 @@
 import {ChangeDetectorRef, Component, ElementRef} from '@angular/core';
-import {DomSanitizer} from '@angular/platform-browser';
-import {ChatService} from '../../../chat/services/chat.service';
-import {FlagService} from '../../../show-process/services/flag/flag.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService} from '../../services/auth/auth.service';
 import {FormsModule} from '@angular/forms';
+import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-sign-in',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, MatSnackBarModule],
   templateUrl: './sign-in.component.html',
   styleUrl: './sign-in.component.css'
 })
@@ -24,7 +22,8 @@ export class SignInComponent {
     private router: Router,
     private route: ActivatedRoute,
     private el: ElementRef,
-    private cdRef: ChangeDetectorRef
+    private cdRef: ChangeDetectorRef,
+    private snackBar: MatSnackBar
   ) {
   }
 
@@ -36,15 +35,37 @@ export class SignInComponent {
         this.password,
         this.fullName
       ).subscribe({
-        next: () => window.location.href = '/',
-        error: (err) => console.error('Registration failed', err)
+        next: () => {
+          this.snackBar.open('Registration successful! Please log in.', 'Close', {
+            duration: 5000,
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
+            panelClass: ['success-snackbar']
+          });
+          this.router.navigate(['/login']);
+        },
+        error: (err) => {
+          console.error('Registration failed', err);
+          this.snackBar.open('Registration failed. Please try again.', 'Close', {
+            duration: 5000,
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
+            panelClass: ['error-snackbar']
+          });
+        }
       });
     } else {
       console.log("Passwords do not match");
+      this.snackBar.open('Passwords do not match', 'Close', {
+        duration: 5000,
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+        panelClass: ['error-snackbar']
+      });
     }
   }
 
   navigateToLink(link: string) {
-    this.router.navigate(['/'+link]);
+    this.router.navigate(['/' + link]);
   }
 }
