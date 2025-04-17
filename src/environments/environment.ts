@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  apiUrl: 'localhost',
-  port: 5000,
-  protocol: "http"
+  apiUrl: 'nnikkserver.duckdns.org',
+  port: 8000,
+  protocol: "https"
 };
