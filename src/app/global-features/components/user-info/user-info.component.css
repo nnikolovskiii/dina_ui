@@ -1,88 +1,53 @@
 .container {
-  background-color: #ffffff;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-  padding: 32px;
-  max-width: 560px;
-  margin: 0 auto;
+  background-color: #f9f9f9;
+  font-family: Arial, sans-serif;
+  padding-bottom: 4px;
   color: #333333;
+  width: 500px;
 }
 
-.form-header {
-  margin-bottom: 24px;
-  text-align: center;
-}
-
-.form-title {
-  font-size: 1.75rem;
-  font-weight: 600;
-  color: #2c3e50;
-  margin-bottom: 8px;
-}
-
-.form-subtitle {
-  font-size: 1rem;
-  color: #7f8c8d;
-}
-
-.form-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-}
-
-.full-width {
-  grid-column: 1 / -1;
-}
 
 .input-group {
-  margin-bottom: 0;
+  margin-bottom: 1.5rem;
+  flex-direction: column;
 }
 
 .input-label {
   display: block;
-  margin-bottom: 8px;
-  font-weight: 500;
-  color: #34495e;
+  margin-bottom: 0.5rem;
+  color: #333333;
   font-size: 0.9rem;
 }
 
 .input-field {
   width: 100%;
-  padding: 12px 16px;
-  border-radius: 8px;
+  padding: 12px;
+  border-radius: 6px;
   font-size: 1rem;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
   box-sizing: border-box;
-  background-color: #f8f9fa;
-  border: 1px solid #e1e4e8;
+  background-color: #ffffff;
+  border: #333333 solid 1px;
 }
 
 .input-field:focus {
   outline: none;
-  border-color: #4296f4;
-  background-color: #ffffff;
-  box-shadow: 0 0 0 3px rgba(66, 150, 244, 0.15);
+  box-shadow: 0 0 0 1px rgba(51, 50, 50, 0.6);
 }
 
 .input-field:hover {
-  border-color: #bdc3c7;
+  border-color: #333333;
 }
 
-textarea.input-field {
-  min-height: 100px;
-  resize: vertical;
-  color: #34373b;
-}
+@media (max-width: 480px) {
+  .container {
+    padding: 15px;
+  }
 
-select.input-field {
-  appearance: none;
-  background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
-  background-repeat: no-repeat;
-  background-position: right 12px center;
-  background-size: 16px;
-  padding-right: 40px;
+  .input-field {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
 }
 
 .flex-div{
@@ -148,6 +113,21 @@ select.input-field {
 .checkbox-container input[type="checkbox"] {
   width: auto;
   transform: scale(1.2);
+}
+
+select.input-field {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1em;
+  color: #333333;
+}
+
+textarea.input-field {
+  min-height: 100px;
+  resize: vertical;
+  color: #34373b;
 }
 
 .checkbox-group {
@@ -270,69 +250,11 @@ input[type=number] {
 }
 
 .error-message {
-  color: #e74c3c;
-  font-size: 0.8rem;
-  margin-top: 6px;
-  animation: fadeIn 0.2s ease;
-}
-
-.form-actions {
-  display: flex;
-  justify-content: center;
-  margin-top: 32px;
-}
-
-.alert {
-  padding: 16px;
-  border-radius: 8px;
-  margin-top: 24px;
-  text-align: center;
-  animation: fadeIn 0.3s ease;
-}
-
-.alert-success {
-  background-color: #d4edda;
-  color: #155724;
-  border: 1px solid #c3e6cb;
-}
-
-.alert-danger {
-  background-color: #f8d7da;
-  color: #721c24;
-  border: 1px solid #f5c6cb;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  color: #dc3545;
+  font-size: 0.85em;
+  margin-top: 5px;
 }
 
 .input-field.ng-invalid.ng-touched {
-  border-color: #e74c3c;
-  background-color: #fff8f8;
-}
-
-@media (max-width: 640px) {
-  .container {
-    padding: 24px 16px;
-  }
-
-  .form-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-
-  .input-field {
-    padding: 10px 14px;
-  }
-
-  .form-title {
-    font-size: 1.5rem;
-  }
+  border-color: #dc3545;
 }
