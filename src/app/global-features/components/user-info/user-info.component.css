@@ -249,4 +249,12 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
+.error-message {
+  color: #dc3545;
+  font-size: 0.85em;
+  margin-top: 5px;
+}
 
+.input-field.ng-invalid.ng-touched {
+  border-color: #dc3545;
+}

@@ -467,6 +467,41 @@
     p{
       margin-bottom: 0;
     }
+
+    /* === Add this to your existing CSS within the <style> tags === */
+
+    .project-link {
+      margin-top: 5px;  /* Space above the link */
+      margin-bottom: 15px; /* Space below the link, before tech tags */
+      font-size: 14px;
+    }
+
+    .project-link a {
+      color: #0056b3; /* Use theme blue */
+      text-decoration: none; /* Remove underline */
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .project-link a:hover {
+      color: #003d80; /* Darker blue on hover */
+      text-decoration: underline; /* Add underline on hover */
+    }
+
+    .project-link i {
+      margin-right: 6px; /* Space between icon and text */
+      font-size: 13px; /* Slightly smaller icon */
+    }
+
+    /* Adjust spacing for project description if needed */
+    .project-item > p {
+      margin-top: 5px; /* Ensure some space above the description */
+    }
+
+    /* Add this to your existing CSS */
+    .project-link a + a { /* Selects any 'a' tag that directly follows another 'a' tag within .project-link */
+      margin-left: 15px; /* Adjust the value as needed */
+    }
     /* === Font Awesome Import (Keep as is) === */
     @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
     /* === Inter Font Import (Keep as is) === */
@@ -482,7 +517,7 @@
     <div class="contact-info">
       <div class="contact-item">
         <i class="fas fa-envelope contact-icon"></i>
-        <span>nikolovski[dot]nikola42[at]gmail[dot]com</span>
+        <span>nikolovski.nikola42gmail.com</span>
       </div>
       <div class="contact-item">
         <i class="fas fa-phone-alt contact-icon"></i>
@@ -490,11 +525,15 @@
       </div>
       <div class="contact-item">
         <i class="fab fa-linkedin contact-icon"></i>
-        <span>linkedin.com/in/nikola-nikolovski-365340215</span>
+        <a href="https://www.linkedin.com/in/nikola-nikolovski-365340215/" target="_blank" rel="noopener noreferrer">
+          LinkedIn Profile
+        </a>
       </div>
       <div class="contact-item">
         <i class="fab fa-github contact-icon"></i>
-        <span>github.com/nnikolovskiii</span>
+        <a href="https://github.com/nnikolovskiii" target="_blank" rel="noopener noreferrer">
+           GitHub Profile
+        </a>
       </div>
       <div class="contact-item">
         <i class="fas fa-map-marker-alt contact-icon"></i>
@@ -563,9 +602,13 @@
 
         <div class="project-item">
           <h3 class="project-title">AI-Powered Institution Services Assistant</h3>
+          <div class="project-link">
+            <a href="https://nnikkserver.duckdns.org" target="_blank" rel="noopener noreferrer">
+              <i class="fas fa-external-link-alt"></i> Live Demo
+            </a>
+          </div>
           <div class="project-tech">
             <div class="tech-tag"><p>LLMs</p></div>
-            <div class="tech-tag"><p>Task automation</p></div>
             <div class="tech-tag"><p>Task automation</p></div>
             <div class="tech-tag"><p>Document generation</p></div>
           </div>
@@ -573,9 +616,7 @@
             system enables users to:
           </p>
           <ul>
-            <li class="responsibility"> Retrieve accurate, real-time information via a natural language chat interface.
-
-            </li>
+            <li class="responsibility"> Retrieve accurate, real-time information via a natural language chat interface.</li>
             <li class="responsibility"> Automate administrative tasks (e.g., scheduling appointments, processing
               payments, generating official PDF documents).
             </li>
@@ -584,6 +625,11 @@
 
         <div class="project-item">
           <h3 class="project-title">Code Explore</h3>
+          <div class="project-link">
+            <a href="https://github.com/nnikolovskiii/code_explore" target="_blank" rel="noopener noreferrer">
+              <i class="fab fa-github"></i> Source Code
+            </a>
+          </div>
           <div class="project-tech">
             <div class="tech-tag"><p>RAG system</p></div>
             <div class="tech-tag"><p>Contextual retrieval</p></div>

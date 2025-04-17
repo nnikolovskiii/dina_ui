@@ -2,9 +2,13 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+export enum GenderEnum {
+  MALE = 'MALE',
+  FEMALE = 'FEMALE'
+}
 
 interface UserInfo {
-  email?: string ;
+  email?: string;
   id?: string;
   name?: string;
   surname?: string;
@@ -12,7 +16,7 @@ interface UserInfo {
   father_name: string;
   mother_name: string;
   date_of_birth: Date;
-  gender: string;
+  gender: GenderEnum; // Changed from string to Gender enum
   living_address: string;
   passport_number: string;
   id_card_number: string;

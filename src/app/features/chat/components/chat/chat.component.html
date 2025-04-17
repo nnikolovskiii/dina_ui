@@ -33,11 +33,11 @@
     <div class="chat-container" #messagesContainer>
       <div *ngIf="!isLoggedIn" class="login-alert">
         <div class="alert alert-warning" role="alert">
-          You are not logged in. Please <a [routerLink]="['/login']">login</a> to continue using the chat.
+          You are not logged in. Please <a [routerLink]="['/login']">login</a> / <a [routerLink]="['/sign-in']">register</a>  to continue using the chat.
         </div>
       </div>
 
-      <div *ngIf="!hasUserInfoAvailable" class="login-alert">
+      <div *ngIf="!hasUserInfoAvailable && isLoggedIn" class="login-alert">
         <div class="alert alert-warning" role="alert">
           You need to fill in your information. Please <a [routerLink]="['/user-info']">fill info</a> to continue using the chat.
         </div>
