@@ -5,9 +5,6 @@
   <div (click)="toggleChatModels()" class="toggle-button">
     <img src="../../../../../assets/calendar.png" height="36" width="36"/>
   </div>
-  <!--  <div (click)="toggleChatModels()" class="toggle-button">-->
-  <!--    <img src="../../../../../assets/setting(2).png" height="26" width="26"/>-->
-  <!--  </div>-->
   <div class="h-full pb-[15px] flex flex-col justify-end items-center">
     <div
       id="new-chat-button"
@@ -34,25 +31,94 @@
 <div class="content">
   <div class="main-div bg-wrapper">
     <div class="chat-container" #messagesContainer>
-      <div class="messages pb-5">
-        <div *ngFor="let message of messages; let i = index">
-          <div [ngSwitch]="message.type">
-            <div *ngSwitchCase="'user'" class="user-card" [innerHtml]="message.sanitizedContent">
+      <div *ngIf="!isLoggedIn" class="login-alert">
+        <div class="alert alert-warning" role="alert">
+          You are not logged in. Please <a [routerLink]="['/login']">login</a> to continue using the chat.
+        </div>
+      </div>
+
+      <div [class.disabled-content]="!isLoggedIn">
+
+        <div class="messages pb-5">
+          <div *ngFor="let message of messages; let i = index">
+            <div [ngSwitch]="message.type">
+              <div *ngSwitchCase="'user'" class="user-card" [innerHtml]="message.sanitizedContent">
+              </div>
+              <div *ngSwitchCase="'assistant'">
+                <div class="assistant-content">
+                  <div class="logo-container"
+                       *ngIf="shouldShowLogo(i)">
+                  </div>
+                  <!-- Message Content -->
+                  <div class="assistant-card">
+                    <div class="message-content">
+                      <div *ngIf="message.content !== '';else empty" [innerHtml]="message.sanitizedContent"></div>
+                      <ng-template #empty>
+                        <div class="p-2 bg-transparent"></div>
+                      </ng-template>
+                      <div *ngIf="message.isStreaming"
+                           class="streaming-dot-container">
+                        <div class="spinner">
+                          <div class="spinner1"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="gap" *ngIf="shouldShowGap(i)"></div>
             </div>
-            <div *ngSwitchCase="'assistant'">
+          </div>
+          <div *ngIf="showForm; else lol">
+            <div class="assistant">
               <div class="assistant-content">
-                <div class="logo-container"
-                     *ngIf="shouldShowLogo(i)">
+                <!-- Logo -->
+                <!-- Message Content -->
+                <div class="assistant-card">
+                  <div class="message-content">
+                    <div>
+                      <app-document-form
+                        [formFields]="formData?.form_data"
+                        (generate)="handleGenerate($event)"> >
+                      </app-document-form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="payment; else lol">
+            <div class="assistant">
+              <div class="assistant-content">
+                <!-- Message Content -->
+                <div class="assistant-card">
+                  <div class="message-content">
+                    <div>
+                      <app-payment
+                        [formFields]="formData?.form_data"
+                        (generate)="handleGenerate($event)">
+                      </app-payment>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="startLoading; else lol">
+            <div class="assistant">
+              <div class="assistant-content">
+                <!-- Logo -->
+                <div class="logo-container">
                 </div>
                 <!-- Message Content -->
                 <div class="assistant-card">
                   <div class="message-content">
-                    <div *ngIf="message.content !== '';else empty" [innerHtml]="message.sanitizedContent"></div>
+                    <div class="w-2 h-4"></div>
                     <ng-template #empty>
                       <div class="p-2 bg-transparent"></div>
                     </ng-template>
-                    <div *ngIf="message.isStreaming"
-                         class="streaming-dot-container">
+                    <div
+                      class="streaming-dot-container">
                       <div class="spinner">
                         <div class="spinner1"></div>
                       </div>
@@ -61,114 +127,55 @@
                 </div>
               </div>
             </div>
-            <div id="gap" *ngIf="shouldShowGap(i)"></div>
           </div>
-        </div>
-        <div *ngIf="showForm; else lol">
-          <div class="assistant">
-            <div class="assistant-content">
-              <!-- Logo -->
-              <!-- Message Content -->
-              <div class="assistant-card">
-                <div class="message-content">
-                  <div>
-                    <app-document-form
-                      [formFields]="formData?.form_data"
-                      (generate)="handleGenerate($event)"> >
-                    </app-document-form>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div *ngIf="payment; else lol">
-          <div class="assistant">
-            <div class="assistant-content">
-              <!-- Message Content -->
-              <div class="assistant-card">
-                <div class="message-content">
-                  <div>
-                    <app-payment
-                      [formFields]="formData?.form_data"
-                      (generate)="handleGenerate($event)">
-                    </app-payment>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div *ngIf="startLoading; else lol">
-          <div class="assistant">
-            <div class="assistant-content">
-              <!-- Logo -->
-              <div class="logo-container">
-              </div>
-              <!-- Message Content -->
-              <div class="assistant-card">
-                <div class="message-content">
-                  <div class="w-2 h-4"></div>
-                  <ng-template #empty>
-                    <div class="p-2 bg-transparent"></div>
-                  </ng-template>
-                  <div
-                    class="streaming-dot-container">
-                    <div class="spinner">
-                      <div class="spinner1"></div>
+
+          <div *ngIf="showAppointments; else lol">
+            <div class="assistant">
+              <div class="assistant-content">
+                <!-- Message Content -->
+                <div class="assistant-card top-left-corner">
+                  <div class="message-content">
+                    <div>
+                      <app-appointment-list
+                        width="400px"
+                      >
+                      </app-appointment-list>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-
-        <div *ngIf="showAppointments; else lol">
-          <div class="assistant">
-            <div class="assistant-content">
-              <!-- Message Content -->
-              <div class="assistant-card top-left-corner">
-                <div class="message-content">
-                  <div>
-                    <app-appointment-list
-                      width="400px"
-                    >
-                    </app-appointment-list>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <ng-template #lol></ng-template>
-        <div class="messageBox">
+          <ng-template #lol></ng-template>
+          <div class="messageBox">
           <textarea #messageArea [(ngModel)]="inputMessage" required="" placeholder="Разговарај со Дина ..." type="text"
                     id="messageInput" (keydown)="handleKeyDown($event, messageArea)" rows="1" (input)="autoResize()"
           >
           </textarea>
-          <div class="send-button">
-            <button id="sendButton" (click)="sendMessage()">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 664 663">
-                <path
-                  fill="none"
-                  d="M646.293 331.888L17.7538 17.6187L155.245 331.888M646.293 331.888L17.753 646.157L155.245 331.888M646.293 331.888L318.735 330.228L155.245 331.888"
-                ></path>
-                <path
-                  stroke-linejoin="round"
-                  stroke-linecap="round"
-                  stroke-width="33.67"
-                  stroke="#6c6c6c"
-                  d="M646.293 331.888L17.7538 17.6187L155.245 331.888M646.293 331.888L17.753 646.157L155.245 331.888M646.293 331.888L318.735 330.228L155.245 331.888"
-                ></path>
-              </svg>
-            </button>
+            <div class="send-button">
+              <button id="sendButton" (click)="sendMessage()">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 664 663">
+                  <path
+                    fill="none"
+                    d="M646.293 331.888L17.7538 17.6187L155.245 331.888M646.293 331.888L17.753 646.157L155.245 331.888M646.293 331.888L318.735 330.228L155.245 331.888"
+                  ></path>
+                  <path
+                    stroke-linejoin="round"
+                    stroke-linecap="round"
+                    stroke-width="33.67"
+                    stroke="#6c6c6c"
+                    d="M646.293 331.888L17.7538 17.6187L155.245 331.888M646.293 331.888L17.753 646.157L155.245 331.888M646.293 331.888L318.735 330.228L155.245 331.888"
+                  ></path>
+                </svg>
+              </button>
+            </div>
           </div>
-        </div>
 
-        <div id="block1">
+          <div id="block1">
+          </div>
         </div>
       </div>
     </div>
+
   </div>
 </div>

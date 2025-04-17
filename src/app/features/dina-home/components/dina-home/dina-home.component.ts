@@ -10,8 +10,6 @@ import {StarButtonComponent} from '../../../../global-features/buttons/star-butt
   standalone: true,
   imports: [
     NgForOf,
-    BlobComponent,
-    StarButtonComponent
   ],
   templateUrl: './dina-home.component.html',
   styleUrl: './dina-home.component.css'

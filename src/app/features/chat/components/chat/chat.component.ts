@@ -24,6 +24,7 @@ import {AppointmentListComponent} from '../../../dina-home/components/appointmen
 import {
   AppointmentSidebarComponent
 } from '../../../dina-home/components/appointment-sidebar/appointment-sidebar.component';
+import {AuthService} from '../../../auth/services/auth/auth.service';
 
 interface Message {
   content: string;
@@ -91,26 +92,27 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
   private ws: WebSocket | undefined;
   public inputMessage: string = '';
   public messages: Message[] = [];
-  public chatApi: any | null = null;
-  public chatModels: ChatModel[] | null = null;
-  public activeModel: ChatModel | null = null;
   public isStreaming = false;
   public lightMode: boolean = false;
+  public isLoggedIn: boolean = false;
+
 
   constructor(
     private sanitizer: DomSanitizer,
     private chatService: ChatService,
-    private flagService: FlagService,
     private router: Router,
     private route: ActivatedRoute,
     private el: ElementRef,
     private cdRef: ChangeDetectorRef,
     private renderer: Renderer2,
+    private authService: AuthService,
     @Inject(DOCUMENT) private document: Document
   ) {
   }
 
   async ngOnInit(): Promise<void> {
+    this.checkAuthStatus();
+
     this.route.queryParams.subscribe(async (params) => {
       this.chat_id = params['chat_id'] || null;
 
@@ -122,33 +124,26 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
       }
 
       this.initializeWebSocket();
-      this.initializeChatModels();
       this.updateTheme()
     });
 
   }
 
-  private initializeChatModels(): void {
-    this.chatService.getActiveChatModel().subscribe(
-      (response) => {
-        this.activeModel = response;
-        this.selectedApi = this.activeModel!.chat_api_type;
-        this.chatService.getChatApiAndModels(this.activeModel!.chat_api_type).subscribe(
-          (response) => {
-            this.chatApi = response["api"];
-            this.chatModels = response["models"];
-            this.cdRef.detectChanges();
-          },
-          (error) => {
-            console.error('Error fetching chats:', error);
-          }
-        );
+  private checkAuthStatus(): void {
+    this.authService.getProtectedData().subscribe(
+      (data) => {
+        // User is authenticated
+        this.isLoggedIn = true;
       },
       (error) => {
-        console.error('Error fetching active model:', error);
+        // User is not authenticated
+        this.isLoggedIn = false;
       }
     );
   }
+
+
+
 
   ngOnDestroy(): void {
     if (this.ws) {
