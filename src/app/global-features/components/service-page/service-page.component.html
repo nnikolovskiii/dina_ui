@@ -1,0 +1,87 @@
+<div class="page">
+  <div class="container" #container>
+    <section class="section" id="section1">
+      <!--      <app-moving-points class="moving-balls"></app-moving-points>-->
+      <div class="flex flex-col justify-center items-center">
+
+        <div id="header" class="mt-4  flex w-full h-full justify-between items-center">
+          <div class="flex justify-center items-center gap-3">
+            <img src="../../../../../assets/ai_logo.svg.png" height="100"
+                 width="100" class="logo-image"/>
+            <p class="lol3" (click)="navigateToLink('home')">Remora AI</p>
+          </div>
+
+          <div class="flex justify-center items-center lol">
+            <app-underlining-text (click)="navigateToLink('services')" [text]="'Services'"></app-underlining-text>
+            <app-underlining-text (click)="navigateToLink('about-us')" [text]="'About us'"></app-underlining-text>
+            <app-underlining-text [text]="'Sign in'" (click)="navigateToLink('/login')"></app-underlining-text>
+
+            <button class="blue-button">
+              <span class="text">Register</span>
+            </button>
+          </div>
+        </div>
+
+        <!--        <div class="w-full h-[10px] bg-transparent">-->
+
+        <!--        </div>-->
+
+        <div id="text" class="main-section">
+          <div class="left-section">
+            <div class="main-heading-container mb-[200px] ml-[50px]">
+              <h1 class="remora-bot-heading">Remora Bots</h1>
+              <p class="remora-bot-subheading">AI-Powered Workflow Automation for Enterprise Efficiency</p>
+            </div>
+          </div>
+          <div class="right-section">
+            <img src="../../../../../assets/ai_logo.svg.png" height="200"
+                 width="200" class="big-logo"/>
+          </div>
+        </div>
+
+
+      </div>
+    </section>
+
+    <section class="bot-container">
+      <div class="content-wrapper">
+        <div class="cards-container">
+          <app-title-button-card
+            [title]="'Intelligent Chatbot Interface'"
+            [description]="'Unified Information Access: Discover how our intelligent chatbot capabilities can seamlessly integrate with your internal systems, including databases, APIs, and CRMs. Explore potential functionalities such as automated document handling, appointment scheduling, payment processing, and insightful data extraction. See how smart task delegation and real-time monitoring can align with your organizational objectives'"
+            [cardColor]="'#87CEEB'"
+          ></app-title-button-card>
+          <app-title-button-card
+            [title]="'Business Process Automation'"
+            [description]="'Workflow Optimization: Explore our solutions designed to analyze and automate repetitive processes, significantly reducing manual work. Uncover capabilities that  include strategic decision support with financial analysis, goal  alignment, and performance insights. Gain insights into how AI-driven  expert consultations can elevate your business strategy, risk  assessment, and operational enhancements.'"
+            [cardColor]="'#98FF98'"
+          ></app-title-button-card>
+          <app-title-button-card
+            [title]="'Technical & Development Support'"
+            [description]="'Integrated Terminal Access: Examine Remora\'s integrated terminal access designed for command-line interaction, perfect for debugging and system management. Delve into  collaborative coding experiences through real-time code sharing and  version control. Learn about AI-assisted programming tools for code  generation, debugging, and documentation, along with automated IT  support aimed at monitoring system alerts and suggesting timely  solutions.'"
+            [cardColor]="'#DF73FF'"
+          ></app-title-button-card>
+
+        </div>
+
+        <div class="browser-frame-container">
+          <app-browswer-frame></app-browswer-frame>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-[150px]">
+      <app-under-the-hood></app-under-the-hood>
+    </section>
+
+    <section class="diagram">
+
+      <img src="../../../../assets/under-the-hood(1).jpg" height="641" width="1214"/></section>
+
+    <section  class="mt-[400px]">
+      <app-footer></app-footer>
+    </section>
+
+
+  </div>
+</div>

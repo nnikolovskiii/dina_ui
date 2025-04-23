@@ -1,0 +1,246 @@
+.zero-cost-banner {
+  display: flex;
+  width: 100%;
+  background: #222;
+  color: white;
+  width: 100%;
+  overflow: hidden;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  position: relative;
+  border-radius: 12px;
+}
+
+.content-side {
+  flex: 1;
+  padding: 60px 5% 60px 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 450px;
+}
+
+.offer-heading {
+  font-size: clamp(28px, 5vw, 42px);
+  font-weight: 800;
+  margin-bottom: 25px;
+  line-height: 1.2;
+}
+
+.highlight {
+  color: #b066df;
+  font-weight: 900;
+  position: relative;
+}
+
+.highlight::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 6px;
+  background: rgba(176, 102, 223, 0.3);
+  bottom: 5px;
+  left: 0;
+  z-index: -1;
+  border-radius: 3px;
+}
+
+.offer-description {
+  font-size: clamp(18px, 2vw, 20px);
+  line-height: 1.6;
+  margin-bottom: 30px;
+  opacity: 0.9;
+  max-width: 700px;
+}
+
+.highlight-text {
+  font-weight: 700;
+  color: #d6b5f1;
+  position: relative;
+}
+
+.highlight-text::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: #d6b5f1;
+  bottom: -2px;
+  left: 0;
+}
+
+.benefits-list {
+  margin: 0 0 35px 0;
+  padding: 0;
+  list-style: none;
+}
+
+.benefits-list li {
+  margin-bottom: 30px;
+  position: relative;
+  font-size: 18px;
+  padding-left: 30px;
+}
+
+.benefits-list li:before {
+  content: "✓";
+  color: #b066df;
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+  font-size: 20px;
+}
+
+.cta-button {
+  background-color: #9c27b0;
+  color: white;
+  border: none;
+  padding: 16px 32px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(156, 39, 176, 0.3);
+  align-self: flex-start;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.cta-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(156, 39, 176, 0.5);
+  background-color: #b32ec5;
+}
+
+.visual-side {
+  width: 50%;
+  min-width: 450px;
+  background-image: url("../../../../assets/zero_cost.png");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.visual-side::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 100%);
+}
+
+.cost-badge {
+  position: relative;
+  z-index: 2;
+  transform: rotate(-5deg);
+}
+
+.zero-cost-container {
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  padding: 40px 45px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease;
+}
+
+.zero-cost-container:hover {
+  transform: scale(1.05) rotate(0deg);
+}
+
+.zero-text {
+  font-size: clamp(60px, 8vw, 90px);
+  font-weight: 900;
+  letter-spacing: 3px;
+  margin: 0;
+  line-height: 1;
+  background: linear-gradient(180deg, #ffffff 0%, #b5b5b5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  position: relative;
+  z-index: 1;
+}
+
+.cost-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.cost-text {
+  color: #c278e8;
+  font-size: clamp(30px, 4vw, 48px);
+  font-weight: 900;
+  letter-spacing: 5px;
+  margin: 5px 0 0 0;
+  background: linear-gradient(to right, #9c27b0, #d066ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+  z-index: 1;
+  animation: pulse 2s infinite;
+}
+
+.sparkle-effect {
+  position: absolute;
+  width: 120%;
+  height: 120%;
+  top: -10%;
+  left: -10%;
+  background: radial-gradient(circle, rgba(176, 102, 223, 0.4) 0%, rgba(176, 102, 223, 0) 70%);
+  filter: blur(5px);
+  z-index: 0;
+  animation: sparkle 3s infinite;
+}
+
+
+@keyframes sparkle {
+  0% { opacity: 0.2; }
+  50% { opacity: 0.8; }
+  100% { opacity: 0.2; }
+}
+
+/* Responsive adjustments */
+@media (max-width: 1100px) {
+  .zero-cost-banner {
+    flex-direction: column;
+  }
+
+  .visual-side {
+    width: 100%;
+    min-width: unset;
+    height: 400px;
+    order: -1;
+  }
+
+  .content-side {
+    padding: 40px 5%;
+  }
+
+  .cost-badge {
+    transform: rotate(0);
+  }
+}
+
+@media (max-width: 600px) {
+  .visual-side {
+    height: 350px;
+  }
+
+  .zero-cost-container {
+    padding: 30px 35px;
+  }
+
+  .cta-button {
+    width: 100%;
+    text-align: center;
+  }
+}

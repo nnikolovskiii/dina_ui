@@ -1,0 +1,86 @@
+<div class="page">
+  <div class="container" #container>
+    <section class="section" id="section1">
+      <!--      <app-moving-points class="moving-balls"></app-moving-points>-->
+      <div class="flex flex-col justify-center items-center">
+
+        <div id="header" class="mt-4  flex w-full h-full justify-between items-center">
+          <div class="flex justify-center items-center gap-3">
+            <img src="../../../../../assets/ai_logo.svg.png" height="100"
+                 width="100" class="logo-image"/>
+            <p class="lol3" (click)="navigateToLink('home')">Remora AI</p>
+          </div>
+
+          <div class="flex justify-center items-center lol">
+            <app-underlining-text (click)="navigateToLink('services')" [text]="'Services'"></app-underlining-text>
+            <app-underlining-text [text]="'About us'"></app-underlining-text>
+            <app-underlining-text [text]="'Sign in'" (click)="navigateToLink('/login')"></app-underlining-text>
+
+            <button class="blue-button">
+              <span class="text">Register</span>
+            </button>
+          </div>
+        </div>
+
+
+        <div class="main-section">
+          <div class="shapes-container">
+            <div class="shape square-2"></div>
+            <div class="shape triangle-1"></div>
+            <div class="shape triangle-2"></div>
+            <div class="shape plus-1"></div>
+            <div class="shape plus-2"></div>
+          </div>
+          <h1 class="remora-bot-heading">About Us</h1>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="center-container">
+      <div class="text-container">
+        <div class="logo">
+          <img src="../../../../../assets/ai_logo.svg.png" height="100"
+               width="100" class="logo-image"/>
+          <span class="logo-text">Remora</span>
+        </div>
+
+        <h1 class="tagline">At Remora, we believe the best AI starts with the best team.</h1>
+
+        <div class="main-content">
+          <p>
+            Behind every great AI chatbot is a team of brilliant minds—engineers, designers, and storytellers who obsess
+            over making conversations seamless, intuitive, and human-like. At Remora, we've built a culture of
+            curiosity, collaboration, and relentless innovation to ensure our AI doesn't just respond—it understands.
+            Because when you have the right team, the technology follows.
+          </p>
+        </div>
+
+        <div class="fun-fact-container">
+          <span class="fun-fact-label">Fun Fact</span>
+          <p class="fun-fact">
+            "Named after the remora fish—known for its symbiotic relationships—we're here to stick to your needs and
+            propel you forward."
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="center-container mt-[320px]">
+      <app-contributor></app-contributor>
+      <app-contributor></app-contributor>
+      <app-contributor></app-contributor>
+      <app-contributor></app-contributor>
+      <app-contributor></app-contributor>
+      <app-contributor></app-contributor>
+
+    </section>
+
+
+    <section  class="mt-[400px]">
+      <app-footer></app-footer>
+    </section>
+
+
+  </div>
+</div>

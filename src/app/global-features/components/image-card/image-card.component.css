@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;700&family=Space+Grotesk:wght@400;700&display=swap');
+
+.image-card {
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+  align-items: center;
+  background-color: #222;
+  width: 720px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.image-title {
+  color: white;
+  font-size: 30px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  transition: opacity 0.3s ease, transform 0.4s ease;
+}
+
+.image-description {
+  color: white;
+  font-size: 18px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 400;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease, transform 0.4s ease;
+  width: calc(100% - 40px);
+  pointer-events: none;
+}
+
+.rounded-image {
+  border-bottom-left-radius: 12px;
+  border-top-left-radius: 12px;
+  width: 400px;
+  height: 230px;
+  background-image: url('../../../../assets/image.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.image-text {
+  position: relative;
+  padding: 0 20px;
+  height: 230px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Hover effects */
+.image-card:hover .image-title {
+  opacity: 0;
+  transform: translateY(-30px);
+}
+
+.image-card:hover .image-description {
+  opacity: 1;
+  transform: translateY(-50%);
+  transition-delay: 0.1s;
+}

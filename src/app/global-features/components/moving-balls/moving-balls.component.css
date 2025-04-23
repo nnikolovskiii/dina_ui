@@ -1,0 +1,78 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: #1e1f22;
+  overflow: hidden;
+  position: relative;
+}
+
+.points-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.point {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(8px);
+  animation: point-pulse 2s ease-in-out infinite,
+  hover 4s ease-in-out infinite;
+  transform-origin: center center;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.point.purple {
+  background: rgba(88,6,218,1);
+  box-shadow: 0 0 40px 20px rgba(88,6,218, 0.3);
+}
+
+.point.cyan {
+  background: rgba(9,220,255,1);
+  box-shadow: 0 0 40px 20px rgba(9,220,255, 0.3);
+}
+
+.point:nth-child(3n+1) {
+  animation-delay: 0s;
+}
+
+.point:nth-child(3n+2) {
+  animation-delay: 0.5s;
+}
+
+.point:nth-child(3n) {
+  animation-delay: 1s;
+}
+
+@keyframes point-pulse {
+  0%, 100% {
+    opacity: 0.9;
+    box-shadow:
+      0 0 15px currentColor,
+      0 0 30px currentColor;
+  }
+  50% {
+    opacity: 1;
+    box-shadow:
+      0 0 25px currentColor,
+      0 0 50px currentColor;
+  }
+}
+
+@keyframes hover {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+  }
+  25% {
+    transform: translateY(-10px) translateX(5px);
+  }
+  50% {
+    transform: translateY(0) translateX(10px);
+  }
+  75% {
+    transform: translateY(10px) translateX(5px);
+  }
+}

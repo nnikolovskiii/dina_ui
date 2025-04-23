@@ -1,0 +1,144 @@
+.card {
+  display: flex;
+  position: relative;
+  background: linear-gradient(145deg, #333333, #222222);
+  color: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  min-height: 300px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+.card-accent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 100%;
+  opacity: 0.9;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  padding: 32px 36px 32px 48px;
+  width: 100%;
+}
+
+.card-title {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin: 0 0 24px 0;
+  letter-spacing: -0.5px;
+  color: #ffffff;
+  line-height: 1.2;
+}
+
+.card-body {
+  flex: 1;
+}
+
+.card-description {
+  font-size: 1.4rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 32px;
+  max-width: 90%;
+}
+
+.card-actions {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.btn-primary {
+  padding: 12px 28px;
+  border-radius: 30px;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary:active {
+  transform: translateY(1px);
+}
+
+.btn-secondary {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 1.3rem;
+  cursor: pointer;
+  padding: 10px 16px;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.btn-secondary:after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 50%;
+  background-color: white;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.btn-secondary:hover {
+  color: white;
+}
+
+.btn-secondary:hover:after {
+  width: 80%;
+}
+
+@media (max-width: 768px) {
+  .card-content {
+    padding: 24px 20px 24px 32px;
+  }
+
+  .card-title {
+    font-size: 2rem;
+  }
+
+  .card-description {
+    font-size: 1rem;
+  }
+}
+
+.cta-button {
+  color: black;
+  border: none;
+  padding: 16px 32px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  align-self: flex-start;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.cta-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(var(--cardColor-rgb), 0.5) !important;
+}

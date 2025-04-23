@@ -1,0 +1,220 @@
+/* Base styles */
+html {
+  overscroll-behavior: none;
+  height: 100%;
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+}
+
+body {
+  background-color: #1e1f22;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  overflow-x: hidden;
+  margin: 0;
+  min-height: 100vh;
+}
+
+/* Layout styles */
+.page {
+  display: block;
+  background-color: #1e1f22;
+  color: white;
+}
+
+.container {
+  position: relative;
+}
+
+.section {
+  scroll-snap-align: start;
+  width: 100%;
+  position: relative;
+  min-height: 100vh;
+  height: 1px;
+}
+
+/* Navigation styles */
+.lol {
+  gap: 20px;
+}
+
+.lol3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 25px;
+}
+
+/* Main content layout */
+.main-section {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.left-section {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+}
+
+.right-section {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* Button styling */
+.blue-button {
+  align-items: center;
+  background-image: linear-gradient(144deg, #af40ff, #5b42f3 50%, #00ddeb);
+  border: 0;
+  border-radius: 8px;
+  box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+  box-sizing: border-box;
+  color: #ffffff;
+  display: flex;
+  font-size: 18px;
+  justify-content: center;
+  line-height: 1em;
+  max-width: 100%;
+  min-width: 140px;
+  padding: 3px;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.blue-button:active,
+.blue-button:hover {
+  outline: 0;
+}
+
+.blue-button span {
+  background-color: rgb(5, 6, 45);
+  padding: 16px 24px;
+  border-radius: 6px;
+  width: 100%;
+  height: 100%;
+  transition: 300ms;
+}
+
+.blue-button:hover span {
+  background: none;
+}
+
+button:active {
+  transform: scale(0.9);
+}
+
+/* Logo styling */
+.big-logo {
+  margin-bottom: 150px;
+  margin-right: 150px;
+}
+
+.remora-bot-heading{
+  letter-spacing: 6px;
+  font-size: 92px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  margin-bottom: 20px;
+  background: linear-gradient(90deg, #0087f6, #00e9f6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.remora-bot-subheading{
+  font-size: 24px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  background: white;
+  -webkit-background-clip: text;
+  width: 500px;
+}
+
+.main-heading-container{
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.bot-container {
+  padding: 20px;
+}
+
+.content-wrapper {
+  display: flex;
+  max-width: 1400px;
+  margin: 0 auto;
+  gap: 30px;
+  position: relative;
+}
+
+.cards-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  padding-bottom: 40px; /* Space at bottom */
+}
+
+.browser-frame-container {
+  width: 45%;
+  position: sticky;
+  top: 20px;
+  height: 100vh;
+  align-self: flex-start; /* Important for sticky positioning */
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+/* Card hover effects */
+app-title-button-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+app-title-button-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Responsive considerations */
+@media (max-width: 992px) {
+  .content-wrapper {
+    flex-direction: column;
+  }
+
+  .browser-frame-container {
+    width: 100%;
+    position: static;
+    height: auto;
+    margin-top: 30px;
+  }
+}
+
+.diagram{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lol3:hover {
+  cursor: pointer;
+}

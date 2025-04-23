@@ -1,0 +1,57 @@
+.employee-card {
+  display: flex;
+  margin: 25px 0;
+  background: linear-gradient(145deg, #333333, #222222);
+  border-radius: 12px;
+  overflow: hidden;
+  max-width: 900px;
+}
+
+.employee-image {
+  flex: 0 0 280px;
+}
+
+.employee-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.employee-info {
+  padding: 25px;
+  flex: 1;
+}
+
+.employee-name {
+  margin: 0 0 5px 0;
+  font-size: 24px;
+  color: white;
+  font-weight: 600;
+}
+
+.employee-position {
+  margin: 0 0 20px 0;
+  font-size: 22px;
+  color: white;
+  font-weight: 500;
+}
+
+.employee-description p {
+  margin: 0 0 15px 0;
+  font-size: 18px;
+  line-height: 1.6;
+  color: white;
+}
+
+/* Responsive design for mobile devices */
+@media (max-width: 768px) {
+  .employee-card {
+    flex-direction: column;
+  }
+
+  .employee-image {
+    flex: 0 0 auto;
+    height: 300px;
+  }
+}

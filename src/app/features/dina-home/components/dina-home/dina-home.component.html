@@ -1,249 +1,90 @@
-<div class="container" #container>
-  <section class="section" id="section1">
-    <div class="flex flex-col justify-center items-center">
-      <div id="header" class="mt-4 px-12 flex w-full h-full justify-between items-center">
-        <div class="flex justify-center items-center gap-[16px]">
-          <img src="../../../../../assets/dina_logo.png" class="h-16 w-16"/>
+<div class="page">
+  <div class="container" #container>
+    <section class="section" id="section1">
+      <!--      <app-moving-points class="moving-balls"></app-moving-points>-->
+      <div class="flex flex-col justify-center items-center">
 
-          <div class="ml-2.5 w-[3px] h-[52px] bg-gray-600 rounded">
-          </div>
-          <img src="../../../../../assets/ministerstvo-logo.png" height="72" width="421"/>
-        </div>
-        <div class="flex justify-center items-center lol">
-          <button class="cta">
-            <span class="hover-underline-animation"> МДТ </span>
-          </button>
-          <button class="cta">
-            <span class="hover-underline-animation"> Примери </span>
-          </button>
-          <button class="cta">
-            <span class="hover-underline-animation"> За Дина</span>
-          </button>
-          <div class="w-[3px] h-[52px] bg-gray-600 rounded">
+        <div id="header" class="mt-4  flex w-full h-full justify-between items-center">
+          <div class="flex justify-center items-center gap-3">
+            <img src="../../../../../assets/ai_logo.svg.png" height="100"
+                 width="100" class="logo-image"/>
+            <p class="lol3" (click)="navigateToLink('home')">Remora AI</p>
           </div>
 
-          <app-user-profile></app-user-profile>
-        </div>
-      </div>
+          <div class="flex justify-center items-center lol">
+            <app-underlining-text (click)="navigateToLink('services')" [text]="'Services'"></app-underlining-text>
+            <app-underlining-text (click)="navigateToLink('about-us')" [text]="'About us'"></app-underlining-text>
+            <app-underlining-text [text]="'Sign in'" (click)="navigateToLink('/login')"></app-underlining-text>
 
-      <div class="w-full h-[150px] bg-transparent">
-
-      </div>
-
-      <div id="text" class="flex flex-col justify-center items-center">
-        <p class="lol1 dina-heading">ДИНА</p>
-        <p class="lol2 tagline">Национален административен асистент!</p>
-      </div>
-
-      <div class="w-full h-[80px] bg-transparent">
-
-      </div>
-
-<!--      <div id="buttons" class="flex justify-center items-center">-->
-<!--        <button class="star-button" (click)="navigateToLink('chat')">-->
-<!--          Прашај ја Дина!-->
-
-      <div id="buttons" class="flex flex-col justify-center items-center">
-        <button class="star-button mb-8" (click)="navigateToLink('chat')">
-          Прашај ја Дина!
-          <div class="star-1">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              xml:space="preserve"
-              version="1.1"
-              style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
-              viewBox="0 0 784.11 815.53"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
-            >
-      <defs></defs>
-              <g id="Layer_x0020_1">
-        <metadata id="CorelCorpID_0Corel-Layer"></metadata>
-                <path
-                  class="fil0"
-                  d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
-                ></path>
-      </g>
-    </svg>
-          </div>
-          <div class="star-2">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              xml:space="preserve"
-              version="1.1"
-              style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
-              viewBox="0 0 784.11 815.53"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
-            >
-      <defs></defs>
-              <g id="Layer_x0020_1">
-        <metadata id="CorelCorpID_0Corel-Layer"></metadata>
-                <path
-                  class="fil0"
-                  d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
-                ></path>
-      </g>
-    </svg>
-          </div>
-          <div class="star-3">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              xml:space="preserve"
-              version="1.1"
-              style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
-              viewBox="0 0 784.11 815.53"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
-            >
-      <defs></defs>
-              <g id="Layer_x0020_1">
-        <metadata id="CorelCorpID_0Corel-Layer"></metadata>
-                <path
-                  class="fil0"
-                  d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
-                ></path>
-      </g>
-    </svg>
-          </div>
-          <div class="star-4">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              xml:space="preserve"
-              version="1.1"
-              style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
-              viewBox="0 0 784.11 815.53"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
-            >
-      <defs></defs>П
-              <g id="Layer_x0020_1">
-        <metadata id="CorelCorpID_0Corel-Layer"></metadata>
-                <path
-                  class="fil0"
-                  d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
-                ></path>
-      </g>
-    </svg>
-          </div>
-          <div class="star-5">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              xml:space="preserve"
-              version="1.1"
-              style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
-              viewBox="0 0 784.11 815.53"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
-            >
-      <defs></defs>
-              <g id="Layer_x0020_1">
-        <metadata id="CorelCorpID_0Corel-Layer"></metadata>
-                <path
-                  class="fil0"
-                  d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
-                ></path>
-      </g>
-    </svg>
-          </div>
-          <div class="star-6">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              xml:space="preserve"
-              version="1.1"
-              style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
-              viewBox="0 0 784.11 815.53"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
-            >
-      <defs></defs>
-              <g id="Layer_x0020_1">
-        <metadata id="CorelCorpID_0Corel-Layer"></metadata>
-                <path
-                  class="fil0"
-                  d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
-                ></path>
-      </g>
-    </svg>
-          </div>
-        </button>
-
-
-        <div class="w-[300px] h-full bg-transparent">
-        </div>
-      </div>
-    </div>
-  </section>
-  <section class="section" id="section2">
-    <div class="flex flex-col md:flex-row justify-center items-center h-full w-full gap-5 md:gap-[100px]">
-      <div class="card">
-        <div class="bg">
-          <div class="upper-div">
-
-            <img src="../../../../../assets/seachingf.png" class=" w-[300px] "/>
-          </div>
-          <div class="lower-div">
-            <div class="title-div">
-
-              <p class="text-[#333] text-lg font-semibold md:text-xl text-center px-2  pb-3 lol5">Информирај се!</p>
-            </div>
-            <div class="content-div">
-              <p class="text-[#333] text-m md:text-base ml-6 px-8 lol6">Информирајте се за сите
-                услуги, постапки, и
-                фунскционалности на
-                државата администрација.</p>
-            </div>
+            <button class="blue-button">
+              <span class="text">Register</span>
+            </button>
           </div>
         </div>
-        <div class="blob"></div>
-      </div>
 
-      <div class="card">
-        <div class="bg">
-          <div class="upper-div">
-            <img src="../../../../../assets/registering.png" class="w-[300px]"/>
+        <!--        <div class="w-full h-[10px] bg-transparent">-->
+
+        <!--        </div>-->
+
+        <div id="text" class="main-section">
+          <div class="left-section">
+            <app-company-title class="mb-[200px]"></app-company-title>
           </div>
-          <div class="lower-div">
-            <div class="title-div">
-
-              <p class="text-[#333] text-xl font-semibold md:text-xl text-center px-2  pb-3 lol5">Аплицирај!</p>
-            </div>
-            <div class="content-div">
-              <p class="text-[#333] text-sm md:text-base ml-6 px-8 lol6">Извршете аплицирање за
-                услуга преку разговорен
-                дијалог со ДИНА.</p>
-            </div>
+          <div class="right-section">
+            <img src="../../../../../assets/ai_logo.svg.png" height="200"
+                 width="200" class="big-logo"/>
           </div>
         </div>
-        <div class="blob"></div>
+
+
       </div>
-
-      <div class="card">
-        <div class="bg">
-          <div class="upper-div">
-            <img src="../../../../../assets/globe.png" class="w-[220px]"/>
-          </div>
-          <div class="lower-div">
-            <div class="title-div">
-              <p class="text-[#333] text-lg font-semibold md:text-xl text-center px-2 pb-3 lol5">Добиј ја услугата!</p>
-            </div>
-            <div class="content-div">
-
-              <p class="text-[#333] text-sm md:text-base ml-6 px-8 lol6">Добијте ја услугата најбрзo,
-                најбезбедно на било кое
-                место и во било кое време.</p>
-            </div>
-          </div>
+    </section>
+    <section class="compact-session" id="section2">
+      <div class="main-section1">
+        <div class="right-section1">
+          <app-title-button-card></app-title-button-card>
         </div>
-        <div class="blob"></div>
+        <div class="left-section1">
+          <app-browswer-frame></app-browswer-frame>
+        </div>
       </div>
+    </section>
+    <section class="compact-session" id="section3">
+
+      <app-quote-shower></app-quote-shower>
+
+    </section>
+
+    <section class="compact-session" id="section4">
+      <div class="four-cards">
+        <app-image-card [imageUrl]="'../../../../assets/image.png'"
+                        [title]="'The Ultimate Team Orchestrator'"
+                        [description]="'Remora doesn’t just manage tasks—it understands your team. Delegate work, track progress, and resolve bottlenecks through natural  conversation. Perfect for remote teams and managers who want to focus on  strategy, not micromanagement.'"
+        ></app-image-card>
+        <app-image-card [imageUrl]="'../../../../assets/frontdoor.png'"
+                        [title]="'The Company’s Digital Front Door'"
+                        [description]="'Debug, document, or build entire features with Remora as your co-developer. It speaks Python, SQL, and 20+ other languages—and  explains concepts like a senior engineer. Commit cleaner code, faster.'"
+        ></app-image-card>
+        <app-image-card [imageUrl]="'../../../../assets/ai_pair.png'"
+                        [title]="'Your AI Pair Programmer'"
+                        [description]="'New hire? Veteran employee? Remora is the single point of truth for policies, docs, and team knowledge. Ask about payroll, project history,  or even where the best lunch spots are near the office.'"
+        ></app-image-card>
+        <app-image-card [imageUrl]="'../../../../assets/automation.png'"
+                        [title]="'Automation Without the Headache'"
+                        [description]="'From syncing calendars to scraping data across platforms, Remora turns ‘manual’ into ‘automatic’—no API expertise required. Just say what you  need repetitive, and consider it done.'"
+        ></app-image-card>
+
+      </div>
+    </section>
+    <div class="w-full h-[150px]">
 
     </div>
-  </section>
-  <section class="section third-section">
+    <section class="section" id="section6">
+      <app-no-cost-section></app-no-cost-section>
+    </section>
 
-    <img src="../../../../../assets/dina_design.jpg" height="456" width="989" class="rounded-xl"/></section>
+    <section class="compact-session">
+      <app-footer></app-footer>
+    </section>
+  </div>
 </div>
-
-<ul class="dots">
-  <li
-    *ngFor="let dot of dotsArray; let i = index"
-    [class.active]="i === activeIndex"
-    (click)="scrollToSection(i)">
-  </li>
-</ul>
-

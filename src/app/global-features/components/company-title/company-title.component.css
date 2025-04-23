@@ -1,0 +1,120 @@
+.remora-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100vh;
+  padding-left: 15%;
+  width: 800px;
+}
+
+.remora-content {
+  max-width: 100%;
+}
+
+.remora-heading {
+  letter-spacing: 6px;
+  font-size: 92px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  margin-bottom: 20px;
+  background: linear-gradient(90deg, #5806da, #9254de);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.tagline-container {
+  display: flex;
+  align-items: center;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.tagline-prefix {
+  margin-right: 10px;
+  font-weight: 500;
+}
+
+.word-spinner {
+  height: 40px;
+  overflow: hidden;
+  position: relative;
+}
+
+
+.tagline-suffix {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 28px;
+  font-weight: 500;
+  margin-top: 10px;
+}
+
+.words {
+  overflow: hidden;
+  position: relative;
+}
+.words::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    var(--bg-color) 10%,
+    transparent 30%,
+    transparent 70%,
+    var(--bg-color) 90%
+  );
+  z-index: 20;
+}
+
+.word {
+  display: block;
+  height: 100%;
+  padding-left: 6px;
+  color: #9254de;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  animation: spin_4991 8s infinite;
+}
+
+@keyframes spin_4991 {
+  10% {
+    -webkit-transform: translateY(-102%);
+    transform: translateY(-102%);
+  }
+
+  25% {
+    -webkit-transform: translateY(-100%);
+    transform: translateY(-100%);
+  }
+
+  35% {
+    -webkit-transform: translateY(-202%);
+    transform: translateY(-202%);
+  }
+
+  50% {
+    -webkit-transform: translateY(-200%);
+    transform: translateY(-200%);
+  }
+
+  60% {
+    -webkit-transform: translateY(-302%);
+    transform: translateY(-302%);
+  }
+
+  75% {
+    -webkit-transform: translateY(-300%);
+    transform: translateY(-300%);
+  }
+
+  85% {
+    -webkit-transform: translateY(-402%);
+    transform: translateY(-402%);
+  }
+
+  100% {
+    -webkit-transform: translateY(-400%);
+    transform: translateY(-400%);
+  }
+}

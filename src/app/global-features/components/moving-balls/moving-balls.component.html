@@ -1,0 +1,11 @@
+<div #container class="container" (mousemove)="onMouseMove($event)">
+  <div class="points-container">
+    <div *ngFor="let point of points"
+         [ngClass]="['point', point.colorType]"
+         [style.left.px]="point.x"
+         [style.top.px]="point.y"
+         [style.width.px]="point.size"
+         [style.height.px]="point.size">
+    </div>
+  </div>
+</div>
