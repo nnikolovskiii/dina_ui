@@ -6,7 +6,10 @@
       <p class="card-description">{{description}}</p>
     </div>
     <div class="card-actions">
-      <button class="cta-button" [style.background-color]="cardColor" [style.box-shadow]="'0 4px 15px ' + cardColor + '4D'">
+      <button class="cta-button"
+              [style.background-color]="cardColor"
+              [style.box-shadow]="'0 4px 15px ' + cardColor + '4D'"
+              (click)="navigateTo()">
         <span>{{buttonText}}</span>
       </button>
       <button class="btn-secondary">

@@ -113,7 +113,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
 
   async ngOnInit(): Promise<void> {
     this.checkAuthStatus();
-    this.checkUserInfo(); // Add this line to check user info
+    this.checkUserInfo();
 
     this.route.queryParams.subscribe(async (params) => {
       this.chat_id = params['chat_id'] || null;
@@ -126,6 +126,10 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
 
       this.initializeWebSocket();
       this.updateTheme()
+      this.updateTheme()
+
+
+      console.log(this.lightMode)
       this.startPlaceholderRotation();
     });
 
@@ -516,13 +520,15 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private updateTheme() {
+    const body = this.document.body;
     if (this.lightMode) {
-      this.renderer.addClass(this.document.body, 'dark-theme');
-      this.renderer.removeClass(this.document.body, 'light-theme');
+      this.renderer.removeClass(body, 'dark-theme');
+      this.renderer.addClass(body, 'light-theme');
     } else {
-      this.renderer.addClass(this.document.body, 'light-theme');
-      this.renderer.removeClass(this.document.body, 'dark-theme');
+      this.renderer.removeClass(body, 'light-theme');
+      this.renderer.addClass(body, 'dark-theme');
     }
+    this.cdRef.detectChanges();
   }
 
   shouldShowLogo(index: number): boolean {
@@ -545,6 +551,12 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
 
     // Only show gap if messages are different types
     return current.type !== next.type;
+  }
+
+  // Add to your component class
+  toggleTheme() {
+    this.lightMode = !this.lightMode;
+    this.updateTheme();
   }
 
 }
