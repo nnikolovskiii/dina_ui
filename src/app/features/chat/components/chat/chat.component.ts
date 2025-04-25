@@ -453,7 +453,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   addDummyStreamingMessage() {
-    const fullMessage = 'Здраво, јас сум Дина! Како можам да ти помогнам денес?';
+    const fullMessage = 'Здраво, јас сум Софија! Како можам да ти помогнам денес?';
     const words = fullMessage.split(' ');
 
     // Initial empty message with streaming state

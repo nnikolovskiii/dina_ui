@@ -40,7 +40,7 @@ export class DinaHomeComponent implements OnInit {
   scrollToSection(index: number): void {
     const sections = this.container.nativeElement.querySelectorAll('.section');
     if (sections && sections[index]) {
-      sections[index].scrollIntoView({ behavior: 'smooth' });
+      sections[index].scrollIntoView({behavior: 'smooth'});
     }
   }
 

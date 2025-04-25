@@ -14,7 +14,7 @@ export class StarButtonComponent {
   @Input() hoverBgColor: string = 'green';
   @Input() paddingX: string = '12px';
   @Input() paddingY: string = '35px';
-  @Input() text: string = 'Прашај ја Дина!';
+  @Input() text: string = 'Прашај ја Софија!';
   @Input() textColor: string = 'black';
   @Input() boxShadow: string = '#fec1958c';
 
