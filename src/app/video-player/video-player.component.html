@@ -1,0 +1,38 @@
+<div class="video-section-wrapper"> <div class="container video-outer-container">
+  <div class="video-container">
+
+    <ng-container *ngIf="showPreview">
+      <img
+        [src]="previewImageUrl"
+        alt="Video preview"
+        class="video-thumbnail"
+        loading="lazy"
+      >
+      <div class="video-overlay-content">
+        <h2>Introducing<br>Manus</h2>
+        <div class="logo-overlay"><strong>manus</strong></div>
+      </div>
+      <button class="play-button" aria-label="Play Video" (click)="playVideo()">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black">
+          <path d="M0 0h24v24H0z" fill="none" />
+          <path d="M8 5v14l11-7z" />
+        </svg>
+      </button>
+    </ng-container>
+
+    <ng-container *ngIf="!showPreview && videoId">
+      <youtube-player
+        [videoId]="videoId"
+        [height]="playerHeight"
+        [width]="playerWidth"
+        [playerVars]="playerVars">
+      </youtube-player>
+    </ng-container>
+
+    <ng-container *ngIf="!showPreview && !videoId">
+      <div class="video-error">Could not load video. Invalid Link.</div>
+    </ng-container>
+
+  </div>
+</div>
+</div>

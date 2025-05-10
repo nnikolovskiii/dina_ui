@@ -6,17 +6,13 @@
   background-color: transparent;
   outline: none;
   border: none;
-  padding-left: 10px;
   color: rgba(var(--text-color-custom), 0.5); /* Make text lighter */
   font-size: 18px;
-  margin-top: 12px;
-  margin-bottom: 12px;
 }
 
 /* Also make placeholder text lighter */
 textarea::placeholder {
-  color: rgba(var(--text-color-custom), 0.6);
-  opacity: 0.4;
+  color: rgba(var(--text-color-custom));
 }
 
 
@@ -31,16 +27,16 @@ body.light-theme {
   --line-bg-color: #ccc;
   --chat-container-scrollable: #ccc;
   --message-box-border-color: #ccc;
-  --message-box-focus:  #333333;
+  --message-box-focus: #333333;
   --text-color-custom: #333;
   --message-box-fill: #e6e6e6;
   --message-box-stroke: #333;
   --input-field: rgba(51, 50, 50, 0.6);
-  --input-field-hover:  #333333;
+  --input-field-hover: #333333;
   --three-color-gradient: linear-gradient(45deg, #e35e0c, #f6a202, #f40622);
-  --logo:url('../../../../../assets/dina_logo.png');
+  --logo: url('../../../../../assets/ai_logo.png');
   --new-chat-img: url('../../../../../assets/post.png');
-  --user-card: #ffd9b5;
+  --user-card: rgba(67, 185, 136, 0.6);
 }
 
 body.dark-theme {
@@ -53,15 +49,15 @@ body.dark-theme {
   --spinner-1-bg: rgb(36, 36, 36);
   --line-bg-color: #666362;
   --chat-container-scrollable: rgb(67, 69, 74);
-  --message-box-border-color:  rgb(63, 63, 63);
+  --message-box-border-color: rgb(63, 63, 63);
   --message-box-focus: rgb(110, 110, 110);
   --text-color-custom: #e9e3e7;
   --message-box-fill: #3c3c3c;
   --message-box-stroke: white;
-  --input-field: rgba(255,255, 255, 0.6);
-  --input-field-hover:#999;
+  --input-field: rgba(255, 255, 255, 0.6);
+  --input-field-hover: #999;
   --three-color-gradient: linear-gradient(45deg, #0ce39a, #69007f, #fc0987);
-  --logo:url('../../../../../assets/whiteDina.png');
+  --logo: url('../../../../../assets/whiteDina.png');
   --new-chat-img: url('../../../../../assets/new-message.png');
   --user-card: #34373b;
 
@@ -72,12 +68,11 @@ body.dark-theme {
 }
 
 .banter {
-  position: fixed;
   z-index: 1000;
   font-size: 16px;
   cursor: pointer;
   border: none;
-  width: 50px;
+  width: 60px;
   height: 100%;
   background-color: var(--light-bg-color);
   display: flex;
@@ -179,8 +174,9 @@ body.dark-theme {
   font-family: Arial, sans-serif;
   background-color: var(--darker-bg-color);
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   height: 100vh;
+  border-radius: 10px;
 }
 
 .line-div {
@@ -220,6 +216,23 @@ body.dark-theme {
   align-items: center;
   overflow-y: auto;
   margin-top: 40px;
+  border-radius: 10px;
+  align-content: center;
+  justify-content: center;
+}
+
+.all-messages{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding-bottom: 15px;
+  padding-left: 100px;
+  padding-right: 100px;
+  flex-flow: column;
+  align-items: center;
+  overflow-y: auto;
+  margin-top: 40px;
+  border-radius: 10px;
 }
 
 .chat-container::-webkit-scrollbar {
@@ -245,7 +258,7 @@ body.dark-theme {
 
 .user-card {
   align-self: flex-end;
-  background-color: var(--user-card);
+  background: #ededed;
   border-radius: 10px;
   padding: 10px 15px;
   max-width: 70%;
@@ -254,29 +267,29 @@ body.dark-theme {
   overflow-wrap: break-word;
   margin-left: auto;
   margin-right: 0;
-  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
 }
+
+/*.messages div:hover{*/
+/*  background-color: var(--lighter-3-bg-color);*/
+/*  border-radius: 10px;*/
+/*}*/
 
 
 /*message area new*/
 /* From Uiverse.io by vinodjangid07 */
 .messageBox {
-  min-height: 50px;
-  height: auto;
   display: flex;
+  height: 120px;
   align-items: center;
   justify-content: center;
   background-color: var(--even-lighter-bg-color);
-  padding: 0 15px;
-  border-radius: 10px;
+  border-radius: 20px;
   border: 1px solid var(--message-box-border-color);
-  width: 900px;
-  position: fixed;
   bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
   z-index: 1;
   gap: 14px;
+  width: 80%;
+  flex-flow: column;
 }
 
 .messageBox:focus-within {
@@ -292,8 +305,6 @@ body.dark-theme {
 .sliding-bar.open ~ .content .messageBox {
   left: calc(50% + 125px);
 }
-
-
 
 
 #messageInput::-webkit-scrollbar {
@@ -349,7 +360,6 @@ body.dark-theme {
   gap: 0px;
   background-color: transparent;
   width: 900px;
-  position: fixed;
   bottom: 5px;
   left: 50%;
   transform: translateX(-50%);
@@ -603,13 +613,13 @@ pre {
 
 .assistant-card {
   align-self: flex-start;
-  background: var(--even-lighter-bg-color);
   border-radius: 10px;
   padding: 10px 15px;
   word-wrap: break-word;
   overflow-wrap: break-word;
   display: inline-block;
-  border: #e6e6e6 solid 1px;
+  /*background: var(--even-lighter-bg-color);*/
+  /*border: #e6e6e6 solid 1px;*/
 }
 
 
@@ -624,14 +634,16 @@ pre {
   margin-left: -3em;
   margin-right: 4px;
   flex-shrink: 0; /* Prevent logo from shrinking */
-  width: 41px;
+  width: 38px;
   height: 41px;
   background-image: var(--logo);
-  background-size: cover;
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
+  padding:3px;
 
 }
+
 .message-content {
   flex-grow: 1; /* Take remaining space */
   margin-left: 6px;
@@ -677,7 +689,7 @@ pre {
 }
 
 .input-field:hover {
-  border-color:  var(--input-field-hover);
+  border-color: var(--input-field-hover);
 }
 
 @media (max-width: 480px) {
@@ -785,7 +797,6 @@ textarea {
 }
 
 
-
 .login-alert {
   margin-bottom: 20px;
   padding: 15px;
@@ -795,6 +806,10 @@ textarea {
 .disabled-content {
   opacity: 0.7;
   pointer-events: none;
+}
+
+.content{
+  background-color: black;
 }
 
 /*.top-left-corner{*/

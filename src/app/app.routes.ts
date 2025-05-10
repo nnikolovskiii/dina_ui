@@ -16,6 +16,7 @@ import {PaymentComponent} from './features/dina-home/components/payment/payment.
 import {StarButtonComponent} from './global-features/buttons/star-button/star-button.component';
 import {AppointmentListComponent} from './features/dina-home/components/appointment-list/appointment-list.component';
 import {UserInfoComponent} from './global-features/components/user-info/user-info.component';
+import {PatekaHomeComponent} from './features/pateka-home/pateka-home.component';
 
 
 export const routes: Routes = [
@@ -33,7 +34,7 @@ export const routes: Routes = [
   {path:'login', component: LoginComponent},
   {path: 'tmp', component: DocumentFormComponent},
   {path:'payment', component: PaymentComponent},
-  {path: 'star', component: StarButtonComponent},
+  {path: 'star', component: PatekaHomeComponent},
   {path: 'appointment', component: AppointmentListComponent},
   {path: 'user-info', component: UserInfoComponent},
   { path: '', redirectTo: 'dina-home', pathMatch: 'full' },

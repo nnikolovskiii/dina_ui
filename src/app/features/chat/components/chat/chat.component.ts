@@ -92,10 +92,10 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
   public messages: Message[] = [];
   public isStreaming = false;
   public lightMode: boolean = false;
-  public isLoggedIn: boolean = false;
+  public isLoggedIn: boolean = true;
 
   // Add a property to track whether user info is available
-  public hasUserInfoAvailable: boolean = false;
+  public hasUserInfoAvailable: boolean = true;
 
 
   constructor(
@@ -112,8 +112,8 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   async ngOnInit(): Promise<void> {
-    this.checkAuthStatus();
-    this.checkUserInfo(); // Add this line to check user info
+    // this.checkAuthStatus();
+    // this.checkUserInfo(); // Add this line to check user info
 
     this.route.queryParams.subscribe(async (params) => {
       this.chat_id = params['chat_id'] || null;
@@ -126,68 +126,45 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
 
       this.initializeWebSocket();
       this.updateTheme()
-      this.startPlaceholderRotation();
     });
 
   }
 
-  // Add this new method
-  private checkUserInfo(): void {
-    this.authService.hasUserInfo().subscribe(
-      (hasInfo) => {
-        // User has info
-        this.hasUserInfoAvailable = hasInfo;
-      },
-      (error) => {
-        // Error occurred, treat as not having info
-        this.hasUserInfoAvailable = false;
-      }
-    );
-  }
+  // // Add this new method
+  // private checkUserInfo(): void {
+  //   this.authService.hasUserInfo().subscribe(
+  //     (hasInfo) => {
+  //       // User has info
+  //       this.hasUserInfoAvailable = hasInfo;
+  //     },
+  //     (error) => {
+  //       // Error occurred, treat as not having info
+  //       this.hasUserInfoAvailable = false;
+  //     }
+  //   );
+  // }
 
 
-  private checkAuthStatus(): void {
-    this.authService.getProtectedData().subscribe(
-      (data) => {
-        // User is authenticated
-        this.isLoggedIn = true;
-      },
-      (error) => {
-        // User is not authenticated
-        this.isLoggedIn = false;
-      }
-    );
-  }
+  // private checkAuthStatus(): void {
+  //   this.authService.getProtectedData().subscribe(
+  //     (data) => {
+  //       // User is authenticated
+  //       this.isLoggedIn = true;
+  //     },
+  //     (error) => {
+  //       // User is not authenticated
+  //       this.isLoggedIn = false;
+  //     }
+  //   );
+  // }
 
 
-  private placeholderTexts: string[] = [
-    "Kако можам да извадам пасош?",
-    "Закажи ми термин за лична карта.",
-    "Извади ми документ за извод на родени.",
-    "Покажи ми ги сите мои закажани термини.",
-  ];
-  currentPlaceholderIndex: number = 0;
-  placeholderText: string = this.placeholderTexts[0];
-  placeholderInterval: any;
-
-
-  private startPlaceholderRotation(): void {
-    this.placeholderInterval = setInterval(() => {
-      this.currentPlaceholderIndex = (this.currentPlaceholderIndex + 1) % this.placeholderTexts.length;
-      this.placeholderText = this.placeholderTexts[this.currentPlaceholderIndex];
-      this.cdRef.detectChanges(); // Trigger change detection
-    }, 3000); // Change every 3 seconds
-  }
 
 
 
   ngOnDestroy(): void {
     if (this.ws) {
       this.ws.close();
-    }
-
-    if (this.placeholderInterval) {
-      clearInterval(this.placeholderInterval);
     }
   }
 
@@ -300,7 +277,6 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
 
     // If no message was typed, use the current placeholder
     if (!messageToSend) {
-      messageToSend = this.placeholderText;
     }
 
     console.log(messageToSend);
@@ -338,8 +314,8 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private initializeWebSocket(): void {
     const url = environment.port ?
-      `wss://${environment.apiUrl}:${environment.port}/websocket/` :
-      `wss://${environment.apiUrl}/websocket/`;
+      `ws://${environment.apiUrl}:${environment.port}/websocket/` :
+      `ws://${environment.apiUrl}/websocket/`;
 
     this.ws = new WebSocket(url);
 

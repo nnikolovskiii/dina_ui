@@ -1,0 +1,22 @@
+<div class="button-group">
+  <button
+    *ngFor="let tab of tabs"
+    class="button"
+    [class.active]="tab.value === activeTab"
+    (click)="setActiveTab(tab.value)"
+  >
+    {{ tab.label }}
+  </button>
+</div>
+
+<div class="content">
+  <ng-container *ngIf="activeTab as currentTab">
+    <div *ngIf="currentTab === 'featured'" class="view active">Featured Content</div>
+    <div *ngIf="currentTab === 'research'" class="view">Research Content</div>
+    <div *ngIf="currentTab === 'life'" class="view">Life Content</div>
+    <div *ngIf="currentTab === 'data-analysis'" class="view">Data Analysis Content</div>
+    <div *ngIf="currentTab === 'education'" class="view">Education Content</div>
+    <div *ngIf="currentTab === 'productivity'" class="view">Productivity Content</div>
+    <div *ngIf="currentTab === 'wtf'" class="view">WTF Content</div>
+  </ng-container>
+</div>

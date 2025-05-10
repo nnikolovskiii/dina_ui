@@ -20,6 +20,7 @@
     "@angular/platform-browser": "^18.2.0",
     "@angular/platform-browser-dynamic": "^18.2.0",
     "@angular/router": "^18.2.0",
+    "@angular/youtube-player": "^18.2.14",
     "@ngneat/effects": "^2.1.2",
     "@ngneat/effects-hooks": "^1.1.0",
     "@ngneat/effects-ng": "^3.1.4",

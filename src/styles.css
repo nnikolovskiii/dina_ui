@@ -15,7 +15,6 @@
 /*}*/
 
 
-
 /*.bg-wrapper {*/
 /*  position: relative;*/
 /*  overflow: hidden;*/
@@ -41,26 +40,31 @@
 /* ================================================================ */
 /* === PLACE THIS PART IN YOUR GLOBAL styles.css or styles.scss === */
 /* ================================================================ */
+
+html {
+  scroll-behavior: smooth;
+}
+
 :root {
   /* Refined colors based on image */
   --primary-purple: #7A5FEC; /* Slightly adjusted purple */
   --light-purple: #EDE9FE; /* Light purple for active states */
-  --dark-grey: #374151;    /* Darker text/elements */
-  --medium-grey: #6B7280;  /* Medium text/icons */
-  --light-grey: #D1D5DB;   /* Lighter icons/borders */
-  --border-grey: #E5E7EB;  /* Borders */
-  --bg-grey: #F9FAFB;      /* Main background */
+  --dark-grey: #374151; /* Darker text/elements */
+  --medium-grey: #6B7280; /* Medium text/icons */
+  --light-grey: #D1D5DB; /* Lighter icons/borders */
+  --border-grey: #E5E7EB; /* Borders */
+  --bg-grey: #F9FAFB; /* Main background */
   --text-color: var(--dark-grey);
   --sidebar-bg: #FFFFFF;
   --content-bg: #FFFFFF;
 
   --complete-green: #3DCC85; /* Brighter green for status text */
-  --complete-bg: #D1FAE5;    /* Lighter green background for status */
-  --todo-grey: #6B7280;      /* To Do status text (same as medium grey) */
-  --todo-bg: #F3F4F6;        /* Slightly darker light grey for To Do background */
+  --complete-bg: #D1FAE5; /* Lighter green background for status */
+  --todo-grey: #6B7280; /* To Do status text (same as medium grey) */
+  --todo-bg: #F3F4F6; /* Slightly darker light grey for To Do background */
 
   --upgrade-orange: #FF6F61; /* Coral/red for upgrade button */
-  --avatar-yellow: #FBBF24;  /* Adjusted yellow for avatar */
+  --avatar-yellow: #FBBF24; /* Adjusted yellow for avatar */
 
   /* Suggested Priority Flag Colors (if not using inline styles) */
   /* --priority-red: #EF4444; */
@@ -80,6 +84,7 @@ body {
   background-color: #ffffff;
   line-height: 1.5;
 }
+
 /* ================================================================ */
 /* === END OF GLOBAL STYLES PART                             === */
 /* ================================================================ */
