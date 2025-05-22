@@ -1,0 +1,20 @@
+<div class="language-selector">
+  <div class="selector-header" (click)="toggleDropdown()">
+    <div class="current-language-display">
+      <span class="icon icon-globe"><img src="../../../assets/languages_icon.png" height="20" width="20"/></span>
+      <span class="selected-language-text">{{ selectedLanguage.name }}</span>
+      <span class="icon icon-caret"><img src="../../../assets/arrow-down-sign-to-navigate.png" height="10" width="10"/></span>
+    </div>
+  </div>
+
+  <ul class="language-list" *ngIf="isDropdownOpen">
+    <li *ngFor="let lang of languages"
+        (click)="selectLanguage(lang, $event)"
+        [class.selected]="lang.code === selectedLanguage.code"
+        [class.static-highlight]="lang.isStaticHighlight"
+        [attr.data-lang]="lang.code">
+      <span class="language-name">{{ lang.name }}</span>
+      <span class="checkmark" *ngIf="lang.code === selectedLanguage.code">{{ iconCheck }}</span>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,252 @@
+// assistant-message.component.scss
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400&display=swap');
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  margin: 0;
+  padding: 20px; /* Just for better viewing of the component */
+  background-color: #f0f0f0; /* Just for better viewing of the component */
+}
+
+:host {
+  display: block; // Ensures the component itself can be sized if needed
+}
+
+.figma-container {
+  /* Corresponds to the first "Frame" block from Figma */
+  /* Auto layout */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 12px;
+
+  width: 1008px;
+  // height: 577px; // Height will be determined by content + gap + footer height
+
+  /* Inside auto layout - these apply to children if this was a child itself */
+  // flex: none;
+  // order: 0;
+  // align-self: stretch;
+  // flex-grow: 0;
+}
+
+.content-card {
+  /* Corresponds to the third "Frame" block (the one with border-radius) */
+  /* Auto layout */
+  display: flex; // Although it only contains a paragraph, Figma might have set it
+  flex-direction: column; // Assuming the paragraph is the main content flow
+  align-items: flex-start;
+  padding: 8px 12px;
+  gap: 10px; // Figma specified this, might be for multiple paragraphs later
+
+  width: 908px; // As per Figma, but padding will make content area smaller
+  box-sizing: border-box; // Important for width/height including padding
+
+  border-radius: 24px;
+  background-color: #ffffff; // Assuming a white background for the card
+
+  /* Inside auto layout for .content-card itself (child of .figma-container) */
+  flex: none;
+  order: 0;
+  align-self: stretch; // Will stretch to the width of .figma-container if width isn't fixed
+  flex-grow: 0;
+}
+
+.main-paragraph { /* Note: Your HTML uses [innerHtml] on a div, not a .main-paragraph class directly. Styles here might need to target the div inside .content-card or apply to its children like <p> if markdown is used. */
+  /* Corresponds to the text properties */
+  // width: 984px; // (1008px - 2 * 12px padding)
+  // height: 494px; // (510px - 2 * 8px padding)
+  // These will be naturally sized by flex-grow:1 and parent dimensions
+
+  /* Paragraph/md */
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  //font-size: 16px;
+  line-height: 160%;
+  /* or 26px */
+  color: #475569;
+  margin: 0; // Remove default paragraph margin
+  overflow-y: auto; // If text exceeds height
+
+  /* Inside auto layout for .main-paragraph (child of .content-card) */
+  flex: none; // Overridden by flex-grow
+  order: 0;
+  flex-grow: 1; // This makes the paragraph fill the available space in .content-card
+  align-self: stretch; // Ensures it takes full width within padding
+
+  // Ensure direct children of the [innerHtml] div also get these styles if needed
+  // e.g., if the sanitizedContent renders <p> tags:
+  ::ng-deep p { // Or use a more specific selector if [innerHtml] div has a class
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 160%;
+    color: #475569;
+    margin-top: 0;
+    margin-bottom: 1em; // Or your desired paragraph spacing
+  }
+  ::ng-deep p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+
+.footer-bar {
+  /* Corresponds to the "Frame" for the footer section */
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0px; // Figma has 16px 0px
+  gap: 12px;
+
+  width: 900px;
+  // height: 63px; // Height determined by content
+  min-height: 24px; // As per Figma (minimum content height for alignment)
+  box-sizing: border-box;
+
+  /* Inside auto layout for .footer-bar (child of .figma-container) */
+  flex: none;
+  order: 1;
+  align-self: stretch; // Will stretch to the width of .figma-container if width isn't fixed
+  flex-grow: 0;
+
+  /* --- MODIFICATION START --- */
+  /* Added for fade-in effect */
+  opacity: 0; /* Start fully transparent */
+  animation-name: footerFadeInAnimation;
+  animation-duration: 0.5s; /* Duration of the fade-in */
+  animation-timing-function: ease-in-out; /* Easing function for the animation */
+  animation-fill-mode: forwards; /* Retain the style from the last keyframe after animation */
+  /* animation-delay: 0.1s; /* Optional: a slight delay before the animation starts */
+  /* --- MODIFICATION END --- */
+}
+
+/* --- MODIFICATION START --- */
+/* Keyframes for the fade-in animation */
+@keyframes footerFadeInAnimation {
+  to {
+    opacity: 1; /* End fully visible */
+  }
+}
+/* --- MODIFICATION END --- */
+
+.footer-logo { /* This class is not used in your HTML, the image is directly `<img>` */
+  /* Corresponds to "image 18" */
+  // margin: 0 auto; // This would center it if it was the only child or parent wasn't space-between
+  width: 145px;
+  height: 31px;
+  // background: url(image.png); // Handled by <img> src
+
+  /* Inside auto layout for .footer-logo (child of .footer-bar) */
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  object-fit: contain; // Good practice for logos
+}
+
+.regenerate-button {
+  /* Corresponds to the "Frame" wrapping the icon and text */
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px; // Figma has 0px, can add padding for better click area if needed
+  gap: 8px;
+
+  // margin: 0 auto; // This would center it if it was the only child or parent wasn't space-between
+  // width: 166px; // Auto width based on content + gap
+  // height: 26px; // Auto height based on content
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: inherit; // Inherit font from body/parent
+
+  /* Inside auto layout for .regenerate-button (child of .footer-bar) */
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+
+  .icon-wrapper {
+    /* Corresponds to "Layer 2" for the icon */
+    width: 19px;
+    height: 19px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+
+    svg {
+      width: 100%;
+      height: 100%;
+      // The "Vector" absolute positioning is complex and better handled by SVG's own structure
+      // background: #000000; // This would be 'fill' or 'stroke' for SVG paths
+      stroke: #000000; // For the chosen SVG
+    }
+  }
+
+  .regenerate-text {
+    /* Corresponds to "генерирај одново" text properties */
+    // width: 139px; // Auto width
+    // height: 26px; // Auto height/line-height
+
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    //font-size: 16px;
+    line-height: 160%;
+    /* identical to box height, or 26px */
+    color: #000000;
+
+    /* Inside auto layout */
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+  }
+}
+
+/* Styles for streaming indicator - already present in your HTML logic */
+.streaming-dot-container {
+  display: inline-block; /* Or flex if you need to align items within it */
+  /* Add specific styling for the container if needed */
+}
+
+/* CSS Spinner (Example) */
+.spinner {
+  margin: 0px auto;
+  width: 15px;
+  height: 15px;
+  position: relative;
+}
+
+.spinner1 {
+  width: 100%;
+  height: 100%;
+  background-color: #475569; /* Or your desired dot color */
+  border-radius: 100%;
+  display: inline-block;
+  animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+}
+
+@keyframes sk-bouncedelay {
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1.0);
+  }
+}
+
+/* Added a note about .main-paragraph and ::ng-deep for content styling.
+   If your sanitizedContent includes HTML tags like <p>, <ul>, etc.,
+   you might need to style them specifically. The .main-paragraph class
+   was in your SCSS but not directly on the [innerHtml] div.
+   The example ::ng-deep p styles are a suggestion if needed.
+*/

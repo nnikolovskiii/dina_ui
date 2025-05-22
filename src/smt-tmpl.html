@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Figma CSS to HTML</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: #F0F2F5; /* Assuming a light gray bg for contrast if desktop is white */
+      display: flex;
+      justify-content: center;
+      align-items: flex-start; /* Align to top if page is scrollable */
+      min-height: 100vh;
+      padding: 20px; /* For viewing purposes */
+    }
+
+    /* Placeholder for images */
+    .avatar, .feedback-brand-logo, .remora-logo-sidebar, .remora-logo-avatar-icon {
+      background-color: #DDD; /* Placeholder color */
+      background-size: cover;
+      background-position: center;
+    }
+    /* Specific image placeholders if needed */
+    .header-avatar, .sidebar-avatar, .user-meta-avatar .avatar-image-inner {
+      background-image: url(avatar-40.png); /* Fallback color will be used if image not found */
+    }
+    .feedback-brand-logo {
+      background-image: url(image.png);
+    }
+    .remora-logo-sidebar, .remora-logo-avatar-icon {
+      /* background: #000000; border: 1px solid #000000; as per figma */
+      /* For a visible placeholder, using a different color */
+      background-color: #333;
+    }
+
+
+    /* GENERAL ICON STYLES (Container) */
+    .icon-sidebar, .icon-caret-down, .icon-sun, .icon-moon, .icon-hamburger, .icon-settings,
+    .icon-folder-open, .icon-device-mobile-camera, .icon-check-badge,
+    .icon-regenerate, .icon-lightbulb, .icon-plus,
+    .icon-paperclip, .icon-mic, .icon-send-arrow {
+      display: inline-flex; /* Changed to inline-flex for better alignment with text if mixed */
+      justify-content: center;
+      align-items: center;
+      position: relative; /* For absolute positioning of vector shapes */
+    }
+
+    /* General Vector Shape Styles */
+    .icon-vector-shape {
+      position: absolute;
+      background: #475569; /* Default color, can be overridden */
+      border-style: solid;
+      border-color: transparent; /* Default, can be overridden */
+      border-width: 0.09375px; /* Common border width from Figma */
+    }
+
+
+    /* Desktop Container */
+    .desktop-container {
+      position: relative;
+      width: 1280px;
+      height: 1398px; /* Fixed height, will scroll if content exceeds */
+      overflow-y: scroll;
+      background: #FFFFFF;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Added for better visibility on page */
+    }
+
+    /* App Sidebar */
+    .app-sidebar {
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-start; /* Figma spec */
+      padding: 24px 16px;
+      gap: 368px; /* This large gap is key for space-between effect with two main children */
+      position: absolute;
+      width: 80px;
+      left: 0px;
+      top: -1px; /* Figma spec */
+      bottom: -1px; /* Figma spec */
+      background: #FFFFFF;
+      border-right: 1px solid #E2E8F0;
+    }
+
+    .sidebar-top-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* Figma spec for inner items */
+      padding: 0px;
+      gap: 32px;
+      width: 48px; /* Width of content within sidebar padding */
+      /* height: 432px; auto */
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+    }
+
+    .logomark {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 0px;
+      gap: 5px;
+      width: 32px;
+      height: 32px;
+      background: radial-gradient(50% 50% at 50% 50%, #E3E3E3 0%, #DDDDDD 100%);
+      box-shadow: 0px 4px 8px rgba(79, 70, 229, 0.1);
+      border-radius: 12px;
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+    }
+
+    .remora-logo-sidebar {
+      width: 25px;
+      height: 26px;
+      background: #000000; /* Figma */
+      border: 1px solid #000000; /* Figma */
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+    }
+
+    .sidebar-nav-icons {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 0px;
+      gap: 16px;
+      width: 48px;
+      /* height: 368px; auto */
+      flex: none;
+      order: 1;
+      flex-grow: 0;
+    }
+
+    .button-icon-sidebar {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 16px; /* This makes the clickable area larger than the icon */
+      gap: 10px;
+      width: 48px;
+      height: 48px;
+      border-radius: 123px;
+      flex: none;
+      /* order set individually */
+      flex-grow: 0;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+    .button-icon-sidebar.active-sidebar-btn {
+      background: #F8FAFC; /* Gray/5 */
+    }
+    .button-icon-sidebar:nth-child(1) { order: 0; }
+    .button-icon-sidebar:nth-child(2) { order: 1; }
+    .button-icon-sidebar:nth-child(3) { order: 2; }
+    .button-icon-sidebar:nth-child(4) { order: 3; }
+    .button-icon-sidebar:nth-child(5) { order: 4; }
+    .button-icon-sidebar:nth-child(6) { order: 5; }
+
+
+    .icon-sidebar { /* Container for icon vectors */
+      width: 24px;
+      height: 24px;
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+    }
+
+    .home-vector { left: 10.94%; right: 10.94%; top: 7.81%; bottom: 10.94%; background: #475569; border-color: #475569; }
+    .graph-vector { left: 7.81%; right: 7.81%; top: 10.94%; bottom: 14.06%; background: #475569; border-color: #475569; }
+    .people-vector { left: 7.74%; right: 7.89%; top: 7.8%; bottom: 10.81%; background: #475569; border-color: #475569; }
+    .calendar-vector { left: 10.94%; right: 10.94%; top: 4.69%; bottom: 10.94%; background: #475569; border-color: #475569; }
+    .lightning-vector { left: 14.06%; right: 14.06%; top: 1.55%; bottom: 1.55%; background: #475569; border-color: #475569; }
+    .bell-vector { left: 10.94%; right: 10.94%; top: 7.81%; bottom: 7.81%; background: #475569; border-color: #475569; }
+
+
+    .sidebar-bottom-section {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start; /* Figma: align-items: flex-start */
+      padding: 0px;
+      gap: 16px;
+      width: 48px;
+      /* height: 112px; auto */
+      flex: none;
+      order: 1; /* This makes it the second child for justify-content: space-between */
+      flex-grow: 0;
+    }
+    .sidebar-bottom-section .button-icon-sidebar:nth-child(1) { order: 0; }
+
+    .settings-alt-vector { left: 4.7%; right: 4.69%; top: 7.81%; bottom: 7.81%; background: #475569; border-color: #475569; }
+
+    .avatar.sidebar-avatar {
+      width: 48px;
+      height: 48px;
+      /* background: url(avatar-40.png); Scaled up or different image? */
+      border-radius: 92.25px;
+      flex: none;
+      order: 1;
+      flex-grow: 0;
+    }
+
+    /* Main Frame (content area) */
+    .main-frame-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0px;
+      position: absolute;
+      width: 1200px;
+      right: 0px;
+      top: -3px; /* Figma spec */
+      bottom: 171px; /* Figma spec */
+      background: #FFFFFF;
+    }
+
+    .page-header {
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start; /* Children will align to start of this container */
+      padding: 20px 32px;
+      gap: 10px;
+      width: 1200px;
+      height: 80px;
+      border-bottom: 1px solid #CBD5E1; /* Gray/30 */
+      flex: none;
+      order: 0;
+      align-self: stretch;
+      flex-grow: 0;
+    }
+
+    .header-content-row {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 0px;
+      gap: 16px;
+      width: 1136px; /* (1200 - 2*32 padding effectively) This fixed width might be too specific */
+      height: 40px;
+      flex: none;
+      order: 0;
+      align-self: stretch; /* Stretches to parent's cross-axis size (if parent is column, stretches horizontally) */
+      flex-grow: 0;
+    }
+
+    .header-left {
+      display: flex;
+      flex-direction: column; /* This is odd for a single button unless more items are planned */
+      align-items: flex-start;
+      padding: 0px;
+      gap: 10px;
+      width: 368px; /* Fixed width */
+      height: 24px; /* Fixed height for button */
+      flex: none;
+      order: 0;
+      flex-grow: 1; /* Takes up available space */
+    }
+
+    .dropdown-button {
+      display: flex;
+      flex-direction: row;
+      justify-content: center; /* Centers items if they don't fill width */
+      align-items: center;
+      padding: 0px;
+      gap: 8px;
+      width: 166px;
+      height: 24px;
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+
+    .icon-user-placeholder {
+      display: none; /* As per Figma */
+      width: 24px;
+      height: 24px;
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+    }
+
+    .dropdown-text {
+      width: 134px;
+      height: 24px;
+      font-family: 'Plus Jakarta Sans';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 24px;
+      letter-spacing: -0.008em;
+      color: #475569; /* Gray/60 */
+      flex: none;
+      order: 1;
+      flex-grow: 0;
+      text-align: left;
+    }
+
+    .icon-caret-down {
+      width: 24px;
+      height: 24px;
+      flex: none;
+      order: 2;
+      flex-grow: 0;
+    }
+    .caret-down-vector-shape {
+      left: 14.05%; right: 14.05%; top: 32.8%; bottom: 26.56%;
+      background: #475569;
+      /* This makes a small horizontal bar. A real caret would be a triangle. */
+      /* For a triangle:
+         width: 0; height: 0;
+         border-left: 5px solid transparent;
+         border-right: 5px solid transparent;
+         border-top: 6px solid #475569;
+         position: static; or adjust absolute if needed
+      */
+    }
+
+    .header-middle {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 0px;
+      gap: 8px;
+      width: 368px; /* Fixed width */
+      height: 40px;
+      flex: none;
+      order: 1;
+      flex-grow: 1; /* Takes up available space */
+    }
+
+    .button-icon { /* Generic button icon style for header */
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 16px; /* Large padding makes 40x40 button from 24x24 icon */
+      gap: 10px;
+      width: 40px;
+      height: 40px;
+      border-radius: 123px;
+      flex: none;
+      flex-grow: 0;
+      border: none;
+      cursor: pointer;
+    }
+    .theme-button-light {
+      background: #EEF2FF; /* Brand/5 */
+      order: 0;
+    }
+    .theme-button-dark {
+      /* No background specified, assumes transparent or parent bg */
+      order: 1;
+    }
+    .icon-sun, .icon-moon { width: 24px; height: 24px; flex:none; order:0; flex-grow:0; }
+    .sun-vector { left: 3.12%; right: 3.12%; top: 3.12%; bottom: 3.12%; background: #4F46E5; border-color: #4F46E5;}
+    .moon-vector { left: 10.93%; right: 6.29%; top: 6.27%; bottom: 10.94%; background: #475569; border-color: #475569;}
+
+
+    .header-right {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 0px;
+      gap: 8px;
+      width: 368px; /* Fixed width */
+      height: 40px;
+      flex: none;
+      order: 2;
+      flex-grow: 1; /* Takes up available space */
+    }
+
+    .menu-button-header {
+      border: 1px solid #CBD5E1; /* Gray/30 */
+      order: 0;
+    }
+    .settings-button-header {
+      border: 1px solid #CBD5E1; /* Gray/30 */
+      order: 1;
+    }
+    .icon-hamburger, .icon-settings { width: 24px; height: 24px; flex:none; order:0; flex-grow:0; }
+    .hamburger-vector { left: 10.94%; right: 10.94%; top: 20.31%; bottom: 20.31%; background: #475569; border-color: #475569; }
+    /* A real hamburger would have 3 lines. This is one thick-ish line. */
+    .settings-vector { left: 4.7%; right: 4.69%; top: 7.81%; bottom: 7.81%; background: #475569; border-color: #475569; }
+
+    .avatar.header-avatar {
+      width: 40px;
+      height: 40px;
+      /* background: url(avatar-40.png); */
+      border-radius: 92.25px;
+      flex: none;
+      order: 2;
+      flex-grow: 0;
+      position: relative; /* For indicator */
+    }
+    .avatar-indicator {
+      position: absolute;
+      left: 31px;
+      right: 2px;
+      top: 31px;
+      bottom: 2px;
+      background: #22C55E; /* Success/50 */
+      border: 1.5px solid #FFFFFF; /* Gray/0 (White) */
+      border-radius: 123px;
+    }
+
+    /* Chat Area */
+    .chat-area {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start; /* children (message groups) align left */
+      padding: 32px 96px;
+      gap: 12px; /* Gap between message groups and other direct children */
+      width: 1200px; /* Stretches to parent's width */
+      /* height: 1181px; This is very large, likely sum of content. auto is better here. */
+      flex: none;
+      order: 1;
+      align-self: stretch;
+      flex-grow: 0; /* Will not grow, height based on content or fixed value */
+      /* This area might need overflow-y: auto if its content exceeds main-frame-wrapper calculations */
+    }
+
+    .message-group {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start; /* This will align children like message-meta */
+      padding: 0px;
+      gap: 12px; /* Gap between message-content-main, message-meta, hr */
+      width: 1008px; /* Width of message content within chat-area padding */
+      /* height will be auto based on content */
+      align-self: stretch; /* Ensures it takes full width (1008px) */
+      flex: none;
+      flex-grow: 0;
+    }
+    .user-message-group { order: 0; } /* First message group example */
+    .ai-message-group { order: 1; } /* Second message group example */
+
+    .message-content-main { /* Corresponds to Figma's Frame with H:113px or H:168px */
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 0px;
+      gap: 4px; /* Gap between bubble, attachments, reactions */
+      width: 1008px; /* Stretch */
+      /* height auto */
+      align-self: stretch;
+      flex: none;
+      order: 0; /* First child in message-group */
+      flex-grow: 0;
+    }
+
+    .message-bubble {
+      display: flex; /* To allow text inside to control bubble width/height */
+      flex-direction: row; /* Though only text is direct child */
+      align-items: flex-start;
+      padding: 8px 12px;
+      gap: 10px;
+      /* width: 1013px; Figma spec for the container, but text should define width */
+      /* height: 168px; Figma spec, but text should define height */
+      border-radius: 24px;
+      flex: none;
+      order: 0;
+      flex-grow: 0; /* Bubble doesn't grow, text inside might if set */
+    }
+    .user-bubble {
+      /* background: #E0E0E0; Example background for user */
+      max-width: 1013px; /* As per Figma Frame width */
+    }
+    .ai-bubble {
+      /* background: #F0F0F0; Example background for AI */
+      width: 1008px; /* AI bubble seems to take full width in Figma */
+      align-self: stretch; /* From Figma styles on its text container */
+    }
+
+    .message-text {
+      font-family: 'Plus Jakarta Sans';
+      font-style: normal;
+      color: #475569; /* Gray/60 */
+      flex: none; /* Item itself does not grow/shrink */
+      order: 0;
+    }
+    .user-question {
+      width: 989px; /* Max width of text */
+      /* height: 152px; Auto */
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 160%; /* or 38px */
+      flex-grow: 0; /* Text content determines size */
+    }
+    .ai-response {
+      width: 984px; /* Max width of text */
+      /* height: 494px; Auto */
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 160%; /* or 26px */
+      flex-grow: 1; /* Text takes available space in bubble */
+    }
+
+    .message-attachments-area {
+      display: flex; /* overridden by style="display: none;" in HTML */
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      align-content: flex-start;
+      padding: 0px;
+      gap: 8px;
+      width: 868px; /* Max width for attachments */
+      height: 32px; /* Fixed height, implies one row */
+      flex: none;
+      order: 1;
+      flex-grow: 0;
+    }
+
+    .badge-text-item {
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 6px 12px;
+      gap: 8px;
+      height: 32px;
+      border: 1px solid #CBD5E1; /* Gray/30 */
+      border-radius: 1234px;
+      flex: none;
+      flex-grow: 0;
+    }
+    .message-attachments-area .badge-text-item:nth-child(1) { width: 180px; order: 0; }
+    .message-attachments-area .badge-text-item:nth-child(2) { width: 191px; order: 1; }
+
+    .icon-folder-open, .icon-device-mobile-camera, .icon-check-badge {
+      width: 16px;
+      height: 16px;
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+    }
+    .folder-open-vector { left: 7.81%; right: 1.56%; top: 17.19%; bottom: 14.06%; background: #475569; }
+    .device-mobile-camera-vector { left: 20.31%; right: 20.31%; top: 4.69%; bottom: 4.69%; background: #475569; }
+
+    .badge-text-content {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 0px;
+      gap: 6px;
+      height: 20px;
+      flex: none;
+      order: 1;
+      flex-grow: 0;
+    }
+    .message-attachments-area .badge-text-item:nth-child(1) .badge-text-content { width: 132px; }
+    .message-attachments-area .badge-text-item:nth-child(2) .badge-text-content { width: 143px; }
+
+
+    .badge-dot {
+      /* display: none; */
+      width: 8px;
+      height: 8px;
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+      /* background needs to be defined if shown */
+    }
+    .badge-label {
+      height: 20px;
+      font-family: 'Plus Jakarta Sans';
+      font-style: normal;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 20px;
+      text-align: center;
+      letter-spacing: -0.006em;
+      color: #475569; /* Gray/60 */
+      flex: none;
+      order: 1;
+      flex-grow: 0;
+    }
+    .message-attachments-area .badge-text-item:nth-child(1) .badge-label { width: 132px; }
+    .message-attachments-area .badge-text-item:nth-child(2) .badge-label { width: 143px; }
+
+    .icon-check-badge {
+      /* display: none; */
+      order: 2;
+    }
+
+    .message-reactions-area {
+      display: flex; /* overridden by style="display: none;" in HTML */
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      align-content: flex-start;
+      padding: 0px;
+      gap: 8px;
+      width: 868px; /* Max width for reactions */
+      height: 30px; /* Fixed height, one row */
+      flex: none;
+      order: 2;
+      flex-grow: 0;
+    }
+    .chat-reaction {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 4px 8px;
+      gap: 6px;
+      height: 30px;
+      background: #F1F5F9; /* Gray/10 */
+      border-radius: 1234px;
+      flex: none;
+      flex-grow: 0;
+    }
+    .message-reactions-area .chat-reaction:nth-child(1) { width: 57px; order: 0; }
+    .message-reactions-area .chat-reaction:nth-child(2) { width: 65px; order: 1; }
+    .message-reactions-area .chat-reaction:nth-child(3) { width: 58px; order: 2; }
+
+    .reaction-emoji {
+      width: 16px; /* Approximate, depends on emoji */
+      height: 22px;
+      font-family: 'Plus Jakarta Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 22px;
+      letter-spacing: -0.007em;
+      color: #475569; /* Gray/60 */
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+    }
+    .reaction-count {
+      height: 22px;
+      font-family: 'Plus Jakarta Sans';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 22px;
+      letter-spacing: -0.007em;
+      color: #475569; /* Gray/60 */
+      flex: none;
+      order: 1;
+      flex-grow: 0;
+    }
+    .message-reactions-area .chat-reaction:nth-child(1) .reaction-count { width: 19px; }
+    .message-reactions-area .chat-reaction:nth-child(2) .reaction-count { width: 27px; }
+    .message-reactions-area .chat-reaction:nth-child(3) .reaction-count { width: 20px; }
+
+
+    .message-meta {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end; /* Aligns children (time/avatar, sender) to the right */
+      align-items: flex-end; /* Aligns children along their bottom edge */
+      padding: 0px;
+      gap: 12px;
+      width: 994px; /* Less than full 1008px, implies it's not stretching if content is small */
+      height: 24px; /* Fixed height */
+      min-height: 24px; /* Ensure it's at least this tall */
+      flex: none;
+      order: 1; /* Second child in message-group */
+      flex-grow: 0;
+      align-self: flex-end; /* Aligns this whole meta block to the right of message-group */
+    }
+
+    .meta-time-avatar {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 0px;
+      gap: 12px;
+      /* width: 105px; from Figma, auto based on content */
+      height: 22px;
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+    }
+    .time-stamp {
+      width: 33px; /* For "14:21" */
+      height: 20px;
+      font-family: 'Plus Jakarta Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 20px;
+      letter-spacing: -0.006em;
+      color: #94A3B8; /* Gray/40 */
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+    }
+    .avatar.meta-avatar {
+      border-radius: 92.25px;
+      flex: none;
+      flex-grow: 0;
+      position: relative; /* For inner image div if used */
+    }
+    .user-meta .meta-avatar {
+      width: 20px;
+      height: 20px;
+      background: #EEF2FF; /* Brand/5 - fallback/outer ring */
+      order: 1;
+    }
+    .user-meta .avatar-image-inner { /* Actual image part */
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      left: 0px;
+      top: 0px;
+      /* background: url(avatar-40.png); Scaled */
+      background-size: cover;
+      border-radius: 92.25px;
+    }
+
+    .meta-badge { /* This is the badge text that's display:none in meta */
+      /* display: flex; by default */
+      padding: 4px 8px;
+      gap: 4px;
+      width: 53px;
+      height: 24px;
+      background: #EEF2FF; /* Brand/5 */
+      border-radius: 1234px;
+      flex: none;
+      order: 1; /* Between time/avatar and sender name */
+      flex-grow: 0;
+    }
+
+
+    .sender-info { /* Wrapper for sender name */
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 0px;
+      gap: 8px; /* If there were an icon next to name */
+      height: 22px;
+      flex: none;
+      order: 2; /* Last item in user-meta flex row */
+      flex-grow: 0;
+    }
+    .user-meta .sender-info { width: 28px; /* For "you" */ }
+    .ai-meta .sender-info { width: 51px; /* For "manus" */ }
+
+    .sender-name {
+      height: 22px;
+      font-family: 'Plus Jakarta Sans';
+      font-style: normal;
+      letter-spacing: -0.007em;
+      color: #1E293B; /* Gray/80 */
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+    }
+    .user-meta .sender-name { /* "you" */
+      width: 28px;
+      font-weight: 400; /* Normal in Figma, but often bold for "you" */
+      font-size: 16px;
+      line-height: 22px;
+    }
+    .ai-meta .sender-name { /* "manus" */
+      width: 51px;
+      font-weight: 700; /* Bold */
+      font-size: 16px;
+      line-height: 22px;
+    }
+
+
+    .message-divider-line {
+      width: 1014px;
+      height: 0px; /* Effectively makes border the thickness */
+      border: 2px solid #CBD4E3; /* Line 2 color */
+      flex: none;
+      order: 2; /* Third child in message-group */
+      flex-grow: 0;
+      margin-top: auto; /* Pushes it down if message-group has extra space, though unlikely with fixed heights */
+    }
+
+
+    /* AI Message Specifics */
+    .ai-feedback-section {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between; /* Figma shows image left, button right, but CSS has margin: 0 auto for both children */
+      align-items: center;
+      padding: 16px 0px;
+      gap: 12px;
+      width: 1008px; /* Stretch */
+      height: 63px;
+      min-height: 24px; /* Ensure height */
+      align-self: stretch;
+      flex: none;
+      order: 1; /* After AI message bubble */
+      flex-grow: 0;
+    }
+    .feedback-brand-logo {
+      margin: 0 auto; /* Centers if parent is wider and not flex controlling it */
+      width: 145px;
+      height: 31px;
+      /* background: url(image.png); */
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+    }
+    .regenerate-button {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 0px;
+      gap: 8px;
+      margin: 0 auto; /* Centers */
+      width: 166px;
+      height: 26px;
+      flex: none;
+      order: 1;
+      flex-grow: 0;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+    .icon-regenerate {
+      width: 19px;
+      height: 19px;
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+    }
+    .regenerate-vector1 { left: 0%; right: 88.56%; top: 13.47%; bottom: 13.47%; background: #000000; border-color: #000000; }
+    .regenerate-vector2 { left: 5.72%; right: 88.56%; top: 13.47%; bottom: 49.96%; background: #000000; border-color: #000000; }
+
+    .regenerate-text {
+      width: 139px;
+      height: 26px;
+      font-family: 'Plus Jakarta Sans';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 160%; /* or 26px */
+      color: #000000;
+      flex: none;
+      order: 1;
+      flex-grow: 0;
+    }
+
+    .suggested-questions-container {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 0px;
+      gap: 6px; /* Gap between header and list */
+      width: 1008px; /* Stretch */
+      /* height: 211.31px; Auto */
+      align-self: stretch;
+      flex: none;
+      order: 1; /* After message-content-main in ai-message-group */
+      flex-grow: 0;
+    }
+    .suggested-questions-header {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 0px;
+      gap: 12px;
+      width: 1008px; /* Stretch */
+      height: 32.06px; /* Fixed height */
+      align-self: stretch;
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+    }
+    .icon-lightbulb {
+      width: 25px;
+      height: 25px;
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+    }
+    .lightbulb-vector { left: 12.5%; right: 12.5%; top: 0%; bottom: 0%; background: #475569; border-color: #475569; }
+
+    .suggested-questions-title {
+      width: 153px;
+      height: 26px;
+      font-family: 'Plus Jakarta Sans';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 160%; /* or 26px */
+      color: #475569;
+      flex: none;
+      order: 1;
+      flex-grow: 0;
+      margin: 0; /* Reset h3 margin */
+    }
+
+    .suggested-questions-list {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 0px;
+      gap: 15px; /* Gap between question items */
+      width: 1008px; /* Stretch */
+      /* height: 173.25px; Auto */
+      align-self: stretch;
+      flex: none;
+      order: 1;
+      flex-grow: 0;
+      list-style: none; /* Remove default ul styling */
+    }
+    .suggested-question-item {
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end; /* Text baseline and icon bottom align */
+      padding: 0px 9px 0px 7px;
+      gap: 12px;
+      width: 1008px; /* Stretch */
+      height: 32.06px; /* Fixed height */
+      border-top: 1px solid #CACACA;
+      align-self: stretch;
+      flex: none;
+      /* order is implicit by document order */
+      flex-grow: 0;
+    }
+    .suggested-question-text {
+      /* margin: 0 auto; - this would center it if parent is wider. Here, flex-grow on text or specific width needed */
+      height: 26px; /* Text content height */
+      font-family: 'Plus Jakarta Sans';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 160%; /* or 26px */
+      color: #475569;
+      flex: none; /* Item doesn't grow */
+      order: 0;
+      flex-grow: 1; /* Text takes available space next to button */
+      /* Widths from figma: 781px, 915px, 942px, 947px. Use flex-grow instead. */
+      overflow: hidden; /* Ellipsis if too long */
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .add-suggestion-button {
+      margin: 0 auto; /* In Figma CSS, not ideal with space-between */
+      width: 26px;
+      height: 26px;
+      flex: none;
+      order: 1;
+      flex-grow: 0;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0; /* Reset button padding */
+    }
+    .icon-plus {
+      width: 26px;
+      height: 26px;
+    }
+    .plus-vector { left: 16.67%; right: 16.67%; top: 16.67%; bottom: 16.67%; background: #8D8A8A; border-color: #8D8A8A; }
+
+    .ai-meta { /* message-meta styles apply, these are overrides/additions */
+      padding: 3px 0px; /* Override from generic message-meta */
+      height: 38px; /* Override */
+      order: 2; /* After suggested questions */
+    }
+    .ai-meta-group { /* Specific to AI meta time/avatar group */
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end; /* This frame itself */
+      align-items: center;
+      padding: 0px;
+      gap: 12px;
+      width: 140px;
+      height: 32px;
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+    }
+    .ai-meta .time-stamp {
+      order: 0;
+    }
+    .avatar.ai-meta-avatar {
+      width: 32px;
+      height: 32px;
+      background: #EEF2FF; /* Brand/5 */
+      border-radius: 92.25px;
+      flex: none;
+      order: 1;
+      flex-grow: 0;
+      position: relative;
+    }
+    .remora-logo-avatar-icon {
+      position: absolute;
+      left: 5px;
+      right: 6px;
+      top: 5px;
+      bottom: 5px;
+      background: #000000; /* Figma */
+      border: 1px solid #000000; /* Figma */
+    }
+    .ai-meta .badge-text-item { order: 1; } /* Hidden badge */
+    .ai-meta .sender-info { order: 2; }
+
+
+    /* Chat Input Bar */
+    .chat-input-bar-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 96px;
+      gap: 8px;
+      width: 1200px; /* Stretch */
+      height: 140px;
+      align-self: stretch;
+      flex: none;
+      order: 2; /* Last item in main-frame-wrapper */
+      flex-grow: 0;
+    }
+    .chat-input-bar {
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: row;
+      align-items: center; /* Changed from flex-start for vertical centering of items */
+      padding: 12px;
+      gap: 16px;
+      width: 1008px; /* Stretch */
+      height: 64px;
+      background: #FFFFFF; /* Gray/0 (White) */
+      border: 1px solid #CBD5E1; /* Gray/30 */
+      box-shadow: 0px 4px 8px -2px rgba(23, 23, 23, 0.1), 0px 2px 4px -2px rgba(23, 23, 23, 0.06); /* Shadow/md */
+      border-radius: 9999px; /* Pill shape */
+      align-self: stretch;
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+    }
+    .input-main-area {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 0px;
+      gap: 4px;
+      /* width: 884px; From Figma - use flex-grow */
+      height: 40px;
+      flex: none;
+      order: 0;
+      flex-grow: 1; /* Takes up space */
+    }
+    .attachment-button { /* Uses .button-icon base */
+      order: 0;
+      /* padding 16px makes it 40x40 */
+    }
+    .icon-paperclip { width: 24px; height: 24px; }
+    .paperclip-vector { left: 10.93%; right: 15.61%; top: 9.38%; bottom: 7.79%; background: #94A3B8; border-color: #94A3B8; }
+
+    .input-field-placeholder { /* Style as input field */
+      width: 100%; /* Fill remaining space */
+      height: 22px;
+      font-family: 'Plus Jakarta Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 22px;
+      letter-spacing: -0.007em;
+      color: #475569; /* Gray/60 */
+      flex: none;
+      order: 1;
+      flex-grow: 1; /* Takes up space */
+      border: none;
+      outline: none;
+      background: transparent;
+    }
+    .input-actions {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start; /* Figma, but center might be better for icons */
+      padding: 0px;
+      gap: 4px;
+      width: 84px; /* Fixed width for two 40px buttons + 4px gap */
+      height: 40px;
+      flex: none;
+      order: 1;
+      flex-grow: 0;
+    }
+    .mic-button { order: 0; }
+    .icon-mic { width: 24px; height: 24px; }
+    .mic-vector { left: 14.06%; right: 14.06%; top: 4.69%; bottom: 1.56%; background: #94A3B8; border-color: #94A3B8; }
+
+    .send-button {
+      background: #4F46E5; /* Brand/60 */
+      order: 1;
+    }
+    .icon-send-arrow { width: 24px; height: 24px; }
+    .send-arrow-vector { left: 17.18%; right: 17.18%; top: 10.92%; bottom: 10.94%; background: #FFFFFF; border-color: #FFFFFF; }
+
+
+    .terms-and-conditions-link {
+      width: 1008px; /* Stretch */
+      height: 20px;
+      font-family: 'Plus Jakarta Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 20px;
+      text-align: center;
+      letter-spacing: -0.006em;
+      color: #94A3B8; /* Gray/40 */
+      align-self: stretch;
+      flex: none;
+      order: 1;
+      flex-grow: 0;
+    }
+
+    /* Decorative Hidden Line */
+    .decorative-hidden-line {
+      position: absolute;
+      visibility: hidden; /* As per Figma */
+      width: 1014px;
+      height: 0px;
+      left: 183px; /* Relative to desktop-container */
+      top: 326px; /* Relative to desktop-container */
+      border: 1px solid #D1D4D9;
+    }
+  </style>
+</head>
+<body>
+<div class="desktop-container">
+  <aside class="app-sidebar">
+    <div class="sidebar-top-section">
+      <div class="logomark">
+        <div class="remora-logo-sidebar"></div>
+      </div>
+      <nav class="sidebar-nav-icons">
+        <button class="button-icon-sidebar active-sidebar-btn" aria-label="Home">
+          <i class="icon-sidebar icon-home">
+            <span class="icon-vector-shape home-vector"></span>
+          </i>
+        </button>
+        <button class="button-icon-sidebar" aria-label="Analytics">
+          <i class="icon-sidebar icon-graph">
+            <span class="icon-vector-shape graph-vector"></span>
+          </i>
+        </button>
+        <button class="button-icon-sidebar" aria-label="Users">
+          <i class="icon-sidebar icon-people">
+            <span class="icon-vector-shape people-vector"></span>
+          </i>
+        </button>
+        <button class="button-icon-sidebar" aria-label="Calendar">
+          <i class="icon-sidebar icon-calendar">
+            <span class="icon-vector-shape calendar-vector"></span>
+          </i>
+        </button>
+        <button class="button-icon-sidebar" aria-label="Integrations">
+          <i class="icon-sidebar icon-lightning">
+            <span class="icon-vector-shape lightning-vector"></span>
+          </i>
+        </button>
+        <button class="button-icon-sidebar" aria-label="Notifications">
+          <i class="icon-sidebar icon-bell">
+            <span class="icon-vector-shape bell-vector"></span>
+          </i>
+        </button>
+      </nav>
+    </div>
+    <div class="sidebar-bottom-section">
+      <button class="button-icon-sidebar" aria-label="Settings">
+        <i class="icon-sidebar icon-settings-alt">
+          <span class="icon-vector-shape settings-alt-vector"></span>
+        </i>
+      </button>
+      <div class="avatar sidebar-avatar">
+        <!-- Background image for avatar -->
+      </div>
+    </div>
+  </aside>
+
+  <div class="main-frame-wrapper">
+    <header class="page-header">
+      <div class="header-content-row">
+        <div class="header-left">
+          <button class="dropdown-button">
+            <i class="icon-user-placeholder"></i> <!-- display: none -->
+            <span class="dropdown-text">Каско осигурување</span>
+            <i class="icon-caret-down">
+              <span class="caret-down-vector-shape"></span>
+            </i>
+          </button>
+        </div>
+        <div class="header-middle">
+          <button class="button-icon theme-button-light" aria-label="Light mode">
+            <i class="icon-sun">
+              <span class="icon-vector-shape sun-vector"></span>
+            </i>
+          </button>
+          <button class="button-icon theme-button-dark" aria-label="Dark mode">
+            <i class="icon-moon">
+              <span class="icon-vector-shape moon-vector"></span>
+            </i>
+          </button>
+        </div>
+        <div class="header-right">
+          <button class="button-icon menu-button-header" aria-label="Menu">
+            <i class="icon-hamburger">
+              <span class="icon-vector-shape hamburger-vector"></span>
+              <!-- For a full hamburger, more spans or an SVG would be needed -->
+            </i>
+          </button>
+          <button class="button-icon settings-button-header" aria-label="Settings">
+            <i class="icon-settings">
+              <span class="icon-vector-shape settings-vector"></span>
+            </i>
+          </button>
+          <div class="avatar header-avatar">
+            <!-- Background image for avatar -->
+            <div class="avatar-indicator"></div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="chat-area">
+      <div class="message-group user-message-group">
+        <div class="message-content-main">
+          <div class="message-bubble user-bubble">
+            <p class="message-text user-question">
+              Здраво, се мислам да земам Каско осигурување за мојот велосипед. Сакам да знам, доколку велосипедот ми биде украден додека е оставен заклучен пред кафуле, дали Каско осигурувањето ќе ја покрие штетата?
+            </p>
+          </div>
+          <div class="message-attachments-area" style="display: none;">
+            <div class="badge-text-item">
+              <i class="icon-folder-open">
+                <span class="icon-vector-shape folder-open-vector"></span>
+              </i>
+              <div class="badge-text-content">
+                <span class="badge-dot" style="display: none;"></span>
+                <span class="badge-label">Дополнителни...</span>
+                <i class="icon-check-badge" style="display: none;"></i>
+              </div>
+            </div>
+            <div class="badge-text-item">
+              <i class="icon-device-mobile-camera">
+                <span class="icon-vector-shape device-mobile-camera-vector"></span>
+              </i>
+              <div class="badge-text-content">
+                <span class="badge-dot" style="display: none;"></span>
+                <span class="badge-label">Слика од полиса</span>
+                <i class="icon-check-badge" style="display: none;"></i>
+              </div>
+            </div>
+          </div>
+          <div class="message-reactions-area" style="display: none;">
+            <div class="chat-reaction">
+              <span class="reaction-emoji">♥</span>
+              <span class="reaction-count">8</span>
+            </div>
+            <div class="chat-reaction">
+              <span class="reaction-emoji">👍</span>
+              <span class="reaction-count">12</span>
+            </div>
+            <div class="chat-reaction">
+              <span class="reaction-emoji">🎉</span>
+              <span class="reaction-count">3</span>
+            </div>
+          </div>
+        </div>
+        <div class="message-meta user-meta">
+          <div class="meta-time-avatar">
+            <span class="time-stamp">14:21</span>
+            <div class="avatar meta-avatar user-meta-avatar">
+              <div class="avatar-image-inner"></div> <!-- For url(avatar-40.png) -->
+            </div>
+          </div>
+          <div class="badge-text-item meta-badge" style="display: none;">
+            <!-- Content for meta badge -->
+          </div>
+          <div class="sender-info">
+            <span class="sender-name">you</span>
+          </div>
+        </div>
+        <hr class="message-divider-line">
+      </div>
+
+      <div class="message-group ai-message-group">
+        <div class="message-content-main">
+          <div class="message-bubble ai-bubble">
+            <p class="message-text ai-response">
+              Според Општите услови за Каско осигурување на велосипед на Сава Осигурување, покритието за ризикот кражба има специфично ограничување. Во Член 3, став (1), точка 3 од условите е наведено: "Каско осигурувањето на велосипедот важи на територија на Р. С. Македонија, освен ризикот кражба кој што важи само на адресата наведена на полисата за осигурување." Ова значи дека доколку велосипедот биде украден додека е оставен заклучен пред кафуле, Каско осигурувањето не би ја покрило штетата, бидејќи кражбата е покриена само доколку се случи на адресата која е наведена во вашата полиса за осигурување (најчесто адресата на живеење). Дополнително, во Член 18, став (1), точка 5, се дефинира „Провална кражба“ и условите под кои таа е покриена. Овие услови главно се однесуваат на ситуации кога кражбата е извршена со провалување во заклучени простории на станбен објект каде што се наоѓа велосипедот. Затоа, во случај на кражба на велосипед пред кафуле, дури и ако бил заклучен, Каско осигурувањето од Сава Осигурување, според приложените услови, најверојатно нема да го покрие тој ризик. Препорачливо е внимателно да ја проверите вашата полиса за осигурување за точната адреса наведена за покритие од кражба.
+            </p>
+          </div>
+          <div class="ai-feedback-section">
+            <div class="feedback-brand-logo"></div> <!-- image 18 -->
+            <button class="regenerate-button">
+              <i class="icon-regenerate">
+                <span class="icon-vector-shape regenerate-vector1"></span>
+                <span class="icon-vector-shape regenerate-vector2"></span>
+              </i>
+              <span class="regenerate-text">генерирај одново</span>
+            </button>
+          </div>
+        </div>
+        <div class="suggested-questions-container">
+          <div class="suggested-questions-header">
+            <i class="icon-lightbulb">
+              <span class="icon-vector-shape lightbulb-vector"></span>
+            </i>
+            <h3 class="suggested-questions-title">Предлог прашања</h3>
+          </div>
+          <ul class="suggested-questions-list">
+            <li class="suggested-question-item">
+              <span class="suggested-question-text">Дали Каско осигурувањето го покрива моето возило доколку му е направена штета во друга држава?</span>
+              <button class="add-suggestion-button" aria-label="Add suggestion">
+                <i class="icon-plus">
+                  <span class="icon-vector-shape plus-vector"></span>
+                </i>
+              </button>
+            </li>
+            <li class="suggested-question-item">
+              <span class="suggested-question-text">Кои видови штети (на пр. кражба, пожар, природни непогоди, вандализам) се покриени со моето Каско осигурување?</span>
+              <button class="add-suggestion-button" aria-label="Add suggestion">
+                <i class="icon-plus">
+                  <span class="icon-vector-shape plus-vector"></span>
+                </i>
+              </button>
+            </li>
+            <li class="suggested-question-item">
+              <span class="suggested-question-text">Колкава е мојата франшиза (сопствено учество) при ликвидација на штета и како тоа влијае на износот на надоместокот?</span>
+              <button class="add-suggestion-button" aria-label="Add suggestion">
+                <i class="icon-plus">
+                  <span class="icon-vector-shape plus-vector"></span>
+                </i>
+              </button>
+            </li>
+            <li class="suggested-question-item">
+              <span class="suggested-question-text">Како се одредува пазарната вредност на возилото во случај на тотална штета или кражба и кој износ ќе ми биде исплатен?</span>
+              <button class="add-suggestion-button" aria-label="Add suggestion">
+                <i class="icon-plus">
+                  <span class="icon-vector-shape plus-vector"></span>
+                </i>
+              </button>
+            </li>
+          </ul>
+        </div>
+        <div class="message-meta ai-meta">
+          <div class="meta-time-avatar ai-meta-group">
+            <span class="time-stamp">14:21</span>
+            <div class="avatar meta-avatar ai-meta-avatar">
+              <div class="remora-logo-avatar-icon"></div> <!-- remora-nobg -->
+            </div>
+          </div>
+          <div class="badge-text-item meta-badge" style="display: none;">
+            <!-- Content for meta badge -->
+          </div>
+          <div class="sender-info">
+            <span class="sender-name ai-sender-name">manus</span>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="chat-input-bar-container">
+      <div class="chat-input-bar">
+        <div class="input-main-area">
+          <button class="button-icon attachment-button" aria-label="Attach file">
+            <i class="icon-paperclip">
+              <span class="icon-vector-shape paperclip-vector"></span>
+            </i>
+          </button>
+          <div class="input-field-placeholder" role="textbox" aria-multiline="false" contenteditable="false">Write your message here</div>
+          <!-- Actual input would be <input type="text" placeholder="Write your message here..."> -->
+        </div>
+        <div class="input-actions">
+          <button class="button-icon mic-button" aria-label="Record voice message">
+            <i class="icon-mic">
+              <span class="icon-vector-shape mic-vector"></span>
+            </i>
+          </button>
+          <button class="button-icon send-button" aria-label="Send message">
+            <i class="icon-send-arrow">
+              <span class="icon-vector-shape send-arrow-vector"></span>
+            </i>
+          </button>
+        </div>
+      </div>
+      <p class="terms-and-conditions-link">Check our Terms & Conditions.</p>
+    </footer>
+  </div>
+  <hr class="decorative-hidden-line">
+</div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+/* Frame (for each question item) */
+.question-item-container {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center; // Changed from flex-end for better vertical alignment of text and icon
+padding: 8px 9px 8px 7px; // Adjusted padding slightly for balance
+gap: 12px;
+  width: 100%; // Will be constrained by parent
+min-height: 32.06px; // Use min-height to allow content to expand
+border-top: 1px solid #CACACA;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+
+  &:hover {
+    background-color: #f0f0f0; // Optional: add a hover effect
+  }
+}
+
+/* Text for the question */
+.question-text {
+  font-family: 'Plus Jakarta Sans', sans-serif; // Ensure font is loaded
+font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 160%; /* or 26px */
+  color: #475569;
+  flex-grow: 1; // Allow text to take available space
+margin: 0; // Remove default margins
+}
+
+/* Plus icon wrapper */
+.plus-icon-wrapper {
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0; // Prevent icon from shrinking
+
+svg {
+// The Figma "Vector" styles (position, left, right, top, bottom, background)
+// are for the path *within* an icon container.
+// For an SVG, you'd typically control the fill/stroke directly.
+// The background: #8D8A8A becomes stroke for the path.
+// The size is handled by the SVG's width/height and viewBox.
+// We've simplified this by directly using an SVG.
+path {
+  stroke: #8D8A8A; // Color from Figma's "Vector background"
+}
+}
+}

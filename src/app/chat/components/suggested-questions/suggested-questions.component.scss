@@ -1,0 +1,72 @@
+/* Main Frame for Suggested Questions */
+.suggested-questions-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 6px; // Gap between header and questions list
+width: 1008px; // As per Figma, consider making this responsive (e.g., width: 100%)
+// height: 211.31px; // Height will be auto based on content
+align-self: stretch; // If it's inside another flex container
+}
+
+/* Header section (icon + title) */
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 12px;
+  width: 100%; // Takes full width of its parent
+// height: 32.06px; // Height will be auto
+align-self: stretch;
+}
+
+.header-icon-wrapper {
+  width: 25px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  svg {
+  // The Figma "Vector" styles (position, left, right, top, bottom, background)
+  // for the lightbulb are complex. Simpler to use an actual SVG and set its fill.
+  // background: #475569; becomes fill for the SVG path.
+  path {
+    fill: #475569;
+  }
+  }
+}
+
+.header-title {
+// width: 153px; // Let it take the space it needs
+height: 26px;
+  font-family: 'Plus Jakarta Sans', sans-serif; // Ensure font is loaded
+font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 160%; /* or 26px */
+  color: #475569;
+  margin: 0; // Remove default h3 margins
+flex-grow: 0; // Don't grow
+}
+
+/* Questions List Container */
+.questions-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 0; // The border-top on items will create visual separation
+// width: 1008px; // Handled by parent
+// height: 173.25px; // Auto height
+align-self: stretch; // Take full width of parent
+flex-grow: 0;
+
+// Remove border from the first item if items have border-top
+app-question-item:first-child ::ng-deep .question-item-container {
+  border-top: none;
+}
+}
