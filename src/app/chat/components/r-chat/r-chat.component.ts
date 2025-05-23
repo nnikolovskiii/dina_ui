@@ -79,7 +79,7 @@ export class FormServiceData extends FormData {
   standalone: true,
   imports: [FormsModule, CommonModule, RouterModule, HistorySidebarComponent, UserMessage, AssistantMessageComponent],
   templateUrl: './r-chat.component.html',
-  styleUrls: ['./r-chat.component.css'],
+  styleUrls: ['./r-chat.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
 export class RChatComponent implements OnInit, OnDestroy, AfterViewInit {
@@ -408,9 +408,9 @@ export class RChatComponent implements OnInit, OnDestroy, AfterViewInit {
           if (index === words.length - 1) {
             this.finalizeCurrentMessage();
           }
-        }, 100 * index);
+        }, 50 * index);
       });
-    }, 1000);
+    }, 50);
   }
 
   @ViewChild('messageArea') messageArea!: ElementRef<HTMLTextAreaElement>;

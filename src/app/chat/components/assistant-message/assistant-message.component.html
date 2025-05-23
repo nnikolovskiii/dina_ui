@@ -11,7 +11,14 @@
         </ng-template>
         <!-- Streaming indicator -->
         <div *ngIf="message.isStreaming" class="streaming-dot-container">
-          <div class="spinner"><div class="spinner1"></div></div>
+          <div class="loader">
+            <svg width="618" height="648" viewBox="0 0 618 648" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 323L127.5 455.5L199.5 370.5L155.5 323L310 162.5V2L1 323Z" fill="black" stroke="black"/>
+              <path d="M310 2V164L463.5 325H616.5L529.2 233L310 2Z" fill="black"/>
+              <path d="M198 530.5L268.5 443.5L310 485.5L463 325H616.5L310 647L198 530.5Z" fill="black" stroke="black"/>
+            </svg>
+
+          </div>
         </div>
       </div>
 
@@ -36,6 +43,22 @@
           <span class="regenerate-text">{{ regenerateButtonText }}</span>
         </button>
       </div>
+      <!--
+    Show suggested questions only when:
+    1. message object exists
+    2. message is NOT currently streaming
+    3. message content is not empty (meaning generation is complete)
+    And apply fade-in animation.
+  -->
+      <div
+        class="suggested-questions-container"
+        *ngIf="message && !message.isStreaming && message.content"
+      >
+        <app-suggested-questions></app-suggested-questions>
+      </div>
+      <app-message-metadata class="w-[900px]" [timestamp]="'14:10'" [userLabel]="'remora'" [avatar]="'../../../../assets/remora_circle_bg.png'"></app-message-metadata>
+
+
     </div>
   </div>
 </div>

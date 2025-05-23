@@ -1,10 +1,6 @@
 <!-- user-message.html -->
 <div class="chat-message-container">
   <p class="message-text">{{ messageText }}</p>
-  <div class="message-footer">
-    <span class="timestamp">{{ timestamp }}</span>
-    <img src="../../../../assets/p2.jpeg" alt="User Avatar" class="avatar">
-    <span class="user-label">{{ userLabel }}</span>
-  </div>
+  <app-message-metadata class="w-full" [timestamp]="timestamp" [userLabel]="userLabel"></app-message-metadata>
   <hr class="separator-line"/>
 </div>

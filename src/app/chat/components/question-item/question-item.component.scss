@@ -7,7 +7,7 @@
   align-items: center; // Changed from flex-end for better vertical alignment of text and icon
 padding: 8px 9px 8px 7px; // Adjusted padding slightly for balance
 gap: 12px;
-  width: 100%; // Will be constrained by parent
+  width: 900px; // Will be constrained by parent
 min-height: 32.06px; // Use min-height to allow content to expand
 border-top: 1px solid #CACACA;
   cursor: pointer;
