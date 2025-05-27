@@ -15,11 +15,11 @@ import * as marked from 'marked';
 import {ChatService} from '../../services/chat.service';
 import {ActivatedRoute, Router, RouterModule} from '@angular/router';
 import {environment} from '../../../../environments/environment';
-import {HistorySidebarComponent} from '../history-sidebar/history-sidebar.component';
+import {HistorySidebarComponent} from '../chat-history/history-sidebar.component';
 import {AuthService} from '../../../auth/services/auth/auth.service';
-import {LogoTitleComponent} from '../../../logo-title/logo-title.component';
-import {UserMessage} from '../user-message/user-message';
-import {AssistantMessageComponent} from '../assistant-message/assistant-message.component';
+import {LogoTitleComponent} from '../../../shared/components/logo-title/logo-title.component';
+import {UserMessage} from '../message-user/user-message';
+import {AssistantMessageComponent} from '../message-assistant/assistant-message.component';
 
 export interface Message {
   content: string;

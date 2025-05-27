@@ -1,15 +1,13 @@
 import { Routes } from '@angular/router';
-import {ModelsSidebarComponent} from './chat/components/models-sidebar/models-sidebar.component';
-import {HistorySidebarComponent} from './chat/components/history-sidebar/history-sidebar.component';
-import {SignInComponent} from './auth/components/sign-in/sign-in.component';
-import {LoginComponent} from './auth/components/login/login.component';
-import {LandingPage} from './landing-page/landing-page';
-import {RChatComponent} from './chat/components/r-chat/r-chat.component';
-import {UserMessage} from './chat/components/user-message/user-message';
-import {AssistantMessageComponent} from './chat/components/assistant-message/assistant-message.component';
-import {QuestionItemComponent} from './chat/components/question-item/question-item.component';
-import {SuggestedQuestionsComponent} from './chat/components/suggested-questions/suggested-questions.component';
-import {StartChatComponent} from './chat/components/start-chat/start-chat.component';
+import { ModelsSidebarComponent } from './chat/components/model-selector/models-sidebar.component';
+import { HistorySidebarComponent } from './chat/components/chat-history/history-sidebar.component';
+import { SignInComponent } from './auth/components/register-form/sign-in.component';
+import { LoginComponent } from './auth/components/login-form/login.component';
+import { LandingPage } from './landing-page/landing-page';
+import { RChatComponent } from './chat/components/chat-window/r-chat.component';
+import { UserMessage } from './chat/components/message-user/user-message';
+import { AssistantMessageComponent } from './chat/components/message-assistant/assistant-message.component';
+import { StartChatComponent } from './chat/components/start-chat/start-chat.component';
 
 
 export const routes: Routes = [
@@ -21,5 +19,5 @@ export const routes: Routes = [
   {path: 'lol' , component: RChatComponent},
   {path: 'start' , component: StartChatComponent},
 
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: 'star', pathMatch: 'full' },
 ];

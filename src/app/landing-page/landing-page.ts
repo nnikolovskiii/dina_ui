@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {TabsComponent} from './tabs/tabs.component';
-import {LanguageSelectorComponent} from './language-selector/language-selector.component';
+import {TabsComponent} from './components/tabs/tabs.component';
+import {LanguageSelectorComponent} from './components/language-selector/language-selector.component';
 
 @Component({
   selector: 'app-landing-page',
