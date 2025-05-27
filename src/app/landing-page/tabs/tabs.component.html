@@ -11,12 +11,131 @@
 
 <div class="content">
   <ng-container *ngIf="activeTab as currentTab">
-    <div *ngIf="currentTab === 'featured'" class="view active">Featured Content</div>
-    <div *ngIf="currentTab === 'research'" class="view">Research Content</div>
-    <div *ngIf="currentTab === 'life'" class="view">Life Content</div>
-    <div *ngIf="currentTab === 'data-analysis'" class="view">Data Analysis Content</div>
-    <div *ngIf="currentTab === 'education'" class="view">Education Content</div>
-    <div *ngIf="currentTab === 'productivity'" class="view">Productivity Content</div>
-    <div *ngIf="currentTab === 'wtf'" class="view">WTF Content</div>
+    <div *ngIf="currentTab === 'featured'" class="view active">
+      <div class="tab-content-container">
+        <h3>Featured Use Cases</h3>
+        <p>Discover our most popular AI assistant implementations across different industries.</p>
+        <div class="use-case-cards">
+          <div class="use-case-card">
+            <div class="use-case-icon">🏥</div>
+            <h4>Healthcare Assistance</h4>
+            <p>24/7 patient inquiries and appointment scheduling</p>
+          </div>
+          <div class="use-case-card">
+            <div class="use-case-icon">🛒</div>
+            <h4>Retail Support</h4>
+            <p>Product recommendations and purchase assistance</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="currentTab === 'research'" class="view active">
+      <div class="tab-content-container">
+        <h3>Research Applications</h3>
+        <p>AI-powered research assistance for academics and professionals.</p>
+        <div class="use-case-cards">
+          <div class="use-case-card">
+            <div class="use-case-icon">🧬</div>
+            <h4>Data Analysis</h4>
+            <p>Automated pattern recognition in research datasets</p>
+          </div>
+          <div class="use-case-card">
+            <div class="use-case-icon">📚</div>
+            <h4>Literature Review</h4>
+            <p>Comprehensive research paper summaries and insights</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="currentTab === 'life'" class="view active">
+      <div class="tab-content-container">
+        <h3>Life Enhancement</h3>
+        <p>Simplify daily tasks and improve quality of life with AI assistance.</p>
+        <div class="use-case-cards">
+          <div class="use-case-card">
+            <div class="use-case-icon">🍽️</div>
+            <h4>Meal Planning</h4>
+            <p>Personalized nutrition recommendations and recipes</p>
+          </div>
+          <div class="use-case-card">
+            <div class="use-case-icon">🏃</div>
+            <h4>Fitness Coaching</h4>
+            <p>Custom workout plans and progress tracking</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="currentTab === 'data-analysis'" class="view active">
+      <div class="tab-content-container">
+        <h3>Data Analysis</h3>
+        <p>Transform raw data into actionable insights with AI-powered analytics.</p>
+        <div class="use-case-cards">
+          <div class="use-case-card">
+            <div class="use-case-icon">📊</div>
+            <h4>Business Intelligence</h4>
+            <p>Real-time market trends and competitive analysis</p>
+          </div>
+          <div class="use-case-card">
+            <div class="use-case-icon">📈</div>
+            <h4>Predictive Analytics</h4>
+            <p>Forecast future outcomes based on historical data</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="currentTab === 'education'" class="view active">
+      <div class="tab-content-container">
+        <h3>Educational Tools</h3>
+        <p>Enhance learning experiences with interactive AI tutoring.</p>
+        <div class="use-case-cards">
+          <div class="use-case-card">
+            <div class="use-case-icon">🧮</div>
+            <h4>Math Tutor</h4>
+            <p>Step-by-step problem solving and concept explanations</p>
+          </div>
+          <div class="use-case-card">
+            <div class="use-case-icon">🔬</div>
+            <h4>Science Labs</h4>
+            <p>Virtual experiments and interactive demonstrations</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="currentTab === 'productivity'" class="view active">
+      <div class="tab-content-container">
+        <h3>Productivity Solutions</h3>
+        <p>Streamline workflows and boost efficiency with AI assistants.</p>
+        <div class="use-case-cards">
+          <div class="use-case-card">
+            <div class="use-case-icon">📝</div>
+            <h4>Content Creation</h4>
+            <p>Automated drafting and editing for various content types</p>
+          </div>
+          <div class="use-case-card">
+            <div class="use-case-icon">📅</div>
+            <h4>Smart Scheduling</h4>
+            <p>Intelligent calendar management and meeting optimization</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="currentTab === 'wtf'" class="view active">
+      <div class="tab-content-container">
+        <h3>Unexpected Applications</h3>
+        <p>Discover surprising ways AI is being used in unconventional scenarios.</p>
+        <div class="use-case-cards">
+          <div class="use-case-card">
+            <div class="use-case-icon">🎭</div>
+            <h4>Creative Companion</h4>
+            <p>AI-powered brainstorming for artists and creators</p>
+          </div>
+          <div class="use-case-card">
+            <div class="use-case-icon">🌱</div>
+            <h4>Plant Whisperer</h4>
+            <p>Gardening assistance with plant recognition and care tips</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </ng-container>
 </div>

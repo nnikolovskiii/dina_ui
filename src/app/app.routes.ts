@@ -9,6 +9,7 @@ import {UserMessage} from './chat/components/user-message/user-message';
 import {AssistantMessageComponent} from './chat/components/assistant-message/assistant-message.component';
 import {QuestionItemComponent} from './chat/components/question-item/question-item.component';
 import {SuggestedQuestionsComponent} from './chat/components/suggested-questions/suggested-questions.component';
+import {StartChatComponent} from './chat/components/start-chat/start-chat.component';
 
 
 export const routes: Routes = [
@@ -18,7 +19,7 @@ export const routes: Routes = [
   {path:'login', component: LoginComponent},
   {path: 'star', component: LandingPage},
   {path: 'lol' , component: RChatComponent},
-  {path: 'lolzi' , component: SuggestedQuestionsComponent},
+  {path: 'start' , component: StartChatComponent},
 
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];

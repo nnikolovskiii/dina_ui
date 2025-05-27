@@ -78,11 +78,11 @@ export class FormServiceData extends FormData {
   selector: 'app-real-chat',
   standalone: true,
   imports: [FormsModule, CommonModule, RouterModule, HistorySidebarComponent, UserMessage, AssistantMessageComponent],
-  templateUrl: './r-chat.component.html',
-  styleUrls: ['./r-chat.component.scss'],
+  templateUrl: './start-chat.component.html',
+  styleUrls: ['./start-chat.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class RChatComponent implements OnInit, OnDestroy, AfterViewInit {
+export class StartChatComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() chat_id: string | null = null;
   private ws: WebSocket | undefined;
   public inputMessage: string = '';

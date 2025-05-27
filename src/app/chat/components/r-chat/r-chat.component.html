@@ -12,23 +12,26 @@
 <div class="content-wrapper">
   <div class="main-chat-layout bg-wrapper">
     <div *ngIf="barStatus == 'close'" class="banter-sidebar">
-      <!-- ... sidebar buttons ... -->
-      <button (click)="toggleHistoryBar()" class="banter-button" aria-label="Toggle App Menu">
-        <img src="../../../../assets/remora-no-bg.png" alt="App Logo" class="banter-icon"/>
-      </button>
-      <button (click)="toggleHistoryBar()" class="banter-button" aria-label="Toggle History">
-        <img src="../../../../assets/history_icon.png" alt="History" class="banter-icon icon-history"/>
-      </button>
-      <button
-        id="new-chat-action-button"
-        (click)="navigateToChat()"
-        class="banter-button"
-        aria-label="New Chat">
-      </button>
-      <div class="banter-user-profile">
-        <div class="relative flex items-center justify-center w-[40px] h-[40px] rounded-full overflow-hidden transition-all duration-300 ease-in-out">
-          <div class="absolute inset-0 rounded-full bg-gradient-to-r from-gray-500 from-gray-700 from-gray-900 opacity-70 animate-pulse"></div>
-          <img src="../../../../assets/p2.jpeg" alt="User Avatar" class="w-9 h-9 rounded-full object-cover border-2 border-gray-500 z-10"/>
+      <div class="mobile-header-left">
+        <button (click)="toggleHistoryBar()" class="banter-button" aria-label="Toggle App Menu">
+          <img src="../../../../assets/remora-no-bg.png" alt="App Logo" class="banter-icon"/>
+        </button>
+        <button (click)="toggleHistoryBar()" class="banter-button" aria-label="Toggle History">
+          <img src="../../../../assets/history_icon.png" alt="History" class="banter-icon icon-history"/>
+        </button>
+      </div>
+      <div class="mobile-header-right">
+        <button
+          id="new-chat-action-button"
+          (click)="navigateToChat()"
+          class="banter-button"
+          aria-label="New Chat">
+        </button>
+        <div class="banter-user-profile">
+          <div class="relative flex items-center justify-center w-[40px] h-[40px] rounded-full overflow-hidden transition-all duration-300 ease-in-out">
+            <div class="absolute inset-0 rounded-full bg-gradient-to-r from-gray-500 from-gray-700 from-gray-900 opacity-70 animate-pulse"></div>
+            <img src="../../../../assets/p2.jpeg" alt="User Avatar" class="w-9 h-9 rounded-full object-cover border-2 border-gray-500 z-10"/>
+          </div>
         </div>
       </div>
     </div>
@@ -46,16 +49,13 @@
           <!-- Messages Loop -->
           <div *ngFor="let message of messages; let i = index" class="message-row">
             <div [ngSwitch]="message.type">
-
               <!-- User Message -->
               <div *ngSwitchCase="'user'" class="user-message-container">
-                <!-- Assuming app-user-message takes message as input or handles its own content -->
-                <app-user-message [messageText]="'Здраво, се мислам да земам Каско осигурување за мојот велосипед. Сакам да знам, доколку велосипедот ми биде украден додека е оставен заклучен пред кафуле, дали Каско осигурувањето ќе ја покрие штетата?'"></app-user-message>
+                <app-user-message [messageText]="message.content"></app-user-message>
               </div>
 
               <!-- Assistant Message -->
               <div *ngSwitchCase="'assistant'" class="assistant-message-container">
-                <!-- USE THE NEW COMPONENT HERE -->
                 <app-assistant-message
                   [message]="message"
                   [showLogo]="shouldShowLogo(i)"
@@ -71,10 +71,10 @@
           <!-- Loading Message -->
           <div *ngIf="startLoading" class="assistant-message-container message-row">
             <div class="logo-container">
-              <img src="../../../../assets/ai_logo.png" alt="AI Logo"> <!-- Different logo for loading -->
+              <img src="../../../../assets/ai_logo.png" alt="AI Logo">
             </div>
             <div class="message-details">
-              <div class="assistant-card"> <!-- Standard loading card -->
+              <div class="assistant-card">
                 <div class="message-content">
                   <div class="streaming-dot-container">
                     <div class="spinner"><div class="spinner1"></div></div>
@@ -92,9 +92,10 @@
       </div>
 
       <div class="message-input-box">
-        <!-- ... input box ... -->
         <div class="textarea-wrapper">
-          <textarea #messageArea [(ngModel)]="inputMessage" required
+          <textarea #messageArea 
+                    [(ngModel)]="inputMessage" 
+                    required
                     [placeholder]="'Прашај ме...'"
                     id="messageInput"
                     (keydown)="handleKeyDown($event, messageArea)"
@@ -106,7 +107,11 @@
           <div class="input-options-placeholder">
             <div class="radio-btn-img-style"></div>
           </div>
-          <button id="sendButton" class="send-message-button" (click)="sendMessage()" [disabled]="!inputMessage.trim() || startLoading" aria-label="Send Message">
+          <button id="sendButton" 
+                  class="send-message-button" 
+                  (click)="sendMessage()" 
+                  [disabled]="!inputMessage.trim() || startLoading" 
+                  aria-label="Send Message">
             <span class="send-icon"></span>
           </button>
         </div>
