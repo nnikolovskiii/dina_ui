@@ -10,7 +10,7 @@ import {LanguageSelectorComponent} from './components/language-selector/language
     LanguageSelectorComponent
   ],
   templateUrl: './landing-page.html',
-  styleUrl: './landing-page.css'
+  styleUrls: ['./landing-page-web.css', './landing-page-mobile.css']
 })
 export class LandingPage {
 

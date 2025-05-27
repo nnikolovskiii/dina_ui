@@ -127,7 +127,6 @@ button {
   font-size: 1.1rem;
   color: #555;
   line-height: 1.8;
-
 }
 
 .video-section {
@@ -135,7 +134,6 @@ button {
 }
 
 .video-outer-container {
-
   max-width: 900px;
 }
 
@@ -145,11 +143,12 @@ button {
   overflow: hidden;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
   background-color: #f0f0f0;
+  aspect-ratio: 16 / 9;
+  width: 100%;
 }
 
 .video-thumbnail {
   width: 100%;
-
   object-fit: cover;
 }
 
@@ -243,96 +242,6 @@ button {
 
 .btn.btn-light:hover {
   background-color: #e0e0e0;
-}
-
-@media (max-width: 992px) {
-  .hero-text h1 {
-    font-size: 2.8rem;
-  }
-
-  .hero-text p {
-    font-size: 1rem;
-  }
-
-  .video-overlay-content h2 {
-    font-size: 2.2rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .header-container {
-    flex-direction: column;
-    gap: 15px;
-  }
-
-  .main-nav ul {
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 15px 25px;
-  }
-
-  .header-actions {
-    justify-content: center;
-    width: 100%;
-  }
-
-  .hero-text {
-    padding: 60px 0 40px;
-  }
-
-  .hero-text h1 {
-    font-size: 2.2rem;
-  }
-
-  .video-overlay-content {
-    top: 20px;
-    left: 20px;
-  }
-
-  .video-overlay-content h2 {
-    font-size: 1.8rem;
-  }
-
-  .logo-overlay {
-    bottom: 20px;
-    left: 20px;
-    font-size: 1.2rem;
-  }
-
-  .play-button {
-    width: 60px;
-    height: 60px;
-  }
-
-  .play-button svg {
-    width: 28px;
-    height: 28px;
-  }
-
-  .button-container {
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .btn {
-    width: 80%;
-    max-width: 300px;
-    text-align: center;
-    padding: 12px 20px;
-  }
-}
-
-.video-container {
-  position: relative;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-  background-color: #f0f0f0;
-
-  aspect-ratio: 16 / 9;
-
-  width: 100%;
 }
 
 .video-container iframe {
@@ -446,52 +355,6 @@ button {
 
 .screen-content {
   text-align: center;
-}
-
-@media (max-width: 1100px) {
-  .screen-container {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .web-screen {
-    width: 90%;
-    max-width: 750px;
-    height: auto;
-    aspect-ratio: 16 / 9;
-    font-size: 20px;
-  }
-
-  .phone-screen {
-    width: 280px;
-    height: 560px;
-    font-size: 16px;
-  }
-}
-
-@media (max-width: 480px) {
-  .web-screen {
-    font-size: 16px;
-  }
-
-  .phone-screen {
-    width: 250px;
-    height: 500px;
-    font-size: 14px;
-    border-top-width: 20px;
-    border-bottom-width: 20px;
-    border-radius: 25px;
-  }
-
-  .phone-screen::before {
-    top: -12px;
-    width: 50px;
-  }
-
-  .phone-screen::after {
-    bottom: -12px;
-    width: 80px;
-  }
 }
 
 .hero-section {
@@ -623,5 +486,41 @@ button {
   }
   100% {
     transform: translate3d(-50px, 50px, 0);
+  }
+}
+
+/* Tablet-specific styles */
+@media (max-width: 992px) {
+  .hero-text h1 {
+    font-size: 2.8rem;
+  }
+
+  .hero-text p {
+    font-size: 1rem;
+  }
+
+  .video-overlay-content h2 {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 1100px) {
+  .screen-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .web-screen {
+    width: 90%;
+    max-width: 750px;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    font-size: 20px;
+  }
+
+  .phone-screen {
+    width: 280px;
+    height: 560px;
+    font-size: 16px;
   }
 }

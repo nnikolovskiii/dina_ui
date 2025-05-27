@@ -1,0 +1,98 @@
+@media (max-width: 768px) {
+  .header-container {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .main-nav ul {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px 25px;
+  }
+
+  .header-actions {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .hero-text {
+    padding: 60px 0 40px;
+  }
+
+  .hero-text h1 {
+    font-size: 2.2rem;
+  }
+
+  .video-overlay-content {
+    top: 20px;
+    left: 20px;
+  }
+
+  .video-overlay-content h2 {
+    font-size: 1.8rem;
+  }
+
+  .logo-overlay {
+    bottom: 20px;
+    left: 20px;
+    font-size: 1.2rem;
+  }
+
+  .play-button {
+    width: 60px;
+    height: 60px;
+  }
+
+  .play-button svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .button-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .btn {
+    width: 80%;
+    max-width: 300px;
+    text-align: center;
+    padding: 12px 20px;
+  }
+
+  .image-overlay,
+  .image-overlay1,
+  .image-overlay2 {
+    display: none;
+  }
+
+  .screen-container{
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .web-screen {
+    font-size: 16px;
+  }
+
+  .phone-screen {
+    width: 250px;
+    height: 500px;
+    font-size: 14px;
+    border-top-width: 20px;
+    border-bottom-width: 20px;
+    border-radius: 25px;
+  }
+
+  .phone-screen::before {
+    top: -12px;
+    width: 50px;
+  }
+
+  .phone-screen::after {
+    bottom: -12px;
+    width: 80px;
+  }
+}
