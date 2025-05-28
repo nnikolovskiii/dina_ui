@@ -7,17 +7,17 @@
 
   <div class="flex flex-row items-center gap-2">
     <app-language-selector></app-language-selector>
-    <a class="section-link" href="#contact-section">Get Started</a>
+    <a class="section-link" href="#contact-section">{{ 'LANDING_PAGE.HEADER.GET_STARTED' | translate }}</a>
     <app-sandwich-toggle [isOpen]="isMobileMenuOpen" (toggleMenu)="toggleMobileMenu()"></app-sandwich-toggle>
 
   </div>
 
   <div class="mobile-menu" [class.active]="isMobileMenuOpen">
     <div class="mobile-menu-content">
-      <a href="#contact-section">Get Started</a>
-      <a href="#about">About</a>
-      <a href="#services">Services</a>
-      <a href="#contact-section">Contact</a>
+      <a href="#contact-section">{{ 'LANDING_PAGE.MOBILE_MENU.GET_STARTED' | translate }}</a>
+      <a href="#about">{{ 'LANDING_PAGE.MOBILE_MENU.ABOUT' | translate }}</a>
+      <a href="#services">{{ 'LANDING_PAGE.MOBILE_MENU.SERVICES' | translate }}</a>
+      <a href="#contact-section">{{ 'LANDING_PAGE.MOBILE_MENU.CONTACT' | translate }}</a>
     </div>
   </div>
 </div>
@@ -34,9 +34,9 @@
 </div>
 <section class="hero-text">
   <div class="container">
-    <h1>Transform Customer Conversations</h1>
+    <h1>{{ 'LANDING_PAGE.HERO.TITLE' | translate }}</h1>
     <p >
-      In today’s fast-paced digital landscape, every second counts. Our AI chatbots deliver instant, 24/7 personalized support—answering questions and guiding users to the right services.
+      {{ 'LANDING_PAGE.HERO.DESCRIPTION' | translate }}
     </p>
 
     <!--      <p>Embedded in your website or app, our solution slashes wait times, boosts loyalty, and lets your team focus on what matters most.    </p>-->
@@ -54,15 +54,15 @@
 
 <section class="cta-buttons">
   <div class="container button-container">
-    <button class="btn btn-dark">Try Remora</button>
-    <button class="btn btn-light">Download the App</button>
+    <button class="btn btn-dark">{{ 'LANDING_PAGE.CTA.TRY_REMORA' | translate }}</button>
+    <button class="btn btn-light">{{ 'LANDING_PAGE.CTA.DOWNLOAD_APP' | translate }}</button>
   </div>
 </section>
 
 <div class="hero-section">
-  <h2 class="hero-subtitle">Use cases</h2>
-  <h1 class="hero-title">Explore use cases from our official collection.</h1>
-  <p class="hero-description">Learn how Manus handles real-world tasks through step-by-step replays.</p>
+  <h2 class="hero-subtitle">{{ 'LANDING_PAGE.USE_CASES.SUBTITLE' | translate }}</h2>
+  <h1 class="hero-title">{{ 'LANDING_PAGE.USE_CASES.TITLE' | translate }}</h1>
+  <p class="hero-description">{{ 'LANDING_PAGE.USE_CASES.DESCRIPTION' | translate }}</p>
 </div>
 <app-tabs></app-tabs>
 <div class="screen-container">
@@ -83,15 +83,15 @@
 
 <section id="contact-section" class="contact-section">
   <div class="container contact-container">
-    <h2 class="hero-subtitle">Get in Touch</h2>
-    <h1 class="hero-title">Interested in Using Remora for Your Business?</h1>
-    <p class="hero-description">Fill out the form below and we'll get back to you as soon as possible.</p>
+    <h2 class="hero-subtitle">{{ 'LANDING_PAGE.CONTACT.SUBTITLE' | translate }}</h2>
+    <h1 class="hero-title">{{ 'LANDING_PAGE.CONTACT.TITLE' | translate }}</h1>
+    <p class="hero-description">{{ 'LANDING_PAGE.CONTACT.DESCRIPTION' | translate }}</p>
 
     <form class="contact-form" action="mailto:your-email@example.com" method="post" enctype="text/plain">
-      <input type="text" name="name" placeholder="Your Name" required />
-      <input type="email" name="email" placeholder="Your Email" required />
-      <textarea name="message" rows="5" placeholder="Tell us about your business needs..." required></textarea>
-      <button type="submit" class="btn btn-dark">Send Inquiry</button>
+      <input type="text" name="name" placeholder="{{ 'LANDING_PAGE.CONTACT.FORM.NAME_PLACEHOLDER' | translate }}" required />
+      <input type="email" name="email" placeholder="{{ 'LANDING_PAGE.CONTACT.FORM.EMAIL_PLACEHOLDER' | translate }}" required />
+      <textarea name="message" rows="5" placeholder="{{ 'LANDING_PAGE.CONTACT.FORM.MESSAGE_PLACEHOLDER' | translate }}" required></textarea>
+      <button type="submit" class="btn btn-dark">{{ 'LANDING_PAGE.CONTACT.FORM.SUBMIT' | translate }}</button>
     </form>
   </div>
 </section>

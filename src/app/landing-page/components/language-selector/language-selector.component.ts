@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {NgFor, NgIf} from '@angular/common';
+import { TranslateService, TranslateModule } from '@ngx-translate/core';
 
 interface Language {
   code: string;
@@ -9,11 +10,11 @@ interface Language {
 @Component({
   selector: 'app-language-selector',
   standalone: true,
-  imports: [NgIf, NgFor],
+  imports: [NgIf, NgFor, TranslateModule],
   templateUrl: './language-selector.component.html',
   styleUrl: './language-selector.component.css'
 })
-export class LanguageSelectorComponent {
+export class LanguageSelectorComponent implements OnInit {
   languages: Language[] = [
     { code: 'de', name: 'Deutsch' },
     { code: 'en', name: 'English' },
@@ -37,10 +38,14 @@ export class LanguageSelectorComponent {
   iconBell = '🔔';
   iconCheck = '✓';
 
-  constructor() {
+  constructor(private translate: TranslateService) {
     // Set English as the default selected language
     const defaultLanguage = this.languages.find(lang => lang.code === 'en');
     this.selectedLanguage = defaultLanguage || this.languages[0]; // Fallback to the first language
+
+    // Set the default language for translations
+    translate.setDefaultLang('en');
+    translate.use('en');
   }
 
   ngOnInit(): void {
@@ -49,6 +54,10 @@ export class LanguageSelectorComponent {
   selectLanguage(language: Language, event: MouseEvent): void {
     event.stopPropagation(); // Prevent click on li from toggling dropdown if header is also toggleable
     this.selectedLanguage = language;
+
+    // Use TranslateService to change the language
+    this.translate.use(language.code);
+
     // Optional: close dropdown on selection
     // this.isDropdownOpen = false;
   }

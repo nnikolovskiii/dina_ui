@@ -3,6 +3,7 @@ import {TabsComponent} from './components/tabs/tabs.component';
 import {LanguageSelectorComponent} from './components/language-selector/language-selector.component';
 import {NgClass} from '@angular/common';
 import {SandwichToggleComponent} from './components/sandwich-toggle/sandwich-toggle.component';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-landing-page',
@@ -11,7 +12,8 @@ import {SandwichToggleComponent} from './components/sandwich-toggle/sandwich-tog
     TabsComponent,
     LanguageSelectorComponent,
     NgClass,
-    SandwichToggleComponent
+    SandwichToggleComponent,
+    TranslateModule
   ],
   templateUrl: './landing-page.html',
   styleUrls: ['./landing-page-web.css', './landing-page-mobile.css']
@@ -19,7 +21,9 @@ import {SandwichToggleComponent} from './components/sandwich-toggle/sandwich-tog
 export class LandingPage {
   isMobileMenuOpen = false;
 
-  constructor(private renderer: Renderer2) {}
+  constructor(private renderer: Renderer2, private translate: TranslateService) {
+    // The language is already set in the LanguageSelectorComponent
+  }
 
   // Store event listeners for later removal
   private wheelListener: any;
