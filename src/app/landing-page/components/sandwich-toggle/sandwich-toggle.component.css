@@ -4,7 +4,7 @@
 }
 
 /* Mobile styles */
-@media (max-width: 768px) {
+@media (max-width: 1670px) {
   /* Mobile menu toggle button (hamburger icon and back button) */
   .mobile-menu-toggle {
     display: block;
