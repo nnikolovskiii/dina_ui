@@ -1,0 +1,58 @@
+/* Default state - hidden on desktop */
+.mobile-menu-toggle {
+  display: none;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  /* Mobile menu toggle button (hamburger icon and back button) */
+  .mobile-menu-toggle {
+    display: block;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    z-index: 1000;
+  }
+
+  /* Hamburger icon styles */
+  .hamburger-icon {
+    width: 30px;
+    height: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .hamburger-icon span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background-color: #333;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+  }
+
+  /* Back button styles */
+  .back-button {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1001; /* Higher than the mobile menu */
+    cursor: pointer;
+  }
+
+  .back-arrow {
+    font-size: 24px;
+    color: #333;
+    font-weight: bold;
+  }
+}

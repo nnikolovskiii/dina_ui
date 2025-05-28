@@ -1,0 +1,12 @@
+<ng-container>
+  <div class="back-button" *ngIf="isOpen" (click)="onToggleMenu()">
+    <span class="back-arrow">←</span>
+  </div>
+  <div class="mobile-menu-toggle" *ngIf="!isOpen" (click)="onToggleMenu()">
+    <div class="hamburger-icon">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</ng-container>

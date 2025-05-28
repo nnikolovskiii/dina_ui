@@ -1,5 +1,5 @@
 <body class="flex flex-col items-center  min-h-screen mx-auto">
-<div class="flex flex-row justify-between  pt-2  w-[75%] ">
+<div class="header pt-3">
   <div class="flex flex-row items-center gap-2">
     <div><img src="../../assets/remora.jpeg" height="40" width="40"/></div>
     <div class="remora-title">remora</div>
@@ -7,9 +7,19 @@
 
   <div class="flex flex-row items-center gap-2">
     <app-language-selector></app-language-selector>
-    <a href="#contact-section">Get Started</a>
+    <a class="section-link" href="#contact-section">Get Started</a>
+    <app-sandwich-toggle [isOpen]="isMobileMenuOpen" (toggleMenu)="toggleMobileMenu()"></app-sandwich-toggle>
+
   </div>
 
+  <div class="mobile-menu" [class.active]="isMobileMenuOpen">
+    <div class="mobile-menu-content">
+      <a href="#contact-section">Get Started</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#contact-section">Contact</a>
+    </div>
+  </div>
 </div>
 <div class="image-overlay">
   <img class="left-big-img" src="../../assets/img.png" height="691" width="417"/>
@@ -44,7 +54,7 @@
 
 <section class="cta-buttons">
   <div class="container button-container">
-    <button class="btn btn-dark">Try Manus</button>
+    <button class="btn btn-dark">Try Remora</button>
     <button class="btn btn-light">Download the App</button>
   </div>
 </section>
@@ -85,4 +95,3 @@
     </form>
   </div>
 </section>
-
