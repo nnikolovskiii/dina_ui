@@ -8,7 +8,6 @@
   /* Mobile menu toggle button (hamburger icon and back button) */
   .mobile-menu-toggle {
     display: block;
-    position: absolute;
     top: 10px;
     right: 10px;
     cursor: pointer;
