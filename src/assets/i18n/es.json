@@ -1,0 +1,37 @@
+{
+  "LANDING_PAGE": {
+    "HEADER": {
+      "GET_STARTED": "Comenzar"
+    },
+    "MOBILE_MENU": {
+      "GET_STARTED": "Comenzar",
+      "ABOUT": "Acerca de",
+      "SERVICES": "Servicios",
+      "CONTACT": "Contacto"
+    },
+    "HERO": {
+      "TITLE": "Transforma las Conversaciones con Clientes",
+      "DESCRIPTION": "En el acelerado panorama digital actual, cada segundo cuenta. Nuestros chatbots de IA ofrecen soporte personalizado instantáneo las 24 horas del día, los 7 días de la semana, respondiendo preguntas y guiando a los usuarios hacia los servicios adecuados."
+    },
+    "CTA": {
+      "TRY_REMORA": "Prueba Remora",
+      "DOWNLOAD_APP": "Descarga la Aplicación"
+    },
+    "USE_CASES": {
+      "SUBTITLE": "Casos de uso",
+      "TITLE": "Explora casos de uso de nuestra colección oficial.",
+      "DESCRIPTION": "Aprende cómo Manus maneja tareas del mundo real a través de reproducciones paso a paso."
+    },
+    "CONTACT": {
+      "SUBTITLE": "Ponte en Contacto",
+      "TITLE": "¿Interesado en Usar Remora para tu Negocio?",
+      "DESCRIPTION": "Completa el formulario a continuación y nos pondremos en contacto contigo lo antes posible.",
+      "FORM": {
+        "NAME_PLACEHOLDER": "Tu Nombre",
+        "EMAIL_PLACEHOLDER": "Tu Correo Electrónico",
+        "MESSAGE_PLACEHOLDER": "Cuéntanos sobre las necesidades de tu negocio...",
+        "SUBMIT": "Enviar Consulta"
+      }
+    }
+  }
+}

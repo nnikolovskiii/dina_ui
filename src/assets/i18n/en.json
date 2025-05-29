@@ -1,0 +1,37 @@
+{
+  "LANDING_PAGE": {
+    "HEADER": {
+      "GET_STARTED": "Get Started"
+    },
+    "MOBILE_MENU": {
+      "GET_STARTED": "Get Started",
+      "ABOUT": "About",
+      "SERVICES": "Services",
+      "CONTACT": "Contact"
+    },
+    "HERO": {
+      "TITLE": "Transform Customer Conversations",
+      "DESCRIPTION": "In today's fast-paced digital landscape, every second counts. Our AI chatbots deliver instant, 24/7 personalized support—answering questions and guiding users to the right services."
+    },
+    "CTA": {
+      "TRY_REMORA": "Try Remora",
+      "DOWNLOAD_APP": "Download the App"
+    },
+    "USE_CASES": {
+      "SUBTITLE": "Use cases",
+      "TITLE": "Explore use cases from our official collection.",
+      "DESCRIPTION": "Learn how Manus handles real-world tasks through step-by-step replays."
+    },
+    "CONTACT": {
+      "SUBTITLE": "Get in Touch",
+      "TITLE": "Interested in Using Remora for Your Business?",
+      "DESCRIPTION": "Fill out the form below and we'll get back to you as soon as possible.",
+      "FORM": {
+        "NAME_PLACEHOLDER": "Your Name",
+        "EMAIL_PLACEHOLDER": "Your Email",
+        "MESSAGE_PLACEHOLDER": "Tell us about your business needs...",
+        "SUBMIT": "Send Inquiry"
+      }
+    }
+  }
+}
