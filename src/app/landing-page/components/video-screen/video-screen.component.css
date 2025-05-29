@@ -13,6 +13,29 @@
   overflow: hidden;
 }
 
+/* Media query for tablets and smaller devices */
+@media (max-width: 1500px) {
+  .no-screen {
+    width: 90%;
+    max-width: 750px;
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
+}
+
+/* Media query for mobile phones */
+@media (max-width: 480px) {
+  .no-screen {
+    width: 95%;
+    border-radius: 8px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  video {
+    border-radius: 6px;
+  }
+}
+
 .screen-content {
   text-align: center;
   width: 100%;
