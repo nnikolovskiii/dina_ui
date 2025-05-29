@@ -3,6 +3,7 @@ import {TabsComponent} from './components/tabs/tabs.component';
 import {LanguageSelectorComponent} from './components/language-selector/language-selector.component';
 import {NgClass} from '@angular/common';
 import {SandwichToggleComponent} from './components/sandwich-toggle/sandwich-toggle.component';
+import {FooterComponent} from './components/footer/footer.component';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 
 @Component({
@@ -13,6 +14,7 @@ import {TranslateModule, TranslateService} from '@ngx-translate/core';
     LanguageSelectorComponent,
     NgClass,
     SandwichToggleComponent,
+    FooterComponent,
     TranslateModule
   ],
   templateUrl: './landing-page.html',

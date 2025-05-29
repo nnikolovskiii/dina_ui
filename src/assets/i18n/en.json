@@ -32,6 +32,22 @@
         "MESSAGE_PLACEHOLDER": "Tell us about your business needs...",
         "SUBMIT": "Send Inquiry"
       }
+    },
+    "FOOTER": {
+      "DESCRIPTION": "Remora provides AI-powered chatbots that transform customer conversations and streamline business operations.",
+      "LINKS": {
+        "TITLE": "Quick Links",
+        "ABOUT": "About Us",
+        "SERVICES": "Services",
+        "CONTACT": "Contact Us"
+      },
+      "CONTACT": {
+        "TITLE": "Contact Info",
+        "EMAIL": "info@remora.com",
+        "PHONE": "+1 (555) 123-4567",
+        "ADDRESS": "123 Tech Street, San Francisco, CA"
+      },
+      "COPYRIGHT": "All Rights Reserved"
     }
   }
 }
