@@ -19,6 +19,7 @@ export class LanguageSelectorComponent implements OnInit {
     { code: 'de', name: 'Deutsch' },
     { code: 'en', name: 'English' },
     { code: 'es', name: 'Español' },
+    { code: 'mk', name: 'Македонски' },
     { code: 'fr', name: 'Français' },
     { code: 'it', name: 'Italiano' },
     { code: 'pt-BR', name: 'Português (BR)', isStaticHighlight: true },
