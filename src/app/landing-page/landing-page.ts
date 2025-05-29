@@ -5,6 +5,7 @@ import {NgClass} from '@angular/common';
 import {SandwichToggleComponent} from './components/sandwich-toggle/sandwich-toggle.component';
 import {FooterComponent} from './components/footer/footer.component';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
+import {VideoScreenComponent} from './components/video-screen/video-screen.component';
 
 @Component({
   selector: 'app-landing-page',
@@ -15,7 +16,8 @@ import {TranslateModule, TranslateService} from '@ngx-translate/core';
     NgClass,
     SandwichToggleComponent,
     FooterComponent,
-    TranslateModule
+    TranslateModule,
+    VideoScreenComponent
   ],
   templateUrl: './landing-page.html',
   styleUrls: ['./landing-page-web.css', './landing-page-mobile.css']
