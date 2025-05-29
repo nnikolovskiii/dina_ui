@@ -483,21 +483,21 @@ button {
 
 .image-overlay {
   top: 100px;
-  left: -148px;
+  left: -216px;
   animation-duration: 2.2s;
   animation-delay: 0.2s;
 }
 
 .image-overlay1 {
   top: 800px;
-  right: 50px;
+  right: -150px;
   animation-duration: 1.9s;
   animation-delay: 0.5s;
 }
 
 .image-overlay2 {
   top: 100px;
-  right: -50px;
+  right: -200px;
   animation-duration: 2.5s;
   animation-delay: 0.7s;
 }
