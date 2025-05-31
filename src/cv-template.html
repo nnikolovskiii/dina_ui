@@ -354,6 +354,7 @@
       color: #444;
       line-height: 1.7;
     }
+
     /* Apply to both timeline and project lists */
     .timeline-content ul,
     .project-item ul {
@@ -464,14 +465,14 @@
     }
 
 
-    p{
+    p {
       margin-bottom: 0;
     }
 
     /* === Add this to your existing CSS within the <style> tags === */
 
     .project-link {
-      margin-top: 5px;  /* Space above the link */
+      margin-top: 5px; /* Space above the link */
       margin-bottom: 15px; /* Space below the link, before tech tags */
       font-size: 14px;
     }
@@ -502,6 +503,7 @@
     .project-link a + a { /* Selects any 'a' tag that directly follows another 'a' tag within .project-link */
       margin-left: 15px; /* Adjust the value as needed */
     }
+
     /* === Font Awesome Import (Keep as is) === */
     @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
     /* === Inter Font Import (Keep as is) === */
@@ -510,7 +512,6 @@
 </head>
 <body>
 <div class="cv-container">
-  <!-- Header Section -->
   <header class="header">
     <h1>Nikola Nikolovski</h1>
     <h2>Software Developer</h2>
@@ -532,7 +533,7 @@
       <div class="contact-item">
         <i class="fab fa-github contact-icon"></i>
         <a href="https://github.com/nnikolovskiii" target="_blank" rel="noopener noreferrer">
-           GitHub Profile
+          GitHub Profile
         </a>
       </div>
       <div class="contact-item">
@@ -542,11 +543,8 @@
     </div>
   </header>
 
-  <!-- Main Content Wrapper -->
   <div class="main-content-wrapper">
-    <!-- Main Content -->
     <div class="main-content">
-      <!-- Professional Summary -->
       <section class="section">
         <h2 class="section-title">Professional Summary</h2>
         <p class="summary">
@@ -554,9 +552,26 @@
           theoretical knowledge with practical implementation skills. Skilled in building end-to-end solutions—from
           designing intelligent systems with modern NLP to developing responsive web and mobile applications. </p>
       </section>
-      <!-- Work Experience -->
       <section class="section">
-        <h2 class="section-title">Professional Experience</h2>
+        <h2 class="section-title">Professional Experience & Education</h2>
+
+        <div class="timeline-item">
+          <div class="timeline-title">
+            <h3>B.Sc. in Computer Science</h3>
+            <span class="date">Oct 2020 - Feb 2025 · 4 yrs</span>
+          </div>
+          <div class="timeline-content">
+            <div class="company-name">Faculty of Computer Science and Engineering, Skopje, Macedonia</div>
+            <ul>
+              <li class="responsibility">
+                Major in Computer Science
+              </li>
+              <li class="responsibility">
+                GPA: 8.90/10.00
+              </li>
+            </ul>
+          </div>
+        </div>
 
         <div class="timeline-item">
           <div class="timeline-title">
@@ -596,7 +611,6 @@
         </div>
       </section>
 
-      <!-- Projects -->
       <section class="section">
         <h2 class="section-title">Key Projects</h2>
 
@@ -611,17 +625,20 @@
             </a>
           </div>
           <div class="project-tech">
-            <div class="tech-tag"><p>LLMs</p></div>
+            <div class="tech-tag"><p>AI agent</p></div>
             <div class="tech-tag"><p>Task automation</p></div>
-            <div class="tech-tag"><new_msgp>Document generation</new_msgp></div>
+            <div class="tech-tag"><p>Document generation</p></div>
           </div>
-          <p>Developed an intelligent conversational agent designed to streamline interactions with institutions. The
-            system enables users to:
+          <p>Developed an <b>intelligent conversational agent</b> to unify and streamline user interactions with various
+            institutional services.
           </p>
           <ul>
-            <li class="responsibility"> Retrieve accurate, real-time information via a natural language chat interface.</li>
-            <li class="responsibility"> Automate administrative tasks (e.g., scheduling appointments, processing
-              payments, generating official PDF documents).
+            <li class="responsibility">
+              Engineered a dynamic, <b>tool-based AI agent</b> capable of performing tasks like PDF document generation,
+              appointment scheduling, and payment processing via a natural language chat interface.
+            </li>
+            <li class="responsibility">
+              Designed and integrated a custom <b>Human-in-the-Loop (HITL) mechanism</b>, allowing the agent to pause operations, request user input (e.g., for forms or payment details), and seamlessly resume processing.
             </li>
           </ul>
         </div>
@@ -638,84 +655,59 @@
             <div class="tech-tag"><p>Contextual retrieval</p></div>
             <div class="tech-tag"><p>Web app</p></div>
           </div>
-          <p>Engineered an end-to-end Retrieval-Augmented Generation (RAG) system to transform technical documentation
-            access:
+          <p>
+            Engineered an end-to-end <b>Retrieval-Augmented Generation (RAG) system </b> to enhance access and understanding of technical documentation and code repositories.
           </p>
           <ul>
-            <li class="responsibility"> Architected a hybrid AI workflow: Combined transformer-based embeddings,
-              cross-encoder rerankers, and lean generative models for precision-scaling
+            <li class="responsibility">
+              Architected a <b>multi-stage AI workflow</b>:
+              automated extraction of text data from all linked pages within a provided URL,
+              Data chunking and embedding generation using a self-hosted transformer model.
+              Storage and retrieval of embeddings from a Qdrant vector database.
             </li>
-            <li class="responsibility"> GPU-optimized inference: Balanced latency/accuracy by deploying quantized models
-              for retrieval and full-weight LLMs only for final generation
+            <li class="responsibility">
+              Implemented <b>context enhancement</b> by concatenating AI generated summarization sentences from the larger document to individual chunks, improving retrieval accuracy for the generative model by 10%.
             </li>
           </ul>
         </div>
       </section>
-
-      <!-- Education -->
-      <section class="section">
-        <h2 class="section-title">Education</h2>
-
-        <div class="timeline-item">
-          <div class="timeline-title">
-            <h3>B.S. in Computer Science</h3>
-            <span class="date">Oct 2020 - Feb 2025</span>
-          </div>
-          <div class="timeline-content">
-            <div class="company-name">Faculty of Computer Science and Engineering</div>
-            <p>Major in Computer Science</p>
-            <p>GPA: 8.90/10.00</p>
-          </div>
-        </div>
-      </section>
     </div>
 
-    <!-- Skills Sidebar -->
     <div class="skills-sidebar">
       <section class="sidebar-section">
         <h2 class="section-title">Technical Skills</h2>
 
         <div class="skill-category">
-          <h3>Programming Languages</h3>
+          <h3>AI & Machine Learning</h3>
+          <div class="skill-items">
+            <span class="skill-item">AI Agent Development</span>
+            <span class="skill-item">RAG Systems & Vector Search</span>
+            <span class="skill-item">LLM Integration & Application</span>
+            <span class="skill-item">Contextual Data Retrieval</span>
+            <span class="skill-item">Task Automation & AI Workflows</span>
+            <span class="skill-item">Embedding Models & Reranking</span>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <h3>Full-Stack Development</h3>
           <div class="skill-items">
             <span class="skill-item">Python</span>
-            <span class="skill-item">C#</span>
-            <span class="skill-item">TypeScript</span>
-          </div>
-        </div>
-
-        <div class="skill-category">
-          <h3>Frameworks & Libraries</h3>
-          <div class="skill-items">
-            <span class="skill-item">Fast API</span>
+            <span class="skill-item">FastAPI</span>
             <span class="skill-item">Angular</span>
-            <span class="skill-item">.NET</span>
+            <span class="skill-item">TypeScript</span>
+            <span class="skill-item">API Design & Development</span>
+            <span class="skill-item">Real-time Communication (WebSockets)</span>
+            <span class="skill-item">Asynchronous Programming</span>
           </div>
         </div>
 
         <div class="skill-category">
-          <h3>Databases</h3>
+          <h3>Data Technologies</h3>
           <div class="skill-items">
-            <span class="skill-item">MongoDB</span>
-            <span class="skill-item">PostgreSQL</span>
-            <span class="skill-item">Qdrant</span>
-          </div>
-        </div>
-
-        <div class="skill-category">
-          <h3>DevOps & Cloud</h3>
-          <div class="skill-items">
-            <span class="skill-item">Docker</span>
-            <span class="skill-item">GitHub Actions</span>
-          </div>
-        </div>
-
-        <div class="skill-category">
-          <h3>AI & ML</h3>
-          <div class="skill-items">
-            <span class="skill-item">RAG Systems</span>
-            <span class="skill-item">LLMs</span>
-            <span class="skill-item">Reranking</span>
+            <span class="skill-item">Qdrant (Vector Database)</span>
+            <span class="skill-item">MongoDB (NoSQL)</span>
+            <span class="skill-item">PostgreSQL (SQL)</span>
           </div>
         </div>
       </section>
