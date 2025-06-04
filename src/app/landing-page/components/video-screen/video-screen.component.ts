@@ -14,6 +14,9 @@ export class VideoScreenComponent implements AfterViewInit {
     if (this.videoPlayer && this.videoPlayer.nativeElement) {
       const videoElement = this.videoPlayer.nativeElement;
 
+      // Explicitly set loop property to true
+      videoElement.loop = true;
+
       // Make sure video is not paused and ready to play
       videoElement.onloadeddata = () => {
         this.playVideo(videoElement);
@@ -26,6 +29,8 @@ export class VideoScreenComponent implements AfterViewInit {
 
       // Add event listener for when video ends to ensure looping works properly
       videoElement.onended = () => {
+        // Reset the video to the beginning and play again
+        videoElement.currentTime = 0;
         this.playVideo(videoElement);
       };
     } else {

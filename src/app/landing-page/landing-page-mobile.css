@@ -146,26 +146,42 @@
 }
 
 @media (max-width: 480px) {
+  .screen-container {
+    gap: 40px;
+    padding: 20px 10px;
+  }
+
   .web-screen {
+    width: 95%;
+    max-width: 400px;
     font-size: 16px;
+    border-width: 8px;
+    border-radius: 10px;
   }
 
   .phone-screen {
     width: 250px;
     height: 500px;
     font-size: 14px;
-    border-top-width: 20px;
-    border-bottom-width: 20px;
-    border-radius: 25px;
+    border-width: 6px;
+    border-top-width: 18px;
+    border-bottom-width: 18px;
+    border-radius: 28px;
   }
 
   .phone-screen::before {
     top: -12px;
     width: 50px;
+    height: 4px;
   }
 
   .phone-screen::after {
     bottom: -12px;
     width: 80px;
+    height: 3px;
+  }
+
+  .phone-screen .screen-content img {
+    border-radius: 16px;
   }
 }

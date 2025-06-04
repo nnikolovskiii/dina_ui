@@ -77,11 +77,14 @@
     <div class="screen-container">
       <div class="web-screen">
         <div class="screen-content">
-
-          <img [src]="webImageSrc" height="520" width="916"/></div>
+          <img [src]="webImageSrc" alt="Web interface"/>
+        </div>
       </div>
       <div class="phone-screen">
-        <img class="rounded-[20px]" [src]="phoneImageSrc" height="1540" width="786"/></div>
+        <div class="screen-content">
+          <img [src]="phoneImageSrc" alt="Mobile app interface"/>
+        </div>
+      </div>
     </div>
   </section>
 
