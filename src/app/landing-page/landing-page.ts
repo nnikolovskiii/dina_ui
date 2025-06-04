@@ -6,6 +6,7 @@ import {SandwichToggleComponent} from './components/sandwich-toggle/sandwich-tog
 import {FooterComponent} from './components/footer/footer.component';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {VideoScreenComponent} from './components/video-screen/video-screen.component';
+import {TitleComponent} from '../shared/components/title/title.component';
 
 @Component({
   selector: 'app-landing-page',
@@ -17,16 +18,30 @@ import {VideoScreenComponent} from './components/video-screen/video-screen.compo
     SandwichToggleComponent,
     FooterComponent,
     TranslateModule,
-    VideoScreenComponent
+    VideoScreenComponent,
+    TitleComponent
   ],
   templateUrl: './landing-page.html',
   styleUrls: ['./landing-page-web.css', './landing-page-mobile.css']
 })
 export class LandingPage {
   isMobileMenuOpen = false;
+  currentLang: string;
 
   constructor(private renderer: Renderer2, private translate: TranslateService) {
     // The language is already set in the LanguageSelectorComponent
+    this.currentLang = this.translate.currentLang || 'en';
+    this.translate.onLangChange.subscribe(event => {
+      this.currentLang = event.lang;
+    });
+  }
+
+  get phoneImageSrc(): string {
+    return `../../assets/phone-look-${this.currentLang}.png`;
+  }
+
+  get webImageSrc(): string {
+    return `../../assets/web-look-${this.currentLang}.png`;
   }
 
   // Store event listeners for later removal

@@ -1,0 +1,5 @@
+<div class="title-containe pr-[50px] pl-[50px]" [ngClass]="{'text-left': position === 'left', 'text-center': position === 'center', 'text-right': position === 'right'}">
+  <h2 *ngIf="subtitle" class="hero-subtitle">{{ subtitle }}</h2>
+  <h1 *ngIf="title" class="hero-title">{{ title }}</h1>
+  <p *ngIf="description" class="hero-description">{{ description }}</p>
+</div>

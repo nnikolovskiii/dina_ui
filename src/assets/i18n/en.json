@@ -19,8 +19,13 @@
     },
     "USE_CASES": {
       "SUBTITLE": "Use cases",
-      "TITLE": "Explore use cases from our official collection.",
+      "TITLE": "Explore use cases from our official collection",
       "DESCRIPTION": "Learn how Manus handles real-world tasks through step-by-step replays."
+    },
+    "SCREENS": {
+      "SUBTITLE": "Screens",
+      "TITLE": "Flexible Display, Seamless Experience",
+      "DESCRIPTION": "For seamless customer support, the AI assistant is readily available on mobile devices and can be integrated directly onto your current website for easy access."
     },
     "CONTACT": {
       "SUBTITLE": "Get in Touch",

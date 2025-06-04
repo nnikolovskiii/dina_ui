@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anastazija Kovachevikj</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    /* Custom styles for timeline and finer details if needed */
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -0.40rem; /* Adjusted for Tailwind's spacing */
+      top: 0.5rem; /* Adjust for vertical alignment */
+      width: 0.875rem; /* 14px */
+      height: 0.875rem; /* 14px */
+      background-color: #2563EB; /* theme-blue-600 */
+      border-radius: 9999px; /* full */
+      border: 2px solid white;
+      z-index: 10;
+    }
+
+    /* Ensure the timeline line doesn't extend beyond the last item's dot */
+    .timeline-group > .timeline-item:last-child {
+      padding-bottom: 0;
+    }
+    .timeline-group > .timeline-item:last-child > .border-l-2 {
+      height: 0.5rem; /* or height of the dot to stop line at the dot */
+    }
+
+    @media print {
+      @page {
+        /* Consider adjusting height or using 'auto' if content varies significantly */
+        /* height: 1731px; */ /* Commented out or adjust as needed */
+      }
+
+      body {
+        -webkit-print-color-adjust: exact;
+        color-adjust: exact;
+        margin: 0; /* Body margin is 0, it respects the @page margin */
+      }
+      .cv-container {
+        margin: 0 !important; /* Override mx-auto from screen styles */
+        padding: 0;          /* CV container itself has no padding */
+        box-shadow: none !important;
+        border: none !important;
+        max-width: 100% !important;
+        width: 100% !important; /* Fills the area defined by @page after its margins are applied */
+      }
+      .no-print {
+        display: none;
+      }
+      .skills-sidebar, .section, .project-item {
+        page-break-inside: avoid;
+      }
+
+      .main-content-wrapper {
+        display: flex !important;
+        flex-direction: row !important;
+        gap: 2.5rem; /* Tailwind's gap-10 */
+      }
+
+      .main-content {
+        width: 66.666667%; /* Approximates lg:w-2/3 */
+        flex-shrink: 0;
+      }
+
+      .skills-sidebar {
+        width: 33.333333%; /* Approximates lg:w-1/3 */
+        margin-top: 0 !important;
+        flex-shrink: 0;
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-gray-800 leading-relaxed">
+<div class="cv-container max-w-4xl mx-auto my-8 sm:my-12 p-6 sm:p-10 bg-white shadow-2xl rounded-lg">
+  <header class="text-center mb-6 pb-8 border-b border-gray-300">
+    <h1 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-2">Anastazija Kovachevikj</h1>
+    <h2 class="text-2xl sm:text-3xl font-semibold text-blue-600 mb-6">UX Designer</h2>
+    <div class="contact-info flex flex-wrap justify-center gap-x-6 gap-y-3 text-sm text-gray-600">
+      <div class="contact-item flex items-center">
+        <i class="fas fa-envelope fa-fw mr-2 text-blue-500"></i>
+        <span>[your.email@example.com]</span>
+      </div>
+      <div class="contact-item flex items-center">
+        <i class="fas fa-phone-alt fa-fw mr-2 text-blue-500"></i>
+        <span>[(+XXX) XX XXX XXX]</span>
+      </div>
+      <div class="contact-item flex items-center">
+        <i class="fab fa-linkedin fa-fw mr-2 text-blue-500"></i>
+        <a href="https://[linkedin.com/in/yourprofile]" target="_blank" rel="noopener noreferrer" class="text-blue-700 hover:underline">
+          LinkedIn
+        </a>
+      </div>
+      <div class="contact-item flex items-center">
+        <i class="fab fa-github fa-fw mr-2 text-blue-500"></i>
+        <a href="https://[github.com/yourusername]" target="_blank" rel="noopener noreferrer" class="text-blue-700 hover:underline">
+          GitHub
+        </a>
+      </div>
+      <div class="contact-item flex items-center">
+        <i class="fas fa-map-marker-alt fa-fw mr-2 text-blue-500"></i>
+        <span>[Your City, Your Country]</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="main-content-wrapper lg:flex lg:gap-10">
+    <div class="main-content lg:w-2/3">
+      <section class="section mb-8">
+        <h2 class="section-title text-2xl font-semibold text-gray-800 border-b-2 border-blue-500 pb-2 mb-6">
+          <i class="fas fa-user-tie mr-3 text-blue-500"></i>Professional Summary
+        </h2>
+        <p class="summary text-gray-700 text-justify">
+          A dedicated UX Designer committed to crafting exceptional user experiences through user-centered design, research, and iterative prototyping. Passionate about intuitive UI flows, information architecture, and collaboration with cross-functional teams to deliver accessible and engaging solutions that enhance user satisfaction and task success.
+        </p>
+      </section>
+
+      <section class="section mb-8">
+        <h2 class="section-title text-2xl font-semibold text-gray-800 border-b-2 border-blue-500 pb-2 mb-6">
+          <i class="fas fa-briefcase mr-3 text-blue-500"></i>Experience & Education
+        </h2>
+        <div class="timeline-group">
+          <div class="timeline-item relative pl-8 pb-6 border-l-2 border-blue-200">
+            <div class="timeline-title mb-1">
+              <h3 class="text-lg font-semibold text-gray-800">Lead UI/UX Designer</h3>
+              <span class="date text-xs text-gray-500 block sm:inline sm:ml-2">Apr 2025 – Jun 2025 (3 months)</span>
+            </div>
+            <div class="timeline-content">
+              <div class="company-name text-md font-medium text-blue-600 mb-2">Freelance | [Your City, Your Country]</div>
+              <ul class="list-disc list-inside text-gray-700 space-y-1 pl-1">
+                <li>Spearheaded the end-to-end UI/UX design for the "Cryptocurrency Information & Tracking Platform," focusing on cryptocurrency analysis and market tracking.</li>
+                <li>Managed the design lifecycle from initial concept, wireframing, and user flows to high-fidelity prototypes and visual design, primarily utilizing Figma.</li>
+                <li>Championed user-centered design principles, iteratively refining designs based on user needs and project objectives.</li>
+                <li>Collaborated effectively with project managers and development teams to align design solutions with business goals and technical feasibility.</li>
+                <li>Ensured the creation of responsive and accessible interfaces, adhering to WCAG guidelines and best practices.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="timeline-item relative pl-8 pb-6 border-l-2 border-blue-200">
+            <div class="timeline-title mb-1">
+              <h3 class="text-lg font-semibold text-gray-800">B.Sc. in UX Design (or [Your Degree])</h3>
+              <span class="date text-xs text-gray-500 block sm:inline sm:ml-2">[Start Date e.g., Oct 2020] – [End Date e.g., Feb 2025]</span>
+            </div>
+            <div class="timeline-content">
+              <div class="company-name text-md font-medium text-blue-600 mb-2">[University Name], [City, Country]</div>
+              <ul class="list-disc list-inside text-gray-700 space-y-1 pl-1">
+                <li>Major: [Your Major e.g., UX Design, Human-Computer Interaction]</li>
+                <li>GPA: [Your GPA/10.00] (Optional)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title text-2xl font-semibold text-gray-800 border-b-2 border-blue-500 pb-2 mb-6">
+          <i class="fas fa-project-diagram mr-3 text-blue-500"></i>Key Projects
+        </h2>
+        <div class="project-item mb-8 pb-6 border-b border-gray-200 last:border-b-0 last:pb-0 last:mb-0">
+          <h3 class="project-title text-lg font-semibold text-gray-800 mb-1">Cryptocurrency Information & Tracking Platform</h3>
+          <div class="project-tech flex flex-wrap gap-2 my-3">
+            <span class="tech-tag bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-medium">Figma</span>
+            <span class="tech-tag bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-medium">UI/UX Design</span>
+            <span class="tech-tag bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-medium">Data Visualization</span>
+            <span class="tech-tag bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-medium">AI-Powered Design</span>
+            <span class="tech-tag bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-medium">Responsive Design</span>
+            <span class="tech-tag bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-medium">Accessibility (WCAG)</span>
+          </div>
+          <p class="text-gray-700 mb-2 text-justify">
+            Led UI/UX design and implementation strategy for a comprehensive web platform focused on cryptocurrency information, market tracking, and company insights, aiming to enhance user engagement and decision-making.
+          </p>
+          <div class="text-gray-700 space-y-3 mt-3 text-sm">
+            <p><strong>Key Deliverables:</strong> Designed an engaging landing page, a blog section for company news and guides, and a suite of interactive cryptocurrency dashboards for detailed market analysis.</p>
+            <div>
+              <p class="font-semibold">Design Innovations & Impact:</p>
+              <ul class="list-disc list-inside pl-1 space-y-1 mt-1">
+                <li>Engineered intuitive user interfaces focusing on dashboard clarity and effective financial data presentation, contributing to an estimated 20-30% improvement in user experience metrics.</li>
+                <li>Integrated AI-powered features within Figma to enhance data visualization and provide smarter insights, significantly improving the usability of complex data.</li>
+                <li>Dashboards featured real-time crypto price tracking, diverse metrics, and customizable views, making financial forecasts more accessible and actionable.</li>
+                <li>Ensured designs were responsive across devices and adhered to Accessibility Standards (WCAG) for inclusive user experience.</li>
+              </ul>
+            </div>
+            <p><strong>Process & Collaboration:</strong> Worked in tandem with the development team, translating user needs and business requirements into practical design solutions and streamlining the design-to-development handoff with detailed Figma prototypes.</p>
+            <p><strong>Technologies Used:</strong> Figma (leveraged extensively for UI/UX design, utilizing integrated AI capabilities to accelerate the design process).</p>
+            <p><strong>Outcome:</strong> Successfully delivered a complete and functional web platform, providing users with a central hub for monitoring cryptocurrency markets and accessing vital information, resulting in an enhanced user experience.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="skills-sidebar lg:w-1/3 mt-10 lg:mt-0">
+      <section class="sidebar-section mb-8">
+        <h2 class="section-title text-xl font-semibold text-gray-800 border-b-2 border-blue-500 pb-2 mb-5">
+          <i class="fas fa-cogs mr-3 text-blue-500"></i>Technical Skills
+        </h2>
+        <div class="skill-category mb-5">
+          <h3 class="text-md font-semibold text-blue-700 mb-2">Design & Prototyping</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-item bg-gray-200 text-gray-700 px-3 py-1.5 rounded-md text-sm font-medium">UI/UX Design</span>
+            <span class="skill-item bg-gray-200 text-gray-700 px-3 py-1.5 rounded-md text-sm font-medium">Visual Design</span>
+            <span class="skill-item bg-gray-200 text-gray-700 px-3 py-1.5 rounded-md text-sm font-medium">Wireframing</span>
+            <span class="skill-item bg-gray-200 text-gray-700 px-3 py-1.5 rounded-md text-sm font-medium">High-Fidelity Prototyping</span>
+            <span class="skill-item bg-gray-200 text-gray-700 px-3 py-1.5 rounded-md text-sm font-medium">Interactive Dashboards</span>
+            <span class="skill-item bg-gray-200 text-gray-700 px-3 py-1.5 rounded-md text-sm font-medium">Data Visualization</span>
+            <span class="skill-item bg-gray-200 text-gray-700 px-3 py-1.5 rounded-md text-sm font-medium">Component Libraries</span>
+          </div>
+        </div>
+        <div class="skill-category mb-5">
+          <h3 class="text-md font-semibold text-blue-700 mb-2">UX Methodologies</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-item bg-gray-200 text-gray-700 px-3 py-1.5 rounded-md text-sm font-medium">User-Centered Design</span>
+            <span class="skill-item bg-gray-200 text-gray-700 px-3 py-1.5 rounded-md text-sm font-medium">User Research</span>
+            <span class="skill-item bg-gray-200 text-gray-700 px-3 py-1.5 rounded-md text-sm font-medium">Usability Testing</span>
+            <span class="skill-item bg-gray-200 text-gray-700 px-3 py-1.5 rounded-md text-sm font-medium">Iterative Prototyping</span>
+            <span class="skill-item bg-gray-200 text-gray-700 px-3 py-1.5 rounded-md text-sm font-medium">Information Architecture</span>
+            <span class="skill-item bg-gray-200 text-gray-700 px-3 py-1.5 rounded-md text-sm font-medium">Interaction Design</span>
+            <span class="skill-item bg-gray-200 text-gray-700 px-3 py-1.5 rounded-md text-sm font-medium">User Flow Diagramming</span>
+            <span class="skill-item bg-gray-200 text-gray-700 px-3 py-1.5 rounded-md text-sm font-medium">Heuristic Evaluations</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <h3 class="text-md font-semibold text-blue-700 mb-2">Tools & Technologies</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-item bg-gray-200 text-gray-700 px-3 py-1.5 rounded-md text-sm font-medium">Figma</span>
+            <span class="skill-item bg-gray-200 text-gray-700 px-3 py-1.5 rounded-md text-sm font-medium">AI Design Plugins</span>
+            <span class="skill-item bg-gray-200 text-gray-700 px-3 py-1.5 rounded-md text-sm font-medium">Responsive Design Principles</span>
+            <span class="skill-item bg-gray-200 text-gray-700 px-3 py-1.5 rounded-md text-sm font-medium">Accessibility Standards (WCAG)</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="sidebar-section">
+        <h2 class="section-title text-xl font-semibold text-gray-800 border-b-2 border-blue-500 pb-2 mb-5">
+          <i class="fas fa-language mr-3 text-blue-500"></i>Languages
+        </h2>
+        <div class="language-item mb-3">
+          <div class="flex justify-between items-center mb-1">
+            <span class="language-name font-medium text-gray-700">English</span>
+            <span class="text-sm text-blue-600 font-semibold">[Your Proficiency Level e.g., C1 Proficient or Native]</span>
+          </div>
+          <div class="w-full bg-gray-200 rounded-full h-2.5">
+            <div class="bg-blue-500 h-2.5 rounded-full" style="width: 90%"></div>
+          </div>
+        </div>
+        <div class="language-item">
+          <div class="flex justify-between items-center mb-1">
+            <span class="language-name font-medium text-gray-700">[Other Language, e.g., Macedonian]</span>
+            <span class="text-sm text-blue-600 font-semibold">[Your Proficiency Level e.g., Native or Proficient]</span>
+          </div>
+          <div class="w-full bg-gray-200 rounded-full h-2.5">
+            <div class="bg-blue-500 h-2.5 rounded-full" style="width: 100%"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+  <footer class="text-center mt-12 pt-6 border-t border-gray-300 no-print">
+    <p class="text-xs text-gray-500">[Your Name] © <span id="currentYear"></span></p>
+  </footer>
+</div>
+<script>
+  document.getElementById('currentYear').textContent = new Date().getFullYear();
+  const timelineGroups = document.querySelectorAll('.timeline-group');
+  timelineGroups.forEach(group => {
+    const items = group.querySelectorAll('.timeline-item');
+    if (items.length > 0) {
+      const lastItem = items[items.length - 1];
+      const line = lastItem.querySelector('.border-l-2');
+      if(line) {
+        // Check if it is indeed the last item before removing padding
+        if (items.length === Array.from(group.children).filter(child => child.classList.contains('timeline-item')).length) {
+          lastItem.style.paddingBottom = '0';
+          // Optionally, adjust the line height if it's the very last item in the group.
+          const lastLine = lastItem.querySelector('.border-l-2');
+          if (lastLine) {
+            lastLine.style.height = '0.5rem'; // Stop line at the dot
+          }
+        }
+      }
+    }
+  });
+</script>
+</body>
+</html>

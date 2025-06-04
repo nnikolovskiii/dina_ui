@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nikola Nikolovski - Software Developer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      color: #2d3748;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 2rem 1rem;
+    }
+
+    .cv-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .cv-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+    }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+      color: white;
+      padding: 3rem 2rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+      background-size: 20px 20px;
+      animation: float 20s infinite linear;
+    }
+
+    @keyframes float {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      100% { transform: translate(-20px, -20px) rotate(360deg); }
+    }
+
+    .header-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .profile-section {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .profile-avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      color: white;
+      font-weight: 300;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .profile-info h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, #ffffff, #e2e8f0);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .profile-info h2 {
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: #a0aec0;
+      margin-bottom: 1rem;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .contact-item:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .contact-item i {
+      font-size: 1.2rem;
+      color: #667eea;
+      width: 20px;
+      text-align: center;
+    }
+
+    .contact-item a {
+      color: white;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .contact-item a:hover {
+      color: #667eea;
+    }
+
+    /* Main Content */
+    .main-content {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 3rem;
+      padding: 3rem;
+    }
+
+    .content-section {
+      background: #f8fafc;
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      border: 1px solid #e2e8f0;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #1a202c;
+      margin-bottom: 1.5rem;
+      position: relative;
+      padding-bottom: 0.5rem;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+      border-radius: 2px;
+    }
+
+    .summary {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #4a5568;
+    }
+
+    /* Timeline */
+    .timeline {
+      position: relative;
+      padding-left: 2rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0.75rem;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, #667eea, #764ba2);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-bottom: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -1.4rem;
+      top: 0.5rem;
+      width: 12px;
+      height: 12px;
+      background: #667eea;
+      border-radius: 50%;
+      border: 3px solid white;
+      box-shadow: 0 0 0 3px #667eea;
+    }
+
+    .timeline-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.5rem;
+      gap: 1rem;
+    }
+
+    .timeline-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #1a202c;
+    }
+
+    .timeline-date {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .timeline-company {
+      font-weight: 500;
+      color: #667eea;
+      margin-bottom: 1rem;
+    }
+
+    .timeline-content ul {
+      list-style: none;
+    }
+
+    .timeline-content li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: #4a5568;
+    }
+
+    .timeline-content li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: #667eea;
+      font-weight: bold;
+    }
+
+    /* Projects */
+    .project-card {
+      background: white;
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      border: 1px solid #e2e8f0;
+      transition: all 0.3s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+
+    .project-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #1a202c;
+      margin-bottom: 0.5rem;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .project-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    }
+
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+
+    .tech-tag {
+      background: linear-gradient(135deg, #e6fffa, #b2f5ea);
+      color: #234e52;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      border: 1px solid #81e6d9;
+    }
+
+    .project-description {
+      color: #4a5568;
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    .project-highlights {
+      list-style: none;
+    }
+
+    .project-highlights li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 0.75rem;
+      color: #4a5568;
+    }
+
+    .project-highlights li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: #48bb78;
+      font-weight: bold;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      space-y: 2rem;
+    }
+
+    .skill-category {
+      margin-bottom: 2rem;
+    }
+
+    .skill-category h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #1a202c;
+      margin-bottom: 1rem;
+      position: relative;
+      padding-left: 1rem;
+    }
+
+    .skill-category h3::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 4px;
+      height: 20px;
+      background: linear-gradient(180deg, #667eea, #764ba2);
+      border-radius: 2px;
+    }
+
+    .skill-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .skill-item {
+      background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+      color: #0c4a6e;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      border: 1px solid #7dd3fc;
+      transition: all 0.3s ease;
+    }
+
+    .skill-item:hover {
+      background: linear-gradient(135deg, #0ea5e9, #0284c7);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    /* Languages */
+    .language-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      background: white;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .language-name {
+      font-weight: 500;
+      color: #1a202c;
+    }
+
+    .language-level {
+      display: flex;
+      gap: 0.25rem;
+    }
+
+    .level-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #e2e8f0;
+    }
+
+    .level-dot.active {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .main-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 2rem;
+      }
+
+      .profile-section {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 1rem;
+      }
+
+      .cv-container {
+        border-radius: 16px;
+      }
+
+      .header {
+        padding: 2rem 1rem;
+      }
+
+      .profile-info h1 {
+        font-size: 2rem;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .main-content {
+        padding: 1.5rem;
+      }
+
+      .timeline-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+
+      .project-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+
+      .project-links {
+        width: 100%;
+        justify-content: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="cv-container">
+  <header class="header">
+    <div class="header-content">
+      <div class="profile-section">
+        <div class="profile-avatar">
+          NN
+        </div>
+        <div class="profile-info">
+          <h1>Nikola Nikolovski</h1>
+          <h2>AI-Focused Software Developer</h2>
+        </div>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-item">
+          <i class="fas fa-envelope"></i>
+          <span>nikolovski.nikola42@gmail.com</span>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-phone"></i>
+          <span>(+389) 70 222 315</span>
+        </div>
+        <div class="contact-item">
+          <i class="fab fa-linkedin"></i>
+          <a href="https://www.linkedin.com/in/nikola-nikolovski-365340215/" target="_blank">LinkedIn Profile</a>
+        </div>
+        <div class="contact-item">
+          <i class="fab fa-github"></i>
+          <a href="https://github.com/nnikolovskiii" target="_blank">GitHub Profile</a>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>Skopje, North Macedonia</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="main-content">
+    <div class="primary-content">
+      <section class="content-section">
+        <h2 class="section-title">Professional Summary</h2>
+        <p class="summary">
+          Innovative AI-focused software developer with expertise in building intelligent systems, RAG architectures, and automated workflows. Specialized in bridging the gap between cutting-edge AI research and practical applications, with a strong foundation in full-stack development and machine learning operations. Passionate about creating AI solutions that solve real-world problems through thoughtful system design and implementation.
+        </p>
+      </section>
+
+      <section class="content-section">
+        <h2 class="section-title">Professional Experience</h2>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-header">
+              <h3 class="timeline-title">AI Engineering Intern</h3>
+              <span class="timeline-date">Apr 2024 - Jun 2024</span>
+            </div>
+            <div class="timeline-company">G+D Netcetera, Skopje, North Macedonia</div>
+            <div class="timeline-content">
+              <ul>
+                <li>Architected and deployed automated AI workflows for comprehensive chatbot performance evaluation, reducing manual testing time by 75%</li>
+                <li>Conducted comparative analysis of multiple reranking models, optimizing retrieval accuracy by 15% through systematic performance benchmarking</li>
+                <li>Implemented advanced guardrail systems for generative AI models, ensuring reliable and controlled outputs in production environments</li>
+                <li>Collaborated with cross-functional teams to integrate AI solutions into existing enterprise systems</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-header">
+              <h3 class="timeline-title">Teaching Assistant - Programming</h3>
+              <span class="timeline-date">Oct 2022 - Jun 2023</span>
+            </div>
+            <div class="timeline-company">Faculty of Computer Science and Engineering</div>
+            <div class="timeline-content">
+              <ul>
+                <li>Mentored 60+ students in C/C++ programming fundamentals, object-oriented design principles, and software engineering best practices</li>
+                <li>Developed interactive coding exercises and debugging workshops, improving student comprehension rates by 30%</li>
+                <li>Provided personalized guidance on complex programming concepts and project implementation</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-section">
+        <h2 class="section-title">Education</h2>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-header">
+              <h3 class="timeline-title">Bachelor of Science in Computer Science</h3>
+              <span class="timeline-date">Oct 2020 - Feb 2025</span>
+            </div>
+            <div class="timeline-company">Faculty of Computer Science and Engineering, Skopje</div>
+            <div class="timeline-content">
+              <ul>
+                <li>GPA: 8.90/10.00 (Magna Cum Laude)</li>
+                <li>Relevant Coursework: Machine Learning, Artificial Intelligence, Software Engineering, Data Structures & Algorithms</li>
+                <li>Capstone Project: AI-Powered Institution Services Assistant (Outstanding Achievement Award)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-section">
+        <h2 class="section-title">Featured Projects</h2>
+
+        <div class="project-card">
+          <div class="project-header">
+            <div>
+              <h3 class="project-title">AI-Powered Institution Services Assistant</h3>
+              <div class="tech-stack">
+                <span class="tech-tag">AI Agents</span>
+                <span class="tech-tag">Task Automation</span>
+                <span class="tech-tag">FastAPI</span>
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">LLM Integration</span>
+              </div>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/nnikolovskiii/dina" target="_blank" class="project-link">
+                <i class="fab fa-github"></i> Code
+              </a>
+              <a href="https://youtu.be/nwrx3uRPXvo" target="_blank" class="project-link">
+                <i class="fas fa-play"></i> Demo
+              </a>
+            </div>
+          </div>
+          <p class="project-description">
+            Revolutionary conversational AI system that transforms how users interact with institutional services through natural language processing and intelligent task automation.
+          </p>
+          <ul class="project-highlights">
+            <li>Engineered a sophisticated tool-based AI agent capable of autonomous PDF generation, appointment scheduling, and payment processing via conversational interface</li>
+            <li>Designed innovative Human-in-the-Loop (HITL) architecture enabling seamless user interaction for complex workflows requiring human input</li>
+            <li>Achieved 90% automation rate for common institutional tasks, reducing average service completion time from hours to minutes</li>
+            <li>Implemented robust error handling and fallback mechanisms ensuring system reliability in production environments</li>
+          </ul>
+        </div>
+
+        <div class="project-card">
+          <div class="project-header">
+            <div>
+              <h3 class="project-title">Code Explore - RAG System</h3>
+              <div class="tech-stack">
+                <span class="tech-tag">RAG Architecture</span>
+                <span class="tech-tag">Vector Search</span>
+                <span class="tech-tag">Qdrant</span>
+                <span class="tech-tag">Embeddings</span>
+                <span class="tech-tag">Web Scraping</span>
+              </div>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/nnikolovskiii/code_explore" target="_blank" class="project-link">
+                <i class="fab fa-github"></i> Code
+              </a>
+            </div>
+          </div>
+          <p class="project-description">
+            Intelligent documentation exploration system leveraging advanced RAG architecture to provide contextual understanding of technical documentation and codebases.
+          </p>
+          <ul class="project-highlights">
+            <li>Built end-to-end RAG pipeline with automated web scraping, intelligent chunking, and vector database storage using Qdrant</li>
+            <li>Developed context enhancement algorithm using AI-generated summaries, improving retrieval accuracy by 25%</li>
+            <li>Implemented efficient embedding generation pipeline with self-hosted transformer models for optimal performance</li>
+            <li>Created responsive web interface enabling developers to explore and understand complex codebases through natural language queries</li>
+          </ul>
+        </div>
+      </section>
+    </div>
+
+    <div class="sidebar">
+      <section class="content-section">
+        <h2 class="section-title">Technical Expertise</h2>
+
+        <div class="skill-category">
+          <h3>AI & Machine Learning</h3>
+          <div class="skill-grid">
+            <span class="skill-item">AI Agent Development</span>
+            <span class="skill-item">RAG Systems</span>
+            <span class="skill-item">Vector Databases</span>
+            <span class="skill-item">LLM Integration</span>
+            <span class="skill-item">Embedding Models</span>
+            <span class="skill-item">Contextual Retrieval</span>
+            <span class="skill-item">Model Reranking</span>
+            <span class="skill-item">AI Workflows</span>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <h3>Backend Development</h3>
+          <div class="skill-grid">
+            <span class="skill-item">Python</span>
+            <span class="skill-item">FastAPI</span>
+            <span class="skill-item">Async Programming</span>
+            <span class="skill-item">API Design</span>
+            <span class="skill-item">WebSockets</span>
+            <span class="skill-item">Microservices</span>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <h3>Frontend & Full-Stack</h3>
+          <div class="skill-grid">
+            <span class="skill-item">Angular</span>
+            <span class="skill-item">TypeScript</span>
+            <span class="skill-item">JavaScript</span>
+            <span class="skill-item">HTML/CSS</span>
+            <span class="skill-item">Responsive Design</span>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <h3>Data & Infrastructure</h3>
+          <div class="skill-grid">
+            <span class="skill-item">Qdrant</span>
+            <span class="skill-item">MongoDB</span>
+            <span class="skill-item">PostgreSQL</span>
+            <span class="skill-item">Docker</span>
+            <span class="skill-item">Git</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-section">
+        <h2 class="section-title">Languages</h2>
+        <div class="language-item">
+          <span class="language-name">English</span>
+          <div class="language-level">
+            <div class="level-dot active"></div>
+            <div class="level-dot active"></div>
+            <div class="level-dot active"></div>
+            <div class="level-dot active"></div>
+            <div class="level-dot active"></div>
+          </div>
+        </div>
+        <div class="language-item">
+          <span class="language-name">Macedonian</span>
+          <div class="language-level">
+            <div class="level-dot active"></div>
+            <div class="level-dot active"></div>
+            <div class="level-dot active"></div>
+            <div class="level-dot active"></div>
+            <div class="level-dot active"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -32,64 +32,80 @@
 <div class="image-overlay2">
   <img class="left-big-img" src="../../assets/img2.png" height="433" width="403"/>
 </div>
-<section class="hero-text">
-  <div class="container">
-    <h1>{{ 'LANDING_PAGE.HERO.TITLE' | translate }}</h1>
-    <p >
-      {{ 'LANDING_PAGE.HERO.DESCRIPTION' | translate }}
-    </p>
+<div class="sections-container">
+  <section class="hero-text">
+    <div class="container pb-5">
+      <app-title
+        title="{{ 'LANDING_PAGE.HERO.TITLE' | translate }}"
+        description="{{ 'LANDING_PAGE.HERO.DESCRIPTION' | translate }}"
+        position="center">
+      </app-title>
 
-    <!--      <p>Embedded in your website or app, our solution slashes wait times, boosts loyalty, and lets your team focus on what matters most.    </p>-->
-
-
-  </div>
-</section>
-
-<app-video-screen class="flex justify-center w-full"></app-video-screen>
-
-
-<section class="cta-buttons">
-  <div class="container button-container">
-    <button class="btn btn-dark">{{ 'LANDING_PAGE.CTA.TRY_REMORA' | translate }}</button>
-    <button class="btn btn-light">{{ 'LANDING_PAGE.CTA.DOWNLOAD_APP' | translate }}</button>
-  </div>
-</section>
-
-<div class="hero-section">
-  <h2 class="hero-subtitle">{{ 'LANDING_PAGE.USE_CASES.SUBTITLE' | translate }}</h2>
-  <h1 class="hero-title">{{ 'LANDING_PAGE.USE_CASES.TITLE' | translate }}</h1>
-  <p class="hero-description">{{ 'LANDING_PAGE.USE_CASES.DESCRIPTION' | translate }}</p>
-</div>
-<app-tabs></app-tabs>
-<div class="screen-container">
-  <div class="web-screen">
-    <div class="screen-content">
-
-      <img src="../../assets/malenki.jpg" height="520" width="916"/></div>
-  </div>
-  <div class="phone-screen">
-    <div class="screen-content" style="padding-top: 20px;">Phone Screen Top</div>
-    <div class="screen-content" style="flex-grow: 1; display:flex; align-items:center; justify-content:center;">
-      Main Content Area
+      <!--      <p>Embedded in your website or app, our solution slashes wait times, boosts loyalty, and lets your team focus on what matters most.    </p>-->
     </div>
-    <div class="screen-content" style="padding-bottom: 10px;">Navigation Bar</div>
-  </div>
+
+    <app-video-screen class="flex justify-center w-full pb-3"></app-video-screen>
+
+    <section class="cta-buttons">
+      <div class="container button-container">
+        <button class="btn btn-dark">{{ 'LANDING_PAGE.CTA.TRY_REMORA' | translate }}</button>
+        <button class="btn btn-light">{{ 'LANDING_PAGE.CTA.DOWNLOAD_APP' | translate }}</button>
+      </div>
+    </section>
+
+  </section>
+
+
+  <section class="flex flex-col items-center justify-center">
+    <app-title
+      subtitle="{{ 'LANDING_PAGE.USE_CASES.SUBTITLE' | translate }}"
+      title="{{ 'LANDING_PAGE.USE_CASES.TITLE' | translate }}"
+      description="{{ 'LANDING_PAGE.USE_CASES.DESCRIPTION' | translate }}"
+      position="center">
+    </app-title>
+    <app-tabs></app-tabs>
+  </section>
+
+  <section>
+    <app-title
+        subtitle="{{ 'LANDING_PAGE.SCREENS.SUBTITLE' | translate }}"
+      title="{{ 'LANDING_PAGE.SCREENS.TITLE' | translate }}"
+      description="{{ 'LANDING_PAGE.SCREENS.DESCRIPTION' | translate }}"
+      position="center">
+    </app-title>
+    <div class="h-[50px]"></div>
+    <div class="screen-container">
+      <div class="web-screen">
+        <div class="screen-content">
+
+          <img [src]="webImageSrc" height="520" width="916"/></div>
+      </div>
+      <div class="phone-screen">
+        <img class="rounded-[20px]" [src]="phoneImageSrc" height="1540" width="786"/></div>
+    </div>
+  </section>
+
+
+  <section id="contact-section" class="contact-section">
+    <div class="container contact-container">
+      <app-title
+        subtitle="{{ 'LANDING_PAGE.CONTACT.SUBTITLE' | translate }}"
+        title="{{ 'LANDING_PAGE.CONTACT.TITLE' | translate }}"
+        description="{{ 'LANDING_PAGE.CONTACT.DESCRIPTION' | translate }}"
+        position="center">
+      </app-title>
+
+      <form class="contact-form" action="mailto:your-email@example.com" method="post" enctype="text/plain">
+        <input type="text" name="name" placeholder="{{ 'LANDING_PAGE.CONTACT.FORM.NAME_PLACEHOLDER' | translate }}"
+               required/>
+        <input type="email" name="email" placeholder="{{ 'LANDING_PAGE.CONTACT.FORM.EMAIL_PLACEHOLDER' | translate }}"
+               required/>
+        <textarea name="message" rows="5"
+                  placeholder="{{ 'LANDING_PAGE.CONTACT.FORM.MESSAGE_PLACEHOLDER' | translate }}" required></textarea>
+        <button type="submit" class="btn btn-dark">{{ 'LANDING_PAGE.CONTACT.FORM.SUBMIT' | translate }}</button>
+      </form>
+    </div>
+  </section>
 </div>
-
-
-<section id="contact-section" class="contact-section">
-  <div class="container contact-container">
-    <h2 class="hero-subtitle">{{ 'LANDING_PAGE.CONTACT.SUBTITLE' | translate }}</h2>
-    <h1 class="hero-title">{{ 'LANDING_PAGE.CONTACT.TITLE' | translate }}</h1>
-    <p class="hero-description">{{ 'LANDING_PAGE.CONTACT.DESCRIPTION' | translate }}</p>
-
-    <form class="contact-form" action="mailto:your-email@example.com" method="post" enctype="text/plain">
-      <input type="text" name="name" placeholder="{{ 'LANDING_PAGE.CONTACT.FORM.NAME_PLACEHOLDER' | translate }}" required />
-      <input type="email" name="email" placeholder="{{ 'LANDING_PAGE.CONTACT.FORM.EMAIL_PLACEHOLDER' | translate }}" required />
-      <textarea name="message" rows="5" placeholder="{{ 'LANDING_PAGE.CONTACT.FORM.MESSAGE_PLACEHOLDER' | translate }}" required></textarea>
-      <button type="submit" class="btn btn-dark">{{ 'LANDING_PAGE.CONTACT.FORM.SUBMIT' | translate }}</button>
-    </form>
-  </div>
-</section>
 
 <app-footer></app-footer>

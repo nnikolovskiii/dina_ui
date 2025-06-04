@@ -43,6 +43,14 @@ body.no-scroll {
   padding-right: 32px;
 }
 
+.sections-container{
+  display: flex;
+  flex-direction: column;
+  gap: 150px;
+  justify-content: center;
+  align-content: center;
+}
+
 .header {
   display: flex;
   flex-direction: row;
@@ -390,7 +398,6 @@ button {
 
 .hero-section {
   text-align: center;
-  max-width: 600px;
   padding: 0 20px;
 }
 

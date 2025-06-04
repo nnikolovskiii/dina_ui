@@ -1,0 +1,48 @@
+.title-container {
+  margin-bottom: 30px;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.hero-subtitle {
+  font-size: 14px;
+  font-weight: 700;
+  color: #666;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.hero-title {
+  font-size: 36px;
+  font-weight: 900;
+  color: #000;
+  margin: 20px 0 10px;
+}
+
+.hero-description {
+  font-size: 16px;
+  color: #666;
+  margin: 0;
+}
+
+/* Responsive styles */
+@media (max-width: 992px) {
+  .hero-title {
+    font-size: 28px;
+  }
+
+  .hero-description {
+    font-size: 14px;
+  }
+}
