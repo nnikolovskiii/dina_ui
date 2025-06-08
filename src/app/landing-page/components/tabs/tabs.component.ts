@@ -9,18 +9,21 @@ import {NgFor, NgIf} from '@angular/common';
   styleUrl: './tabs.component.css'
 })
 export class TabsComponent {
-  activeTab: string = 'featured';
+  // Sets the default active tab to the first feature
+  activeTab: string = 'task-automation';
 
+  // Defines the new tabs based on your features
   tabs = [
-    {label: 'Featured', value: 'featured'},
-    {label: 'Research', value: 'research'},
-    {label: 'Life', value: 'life'},
-    {label: 'Data Analysis', value: 'data-analysis'},
-    {label: 'Education', value: 'education'},
-    {label: 'Productivity', value: 'productivity'},
-    {label: 'WTF', value: 'wtf'}
+    { label: 'Task Automation', value: 'task-automation' },
+    { label: 'Communication', value: 'multimodal-communication' },
+    { label: 'Reasoning', value: 'advanced-reasoning' },
+    { label: 'Understanding', value: 'contextual-understanding' }
   ];
 
+  /**
+   * Sets the active tab to the one provided.
+   * @param tabValue The value of the tab to make active.
+   */
   setActiveTab(tabValue: string): void {
     this.activeTab = tabValue;
   }
