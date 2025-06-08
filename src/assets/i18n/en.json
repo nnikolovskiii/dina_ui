@@ -27,6 +27,44 @@
       "TITLE": "Flexible Display, Seamless Experience",
       "DESCRIPTION": "For seamless customer support, the AI assistant is readily available on mobile devices and can be integrated directly onto your current website for easy access."
     },
+    "TABS": {
+      "TASK_AUTOMATION": "Task Automation",
+      "COMMUNICATION": "Communication",
+      "REASONING": "Reasoning",
+      "UNDERSTANDING": "Understanding",
+      "TASK_AUTOMATION_CONTENT": {
+        "TITLE": "Automated Task Execution",
+        "DESCRIPTION": "Goes beyond simple answers to actively perform tasks like filling out forms, scheduling appointments, and completing multi-step service requests directly for customers.",
+        "CARD1_TITLE": "Hands-Free Form Completion",
+        "CARD1_DESCRIPTION": "Automatically fills out complex registration or application forms.",
+        "CARD2_TITLE": "Intelligent Appointment Setting",
+        "CARD2_DESCRIPTION": "Schedules, reschedules, and cancels appointments across calendars."
+      },
+      "COMMUNICATION_CONTENT": {
+        "TITLE": "Rich & Multimodal Communication",
+        "DESCRIPTION": "Delivers information and assistance in the most effective format, combining text with images, tables, charts, and other visual elements for maximum clarity and engagement.",
+        "CARD1_TITLE": "Dynamic Data Visualization",
+        "CARD1_DESCRIPTION": "Generates interactive charts and tables to explain complex data.",
+        "CARD2_TITLE": "Visual How-To Guides",
+        "CARD2_DESCRIPTION": "Provides step-by-step instructions with images and diagrams."
+      },
+      "REASONING_CONTENT": {
+        "TITLE": "Advanced Reasoning & Planning",
+        "DESCRIPTION": "Unlike basic retrieval systems, the AI analyzes complex queries, synthesizes information from various sources, and plans multi-step interactions to provide sophisticated support.",
+        "CARD1_TITLE": "Multi-Step Planner",
+        "CARD1_DESCRIPTION": "Organizes and executes a series of dependent actions to accomplish a larger, composite goal.",
+        "CARD2_TITLE": "Complex Problem Solving",
+        "CARD2_DESCRIPTION": "Synthesizes information to offer solutions for multifaceted challenges."
+      },
+      "UNDERSTANDING_CONTENT": {
+        "TITLE": "Deep Contextual Understanding",
+        "DESCRIPTION": "Maintains full awareness of the conversation history and relevant customer information, ensuring responses are always personalized, accurate, and highly relevant to the situation.",
+        "CARD1_TITLE": "Personalized Follow-Ups",
+        "CARD1_DESCRIPTION": "Remembers previous interactions to provide seamless, ongoing support.",
+        "CARD2_TITLE": "Mid-Task Adaptation",
+        "CARD2_DESCRIPTION": "Adjusts its course of action based on new information in the conversation."
+      }
+    },
     "CONTACT": {
       "SUBTITLE": "Get in Touch",
       "TITLE": "Interested in Using Remora for Your Business?",

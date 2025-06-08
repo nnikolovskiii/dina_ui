@@ -5,7 +5,7 @@
     [class.active]="tab.value === activeTab"
     (click)="setActiveTab(tab.value)"
   >
-    {{ tab.label }}
+    {{ tab.label | translate }}
   </button>
 </div>
 
@@ -14,22 +14,21 @@
 
     <div *ngIf="currentTab === 'task-automation'" class="view active">
       <div class="tab-content-container">
-        <h3>Automated Task Execution</h3>
-        <p>Goes beyond simple answers to actively perform tasks like filling out forms, scheduling appointments, and completing multi-step service requests directly for customers.</p>
+        <h3>{{ 'LANDING_PAGE.TABS.TASK_AUTOMATION_CONTENT.TITLE' | translate }}</h3>
+        <p>{{ 'LANDING_PAGE.TABS.TASK_AUTOMATION_CONTENT.DESCRIPTION' | translate }}</p>
         <div class="use-case-cards">
           <div class="use-case-card">
             <div class="use-case-icon">
-
               <img src="../../../../assets/tabs_images/automation%20(1).png" height="35" width="35"/></div>
-            <h4>Hands-Free Form Completion</h4>
-            <p>Automatically fills out complex registration or application forms.</p>
+            <h4>{{ 'LANDING_PAGE.TABS.TASK_AUTOMATION_CONTENT.CARD1_TITLE' | translate }}</h4>
+            <p>{{ 'LANDING_PAGE.TABS.TASK_AUTOMATION_CONTENT.CARD1_DESCRIPTION' | translate }}</p>
           </div>
           <div class="use-case-card">
             <div class="use-case-icon">
               <img src="../../../../assets/tabs_images/calendar%20(1).png" height="32" width="32"/>
             </div>
-            <h4>Intelligent Appointment Setting</h4>
-            <p>Schedules, reschedules, and cancels appointments across calendars.</p>
+            <h4>{{ 'LANDING_PAGE.TABS.TASK_AUTOMATION_CONTENT.CARD2_TITLE' | translate }}</h4>
+            <p>{{ 'LANDING_PAGE.TABS.TASK_AUTOMATION_CONTENT.CARD2_DESCRIPTION' | translate }}</p>
           </div>
         </div>
       </div>
@@ -37,21 +36,20 @@
 
     <div *ngIf="currentTab === 'multimodal-communication'" class="view active">
       <div class="tab-content-container">
-        <h3>Rich & Multimodal Communication</h3>
-        <p>Delivers information and assistance in the most effective format, combining text with images, tables, charts, and other visual elements for maximum clarity and engagement.</p>
+        <h3>{{ 'LANDING_PAGE.TABS.COMMUNICATION_CONTENT.TITLE' | translate }}</h3>
+        <p>{{ 'LANDING_PAGE.TABS.COMMUNICATION_CONTENT.DESCRIPTION' | translate }}</p>
         <div class="use-case-cards">
           <div class="use-case-card">
             <div class="use-case-icon">
-
               <img src="../../../../assets/tabs_images/grow-up.png" height="32" width="32"/></div>
-            <h4>Dynamic Data Visualization</h4>
-            <p>Generates interactive charts and tables to explain complex data.</p>
+            <h4>{{ 'LANDING_PAGE.TABS.COMMUNICATION_CONTENT.CARD1_TITLE' | translate }}</h4>
+            <p>{{ 'LANDING_PAGE.TABS.COMMUNICATION_CONTENT.CARD1_DESCRIPTION' | translate }}</p>
           </div>
           <div class="use-case-card">
             <div class="use-case-icon"><img src="../../../../assets/tabs_images/image (1).png" height="32" width="32"/>
             </div>
-            <h4>Visual How-To Guides</h4>
-            <p>Provides step-by-step instructions with images and diagrams.</p>
+            <h4>{{ 'LANDING_PAGE.TABS.COMMUNICATION_CONTENT.CARD2_TITLE' | translate }}</h4>
+            <p>{{ 'LANDING_PAGE.TABS.COMMUNICATION_CONTENT.CARD2_DESCRIPTION' | translate }}</p>
           </div>
         </div>
       </div>
@@ -59,22 +57,20 @@
 
     <div *ngIf="currentTab === 'advanced-reasoning'" class="view active">
       <div class="tab-content-container">
-        <h3>Advanced Reasoning & Planning</h3>
-        <p>Unlike basic retrieval systems, the AI analyzes complex queries, synthesizes information from various sources, and plans multi-step interactions to provide sophisticated support.</p>
+        <h3>{{ 'LANDING_PAGE.TABS.REASONING_CONTENT.TITLE' | translate }}</h3>
+        <p>{{ 'LANDING_PAGE.TABS.REASONING_CONTENT.DESCRIPTION' | translate }}</p>
         <div class="use-case-cards">
           <div class="use-case-card">
             <div class="use-case-icon">
-
               <img src="../../../../assets/tabs_images/plan.png" height="35" width="35"/></div>
-            <h4>Multi-Step Planner</h4>
-            <p>Organizes and executes a series of dependent actions to accomplish a larger, composite goal.</p>
+            <h4>{{ 'LANDING_PAGE.TABS.REASONING_CONTENT.CARD1_TITLE' | translate }}</h4>
+            <p>{{ 'LANDING_PAGE.TABS.REASONING_CONTENT.CARD1_DESCRIPTION' | translate }}</p>
           </div>
           <div class="use-case-card">
             <div class="use-case-icon">
-
               <img src="../../../../assets/tabs_images/idea.png" height="32" width="32"/></div>
-            <h4>Complex Problem Solving</h4>
-            <p>Synthesizes information to offer solutions for multifaceted challenges.</p>
+            <h4>{{ 'LANDING_PAGE.TABS.REASONING_CONTENT.CARD2_TITLE' | translate }}</h4>
+            <p>{{ 'LANDING_PAGE.TABS.REASONING_CONTENT.CARD2_DESCRIPTION' | translate }}</p>
           </div>
         </div>
       </div>
@@ -82,20 +78,20 @@
 
     <div *ngIf="currentTab === 'contextual-understanding'" class="view active">
       <div class="tab-content-container">
-        <h3>Deep Contextual Understanding</h3>
-        <p>Maintains full awareness of the conversation history and relevant customer information, ensuring responses are always personalized, accurate, and highly relevant to the situation.</p>
+        <h3>{{ 'LANDING_PAGE.TABS.UNDERSTANDING_CONTENT.TITLE' | translate }}</h3>
+        <p>{{ 'LANDING_PAGE.TABS.UNDERSTANDING_CONTENT.DESCRIPTION' | translate }}</p>
         <div class="use-case-cards">
           <div class="use-case-card">
             <div class="use-case-icon">
               <img src="../../../../assets/tabs_images/chat (1).png" height="35" width="35"/></div>
-            <h4>Personalized Follow-Ups</h4>
-            <p>Remembers previous interactions to provide seamless, ongoing support.</p>
+            <h4>{{ 'LANDING_PAGE.TABS.UNDERSTANDING_CONTENT.CARD1_TITLE' | translate }}</h4>
+            <p>{{ 'LANDING_PAGE.TABS.UNDERSTANDING_CONTENT.CARD1_DESCRIPTION' | translate }}</p>
           </div>
           <div class="use-case-card">
             <div class="use-case-icon"><img src="../../../../assets/tabs_images/adaptation.png" height="35" width="35"/>
             </div>
-            <h4>Mid-Task Adaptation</h4>
-            <p>Adjusts its course of action based on new information in the conversation.</p>
+            <h4>{{ 'LANDING_PAGE.TABS.UNDERSTANDING_CONTENT.CARD2_TITLE' | translate }}</h4>
+            <p>{{ 'LANDING_PAGE.TABS.UNDERSTANDING_CONTENT.CARD2_DESCRIPTION' | translate }}</p>
           </div>
         </div>
       </div>
