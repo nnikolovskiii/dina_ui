@@ -14,42 +14,23 @@ export class VideoScreenComponent implements AfterViewInit {
     if (this.videoPlayer && this.videoPlayer.nativeElement) {
       const videoElement = this.videoPlayer.nativeElement;
 
-      // Explicitly set loop property to true
+      // Ensure video is muted for autoplay
+      videoElement.muted = true;
+
+      // Set loop
       videoElement.loop = true;
 
-      // Make sure video is not paused and ready to play
-      videoElement.onloadeddata = () => {
-        this.playVideo(videoElement);
-      };
+      // Attempt to play the video
+      const playPromise = videoElement.play();
 
-      // If the video is already loaded, try to play it immediately
-      if (videoElement.readyState >= 2) {
-        this.playVideo(videoElement);
+      if (playPromise !== undefined) {
+        playPromise.catch(error => {
+          console.error('Autoplay was prevented:', error);
+          // Optionally, you could show a play button here for the user to initiate playback.
+        });
       }
-
-      // Add event listener for when video ends to ensure looping works properly
-      videoElement.onended = () => {
-        // Reset the video to the beginning and play again
-        videoElement.currentTime = 0;
-        this.playVideo(videoElement);
-      };
     } else {
       console.error('Video element not found!');
-    }
-  }
-
-  private playVideo(videoElement: HTMLVideoElement) {
-    // Attempt to play programmatically
-    const playPromise = videoElement.play();
-
-    if (playPromise !== undefined) {
-      playPromise.then(_ => {
-        // Autoplay started or video.play() was successful!
-        console.log('Video playback initiated successfully.');
-      }).catch(error => {
-        // Autoplay was prevented.
-        console.error('Error attempting to play video:', error);
-      });
     }
   }
 }
