@@ -30,7 +30,8 @@
         "NAME_PLACEHOLDER": "Tu Nombre",
         "EMAIL_PLACEHOLDER": "Tu Correo Electrónico",
         "MESSAGE_PLACEHOLDER": "Cuéntanos sobre las necesidades de tu negocio...",
-        "SUBMIT": "Enviar Consulta"
+        "SUBMIT": "Enviar Consulta",
+        "SUCCESS": "¡Formulario enviado con éxito! Nos pondremos en contacto contigo pronto."
       }
     }
   }

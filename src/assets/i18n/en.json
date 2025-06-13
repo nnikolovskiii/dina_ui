@@ -73,7 +73,8 @@
         "NAME_PLACEHOLDER": "Your Name",
         "EMAIL_PLACEHOLDER": "Your Email",
         "MESSAGE_PLACEHOLDER": "Tell us about your business needs...",
-        "SUBMIT": "Send Inquiry"
+        "SUBMIT": "Send Inquiry",
+        "SUCCESS": "Form submitted successfully! We'll get back to you soon."
       }
     },
     "FOOTER": {

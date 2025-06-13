@@ -607,3 +607,22 @@ button {
     border-bottom-width: 20px;
   }
 }
+
+/* Add styles for form error and success messages */
+.error-message {
+  color: #dc3545;
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: rgba(220, 53, 69, 0.1);
+  border-radius: 4px;
+  text-align: center;
+}
+
+.success-message {
+  color: #28a745;
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: rgba(40, 167, 69, 0.1);
+  border-radius: 4px;
+  text-align: center;
+}

@@ -1,12 +1,15 @@
 import {Component, Renderer2} from '@angular/core';
 import {TabsComponent} from './components/tabs/tabs.component';
 import {LanguageSelectorComponent} from './components/language-selector/language-selector.component';
-import {NgClass} from '@angular/common';
+import {NgClass, NgIf} from '@angular/common';
 import {SandwichToggleComponent} from './components/sandwich-toggle/sandwich-toggle.component';
 import {FooterComponent} from './components/footer/footer.component';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {VideoScreenComponent} from './components/video-screen/video-screen.component';
 import {TitleComponent} from '../shared/components/title/title.component';
+import {BusinessInquiryService} from '../services/business-inquiry.service';
+import {FormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
 
 @Component({
   selector: 'app-landing-page',
@@ -15,11 +18,14 @@ import {TitleComponent} from '../shared/components/title/title.component';
     TabsComponent,
     LanguageSelectorComponent,
     NgClass,
+    NgIf,
     SandwichToggleComponent,
     FooterComponent,
     TranslateModule,
     VideoScreenComponent,
-    TitleComponent
+    TitleComponent,
+    FormsModule,
+    HttpClientModule
   ],
   templateUrl: './landing-page.html',
   styleUrls: ['./landing-page-web.css', './landing-page-mobile.css']
@@ -28,7 +34,19 @@ export class LandingPage {
   isMobileMenuOpen = false;
   currentLang: string;
 
-  constructor(private renderer: Renderer2, private translate: TranslateService) {
+  // Form data properties
+  formName: string = '';
+  formEmail: string = '';
+  formMessage: string = '';
+  formSubmitted: boolean = false;
+  formError: string = '';
+  formSuccess: boolean = false;
+
+  constructor(
+    private renderer: Renderer2,
+    private translate: TranslateService,
+    private businessInquiryService: BusinessInquiryService
+  ) {
     // The language is already set in the LanguageSelectorComponent
     this.currentLang = this.translate.currentLang || 'en';
     this.translate.onLangChange.subscribe(event => {
@@ -49,6 +67,37 @@ export class LandingPage {
   private touchmoveListener: any;
   private touchstartListener: any;
   private keydownListener: any;
+
+  /**
+   * Submit the business inquiry form
+   */
+  submitForm(): void {
+    this.formSubmitted = true;
+    this.formError = '';
+    this.formSuccess = false;
+
+    if (!this.formName || !this.formEmail || !this.formMessage) {
+      this.formError = 'Please fill in all required fields';
+      return;
+    }
+
+    this.businessInquiryService.submitInquiry(this.formName, this.formEmail, this.formMessage)
+      .subscribe({
+        next: (response) => {
+          console.log('Form submitted successfully', response);
+          this.formSuccess = true;
+          // Reset form
+          this.formName = '';
+          this.formEmail = '';
+          this.formMessage = '';
+          this.formSubmitted = false;
+        },
+        error: (error) => {
+          console.error('Error submitting form', error);
+          this.formError = 'An error occurred while submitting the form. Please try again.';
+        }
+      });
+  }
 
   toggleMobileMenu(): void {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;

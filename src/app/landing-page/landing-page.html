@@ -14,10 +14,8 @@
 
   <div class="mobile-menu" [class.active]="isMobileMenuOpen">
     <div class="mobile-menu-content">
-      <a href="#contact-section">{{ 'LANDING_PAGE.MOBILE_MENU.GET_STARTED' | translate }}</a>
-      <a href="#about">{{ 'LANDING_PAGE.MOBILE_MENU.ABOUT' | translate }}</a>
-      <a href="#services">{{ 'LANDING_PAGE.MOBILE_MENU.SERVICES' | translate }}</a>
-      <a href="#contact-section">{{ 'LANDING_PAGE.MOBILE_MENU.CONTACT' | translate }}</a>
+      <a href="#contact-section" (click)="toggleMobileMenu()">{{ 'LANDING_PAGE.MOBILE_MENU.GET_STARTED' | translate }}</a>
+      <a href="#feature-tabs" (click)="toggleMobileMenu()">{{ 'LANDING_PAGE.MOBILE_MENU.SERVICES' | translate }}</a>
     </div>
   </div>
 </div>
@@ -98,14 +96,20 @@
         position="center">
       </app-title>
 
-      <form class="contact-form" action="mailto:your-email@example.com" method="post" enctype="text/plain">
-        <input type="text" name="name" placeholder="{{ 'LANDING_PAGE.CONTACT.FORM.NAME_PLACEHOLDER' | translate }}"
+      <form class="contact-form" (ngSubmit)="submitForm()" #inquiryForm="ngForm">
+        <input type="text" name="name" [(ngModel)]="formName" placeholder="{{ 'LANDING_PAGE.CONTACT.FORM.NAME_PLACEHOLDER' | translate }}"
                required/>
-        <input type="email" name="email" placeholder="{{ 'LANDING_PAGE.CONTACT.FORM.EMAIL_PLACEHOLDER' | translate }}"
+        <input type="email" name="email" [(ngModel)]="formEmail" placeholder="{{ 'LANDING_PAGE.CONTACT.FORM.EMAIL_PLACEHOLDER' | translate }}"
                required/>
-        <textarea name="message" rows="5"
+        <textarea name="message" rows="5" [(ngModel)]="formMessage"
                   placeholder="{{ 'LANDING_PAGE.CONTACT.FORM.MESSAGE_PLACEHOLDER' | translate }}" required></textarea>
-        <button type="submit" class="btn btn-dark">{{ 'LANDING_PAGE.CONTACT.FORM.SUBMIT' | translate }}</button>
+
+        <div *ngIf="formError" class="error-message">{{ formError }}</div>
+        <div *ngIf="formSuccess" class="success-message">{{ 'LANDING_PAGE.CONTACT.FORM.SUCCESS' | translate }}</div>
+
+        <button type="submit" class="btn btn-dark" [disabled]="inquiryForm.invalid && formSubmitted">
+          {{ 'LANDING_PAGE.CONTACT.FORM.SUBMIT' | translate }}
+        </button>
       </form>
     </div>
   </section>
