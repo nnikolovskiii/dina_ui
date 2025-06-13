@@ -1,40 +1,40 @@
 <!-- r-chat.component.html -->
-<div [class.open]="barStatus == 'history'" class="sliding-bar">
-  <app-history-sidebar
-    [isVisible]="barStatus == 'history'"
-    (toggleRequested)="toggleHistoryBar()">
-  </app-history-sidebar>
-</div>
+<!--<div [class.open]="barStatus == 'history'" class="sliding-bar">-->
+<!--  <app-history-sidebar-->
+<!--    [isVisible]="barStatus == 'history'"-->
+<!--    (toggleRequested)="toggleHistoryBar()">-->
+<!--  </app-history-sidebar>-->
+<!--</div>-->
 
-<div [class.open]="barStatus == 'chat_models'" class="sliding-bar">
-</div>
+<!--<div [class.open]="barStatus == 'chat_models'" class="sliding-bar">-->
+<!--</div>-->
 
 <div class="content-wrapper">
   <div class="main-chat-layout bg-wrapper">
-    <div *ngIf="barStatus == 'close'" class="banter-sidebar">
-      <div class="mobile-header-left">
-        <button (click)="toggleHistoryBar()" class="banter-button" aria-label="Toggle App Menu">
-          <img src="../../../../assets/remora-no-bg.png" alt="App Logo" class="banter-icon"/>
-        </button>
-        <button (click)="toggleHistoryBar()" class="banter-button" aria-label="Toggle History">
-          <img src="../../../../assets/history_icon.png" alt="History" class="banter-icon icon-history"/>
-        </button>
-      </div>
-      <div class="mobile-header-right">
-        <button
-          id="new-chat-action-button"
-          (click)="navigateToChat()"
-          class="banter-button"
-          aria-label="New Chat">
-        </button>
-        <div class="banter-user-profile">
-          <div class="relative flex items-center justify-center w-[40px] h-[40px] rounded-full overflow-hidden transition-all duration-300 ease-in-out">
-            <div class="absolute inset-0 rounded-full bg-gradient-to-r from-gray-500 from-gray-700 from-gray-900 opacity-70 animate-pulse"></div>
-            <img src="../../../../assets/p2.jpeg" alt="User Avatar" class="w-9 h-9 rounded-full object-cover border-2 border-gray-500 z-10"/>
-          </div>
-        </div>
-      </div>
-    </div>
+<!--    <div *ngIf="barStatus == 'close'" class="banter-sidebar">-->
+<!--      <div class="mobile-header-left">-->
+<!--        <button (click)="toggleHistoryBar()" class="banter-button" aria-label="Toggle App Menu">-->
+<!--          <img src="../../../../assets/remora-no-bg.png" alt="App Logo" class="banter-icon"/>-->
+<!--        </button>-->
+<!--        <button (click)="toggleHistoryBar()" class="banter-button" aria-label="Toggle History">-->
+<!--          <img src="../../../../assets/history_icon.png" alt="History" class="banter-icon icon-history"/>-->
+<!--        </button>-->
+<!--      </div>-->
+<!--      <div class="mobile-header-right">-->
+<!--        <button-->
+<!--          id="new-chat-action-button"-->
+<!--          (click)="navigateToChat()"-->
+<!--          class="banter-button"-->
+<!--          aria-label="New Chat">-->
+<!--        </button>-->
+<!--        <div class="banter-user-profile">-->
+<!--          <div class="relative flex items-center justify-center w-[40px] h-[40px] rounded-full overflow-hidden transition-all duration-300 ease-in-out">-->
+<!--            <div class="absolute inset-0 rounded-full bg-gradient-to-r from-gray-500 from-gray-700 from-gray-900 opacity-70 animate-pulse"></div>-->
+<!--            <img src="../../../../assets/p2.jpeg" alt="User Avatar" class="w-9 h-9 rounded-full object-cover border-2 border-gray-500 z-10"/>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
 
     <div class="chat-area-wrapper">
       <div class="messages-scroll-container" #messagesContainer>
@@ -91,31 +91,31 @@
         </div>
       </div>
 
-      <div class="message-input-box">
-        <div class="textarea-wrapper">
-          <textarea #messageArea 
-                    [(ngModel)]="inputMessage" 
-                    required
-                    [placeholder]="'Прашај ме...'"
-                    id="messageInput"
-                    (keydown)="handleKeyDown($event, messageArea)"
-                    rows="1"
-                    (input)="autoResize()">
-          </textarea>
-        </div>
-        <div class="message-input-actions">
-          <div class="input-options-placeholder">
-            <div class="radio-btn-img-style"></div>
-          </div>
-          <button id="sendButton" 
-                  class="send-message-button" 
-                  (click)="sendMessage()" 
-                  [disabled]="!inputMessage.trim() || startLoading" 
-                  aria-label="Send Message">
-            <span class="send-icon"></span>
-          </button>
-        </div>
-      </div>
+<!--      <div class="message-input-box">-->
+<!--        <div class="textarea-wrapper">-->
+<!--          <textarea #messageArea -->
+<!--                    [(ngModel)]="inputMessage" -->
+<!--                    required-->
+<!--                    [placeholder]="'Прашај ме...'"-->
+<!--                    id="messageInput"-->
+<!--                    (keydown)="handleKeyDown($event, messageArea)"-->
+<!--                    rows="1"-->
+<!--                    (input)="autoResize()">-->
+<!--          </textarea>-->
+<!--        </div>-->
+<!--        <div class="message-input-actions">-->
+<!--          <div class="input-options-placeholder">-->
+<!--            <div class="radio-btn-img-style"></div>-->
+<!--          </div>-->
+<!--          <button id="sendButton" -->
+<!--                  class="send-message-button" -->
+<!--                  (click)="sendMessage()" -->
+<!--                  [disabled]="!inputMessage.trim() || startLoading" -->
+<!--                  aria-label="Send Message">-->
+<!--            <span class="send-icon"></span>-->
+<!--          </button>-->
+<!--        </div>-->
+<!--      </div>-->
     </div>
   </div>
 </div>

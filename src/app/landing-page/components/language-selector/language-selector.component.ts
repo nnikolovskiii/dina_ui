@@ -17,8 +17,8 @@ interface Language {
 })
 export class LanguageSelectorComponent implements OnInit {
   languages: Language[] = [
-    {code: 'en', name: 'English'},
-    {code: 'mk', name: 'Македонски'},
+    {code: 'en', name: 'en 🇬🇧'},
+    {code: 'mk', name: 'мк 🇲🇰'},
   ];
 
   selectedLanguage: Language;

@@ -48,15 +48,15 @@
 
     <section class="cta-buttons">
       <div class="container button-container">
-        <button class="btn btn-dark">{{ 'LANDING_PAGE.CTA.TRY_REMORA' | translate }}</button>
-        <button class="btn btn-light">{{ 'LANDING_PAGE.CTA.DOWNLOAD_APP' | translate }}</button>
+        <button class="btn btn-dark" onclick="location.href='#contact-section'">{{ 'LANDING_PAGE.CTA.TRY_REMORA' | translate }}</button>
+        <button class="btn btn-light" onclick="location.href='#feature-tabs'">{{ 'LANDING_PAGE.CTA.DOWNLOAD_APP' | translate }}</button>
       </div>
     </section>
 
   </section>
 
 
-  <section class="flex flex-col items-center justify-center">
+  <section id="feature-tabs" class="flex flex-col items-center justify-center">
     <app-title
       subtitle="{{ 'LANDING_PAGE.USE_CASES.SUBTITLE' | translate }}"
       title="{{ 'LANDING_PAGE.USE_CASES.TITLE' | translate }}"
